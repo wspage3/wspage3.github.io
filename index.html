@@ -61,6 +61,152 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-2019-12-04-Leetcode152-Maximum Product Subarray" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/04/2019-12-04-Leetcode152-Maximum%20Product%20Subarray/" class="article-date">
+  <time datetime="2019-12-04T00:59:01.751Z" itemprop="datePublished">2019-12-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/04/2019-12-04-Leetcode152-Maximum%20Product%20Subarray/">Leetcode-152 Maximum Product Subarray</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/maximum-product-subarray/" target="_blank" rel="noopener">Leetcode-152 Maximum Product Subarray</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组nums。<br>求出nums的连续子数组，这个子数组是nums所有子数组中乘积最大的那个。返回这个sum。<br>子数组长度至少为1。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [2,3,-2,4]<br>Output: 6<br>Explanation: [2,3] has the largest product 6.</p>
+<p>Input: [-2,0,-1]<br>Output: 0<br>Explanation: The result cannot be 2, because [-2,-1] is not a subarray.</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>需要对n是否为0判断</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><p>显然，本题目和Leetcode-53的唯一区别就是：一个求和最大值，一个求乘积最大值。<br>此处，主要需要考虑乘法运算和加法元素的差异。其它分析可参考Leetcode-53</p>
+<h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>1.不感知加法乘法的差异。<br>时间复杂度：O(n ^ 2)<br>空间复杂度：O(1)</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/283351227/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283351227/</a>)</p>
+<h3 id="Solution-2：Divide-and-Conquer"><a href="#Solution-2：Divide-and-Conquer" class="headerlink" title="Solution-2：Divide and Conquer"></a>Solution-2：Divide and Conquer</h3><p>1.考虑区间[low, high]，mid为中点：<br>递归求得[low, mid]和[mid + 1, high]的值。<br>找出[i, mid]使得以mid结尾的最大值。<br>找出[mid + 1, j]使得以mid + 1开头的最大值。<br>假设区间为：[-3, 2, -5]<br>f(-3, 2) = 2<br>f(-5) = -5<br>f(i, j) = 2 * -5 = -10<br>这样求得的值是2，跟实际答案30不符合。<br>可以发现，问题出现在“负负得正”这种场景下。我们在寻找[i, mid]和[mid + 1, j]的时候，单纯的找到了以其开头或者结尾的最大的值。但这两个最大的值的乘积并不一定是最大的。<br>所以根据这个特点，可以分别维护两个值。<br>对于i来说，lMax，lMin分别记录以mid结尾的最大乘积和最小乘积。<br>对于j来说，rMax，rMin分别记录以mid + 1开头的最大乘积和最小乘积。<br>当combine的时候，找出max(lMax * rMax, lMin * rMin)，这样才是[i, j]范围内的最大乘积。</p>
+<p>时间复杂度：O(n ^ logN)<br>空间复杂度：O(n)，递归开销<br>3.Code(<a href="https://leetcode.com/submissions/detail/283358210/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283358210/</a>)</p>
+<h3 id="Solution-3：Dynamic-Programming"><a href="#Solution-3：Dynamic-Programming" class="headerlink" title="Solution-3：Dynamic Programming"></a>Solution-3：Dynamic Programming</h3><p>1.同理，在递推位置i的时候：<br>sum：<br>    start = max(nums[i], nums[i] + start)<br>    res = max(res, start)<br>product：<br>    if (nums[i] &lt; 0)  then swap(startMin, startMax);<br>    startMin = min(nums[i], nums[i] * startMin);<br>    startMax = max(nums[i], nums[i] * startMax);<br>    res = max(res, startMax);<br>当在位置i的时候，此时：<br>startMin代表以i + 1开头的最小乘积<br>startMax代表以i + 1开头的最大乘积<br>如果当前nums[i]非负的话，要想得到以i开头的连续子树组的最大值，并更新它的话，需要结合maxStart。<br>    maxStart = max(nums[i], nums[i] * maxStart)<br>    同理更新minStart：minStart = max(nums[i], nums[i] * minStart)<br>如果当前nums[i]负数的话，要想得到以i开头的连续子树组的最大值，并更新它的话，需要结合minStart。<br>    maxStart = max(nums[i], nums[i] * minStart)<br>    同理更新minStart：minStart = max(nums[i], nums[i] * maxStart)<br>为了表达简便，我们可以在更新前判断，如果当前nums[i]是负数的话，将minStart和maxStart交换值即可。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/283369314/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283369314/</a>)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/04/2019-12-04-Leetcode152-Maximum%20Product%20Subarray/" data-id="ck3ql324c000294t77v4l97nj" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2019-12-03-Leetcode53-Maximum Subarray" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/03/2019-12-03-Leetcode53-Maximum%20Subarray/" class="article-date">
+  <time datetime="2019-12-03T10:15:35.010Z" itemprop="datePublished">2019-12-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/03/2019-12-03-Leetcode53-Maximum%20Subarray/">Leetcode-53 Maximum Subarray</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/maximum-subarray/" target="_blank" rel="noopener">Leetcode-53 Maximum Subarray</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组nums。<br>求出nums的连续子数组，这个子数组是nums所有子数组中和最大的那个。返回这个sum。<br>子数组长度至少为1。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [-2,1,-3,4,-1,2,1,-5,4],<br>Output: 6<br>Explanation: [4,-1,2,1] has the largest sum = 6.</p>
+<h3 id="3-Note"><a href="#3-Note" class="headerlink" title="3.Note"></a>3.Note</h3><p>a.多种方法求解，使用一下Divide and Conquer方法<br>b.某种方法的时间复杂度为O(n)</p>
+<h3 id="4-Corner-Case"><a href="#4-Corner-Case" class="headerlink" title="4.Corner Case"></a>4.Corner Case</h3><p>需要对n是否为0判断</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>1.直观的想法就是遍历n次，每次选定一个nums[i]；i的范围[0, n - 1]。<br>然后对于该nums[i]，考察以它为首的所有子数组的和，并更新这个最大值；j的范围[i, n - 1]。<br>这样的话，可以将nums所有可能的子数组都遍历一次，不会遗漏。<br>时间复杂度：O(n ^ 2)<br>空间复杂度：O(1)</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/283334388/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283334388/</a>)</p>
+<h3 id="Solution-2：Divide-and-Conquer"><a href="#Solution-2：Divide-and-Conquer" class="headerlink" title="Solution-2：Divide and Conquer"></a>Solution-2：Divide and Conquer</h3><p>1.现有数组[a, b, c, d, e]，把它分为左右两部分：[a, b, c]和[d, e]。<br>若已经知道左右两部分的答案分别为A和B，能否求出本题的答案C？<br>考虑以下三种情况：<br>a.若答案C对应的子数组就在[a, b, c]范围内，则在[a, b, c, d, e]中的答案等于在[a, b, c]中的答案。如：[1,2,3,-1,-1]<br>b.若答案C对应的子数组就在[d, e]范围内，则在[a, b, c, d, e]中的答案等于在[d, e]中的答案。如：[-2,-3,-5,7,7]<br>c.若答案C对应的子数组在穿过了左右两部分，如[1,2,3,4,5]，则我们可以知道：这个子数组中必然包含[c,d]两个元素。<br>也就是说，只要以c结尾的连续子数组中取最大值left，以d开头的连续子数组中取最大值right；left + right就是这种情况下的答案。<br>可以发现，上述三种情况覆盖了所有可能出现的情况，只要我们找出这三个值的最大值，也就是最后要求的答案了。</p>
+<p>2.对于一个区间[low, high]，求这个范围内的答案，只要把上面三种情况下的最大值找出来，就是答案。<br>如果区间中有1个元素[a]，那么答案就是a本身；<br>记为f(a) = a；<br>如果区间中有2个元素[a, b]，那么答案就是max(a, b, (a + 0) + (b + 0))；(a+0)代表以a为结尾的子数组的最大值；(b+0)同理。<br>记为f(a, b) = max(a, b, (a + 0) + (b + 0))；<br>如果区间中有3个元素[a, b, c]，那么答案就是max(f(a, b), c, max(b, a + b) + c)；max(b, a + b)代表以b为结尾的子数组的最大值，c同理。<br>记为f(a, b, c) = max(f(a, b), c, max(b, a + b) + c)；max(b, a + b)<br>所以：对于求区间[low, high]上的答案，只要分别求得左子区间[low, mid]，右子区间[mid + 1, high]，左右子区间[i, j]。<br>其中，左子区间[low, mid]，右子区间[mid + 1, high]可以递归求得，当low == high时，到达递归的结束条件，返回nums[low]即可。<br>左右子区间的i，可以由mid位置，依次递减到low，每次叠加nums中的元素，找出一个最大和。<br>左右子区间的j，可以由mid + 1位置，依次递增到high，每次叠加nums中的元素，找出一个最大和。</p>
+<p>时间复杂度：O(n ^ logN)<br>空间复杂度：O(n)，递归开销<br>3.Code(<a href="https://leetcode.com/submissions/detail/283548839/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283548839/</a>)</p>
+<h3 id="Solution-3：Dynamic-Programming"><a href="#Solution-3：Dynamic-Programming" class="headerlink" title="Solution-3：Dynamic Programming"></a>Solution-3：Dynamic Programming</h3><p>1.顺着上面的想法继续往下思考。<br>考虑新增两个数组res和start：<br>vector<int> res(n);   //res[i]表示[i, n - 1]内最大连续子数组的和。则res[0]就是我们要找的答案。显然，res[n - 1] = nums[n - 1]<br>vector<int> start(n); //start[i]表示[i, n - 1]内最大连续子数组的和，且该子数组以i为开头。同理，start[n - 1] = nums[n - 1]<br>在元素n - 1考虑完成后，我们考虑它前面的n - 2：<br>start[n - 2] = max(nums[n - 2], nums[n - 2] + start[n - 1])<br>res[n - 2] = max(start[n - 2], res[n - 1])，其中前者代表：当前元素存在于答案中，后者代表：当前元素不存在于答案中<br>依次向前遍历，经过一次循环，即可找到答案，也就是res[0]。<br>时间复杂度：O(n)<br>空间复杂度：O(n * 2)</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/283366882/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283366882/</a>)</p>
+<h3 id="Solution-4：Further-Optimization"><a href="#Solution-4：Further-Optimization" class="headerlink" title="Solution-4：Further Optimization"></a>Solution-4：Further Optimization</h3><p>1.能否进一步优化空间复杂度呢？<br>当我们考虑第i个位置的时候，只需要得到nums[i]，start[i + 1]，res[i + 1]即可求出。<br>也就是说，第i个位置的答案只与它后边的一个元素有关，和其他的都无关。所以可以用两个int变量res和start分别替换上述的两个int数组。<br>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/283367123/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283367123/</a>)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/03/2019-12-03-Leetcode53-Maximum%20Subarray/" data-id="ck3ppix4e00015wt79z1l3coq" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2019-12-03-Leetcode238-Product of Array Except Self" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/03/2019-12-03-Leetcode238-Product%20of%20Array%20Except%20Self/" class="article-date">
+  <time datetime="2019-12-03T09:29:50.853Z" itemprop="datePublished">2019-12-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/03/2019-12-03-Leetcode238-Product%20of%20Array%20Except%20Self/">Leetcode-238 Product of Array Except Self</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/product-of-array-except-self/" target="_blank" rel="noopener">Leetcode-238 Product of Array Except Self</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组nums，n &gt; 1。<br>求数组output，其中output[i]表示所有除了i之外，所有其它数字的乘积。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input:  [1,2,3,4]<br>Output: [24,12,8,6]</p>
+<h3 id="3-Note"><a href="#3-Note" class="headerlink" title="3.Note"></a>3.Note</h3><p>a.过程中不使用除法。<br>b.时间复杂度要求：O(n)。<br>c.空间复杂度要求：O(1)，函数返回的数组不算入空间复杂度。</p>
+<h3 id="4-Corner-Case"><a href="#4-Corner-Case" class="headerlink" title="4.Corner Case"></a>4.Corner Case</h3><p>题目保证了n &gt; 1</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>直观的想法就是遍历n次，每次累乘(n - 1)个数字。<br>时间复杂度：O(n ^ 2)<br>空间复杂度：O(1)</p>
+<h3 id="Solution-2：递推"><a href="#Solution-2：递推" class="headerlink" title="Solution-2：递推"></a>Solution-2：递推</h3><p>1.假设我们要求output[i]，i的范围为：[0, n - 1]，也就是nums数组中除了nums[i]之外所有的数字的乘积。也就是求[0, i - 1]以及[i + 1, n - 1]两个范围内所有数的乘积。</p>
+<p>2.新增数组s，设数组s[i]表示范围[0, i - 1]内所有数字的乘积。i的范围为：[1, n - 1]<br>新增数组t，设t[i]为[i + 1, n - 1]所有数字的乘积。i的范围为：[0, n - 2]<br>数组s只需要从前到后遍历一次nums即可求出。<br>数组t从后到前遍历一次nums也能求出。<br>在s和t都求出的情况下，output也只需要O(n)的时间即可求出：output[i] = s[i] * t[i];<br>时间复杂度：O(3 * n)<br>空间复杂度：O(2 * n)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/283206956/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283206956/</a>)</p>
+<h3 id="Solution-3：进一步优化"><a href="#Solution-3：进一步优化" class="headerlink" title="Solution-3：进一步优化"></a>Solution-3：进一步优化</h3><p>1.可以省略数组s，和数组t：<br>数组s的值就保留在output数组中。<br>数组t用一个int变量表示。<br>时间复杂度：O(2 * n)<br>空间复杂度：O(1)</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/283208630/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283208630/</a>)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/03/2019-12-03-Leetcode238-Product%20of%20Array%20Except%20Self/" data-id="ck3pnwn8i0003est7dhea5hb2" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/12/02/hello-world/" class="article-date">
@@ -91,7 +237,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/02/hello-world/" data-id="ck3nsy9rx000008t7ahffgcye" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/02/hello-world/" data-id="ck3pnrvi90000est7bq4jbl5r" class="article-share-link">Share</a>
       
       
     </footer>
@@ -130,6 +276,18 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/12/04/2019-12-04-Leetcode152-Maximum%20Product%20Subarray/">Leetcode-152 Maximum Product Subarray</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/03/2019-12-03-Leetcode53-Maximum%20Subarray/">Leetcode-53 Maximum Subarray</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/03/2019-12-03-Leetcode238-Product%20of%20Array%20Except%20Self/">Leetcode-238 Product of Array Except Self</a>
+          </li>
         
           <li>
             <a href="/2019/12/02/hello-world/">Hello Blog</a>
