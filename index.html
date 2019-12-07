@@ -61,9 +61,57 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-2019-12-05-Leetcode42-Trapping Rain Water" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-2019-12-07-Leetcode-121-Best Time to Buy ans Sell Stock" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/06/2019-12-05-Leetcode42-Trapping%20Rain%20Water/" class="article-date">
+    <a href="/2019/12/07/2019-12-07-Leetcode-121-Best%20Time%20to%20Buy%20ans%20Sell%20Stock/" class="article-date">
+  <time datetime="2019-12-07T01:09:15.739Z" itemprop="datePublished">2019-12-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/07/2019-12-07-Leetcode-121-Best%20Time%20to%20Buy%20ans%20Sell%20Stock/">Leetcode121-Best Time to Buy and Sell Stock</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/" target="_blank" rel="noopener">Leetcode121-Best Time to Buy and Sell Stock</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组prices；prices[i]代表第i天股票的价格。<br>如果你只能交易一次，即：买一次，卖一次。求出你最多能赚多少钱。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [7,1,5,3,6,4]<br>Output: 5<br>Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.<br>Not 7-1 = 6, as selling price needs to be larger than buying price.</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n：当n为0/1的时候，直接返回0；<br>赚不到钱则返回0；</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>由于要想赚钱，得低价买入，高价卖出；<br>买入卖出不能在同一天，至少买入的第二天才能卖出；<br>对于任意i，本质上就是求出[i + 1, n - 1]范围内最大的数字，然后减去prices[i]，就是第i天能获取到的利润。<br>对于[0, n - 1]上的所有i，找出一个最大值即可。</p>
+<h3 id="Solution-1：Dynamic-programming"><a href="#Solution-1：Dynamic-programming" class="headerlink" title="Solution-1：Dynamic programming"></a>Solution-1：Dynamic programming</h3><p>1.由于我们之前做过题目：Leetcode42-Trapping Rain Water<br>在42的Solution2的时候，本质上也是求：给定一个位置，其左右两边最大的值。<br>对于求n个元素所有的rightMax，使用O(n)的时间和O(n)的空间即可。</p>
+<p>2.rightMax[i]表示：[i + 1, n - 1]范围内最大的数字。<br>则通过递推，可以得到：rightMax[i - 1] = max(prices[i], rightMax[i]);<br>则i从后往前，就可以算出所有的rightMax[i]。<br>同时，使用这个值减去prices[i]的值，来不断更新最大利润即可。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/284225891/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284225891/</a>)</p>
+<h3 id="Solution-2：Further-Optimization"><a href="#Solution-2：Further-Optimization" class="headerlink" title="Solution-2：Further Optimization"></a>Solution-2：Further Optimization</h3><p>1.观察上面的递推式，可以发现：计算rightMax[i - 1]的时候，只用到了rightMax[i]，也就是说可以将数组优化为单个变量。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/284226029/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284226029/</a>)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/07/2019-12-07-Leetcode-121-Best%20Time%20to%20Buy%20ans%20Sell%20Stock/" data-id="ck3uwdf330009jot7djy0bvh0" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2019-12-06-Leetcode42-Trapping Rain Water" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/06/2019-12-06-Leetcode42-Trapping%20Rain%20Water/" class="article-date">
   <time datetime="2019-12-06T02:46:59.128Z" itemprop="datePublished">2019-12-06</time>
 </a>
     
@@ -75,7 +123,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/06/2019-12-05-Leetcode42-Trapping%20Rain%20Water/">Leetcode42-Trapping Rain Water</a>
+      <a class="article-title" href="/2019/12/06/2019-12-06-Leetcode42-Trapping%20Rain%20Water/">Leetcode42-Trapping Rain Water</a>
     </h1>
   
 
@@ -109,7 +157,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/06/2019-12-05-Leetcode42-Trapping%20Rain%20Water/" data-id="ck3u435by0002lgt7cqbyhth7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/06/2019-12-06-Leetcode42-Trapping%20Rain%20Water/" data-id="ck3uwdf2o0006jot7gtfj9upu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -165,7 +213,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/05/2019-12-05-Leetcode84-Largest%20Rectangle%20in%20Histogram/" data-id="ck3u435c00004lgt737op6hgd" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/05/2019-12-05-Leetcode84-Largest%20Rectangle%20in%20Histogram/" data-id="ck3uwdf2o0005jot7cbqq9ix7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -218,7 +266,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/05/2019-12-05-Leetcode739-Daily%20Temperatures/" data-id="ck3u435c50006lgt73r19am04" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/05/2019-12-05-Leetcode739-Daily%20Temperatures/" data-id="ck3uwdf2o0007jot7gls0081b" class="article-share-link">Share</a>
       
       
     </footer>
@@ -270,7 +318,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/04/2019-12-04-Leetcode300-Longest%20Increasing%20Subsequence/" data-id="ck3u435c00005lgt764fl5sba" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/04/2019-12-04-Leetcode300-Longest%20Increasing%20Subsequence/" data-id="ck3uwdf2o0004jot7fgxvhz0c" class="article-share-link">Share</a>
       
       
     </footer>
@@ -321,7 +369,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/04/2019-12-04-Leetcode713-Subarray%20Product%20Less%20Than%20K/" data-id="ck3u435c60007lgt76ofrhpk7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/04/2019-12-04-Leetcode713-Subarray%20Product%20Less%20Than%20K/" data-id="ck3uwdf2o0003jot7e7432bga" class="article-share-link">Share</a>
       
       
     </footer>
@@ -370,7 +418,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/04/2019-12-04-Leetcode152-Maximum%20Product%20Subarray/" data-id="ck3u435bz0003lgt7aku83gtt" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/04/2019-12-04-Leetcode152-Maximum%20Product%20Subarray/" data-id="ck3uwdf2o0002jot74g1hdwwz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -420,7 +468,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/03/2019-12-03-Leetcode53-Maximum%20Subarray/" data-id="ck3u435bx0001lgt7gdpf5tfc" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/03/2019-12-03-Leetcode53-Maximum%20Subarray/" data-id="ck3uwdf280000jot7ekq21osu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -467,7 +515,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/03/2019-12-03-Leetcode238-Product%20of%20Array%20Except%20Self/" data-id="ck3u435bt0000lgt78ocf20rb" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/03/2019-12-03-Leetcode238-Product%20of%20Array%20Except%20Self/" data-id="ck3uwdf2o0001jot7emtc4qt5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -507,7 +555,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/02/hello-world/" data-id="ck3u435c70008lgt7c5io33zq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/02/hello-world/" data-id="ck3uwdf330008jot78ko3e5kc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -548,7 +596,11 @@
       <ul>
         
           <li>
-            <a href="/2019/12/06/2019-12-05-Leetcode42-Trapping%20Rain%20Water/">Leetcode42-Trapping Rain Water</a>
+            <a href="/2019/12/07/2019-12-07-Leetcode-121-Best%20Time%20to%20Buy%20ans%20Sell%20Stock/">Leetcode121-Best Time to Buy and Sell Stock</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/06/2019-12-06-Leetcode42-Trapping%20Rain%20Water/">Leetcode42-Trapping Rain Water</a>
           </li>
         
           <li>
@@ -561,10 +613,6 @@
         
           <li>
             <a href="/2019/12/04/2019-12-04-Leetcode300-Longest%20Increasing%20Subsequence/">Leetcode300-Longest Increasing Subsequence</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/04/2019-12-04-Leetcode713-Subarray%20Product%20Less%20Than%20K/">Leetcode713-Subarray Product Less Than K</a>
           </li>
         
       </ul>
