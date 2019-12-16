@@ -61,6 +61,97 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-2019-12-16-Leetcode-645-Set Mismatch" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/16/2019-12-16-Leetcode-645-Set%20Mismatch/" class="article-date">
+  <time datetime="2019-12-16T02:20:17.020Z" itemprop="datePublished">2019-12-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/16/2019-12-16-Leetcode-645-Set%20Mismatch/">645.Set Mismatch</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/set-mismatch/" target="_blank" rel="noopener">645.Set Mismatch</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个长度为n的整数数组。<br>其中所有的元素取值都是范围[1, n]的。<br>但其中某个元素出现了两次，导致另外一个元素没有出现。<br>【输出】<br>找出这两个元素：出现两次的在前，没有出现的在后。<br>以数组的形式返回。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: nums = [1,2,2,4]<br>Output: [2,3]</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.n: [2, 10000]<br>2.nums数组无序。</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：做标记"><a href="#Solution-1：做标记" class="headerlink" title="Solution-1：做标记"></a>Solution-1：做标记</h3><p>1.根据【Leetcode-442-Find All Duplicates in an Array】的启示：<br>对于一个长度为n的数组nums，其所有nums[i]都在[1, n]区间内，我们可以通过将nums[nums[i] - 1]置为负数（相反数）的方法，找出所有出现2次的元素。<br>本题目中保证了只有一个元素出现了两次，所以找到它后break即可。O(n)的time complexity。</p>
+<p>2.同时根据【Leetcode-268-Missing Number】的启示：<br>对于一个长度为n的数组nums，其所有nums[i]都在[0, n]区间内，且不重复。<br>我们可以找到那个缺失的元素x。<br>通过：将0, 1, 2, 3, 4, …, n, nums[0], nums[1], nums[2], …, nums[n - 1]这(n + 1 + n)个元素都异或起来。<br>缺失元素x就是这个异或的值。O(n)的time complexity。</p>
+<p>3.对于本题目，长度为n的nums数组，所有元素取值范围都在[1, n]。<br>某个元素a出现了两次，某个元素b出现了0次。即：[1, 2, 3, 4, …, a, a, …, b - 1, b + 1, …, n]<br>根据1，可以找到a的值。存在res[0]中。res[0] = a;<br>根据2，将nums中所有的元素和[1, n]中所有的元素异或起来的值存到res[1]中。res[1] = a ^ b;<br>然后再将res[1] = res[1] ^ res[0]即可，即找到了b的值。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/286256728/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286256728/</a>)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/16/2019-12-16-Leetcode-645-Set%20Mismatch/" data-id="ck47u2pfh000tzwt77yttb5xa" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2019-12-16-Leetcode-442-Find All Duplicates in an Array" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/16/2019-12-16-Leetcode-442-Find%20All%20Duplicates%20in%20an%20Array/" class="article-date">
+  <time datetime="2019-12-16T02:07:31.209Z" itemprop="datePublished">2019-12-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/16/2019-12-16-Leetcode-442-Find%20All%20Duplicates%20in%20an%20Array/">442.Find All Duplicate in an Array</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/find-all-duplicates-in-an-array/" target="_blank" rel="noopener">442.Find All Duplicate in an Array</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个长度为n的整数数组。<br>其中所有的元素取值都是范围[1, n]的。<br>但其中有些元素出现了两次，其它的元素出现了一次。<br>【输出】<br>找出所有出现两次的元素。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input:<br>[4,3,2,7,8,2,3,1]<br>Output:<br>[2,3]</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.n &lt;= 1, 不存在题目中的情况。考虑n &gt;= 2的情况。<br>2.要求O(1)的space。<br>3.要求O(n)的time。</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：做标记"><a href="#Solution-1：做标记" class="headerlink" title="Solution-1：做标记"></a>Solution-1：做标记</h3><p>1.由于nums数组中的元素都在范围[1, n]中。<br>所以对于任意nums[i] - 1，都可以作为nums的index。</p>
+<p>2.我们对于所有i: [0, n - 1]，将nums[i] - 1作为index。<br>将nums[index]的值替换为其值的相反数。</p>
+<p>3.假设某个数字x出现了两次，那么(x - 1)作为nums的index，将同样会出现两次。<br>第一次：将nums[x - 1]的值由正数变换为负数。<br>第二次：发现nums[x - 1]已经是负数了。说明：(x - 1)这个索引在之前已经出现过了。即：x是一个答案。</p>
+<p>4.由于将nums[index]会变换为其相反数，所以为保证index的合法性，可以：index = abs(nums[i]) - 1;</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/286253289/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286253289/</a>)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/16/2019-12-16-Leetcode-442-Find%20All%20Duplicates%20in%20an%20Array/" data-id="ck47u2pfg000szwt74bjl2y54" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-2019-12-15-Leetcode-75-Sort Colors" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/12/15/2019-12-15-Leetcode-75-Sort%20Colors/" class="article-date">
@@ -96,7 +187,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/15/2019-12-15-Leetcode-75-Sort%20Colors/" data-id="ck46yj97y000ss0t79kkh1zwa" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/15/2019-12-15-Leetcode-75-Sort%20Colors/" data-id="ck47u2pfe000pzwt7aanbfbb4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -154,7 +245,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/15/2019-12-15-Leetcode-155-Min%20Stack/" data-id="ck46yj97y000os0t78j0mh5zd" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/15/2019-12-15-Leetcode-155-Min%20Stack/" data-id="ck47u2pfc000mzwt716ss6tni" class="article-share-link">Share</a>
       
       
     </footer>
@@ -203,7 +294,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/15/2019-12-15-Leetcode-268-Missing%20Number/" data-id="ck46yj97y000ps0t73jbifek5" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/15/2019-12-15-Leetcode-268-Missing%20Number/" data-id="ck47u2pff000qzwt71he42uyr" class="article-share-link">Share</a>
       
       
     </footer>
@@ -267,7 +358,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/13/2019-12-13-Leetcode-287-Find%20the%20Duplicate%20Number/" data-id="ck46yj97j000is0t7hl8o7sr4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/13/2019-12-13-Leetcode-287-Find%20the%20Duplicate%20Number/" data-id="ck47u2pfe000ozwt7cs51gny9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -312,7 +403,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/13/2019-12-13-Leetcode-278-First%20Bad%20Version/" data-id="ck46yj97j000ms0t7ak7mhvte" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/13/2019-12-13-Leetcode-278-First%20Bad%20Version/" data-id="ck47u2pfc000lzwt73yvhh8au" class="article-share-link">Share</a>
       
       
     </footer>
@@ -376,7 +467,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/13/2019-12-13-Leetcode-704-Binary%20Search/" data-id="ck46yj97y000ns0t73le208eu" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/13/2019-12-13-Leetcode-704-Binary%20Search/" data-id="ck47u2pfg000rzwt70y3tav7j" class="article-share-link">Share</a>
       
       
     </footer>
@@ -425,7 +516,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/12/2019-12-13-Leetcode-34-Find%20First%20and%20Last%20Position%20of%20Element%20in%20Sorted%20Array/" data-id="ck46yj97j000js0t7h1l90l6n" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/12/2019-12-13-Leetcode-34-Find%20First%20and%20Last%20Position%20of%20Element%20in%20Sorted%20Array/" data-id="ck47u2pfd000nzwt7gbfj42fc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -473,99 +564,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/12/2019-12-12-Leetcode-20-Valid%20Parentheses/" data-id="ck46yj97y000qs0t79h9v9avz" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2019-12-12-Leetcode-22-Generate Parentheses" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/12/12/2019-12-12-Leetcode-22-Generate%20Parentheses/" class="article-date">
-  <time datetime="2019-12-12T06:02:01.240Z" itemprop="datePublished">2019-12-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/12/2019-12-12-Leetcode-22-Generate%20Parentheses/">22.Generate Parentheses</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/generate-parentheses/" target="_blank" rel="noopener">22.Generate Parentheses</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个整数n，代表有n对括号。这是一对：( )<br>求出这n对括号所有可能的组合方式，要求组合后是一个有效的括号表达式。<br>即：匹配的一对括号，左边是(，右边是)</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>n = 3<br>[<br>  “((()))”,<br>  “(()())”,<br>  “(())()”,<br>  “()(())”,<br>  “()()()”<br>]</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n: 当n为0的时候，直接返回空；</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Backtracking-Recursive"><a href="#Solution-1：Backtracking-Recursive" class="headerlink" title="Solution-1：Backtracking(Recursive)"></a>Solution-1：Backtracking(Recursive)</h3><p>1.给定的n，代表有n个open bracket，n个close bracket。</p>
-<p>2.对于任意时刻，我们仅可选一个bracket，要么是open的，要么是close的。<br>只要leftCnt大于0，就可以选择open的。<br>而选择close的，需要rightCnt大于leftCnt，以保证结果先左后右的合法性。</p>
-<p>3.当leftCnt, rightCnt的值都为0时，此时构造出来的string s就是一个合法的答案。将其添加到答案中。<br>并且返回。（回溯）</p>
-<p>4.递归树的某一个子节点计算完成后返回了，其父节点进行考虑，若当前还有其他的儿子，则递归调用其他的儿子。<br>对于一个节点来说，其左儿子可以认为是“选择open bracket”，其右儿子可以认为是“选择close bracket”</p>
-<p>时间复杂度：O() //to do<br>空间复杂度：O()</p>
-<p>5.Code(<a href="https://leetcode.com/submissions/detail/285419056/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285419056/</a>)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/12/2019-12-12-Leetcode-22-Generate%20Parentheses/" data-id="ck46yj97j000ls0t7dubx10z3" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2019-12-12-Leetcode-17-Letter Combinations of a Phone Number" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/12/12/2019-12-12-Leetcode-17-Letter%20Combinations%20of%20a%20Phone%20Number/" class="article-date">
-  <time datetime="2019-12-12T03:50:51.060Z" itemprop="datePublished">2019-12-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/12/2019-12-12-Leetcode-17-Letter%20Combinations%20of%20a%20Phone%20Number/">17.Letter Combinations of a Phone Number</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/letter-combinations-of-a-phone-number/" target="_blank" rel="noopener">17.Letter Combinations of a Phone Number</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的字符串。<br>该字符串的每一个元素都是：[2, 9]的整数。<br>对应的，手机键盘上的九键输入法。如2可以代表：[a, b, c]。<br>求出给定的数字序列，所有可能的字符串。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: “23”<br>Output: [“ad”, “ae”, “af”, “bd”, “be”, “bf”, “cd”, “ce”, “cf”].</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n: 当n为0的时候，直接返回空；<br>尽管example中输出的是字典序，但本题目不要求严格的字典序输出。</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>1.对于长度为n的序列，依次考虑每一个数字。</p>
-<p>2.对于[2, 3]来说：<br>先考虑2，由于2可以代表[a, b, c]，则将[a, b, c]放入ans中。<br>再考虑3，由于3可以代表[d, e, f]，则对于ans中的所有元素，分别将d/e/f拼接在其后面。<br>即：[ad, bd, cd, ae, be, ce, af, bf, cf]</p>
-<p>3.所以说，首先外层循环需要考虑n次。<br>对于每个n来说，需要考虑其所有代表的字母。记x次。则x要么是3，要么是4。<br>对于每个代表的字母，需要考虑当前ans中的个数：然后将自己加入到这些已有的ans后面。<br>由于这个过程需要x次，所以可以用一个temp数组，都存起来。当遍历完x次，将ans更新为temp即可。</p>
-<p>4.对于将temp赋值给ans的操作，可以：<br>ans = temp;//vector支持直接赋值过去。<br>参考：<a href="https://zh.cppreference.com/w/cpp/container/vector/operator%3D" target="_blank" rel="noopener">https://zh.cppreference.com/w/cpp/container/vector/operator%3D</a><br>ans.swap(temp)//O(1)的复杂度，更快。因为swap只交换指针，而不替换数据。<br>参考：<a href="http://www.cplusplus.com/reference/vector/vector/swap/" target="_blank" rel="noopener">http://www.cplusplus.com/reference/vector/vector/swap/</a><br><a href="https://www.zhihu.com/question/310462377" target="_blank" rel="noopener">https://www.zhihu.com/question/310462377</a></p>
-<p>时间复杂度：O(3 ^ n)<br>空间复杂度：O(1)</p>
-<p>5.Code(<a href="https://leetcode.com/submissions/detail/285381545/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285381545/</a>)<br>Code(<a href="https://leetcode.com/submissions/detail/285392928/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285392928/</a>)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/12/2019-12-12-Leetcode-17-Letter%20Combinations%20of%20a%20Phone%20Number/" data-id="ck46yj97j000ks0t75ea2ca2x" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/12/2019-12-12-Leetcode-20-Valid%20Parentheses/" data-id="ck47u2pex000jzwt7ee6gcfez" class="article-share-link">Share</a>
       
       
     </footer>
@@ -579,7 +578,7 @@
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -611,6 +610,14 @@
       <ul>
         
           <li>
+            <a href="/2019/12/16/2019-12-16-Leetcode-645-Set%20Mismatch/">645.Set Mismatch</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/16/2019-12-16-Leetcode-442-Find%20All%20Duplicates%20in%20an%20Array/">442.Find All Duplicate in an Array</a>
+          </li>
+        
+          <li>
             <a href="/2019/12/15/2019-12-15-Leetcode-75-Sort%20Colors/">75.Sort Colors</a>
           </li>
         
@@ -620,14 +627,6 @@
         
           <li>
             <a href="/2019/12/15/2019-12-15-Leetcode-268-Missing%20Number/">268.Missing Number</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/13/2019-12-13-Leetcode-287-Find%20the%20Duplicate%20Number/">287.Find the Duplicate Number</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/13/2019-12-13-Leetcode-278-First%20Bad%20Version/">278.First Bad Version</a>
           </li>
         
       </ul>
