@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="一、题意题目链接: 242.Valid Anagram 1.Description【输入】给定两个字符串s和t。【输出】判断这两个字符串是否为：“字母异位词”所谓“字母异位词”，就是两个单词，组成它们的字母是完全一样的，而不关心其排列顺序。 2.ExampleInput: s &#x3D; “anagram”, t &#x3D; “nagaram”Output: true 3.Corner Case1.lenS不等于">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-16T13:25:56.527Z">
+<meta property="og:updated_time" content="2019-12-16T13:28:12.549Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -99,12 +99,13 @@
 <p>4.Code(<a href="https://leetcode.com/submissions/detail/286347847/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286347847/</a>)</p>
 <h3 id="Solution-4：Use-Vector-instead-of-Hash-Table"><a href="#Solution-4：Use-Vector-instead-of-Hash-Table" class="headerlink" title="Solution-4：Use Vector instead of Hash Table"></a>Solution-4：Use Vector instead of Hash Table</h3><p>1.我们用一个固定长度为26的数组即可实现Solution-3的思路。<br>2.在数组中访问赋值的时间复杂度是O(1)。<br>而理论上哈希表的访问的时间复杂度也是O(1)。<br>参考：<br>Hash tables do some complex math in that one operation to get to the value that you want.<br>Simulating a hash table with an array is quicker because that<br>one operation for a lookup is only an offset from the beginning of the array(since you already have the index)<br>vs more difficult mathy stuff with the hash table.</p>
 <p>时间复杂度：O(n + 26)<br>空间复杂度：O(26)</p>
-<p>4.Code(<a href="https://leetcode.com/submissions/detail/286348853/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286348853/</a>)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/286348853/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286348853/</a>)</p>
+<p>4.进阶：如果输入字符串包含 unicode 字符怎么办？你能否调整你的解法来应对这种情况？<br>解答：使用哈希表而不是固定大小的计数器。想象一下，分配一个大的数组来适应整个 Unicode 字符范围，这个范围可能超过 100万。<br>哈希表是一种更通用的解决方案，可以适应任何字符范围。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/16/2019-12-16-Leetcode-242.Valid%20Anagram/" data-id="ck48h1vgm000t4gt72iuif3ob" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/16/2019-12-16-Leetcode-242.Valid%20Anagram/" data-id="ck48h4hc6000srgt7g7ba8i62" class="article-share-link">Share</a>
       
       
     </footer>
