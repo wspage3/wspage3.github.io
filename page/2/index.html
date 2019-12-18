@@ -61,6 +61,64 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-2019-12-15-Leetcode-155-Min Stack" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/15/2019-12-15-Leetcode-155-Min%20Stack/" class="article-date">
+  <time datetime="2019-12-15T10:45:28.500Z" itemprop="datePublished">2019-12-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/15/2019-12-15-Leetcode-155-Min%20Stack/">155.Min Stack</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/min-stack/" target="_blank" rel="noopener">155.Min Stack</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>设计一个数据结构”最小栈”，具有以下特点：<br>1.push(x) – Push element x onto stack.<br>2.pop() – Removes the element on top of the stack.<br>3.top() – Get the top element.<br>4.getMin() – Retrieve the minimum element in the stack.<br>其中核心功能是第四点，因为如果仅考虑前三点的话，就是常规的栈stack。<br>getMin()要求时间复杂度为O(1)。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>MinStack minStack = new MinStack();<br>minStack.push(-2);<br>minStack.push(0);<br>minStack.push(-3);<br>minStack.getMin();   –&gt; Returns -3.<br>minStack.pop();<br>minStack.top();      –&gt; Returns 0.<br>minStack.getMin();   –&gt; Returns -2.</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.getMin()要求时间复杂度为O(1)。</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><p>思路：看到题目，第一想法是：维护一个stack s和一个最小值m即可。<br>当有更小的值入栈后，更新m即可。<br>但这样有一个问题：如果我当前pop的就是最小值m，那怎么办。<br>因为没有保存第二小的值，所以在pop掉m后，m的值就无法追溯了。</p>
+<h3 id="Solution-1：Two-Stacks"><a href="#Solution-1：Two-Stacks" class="headerlink" title="Solution-1：Two Stacks"></a>Solution-1：Two Stacks</h3><p>1.用两个stack，一个s保存数据，一个m保存最小值。<br>当有更小的值入栈后，将这个值同时加入到栈m中。<br>则当前最小的值就是m的栈顶元素。<br>当pop最小元素的时候，将其从s和m中同时pop掉。</p>
+<p>空间复杂度：O(n)</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/285879960/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285879960/</a>)</p>
+<h3 id="Solution-2：One-Stack"><a href="#Solution-2：One-Stack" class="headerlink" title="Solution-2：One Stack"></a>Solution-2：One Stack</h3><p>1.Solution-1中，我们当遇到更小的值时，都将其保存到m栈中。<br>这样栈顶的就是当前s栈中最小的值，若其被pop出去，同时带走m栈顶的元素。<br>此时m栈顶的元素又是s栈中的最小值了。</p>
+<p>2.现在我们用int minValue来代表当前栈中最小的值。<br>s仍然代表着数据栈。<br>当出现了更小的值时：<br>a.保存当前minValue：将其先push到s中。<br>b.更新minValue<br>c.再将当前minValue push到s中。</p>
+<p>3.则任意时刻，minValue都是代表着当前栈中最小的元素值。</p>
+<p>4.当pop的值是minValue的时候，也就是s.top() == minValue，<br>我们从s中pop一个元素，这个元素就是minValue。<br>同时将此时s.top()赋值给minValue。因为这个元素是“前一个最小值”。<br>同时将其从s中pop出去。</p>
+<p>空间复杂度：O(n)</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/285881659/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285881659/</a>)</p>
+<h3 id="Solution-3：One-Stack"><a href="#Solution-3：One-Stack" class="headerlink" title="Solution-3：One Stack"></a>Solution-3：One Stack</h3><p>1.现在我们将当前元素cur和minValue的差值存入栈s中。</p>
+<p>2.push(x)：<br>当栈中没有元素的时候，将0存入s中，minValue说就是x；<br>当栈中已有元素的时候，将x - minValue存入s中，若该值为负，说明当前x是更小的值。将minValue更新为x。</p>
+<p>3.getMin()<br>任意时刻，minValue的值就是当前栈s中最小元素的值。</p>
+<p>4.top()<br>由于s中存入的已经不是之前的数据了，而是存放的差值。<br>当s栈顶元素小于0的时候，说明：这个元素是当前栈中最小的值minValue。return minValue即可。<br>当s栈顶元素不小于0的时候，说明，这个元素是一个差值，其值 = s.top() + minValue。</p>
+<p>5.pop()<br>当s栈顶元素小于0的时候，说明：这个元素是当前栈中最小的值minValue。<br>  需要更新minValue = minValue - s.top()；然后再从s中把其pop。<br>当s栈顶元素不小于0的时候，说明，这个元素是一个差值，直接pop即可。</p>
+<p>6.缺点1：由于差值可能会导致整数溢出，所以用minValue用long long。<br>缺点2：由于放入栈中的值是一个差值，而非原本的数据本身，即有修改数据的嫌疑。需要确定这种情况再用这个方法。</p>
+<p>空间复杂度：O(1)</p>
+<p>7.Code(<a href="https://leetcode.com/submissions/detail/285885660/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285885660/</a>)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/15/2019-12-15-Leetcode-155-Min%20Stack/" data-id="ck4aqeymj000mowt76mdrclqe" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-2019-12-15-Leetcode-268-Missing Number" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/12/15/2019-12-15-Leetcode-268-Missing%20Number/" class="article-date">
@@ -100,7 +158,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/15/2019-12-15-Leetcode-268-Missing%20Number/" data-id="ck49z7ukf000qeot77uclc0nf" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/15/2019-12-15-Leetcode-268-Missing%20Number/" data-id="ck4aqeymj000powt7d3nx269x" class="article-share-link">Share</a>
       
       
     </footer>
@@ -164,7 +222,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/13/2019-12-13-Leetcode-287-Find%20the%20Duplicate%20Number/" data-id="ck49z7uka000keot75qir5dmc" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/13/2019-12-13-Leetcode-287-Find%20the%20Duplicate%20Number/" data-id="ck4aqeymj000oowt7bprk8ccl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -209,7 +267,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/13/2019-12-13-Leetcode-278-First%20Bad%20Version/" data-id="ck49z7uke000oeot71z5shqu7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/13/2019-12-13-Leetcode-278-First%20Bad%20Version/" data-id="ck4aqeymj000jowt7gejpfbd2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -273,7 +331,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/13/2019-12-13-Leetcode-704-Binary%20Search/" data-id="ck49z7ukd000neot7dufoaq46" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/13/2019-12-13-Leetcode-704-Binary%20Search/" data-id="ck4aqeymj000nowt76y2w3xmc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -322,7 +380,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/12/2019-12-13-Leetcode-34-Find%20First%20and%20Last%20Position%20of%20Element%20in%20Sorted%20Array/" data-id="ck49z7ukd000meot787f48vpj" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/12/2019-12-13-Leetcode-34-Find%20First%20and%20Last%20Position%20of%20Element%20in%20Sorted%20Array/" data-id="ck4aqeymj000towt74dcnb72f" class="article-share-link">Share</a>
       
       
     </footer>
@@ -370,7 +428,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/12/2019-12-12-Leetcode-20-Valid%20Parentheses/" data-id="ck49z7uk9000jeot7043i9wnl" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/12/2019-12-12-Leetcode-20-Valid%20Parentheses/" data-id="ck4aqeymj000kowt7h0eqgpuj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -416,7 +474,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/12/2019-12-12-Leetcode-22-Generate%20Parentheses/" data-id="ck49z7ukb000leot77677a0g4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/12/2019-12-12-Leetcode-22-Generate%20Parentheses/" data-id="ck4aqeymj000lowt7cfvdbdo2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -462,7 +520,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/12/2019-12-12-Leetcode-17-Letter%20Combinations%20of%20a%20Phone%20Number/" data-id="ck49z7uk8000geot777qr0v9w" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/12/2019-12-12-Leetcode-17-Letter%20Combinations%20of%20a%20Phone%20Number/" data-id="ck4aqeymj000gowt7gm3acirc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -508,54 +566,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/11/2019-12-11-Leetcode-48-Rotate%20Image/" data-id="ck49z7uk8000heot76ctl9z17" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2019-12-11-Leetcode-153-Find Minimum in Rotated Sorted Array" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/12/11/2019-12-11-Leetcode-153-Find%20Minimum%20in%20Rotated%20Sorted%20Array/" class="article-date">
-  <time datetime="2019-12-11T03:12:45.411Z" itemprop="datePublished">2019-12-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/11/2019-12-11-Leetcode-153-Find%20Minimum%20in%20Rotated%20Sorted%20Array/">153.Find Minimum in Rotated Sorted Array</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/" target="_blank" rel="noopener">153.Find Minimum in Rotated Sorted Array</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组nums；<br>该数组原本是升序的，结果在某个支点处旋转了一次，如：<br>i.e., [0,1,2,4,5,6,7] might become [4,5,6,7,0,1,2]<br>假设数组中不存在相同的数字。<br>找出这个数组中最小的值。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [3,4,5,1,2]<br>Output: 1</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n: 当n为0的时候，直接返回false；</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>1.常规思路：从前到后遍历一遍nums，找到最小值返回。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<h3 id="Solution-2：Binary-Search"><a href="#Solution-2：Binary-Search" class="headerlink" title="Solution-2：Binary Search"></a>Solution-2：Binary Search</h3><p>1.观察：[0,1,2,4,5,6]<br>经过rotate后，可能存在以下几种不同情况：<br>[1,2,4,5,6,   0]<br>[2,4,5,6,   0,1]<br>[4,5,6,   0,1,2]<br>[5,6,   0,1,2,4]<br>[6,   0,1,2,4,5]</p>
-<p>2.考虑寻找[left, right]中的最小值。<br>若：nums[left] &lt; nums[right]，则说明[left, right]范围内完全升序。nums[left]就是答案。<br>否则：<br>mid = left + (right - left) / 2;<br>若nums[mid] &gt; nums[right]，则说明，这个区间中间某个值比nums[right]还要大，说明mid此时在左侧。<br>而最小值一定在右侧[mid + 1, right]。<br>若nums[mid] &lt; nums[right]，则说明，[mid, right]这个范围是有序的。要寻找的最小值，不可能在mid右侧，一定在包含其的左侧，即：[left, mid]。<br>若nums[mid] == nums[right]，不可能的……</p>
-<p>3.用二分的方法，每次把结果可能出现的区间缩小一半。<br>最终当区间长度为2的时候，left = x, right = x + 1, mid = x<br>判断nums[mid]和nums[right]的大小关系，也就是判断左边元素和右边元素的大小。<br>若nums[mid]大于nums[right]，即答案一定在[mid + 1, right]中，也就是右边元素本身。<br>若nums[mid]小于nums[right]，即答案一定在[left, mid]中，也就是左边元素本身。<br>循环结束后，left一定等于right。此时返回left的值即可。</p>
-<p>时间复杂度：O(log n)<br>空间复杂度：O(1)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/285160090/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285160090/</a>)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/11/2019-12-11-Leetcode-153-Find%20Minimum%20in%20Rotated%20Sorted%20Array/" data-id="ck49z7uk7000feot7hk7h1xcx" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/11/2019-12-11-Leetcode-48-Rotate%20Image/" data-id="ck4aqeym4000dowt7eoibhm1x" class="article-share-link">Share</a>
       
       
     </footer>
@@ -601,6 +612,10 @@
       <ul>
         
           <li>
+            <a href="/2019/12/18/2019-12-18-Leetcode-394-Decode%20String/">394.Decode String</a>
+          </li>
+        
+          <li>
             <a href="/2019/12/17/2019-12-17-Leetcode-611-Valid%20Triangle%20Number/">611.Valid Triangle Number</a>
           </li>
         
@@ -614,10 +629,6 @@
         
           <li>
             <a href="/2019/12/17/2019-12-17-Leetcode-54-Spiral%20Matrix/">54.Spiral Matrix</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/16/2019-12-16-Leetcode-242-Valid%20Anagram/">242.Valid Anagram</a>
           </li>
         
       </ul>

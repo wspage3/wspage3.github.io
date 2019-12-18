@@ -61,6 +61,67 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-2019-12-18-Leetcode-394-Decode String" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/18/2019-12-18-Leetcode-394-Decode%20String/" class="article-date">
+  <time datetime="2019-12-18T02:30:42.678Z" itemprop="datePublished">2019-12-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/18/2019-12-18-Leetcode-394-Decode%20String/">394.Decode String</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/decode-string/" target="_blank" rel="noopener">394.Decode String</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个长度为s的字符串。这个字符串可以理解为“加密串”。<br>【输出】<br>找出该字符串对应的“解密串”。<br>规则：k[str]，代表str出现k次。此处保证k一定是正整数。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>s = “3[a]2[bc]”, return “aaabcbc”.<br>s = “3[a2[c]]”, return “accaccacc”.<br>s = “2[abc]3[cd]ef”, return “abcabccdcdcdef”.</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
+<li>保证方括号都是配对，且合法的。</li>
+<li>保证出现的数字都是正整数。</li>
+<li>“解密串”中不包含字母。所以说“加密串”中出现的数字一定是k，代表次数。</li>
+<li>“加密串”中的“[]”内部不包含数字。</li>
+</ol>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：DFS"><a href="#Solution-1：DFS" class="headerlink" title="Solution-1：DFS"></a>Solution-1：DFS</h3><p>1.从前到后考虑字符串s的每一个位置：[0, n - 1]<br>开始调用：ans = dfs(0, s);</p>
+<p>2.若位置i遇到’[‘，则说明遇到一个子问题，进行递归调用:<br>substr = dfs(i + 1, s);<br>假设这个子问题的答案已经解出来了，答案为：”abcabc”。</p>
+<p>3.任意一个子问题要想解出来答案，说明当前位置j出现了’]’。<br>此时将“计算拼接”出来的子答案返回给上层函数。</p>
+<p>4.回到步骤2，发现：<br>位置i出现了’[‘，寻找子问题的答案。<br>位置j出现了’]’，返回子问题的答案为”abcabc”。<br>说明区间[i, j]上的所有字符都被考虑过了。其value就是”abdabc”。<br>此时我们将i位置之前的num找出来，将其拼接到一起。<br>然后继续考虑位置(j + 1)……<br>注意：由于父亲需要知道子问题返回的时候，走到了哪个位置，所以dfs函数的第一个参数用一个int引用。</p>
+<p>5.继续遍历，知道i &gt; n - 1为止。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(n) //递归开销</p>
+<p>6.Code(<a href="https://leetcode.com/submissions/detail/286626640/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286626640/</a>)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span>&amp; i, <span class="built_in">string</span> s)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">string</span> <span class="keyword">word</span> = <span class="string">""</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> num = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span> (i &lt; s.<span class="built_in">size</span>()) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">char</span> c = s[i];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (c == <span class="string">'['</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">                <span class="built_in">string</span> next = dfs(++i, s);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= num - <span class="number">1</span>; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">                    <span class="keyword">word</span> += next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">                num = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (c &gt;= <span class="string">'0'</span> &amp;&amp; c &lt;= <span class="string">'9'</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">                num = num * <span class="number">10</span> + c - <span class="string">'0'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (c == <span class="string">']'</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">return</span> <span class="keyword">word</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">            &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">word</span> += c;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">            i++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> <span class="keyword">word</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">decodeString</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> dfs(i, s);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+
+<h3 id="Solution-2：Stack"><a href="#Solution-2：Stack" class="headerlink" title="Solution-2：Stack"></a>Solution-2：Stack</h3><p>1.若没有方括号嵌套，while循环从前到后一个一个的找出子答案，拼接起来就行。<br>遇到一个’[‘，则继续向后找，直到找到一个’]’，说明这两个是匹配的括号。<br>将前面的这个范围内的字符循环num次即可，拼接到答案ans上。num清零。考虑下一个位置。</p>
+<p>2.当存在括号嵌套的时候，当找到一个’[‘，后面可以继续跟着一个’[‘，<br>此时计算需要由内往外，找出最内层的匹配的一对方括号，将其答案计算出来，返回给上一层计算……</p>
+<p>3.可以观察到，上面先遍历到的’[‘，反而是最后计算，这种特性十分符合栈的“先入后出”。我们用栈来模拟。<br>使用两个辅助栈：<br>int类型的sNum: 当出现’[‘时，将此时num入栈。num清零。<br>string类型的sString: 当出现’[‘时，将此时已有的答案ans入栈。对于第一次入栈来说，一定是””。ans清空。<br>这样我们就把各个状态存起来了。</p>
+<p>4.当出现一个’]’的时候，说明某个子问题计算出来了。<br>此时：sNum栈顶的元素就是其出现的次数。<br>sString栈顶的元素就是其之前已有的答案。<br>ans就是其出现一次的情况。<br>将答案字符串更新为：ans = sString.top() + sNum.top() * ans；<br>然后从两个栈中各自pop出一个元素。</p>
+<p>5.举个例子：3[a2[c]]    n = 8<br>i = 0:  ‘3’  ans = “”  num = 3<br>i = 1:  ‘[‘  push(“”)  push(3)  ans = “”  num = 0<br>i = 2:  ‘a’  ans = “a”<br>i = 3:  ‘2’  num = 2<br>i = 4:  ‘[‘  push(“a”)  push(2)  ans = “”  num = 0<br>i = 5:  ‘c’  ans = “c”<br>i = 6:  ‘]’  ans = “a” + 2 * “c” = “acc”  pop(“a”)  pop(2)<br>i = 7:  ‘]’  ans = “” + 3 * “acc” = “accaccacc”  pop(“”)  pop(3)</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
+<p>6.Code(<a href="https://leetcode.com/submissions/detail/286636665/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286636665/</a>)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">decodeString</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = s.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> num = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">string</span> ans = <span class="string">""</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; sNum;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">stack</span>&lt;<span class="built_in">string</span>&gt; sString;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span> (i &lt;= n - <span class="number">1</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">char</span> c = s[i];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (<span class="built_in">isdigit</span>(c)) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">                num = num * <span class="number">10</span> + c - <span class="string">'0'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">isalpha</span>(c)) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">                ans += c;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (c == <span class="string">'['</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">                sNum.push(num);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">                sString.push(ans);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">                num = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">                ans = <span class="string">""</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (c == <span class="string">']'</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">                <span class="built_in">string</span> s = <span class="string">""</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= sNum.top() - <span class="number">1</span>; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">                    s += ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">                ans = sString.top() + s;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">                sNum.pop();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">                sString.pop();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">            i++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/18/2019-12-18-Leetcode-394-Decode%20String/" data-id="ck4aqeymj000zowt706g9folk" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-2019-12-17-Leetcode-611-Valid Triangle Number" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/12/17/2019-12-17-Leetcode-611-Valid%20Triangle%20Number/" class="article-date">
@@ -107,7 +168,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/17/2019-12-17-Leetcode-611-Valid%20Triangle%20Number/" data-id="ck49z7uko000zeot782y18vi5" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/17/2019-12-17-Leetcode-611-Valid%20Triangle%20Number/" data-id="ck4aqeymj000xowt7h5bl938l" class="article-share-link">Share</a>
       
       
     </footer>
@@ -153,7 +214,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/17/2019-12-17-Leetcode-885-Spiral%20Matrix%20III/" data-id="ck49z7ukp0010eot7h49i0wui" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/17/2019-12-17-Leetcode-885-Spiral%20Matrix%20III/" data-id="ck4aqeymj0010owt723q1ac2v" class="article-share-link">Share</a>
       
       
     </footer>
@@ -201,7 +262,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/17/2019-12-17-Leetcode-59-Spiral%20Matrix%20II/" data-id="ck49z7uki000weot72yw42qpf" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/17/2019-12-17-Leetcode-59-Spiral%20Matrix%20II/" data-id="ck4aqeymj000yowt77pxqhyt5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -248,7 +309,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/17/2019-12-17-Leetcode-54-Spiral%20Matrix/" data-id="ck49z7uki000xeot782drdpp4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/17/2019-12-17-Leetcode-54-Spiral%20Matrix/" data-id="ck4aqeymj000wowt75r5x2ebf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -301,7 +362,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/16/2019-12-16-Leetcode-242-Valid%20Anagram/" data-id="ck49z7ukg000seot75pd773zh" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/16/2019-12-16-Leetcode-242-Valid%20Anagram/" data-id="ck4aqeymj000sowt73rji37mr" class="article-share-link">Share</a>
       
       
     </footer>
@@ -354,7 +415,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/16/2019-12-16-Leetcode-426-Partition%20Equal%20Subset%20Sum/" data-id="ck49z7ukg000teot71rxs9bu4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/16/2019-12-16-Leetcode-426-Partition%20Equal%20Subset%20Sum/" data-id="ck4aqeymj000rowt79eytcqwl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -399,7 +460,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/16/2019-12-16-Leetcode-645-Set%20Mismatch/" data-id="ck49z7ukh000ueot7459o5xjd" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/16/2019-12-16-Leetcode-645-Set%20Mismatch/" data-id="ck4aqeymj000uowt729dh874v" class="article-share-link">Share</a>
       
       
     </footer>
@@ -445,7 +506,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/16/2019-12-16-Leetcode-442-Find%20All%20Duplicates%20in%20an%20Array/" data-id="ck49z7ukh000veot7a8z8hlup" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/16/2019-12-16-Leetcode-442-Find%20All%20Duplicates%20in%20an%20Array/" data-id="ck4aqeymj000vowt7amrj0t92" class="article-share-link">Share</a>
       
       
     </footer>
@@ -490,65 +551,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/15/2019-12-15-Leetcode-75-Sort%20Colors/" data-id="ck49z7ukf000reot739jd3f1f" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2019-12-15-Leetcode-155-Min Stack" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/12/15/2019-12-15-Leetcode-155-Min%20Stack/" class="article-date">
-  <time datetime="2019-12-15T10:45:28.500Z" itemprop="datePublished">2019-12-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/15/2019-12-15-Leetcode-155-Min%20Stack/">155.Min Stack</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/min-stack/" target="_blank" rel="noopener">155.Min Stack</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>设计一个数据结构”最小栈”，具有以下特点：<br>1.push(x) – Push element x onto stack.<br>2.pop() – Removes the element on top of the stack.<br>3.top() – Get the top element.<br>4.getMin() – Retrieve the minimum element in the stack.<br>其中核心功能是第四点，因为如果仅考虑前三点的话，就是常规的栈stack。<br>getMin()要求时间复杂度为O(1)。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>MinStack minStack = new MinStack();<br>minStack.push(-2);<br>minStack.push(0);<br>minStack.push(-3);<br>minStack.getMin();   –&gt; Returns -3.<br>minStack.pop();<br>minStack.top();      –&gt; Returns 0.<br>minStack.getMin();   –&gt; Returns -2.</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.getMin()要求时间复杂度为O(1)。</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><p>思路：看到题目，第一想法是：维护一个stack s和一个最小值m即可。<br>当有更小的值入栈后，更新m即可。<br>但这样有一个问题：如果我当前pop的就是最小值m，那怎么办。<br>因为没有保存第二小的值，所以在pop掉m后，m的值就无法追溯了。</p>
-<h3 id="Solution-1：Two-Stacks"><a href="#Solution-1：Two-Stacks" class="headerlink" title="Solution-1：Two Stacks"></a>Solution-1：Two Stacks</h3><p>1.用两个stack，一个s保存数据，一个m保存最小值。<br>当有更小的值入栈后，将这个值同时加入到栈m中。<br>则当前最小的值就是m的栈顶元素。<br>当pop最小元素的时候，将其从s和m中同时pop掉。</p>
-<p>空间复杂度：O(n)</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/285879960/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285879960/</a>)</p>
-<h3 id="Solution-2：One-Stack"><a href="#Solution-2：One-Stack" class="headerlink" title="Solution-2：One Stack"></a>Solution-2：One Stack</h3><p>1.Solution-1中，我们当遇到更小的值时，都将其保存到m栈中。<br>这样栈顶的就是当前s栈中最小的值，若其被pop出去，同时带走m栈顶的元素。<br>此时m栈顶的元素又是s栈中的最小值了。</p>
-<p>2.现在我们用int minValue来代表当前栈中最小的值。<br>s仍然代表着数据栈。<br>当出现了更小的值时：<br>a.保存当前minValue：将其先push到s中。<br>b.更新minValue<br>c.再将当前minValue push到s中。</p>
-<p>3.则任意时刻，minValue都是代表着当前栈中最小的元素值。</p>
-<p>4.当pop的值是minValue的时候，也就是s.top() == minValue，<br>我们从s中pop一个元素，这个元素就是minValue。<br>同时将此时s.top()赋值给minValue。因为这个元素是“前一个最小值”。<br>同时将其从s中pop出去。</p>
-<p>空间复杂度：O(n)</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/285881659/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285881659/</a>)</p>
-<h3 id="Solution-3：One-Stack"><a href="#Solution-3：One-Stack" class="headerlink" title="Solution-3：One Stack"></a>Solution-3：One Stack</h3><p>1.现在我们将当前元素cur和minValue的差值存入栈s中。</p>
-<p>2.push(x)：<br>当栈中没有元素的时候，将0存入s中，minValue说就是x；<br>当栈中已有元素的时候，将x - minValue存入s中，若该值为负，说明当前x是更小的值。将minValue更新为x。</p>
-<p>3.getMin()<br>任意时刻，minValue的值就是当前栈s中最小元素的值。</p>
-<p>4.top()<br>由于s中存入的已经不是之前的数据了，而是存放的差值。<br>当s栈顶元素小于0的时候，说明：这个元素是当前栈中最小的值minValue。return minValue即可。<br>当s栈顶元素不小于0的时候，说明，这个元素是一个差值，其值 = s.top() + minValue。</p>
-<p>5.pop()<br>当s栈顶元素小于0的时候，说明：这个元素是当前栈中最小的值minValue。<br>  需要更新minValue = minValue - s.top()；然后再从s中把其pop。<br>当s栈顶元素不小于0的时候，说明，这个元素是一个差值，直接pop即可。</p>
-<p>6.缺点1：由于差值可能会导致整数溢出，所以用minValue用long long。<br>缺点2：由于放入栈中的值是一个差值，而非原本的数据本身，即有修改数据的嫌疑。需要确定这种情况再用这个方法。</p>
-<p>空间复杂度：O(1)</p>
-<p>7.Code(<a href="https://leetcode.com/submissions/detail/285885660/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285885660/</a>)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/15/2019-12-15-Leetcode-155-Min%20Stack/" data-id="ck49z7uke000peot75l0nbap0" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/15/2019-12-15-Leetcode-75-Sort%20Colors/" data-id="ck4aqeymj000qowt71c739iox" class="article-share-link">Share</a>
       
       
     </footer>
@@ -594,6 +597,10 @@
       <ul>
         
           <li>
+            <a href="/2019/12/18/2019-12-18-Leetcode-394-Decode%20String/">394.Decode String</a>
+          </li>
+        
+          <li>
             <a href="/2019/12/17/2019-12-17-Leetcode-611-Valid%20Triangle%20Number/">611.Valid Triangle Number</a>
           </li>
         
@@ -607,10 +614,6 @@
         
           <li>
             <a href="/2019/12/17/2019-12-17-Leetcode-54-Spiral%20Matrix/">54.Spiral Matrix</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/16/2019-12-16-Leetcode-242-Valid%20Anagram/">242.Valid Anagram</a>
           </li>
         
       </ul>
