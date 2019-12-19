@@ -61,6 +61,54 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-2019-12-12-Leetcode-20-Valid Parentheses" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/12/2019-12-12-Leetcode-20-Valid%20Parentheses/" class="article-date">
+  <time datetime="2019-12-12T08:10:34.517Z" itemprop="datePublished">2019-12-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/12/2019-12-12-Leetcode-20-Valid%20Parentheses/">20.Valid Parentheses</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/valid-parentheses/" target="_blank" rel="noopener">20.Valid Parentheses</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的字符串s；<br>判断该字符串是否一个合法的括号表达式；<br>括号有三种：[] {} ()<br>open的bracket最终必须有一个同类型close的bracket与之匹配；<br>且上述匹配的顺序必须是正确的。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: “()[]{}”<br>Output: true</p>
+<p>Input: “([)]”<br>Output: false</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n: 当n为0的时候，也认为是合法的；</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Stack"><a href="#Solution-1：Stack" class="headerlink" title="Solution-1：Stack"></a>Solution-1：Stack</h3><p>1.若n是奇数，那么一定非法。<br>若n是0，则直接return true。</p>
+<p>2.考虑n为大于0的偶数：<br>模拟括号匹配的过程：i在范围[0, n - 1]内遍历：<br>先将s[0]压入栈；<br>考察s[1]，若s[1]和s[0]是同类型的，且一个s[1]是close，s[0]是open的，那么说明这两个是一对。<br>则此时将s[0]从栈中抛出，i跳到位置2，考虑第二个元素。<br>若s[1]的出现无法和s[0]匹配掉，则将s[1]在压入栈，考虑下一个元素。<br>……<br>直到所有的n个元素都遍历过了，此时检查栈，如果栈是空的，说明所有的括号都可以匹配。<br>如果此时栈非空，则说明存在元素无法匹配。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/285447709/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285447709/</a>)</p>
+<h3 id="Solution-2：Stack"><a href="#Solution-2：Stack" class="headerlink" title="Solution-2：Stack"></a>Solution-2：Stack</h3><p>1.另一种方法：<br>从[0, n - 1]考虑每一个s[i]<br>若s[i]是open的bracket，则将其“另一半”压入栈。<br>否则的话，判断此时栈是否为空，是的话，直接return false。<br>栈不空的话，判断当前元素是否和栈顶元素相同，不同的话，也直接return false。<br>相同的话，将栈顶元素抛出，转移到考虑s[i + 1]</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/285450396/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285450396/</a>)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/12/2019-12-12-Leetcode-20-Valid%20Parentheses/" data-id="ck4c505ej000lkgt77r73c6pb" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-2019-12-12-Leetcode-22-Generate Parentheses" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/12/12/2019-12-12-Leetcode-22-Generate%20Parentheses/" class="article-date">
@@ -97,7 +145,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/12/2019-12-12-Leetcode-22-Generate%20Parentheses/" data-id="ck4c2xn12000kb4t73cl5cryu" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/12/2019-12-12-Leetcode-22-Generate%20Parentheses/" data-id="ck4c505ej000jkgt7hecm5e79" class="article-share-link">Share</a>
       
       
     </footer>
@@ -143,7 +191,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/12/2019-12-12-Leetcode-17-Letter%20Combinations%20of%20a%20Phone%20Number/" data-id="ck4c2xn12000gb4t79lt89h40" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/12/2019-12-12-Leetcode-17-Letter%20Combinations%20of%20a%20Phone%20Number/" data-id="ck4c505ej000ikgt7cjwq2s2n" class="article-share-link">Share</a>
       
       
     </footer>
@@ -189,7 +237,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/11/2019-12-11-Leetcode-48-Rotate%20Image/" data-id="ck4c2xn12000eb4t76l7l6o4r" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/11/2019-12-11-Leetcode-48-Rotate%20Image/" data-id="ck4c505ej000gkgt73w3khzcy" class="article-share-link">Share</a>
       
       
     </footer>
@@ -236,7 +284,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/11/2019-12-11-Leetcode-153-Find%20Minimum%20in%20Rotated%20Sorted%20Array/" data-id="ck4c2xn12000fb4t73jik2crz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/11/2019-12-11-Leetcode-153-Find%20Minimum%20in%20Rotated%20Sorted%20Array/" data-id="ck4c505ej000dkgt7e0ku2slg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -284,7 +332,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/11/2019-12-11-Leetcode-81-Search%20in%20Rotated%20Sorted%20Array%20II/" data-id="ck4c2xn12000jb4t7hca8gz7n" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/11/2019-12-11-Leetcode-81-Search%20in%20Rotated%20Sorted%20Array%20II/" data-id="ck4c505ej000hkgt7a3lw5f6a" class="article-share-link">Share</a>
       
       
     </footer>
@@ -334,7 +382,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/10/2019-12-10-Leetcode-33-Search%20in%20Rotated%20Sorted%20Array/" data-id="ck4c2xn0n000db4t7hhewfjxx" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/10/2019-12-10-Leetcode-33-Search%20in%20Rotated%20Sorted%20Array/" data-id="ck4c505ej000ckgt7hxmmhlu3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -380,7 +428,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/10/2019-12-10-Leetcode-309-Best%20Time%20to%20Buy%20and%20Sell%20Stock%20with%20Cooldown/" data-id="ck4c2xn0n0008b4t7ahg4d3nr" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/10/2019-12-10-Leetcode-309-Best%20Time%20to%20Buy%20and%20Sell%20Stock%20with%20Cooldown/" data-id="ck4c505ej000bkgt70jrq5foh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -432,7 +480,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/10/2019-12-10-Leetcode-714-Best%20Time%20to%20Buy%20and%20Sell%20Stock%20with%20Transaction%20Fee/" data-id="ck4c2xn0n000cb4t76vzv6k1v" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/10/2019-12-10-Leetcode-714-Best%20Time%20to%20Buy%20and%20Sell%20Stock%20with%20Transaction%20Fee/" data-id="ck4c505ej000ekgt7dljm6b2x" class="article-share-link">Share</a>
       
       
     </footer>
@@ -483,69 +531,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/09/2019-12-09-Leetcode-188-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20IV/" data-id="ck4c2xn12000hb4t78ikm4xk3" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2019-12-09-Leetcode-123-Best Time to Buy ans Sell Stock III" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/12/08/2019-12-09-Leetcode-123-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20III/" class="article-date">
-  <time datetime="2019-12-08T03:35:57.193Z" itemprop="datePublished">2019-12-08</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/08/2019-12-09-Leetcode-123-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20III/">Leetcode123-Best Time to Buy and Sell Stock III</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/" target="_blank" rel="noopener">Leetcode123-Best Time to Buy and Sell Stock III</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组prices；prices[i]代表第i天股票的价格。<br>如果你最多能交易2次，即：买2次，卖2次。求出你最多能赚多少钱。<br>前提是：买入下一股的时候，必须将上一股卖掉。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [3,3,5,0,0,3,1,4]<br>Output: 6<br>Explanation: Buy on day 4 (price = 0) and sell on day 6 (price = 3), profit = 3-0 = 3.<br>             Then buy on day 7 (price = 1) and sell on day 8 (price = 4), profit = 4-1 = 3.</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n：当n为0/1的时候，直接返回0；<br>赚不到钱则返回0；</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：峰谷法"><a href="#Solution-1：峰谷法" class="headerlink" title="Solution-1：峰谷法"></a>Solution-1：峰谷法</h3><p>1.将每天的价格画成折线图，折线图中上升的线段就是可以获得利润的时候。<br>由于我们最多可以交易两次，也是就说找到两条折线，其高度差最大。<br>所以说用变量maxProfit1和maxProfit2来维护这两个值，数组从左往右遍历一次，找出所有的valley和peak；然后依次更新两个最大值。<br>最后结果返回这两个值的和即可。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<p>结果发现：pass了190/200的用例。<br>其中一个不过的用例是：[1,2,4,2,5,7,2,4,9,0]<br>按照我们上面的思路：找出所有的上升线段：1-&gt;2-&gt;4  2-&gt;5-&gt;7  2-&gt;4-&gt;9<br>挑两个最大的，计算出ans = 5 + 7 = 12<br>但实际上答案是13。分别是：1-&gt;7  2-&gt;9这两个区间。<br>通过观察，可以看出：1-&gt;2-&gt;4  2-&gt;5-&gt;7，这两个区间由于存在范围重叠，导致将其分开计算得到的两个最大值，比在一个计算得到的一个最大值要小。<br>这也是这种思路的问题所在。</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/284240316/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284240316/</a>)</p>
-<h3 id="Solution-2：Divide-and-Conquer"><a href="#Solution-2：Divide-and-Conquer" class="headerlink" title="Solution-2：Divide and Conquer"></a>Solution-2：Divide and Conquer</h3><p>1.根据leetcode121的启示，我们可以找O(n)的时间内，找到一个区间[0, n - 1]交易一次所能获取的最大利润。<br>本题限定，我们最多能交易2次，所以对于位置i，我们可以先找到[0, i - 1]内交易一次所能获得的最大利润。以及[i, n - 1]内交易一次所能获得的最大利润。<br>然后把两部分加起来即可。在[0, n - 1]的范围内，找到一个i，使得其两部分的和最大。相当于进行两次leetcode121。</p>
-<p>2.vector<int> l(n, 0);//l[i]代表：范围[0, i]内，交易一次，能获得的最大利润<br>  vector<int> r(n, 0);//r[i]代表：范围[i, n - 1]内，交易一次，能获得的最大利润<br>  则对于i在[0, n - 1]内，res[i] = l[i] + r[i]，找出最大的res[i]即可。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/284663137/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284663137/</a>)</p>
-<h3 id="Solution-3：Dynamic-Programming"><a href="#Solution-3：Dynamic-Programming" class="headerlink" title="Solution-3：Dynamic Programming"></a>Solution-3：Dynamic Programming</h3><p>1.状态转移：dp[k][i] = max(dp[k][i - 1], dp[k - 1][j] + prices[i] - prices[j])<br>其中dp[k][i]代表：最多交易k次，截止到第i天为止（包含第i天），所能获得的最多利润。则答案就是dp[k][n - 1]<br>分别遍历k和i即可。对于固定的k和i，找到一个j在[0, i]范围内，使得prices[j] - dp[k - 1][j]最小即可。<br>边界条件：<br>当k为0时，dp[k][i]都为0<br>当i为0时，dp[k][i]都为0</p>
-<p>时间复杂度：O(k * n ^ 2)<br>空间复杂度：O(K * n)</p>
-<p>结果TLE</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/284681458/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284681458/</a>)</p>
-<h3 id="Solution-4：Dynamic-Programming-Optimization"><a href="#Solution-4：Dynamic-Programming-Optimization" class="headerlink" title="Solution-4：Dynamic Programming + Optimization"></a>Solution-4：Dynamic Programming + Optimization</h3><p>1.Solution-3的思路是：我们对于一个给定的(k, i)，j在[0, i]中，寻找一个最小的j使得表达式（prices[j] - dp[k - 1][j]）的值最小。<br>找到之后，继续寻找(k, i + 1)..(k, i + 2)……的值，直到所有的k和i遍历完成。</p>
-<p>2.通过观察，我们发现表达式（prices[j] - dp[k - 1][j]）的值只和位置j有关（在k固定的情况下）。<br>所以对于同一个k来说，当计算出了范围[0, i]内表达式的最小值后，计算[0, i + 1]只需要O(1)的时间。<br>也就是说，对于给定的(k, i)，我们保留(k, i - 1)的计算结果，通过递推来算出当前的结果。<br>而不是对于每一个(k, i)，我们通过遍历j来找出当下结果。<br>启示：当计算到某个状态时，而非仅仅考虑当前计算出来正确结果即可。尝试想一下当前结果对下一次的计算是否有用，有用的话将当前结果保留下来即可。</p>
-<p>时间复杂度：O(k * n)<br>空间复杂度：O(K * n)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/284684804/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284684804/</a>)</p>
-<h3 id="Solution-5：Dynamic-Programming-Further-Optimization"><a href="#Solution-5：Dynamic-Programming-Further-Optimization" class="headerlink" title="Solution-5：Dynamic Programming + Further Optimization"></a>Solution-5：Dynamic Programming + Further Optimization</h3><p>1.进一步，我们可以发现k是一个常数，所以尝试将两层循环倒换一下顺序，即：常数级别的k放在内层循环中。</p>
-<p>时间复杂度：O(k * n)<br>空间复杂度：O(K * n)</p>
-<p>Code(<a href="https://leetcode.com/submissions/detail/284698683/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284698683/</a>)</p>
-<p>2.再进一步，我们可以发现dp[i][k]的值只和dp[i - 1][k]的值有关，而和i - 2, i - 3……无关。所以我们可以将第一维用一个变量表示即可，即将二维压缩为一维。空间复杂度变为：O(k)</p>
-<p>时间复杂度：O(k * n)<br>空间复杂度：O(k)</p>
-<p>Code(<a href="https://leetcode.com/submissions/detail/284701294/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284701294/</a>)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/08/2019-12-09-Leetcode-123-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20III/" data-id="ck4c2xn0n0009b4t77u3ogj5n" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/09/2019-12-09-Leetcode-188-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20IV/" data-id="ck4c505ej000fkgt79n4xfo9o" class="article-share-link">Share</a>
       
       
     </footer>
@@ -591,6 +577,10 @@
       <ul>
         
           <li>
+            <a href="/2019/12/19/2019-12-19-Leetcode-922-Sort%20Array%20By%20Parity%20II/">922.Sort Array By Parity II</a>
+          </li>
+        
+          <li>
             <a href="/2019/12/19/2019-12-19-Leetcode-905-Sort%20Array%20By%20Parity/">905.Sort Array By Parity</a>
           </li>
         
@@ -604,10 +594,6 @@
         
           <li>
             <a href="/2019/12/18/2019-12-18-Leetcode-394-Decode%20String/">394.Decode String</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/17/2019-12-17-Leetcode-611-Valid%20Triangle%20Number/">611.Valid Triangle Number</a>
           </li>
         
       </ul>
