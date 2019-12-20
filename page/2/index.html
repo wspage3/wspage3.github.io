@@ -61,6 +61,59 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-2019-12-16-Leetcode-242-Valid Anagram" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/16/2019-12-16-Leetcode-242-Valid%20Anagram/" class="article-date">
+  <time datetime="2019-12-16T13:07:31.626Z" itemprop="datePublished">2019-12-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/16/2019-12-16-Leetcode-242-Valid%20Anagram/">242.Valid Anagram</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/valid-anagram/" target="_blank" rel="noopener">242.Valid Anagram</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定两个字符串s和t。<br>【输出】<br>判断这两个字符串是否为：“字母异位词”<br>所谓“字母异位词”，就是两个单词，组成它们的字母是完全一样的，而不关心其排列顺序。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: s = “anagram”, t = “nagaram”<br>Output: true</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.lenS不等于lenT的时候，直接return false。<br>2.s和t中仅包含小写字母。<br>3.如果输入包含unicode字符的话，该程序的扩展性如何。</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Sort"><a href="#Solution-1：Sort" class="headerlink" title="Solution-1：Sort"></a>Solution-1：Sort</h3><p>1.将两个字符串都排序，然后直接比较字符串是否相等即可。<br>2.在C++中：<br>sort(s.begin(), s.end());<br>return s == t;</p>
+<p>时间复杂度：O(n * log n) //n代表字符串的长度<br>空间复杂度：O(1)</p>
+<p>6.Code(<a href="https://leetcode.com/submissions/detail/286349008/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286349008/</a>)</p>
+<h3 id="Solution-2：Hash-Table"><a href="#Solution-2：Hash-Table" class="headerlink" title="Solution-2：Hash Table"></a>Solution-2：Hash Table</h3><p>1.用两个哈希表mapS和mapT，来记录s和t中所有字母出现的次数。<br>2.然后遍历26个小写字母：<br>对于任意一个小写字母：<br>首先，判断其是否在mapS和mapT中同时出现或者同时不出现。<br>然后，判断其出现的频率是否相等。<br>如果上述两点有不满足的，直接返回false即可。<br>3.在C++中，判断其是否出现在unordered_map中可以使用count()，出现返回1，否则返回0。<br>判断其出现的次数的话，直接比较其key对应的value即可。</p>
+<p>时间复杂度：O(n + 26)<br>空间复杂度：O(26)</p>
+<p>4.Code(<a href="https://leetcode.com/submissions/detail/286336480/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286336480/</a>)</p>
+<h3 id="Solution-3：Hash-Table-with-Optimization"><a href="#Solution-3：Hash-Table-with-Optimization" class="headerlink" title="Solution-3：Hash Table with Optimization"></a>Solution-3：Hash Table with Optimization</h3><p>1.我们用一个哈希表即可。<br>2.首先判断lenS, lenT是否相等，不相等的话直接return false。<br>3.遍历n次，每次：<br>s[i]对应的value加一；<br>t[i]对应的value减一；<br>如果遍历n次后，且两个字符串由相同的字母组成的话，那么所有出现的字符的次数都是0了。<br>4.遍历整个哈希表，若其个数非0，则return false。</p>
+<p>时间复杂度：O(n + 26)<br>空间复杂度：O(26)</p>
+<p>4.Code(<a href="https://leetcode.com/submissions/detail/286347847/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286347847/</a>)</p>
+<h3 id="Solution-4：Use-Vector-instead-of-Hash-Table"><a href="#Solution-4：Use-Vector-instead-of-Hash-Table" class="headerlink" title="Solution-4：Use Vector instead of Hash Table"></a>Solution-4：Use Vector instead of Hash Table</h3><p>1.我们用一个固定长度为26的数组即可实现Solution-3的思路。<br>2.在数组中访问赋值的时间复杂度是O(1)。<br>而理论上哈希表的访问的时间复杂度也是O(1)。<br>参考：<br>Hash tables do some complex math in that one operation to get to the value that you want.<br>Simulating a hash table with an array is quicker because that<br>one operation for a lookup is only an offset from the beginning of the array(since you already have the index)<br>vs more difficult mathy stuff with the hash table.</p>
+<p>时间复杂度：O(n + 26)<br>空间复杂度：O(26)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/286348853/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286348853/</a>)</p>
+<p>4.进阶：如果输入字符串包含 unicode 字符怎么办？你能否调整你的解法来应对这种情况？<br>解答：使用哈希表而不是固定大小的计数器。想象一下，分配一个大的数组来适应整个 Unicode 字符范围，这个范围可能超过 100万。<br>哈希表是一种更通用的解决方案，可以适应任何字符范围。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/16/2019-12-16-Leetcode-242-Valid%20Anagram/" data-id="ck4drxqcx000udgt79iki673k" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-2019-12-16-Leetcode-426-Partition Equal Subset Sum" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/12/16/2019-12-16-Leetcode-426-Partition%20Equal%20Subset%20Sum/" class="article-date">
@@ -104,7 +157,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/16/2019-12-16-Leetcode-426-Partition%20Equal%20Subset%20Sum/" data-id="ck4cjuvb5000tukt752c78u09" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/16/2019-12-16-Leetcode-426-Partition%20Equal%20Subset%20Sum/" data-id="ck4drxqcu000pdgt7260o28t1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -149,7 +202,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/16/2019-12-16-Leetcode-645-Set%20Mismatch/" data-id="ck4cjuvb5000uukt70avxf3gc" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/16/2019-12-16-Leetcode-645-Set%20Mismatch/" data-id="ck4drxqcz000ydgt7chlifzl7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -195,7 +248,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/16/2019-12-16-Leetcode-442-Find%20All%20Duplicates%20in%20an%20Array/" data-id="ck4cjuvb6000vukt76kkd3hr2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/16/2019-12-16-Leetcode-442-Find%20All%20Duplicates%20in%20an%20Array/" data-id="ck4drxqcw000sdgt7hbom7vtq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -240,7 +293,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/15/2019-12-15-Leetcode-75-Sort%20Colors/" data-id="ck4cjuvb3000pukt791uj3qnu" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/15/2019-12-15-Leetcode-75-Sort%20Colors/" data-id="ck4drxqcv000qdgt7dl759ds6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -298,7 +351,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/15/2019-12-15-Leetcode-155-Min%20Stack/" data-id="ck4cjuvb2000oukt7bjxgc3sk" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/15/2019-12-15-Leetcode-155-Min%20Stack/" data-id="ck4drxqct000ndgt76dskfpw6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -347,7 +400,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/15/2019-12-15-Leetcode-268-Missing%20Number/" data-id="ck4cjuvb4000rukt7eif42w3p" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/15/2019-12-15-Leetcode-268-Missing%20Number/" data-id="ck4drxqct000odgt74j3j09go" class="article-share-link">Share</a>
       
       
     </footer>
@@ -411,7 +464,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/13/2019-12-13-Leetcode-287-Find%20the%20Duplicate%20Number/" data-id="ck4cjuvaz000lukt766ys62xz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/13/2019-12-13-Leetcode-287-Find%20the%20Duplicate%20Number/" data-id="ck4drxqcw000tdgt794es3lej" class="article-share-link">Share</a>
       
       
     </footer>
@@ -456,7 +509,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/13/2019-12-13-Leetcode-278-First%20Bad%20Version/" data-id="ck4cjuvb1000mukt7b1nv1w76" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/13/2019-12-13-Leetcode-278-First%20Bad%20Version/" data-id="ck4drxqcs000mdgt7fr5w6q65" class="article-share-link">Share</a>
       
       
     </footer>
@@ -520,56 +573,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/13/2019-12-13-Leetcode-704-Binary%20Search/" data-id="ck4cjuvb2000nukt787fcawn1" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2019-12-13-Leetcode-34-Find First and Last Position of Element in Sorted Array" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/12/12/2019-12-13-Leetcode-34-Find%20First%20and%20Last%20Position%20of%20Element%20in%20Sorted%20Array/" class="article-date">
-  <time datetime="2019-12-12T13:28:34.562Z" itemprop="datePublished">2019-12-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/12/2019-12-13-Leetcode-34-Find%20First%20and%20Last%20Position%20of%20Element%20in%20Sorted%20Array/">34.Find First and Last Position of Element in Sorted Array</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/" target="_blank" rel="noopener">34.Find First and Last Position of Element in Sorted Array</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的数组，该数组是升序排列的，中间可能有重复的元素；<br>给定一个整数target；<br>查找target是否在数组中，在的话，返回其开始出现的索引，以及最后一次出现的索引。<br>不存在的话，返回(-1, -1)即可；</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: nums = [5,7,7,8,8,10], target = 8<br>Output: [3,4]</p>
-<p>Input: nums = [5,7,7,8,8,10], target = 6<br>Output: [-1,-1]</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n: 当n为0的时候，直接返回(-1, -1)；</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Binary-Search-Linear-Search"><a href="#Solution-1：Binary-Search-Linear-Search" class="headerlink" title="Solution-1：Binary Search + Linear Search"></a>Solution-1：Binary Search + Linear Search</h3><p>1.二分查找，每次去mid，然后判断nums[mid]的值是否是target，如果是的话：<br>依次向前找，直到当前的数不等于target为止。<br>依次向后找，直到当前的数不等于target位置。<br>找到，并return 即可。<br>如果target大于nums[mid]，则在[mid + 1, right]中搜。<br>如果target小于nums[mid]，则在[left, mid - 1]中搜。</p>
-<p>2.特殊情况考虑：当left，right相差1的时候，满足while循环条件，并进入。<br>此时mid = left，考虑了nums[mid]后:<br>若nums[mid]就是我们要找的target，则寻找它开始结束的位置。<br>若target大于nums[mid]，此时left = right，while循环退出。此时需要考虑left(等于right)这个位置的值。<br>如果是target，则返回{left, left}即可。<br>如果不是，则target不在数组中。<br>若target小于nums[mid]，则target不在数组中。</p>
-<p>时间复杂度：O(log n)，最坏O(n)<br>空间复杂度：O(1)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/285482172/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285482172/</a>)</p>
-<h3 id="Solution-2：Binary-Search-Binary-Search"><a href="#Solution-2：Binary-Search-Binary-Search" class="headerlink" title="Solution-2：Binary Search + Binary Search"></a>Solution-2：Binary Search + Binary Search</h3><p>1.由于我们在Leetcode-704-Binary Search中学会了找target的最小索引和最大索引。<br>正好本题目中就是找这两个值。</p>
-<p>2.先找到target的最小索引；再找到target的最大索引。<br>再返回答案。</p>
-<p>时间复杂度：O(log n)<br>空间复杂度：O(1)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/285598701/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285598701/</a>)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/12/2019-12-13-Leetcode-34-Find%20First%20and%20Last%20Position%20of%20Element%20in%20Sorted%20Array/" data-id="ck4cjuvb3000qukt73xl68w9a" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/13/2019-12-13-Leetcode-704-Binary%20Search/" data-id="ck4drxqcv000rdgt7fuicb9fl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -615,6 +619,10 @@
       <ul>
         
           <li>
+            <a href="/2019/12/20/2019-12-20-Leetcode-406-Queue%20Reconstruction%20by%20Height/">406.Queue Reconstruction by Height</a>
+          </li>
+        
+          <li>
             <a href="/2019/12/19/2019-12-19-Leetcode-922-Sort%20Array%20By%20Parity%20II/">922.Sort Array By Parity II</a>
           </li>
         
@@ -628,10 +636,6 @@
         
           <li>
             <a href="/2019/12/18/2019-12-18-Leetcode-912-Sort%20an%20Array/">912.Sort an Array</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/18/2019-12-18-Leetcode-394-Decode%20String/">394.Decode String</a>
           </li>
         
       </ul>
