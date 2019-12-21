@@ -61,6 +61,170 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-2019-12-21-Leetcode-088-Merge Sorted Array" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/21/2019-12-21-Leetcode-088-Merge%20Sorted%20Array/" class="article-date">
+  <time datetime="2019-12-21T07:36:35.301Z" itemprop="datePublished">2019-12-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/21/2019-12-21-Leetcode-088-Merge%20Sorted%20Array/">88.Merge Sorted Array</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/merge-sorted-array/" target="_blank" rel="noopener">88.Merge Sorted Array</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定两个整数数组nums1和nums2。两个数组都是有序的。<br>同时给定两个数字m，n。<br>m代表：nums1中前m个数字是有序的。<br>n代表：nums2中前n个数字是有序的。nums2的长度为n。<br>同时nums1的数组长度 &gt;= m + n<br>【输出】<br>将nums2数组和nums1数组合并成一个有序的数组，且存在在nums1数组中。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input:<br>nums1 = [1,2,3,0,0,0], m = 3<br>nums2 = [2,5,6],       n = 3</p>
+<p>Output: [1,2,2,3,5,6]</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
+<li>若n = 0，不需要任何操作</li>
+<li>若m = 0，将nums2拷贝到nums1中即可。</li>
+</ol>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Three-Pointers"><a href="#Solution-1：Three-Pointers" class="headerlink" title="Solution-1：Three Pointers"></a>Solution-1：Three Pointers</h3><p>1.使用三个指针p1, p2, cur<br>cur指向nums1数组的末尾<br>p1指向nums1的最后一个有序元素<br>p2指向nums2的最后一个有序元素<br>当p1和p2均大于等于0时，选出一个较大的元素，放在nums1数组的末尾。</p>
+<p>2.判断此时是p1小于0，还是p2小于0。<br>若p1小于0，说明nums1中所有的有序元素都已经考虑完成了。此时只要将nums2中未考虑的元素依次放入nums1中即可。<br>若p2小于0，说明nums2中所有的有序元素都已经考虑完成了。此时不需要任何操作，nums1中所有元素都是有序的了。</p>
+<p>时间复杂度：O(m + n)<br>空间复杂度：O(1)</p>
+<p>6.Code(<a href="https://leetcode.com/submissions/detail/287061095/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/287061095/</a>)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums1, <span class="keyword">int</span> m, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums2, <span class="keyword">int</span> n)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> cur = m + n - <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> p1 = m - <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> p2 = n - <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span> (p1 &gt;= <span class="number">0</span> &amp;&amp; p2 &gt;= <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (nums1[p1] &gt;= nums2[p2]) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">                nums1[cur--] = nums1[p1--];    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">            &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">                nums1[cur--] = nums2[p2--];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (p1 &lt; <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">while</span> (p2 &gt;= <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">                nums1[cur--] = nums2[p2--];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">            <span class="comment">// do nothing</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/21/2019-12-21-Leetcode-088-Merge%20Sorted%20Array/" data-id="ck4fdlqtm0017z0t7h2oo2qwt" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2019-12-21-Leetcode-283-Move Zeroes" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/21/2019-12-21-Leetcode-283-Move%20Zeroes/" class="article-date">
+  <time datetime="2019-12-21T07:28:09.917Z" itemprop="datePublished">2019-12-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/21/2019-12-21-Leetcode-283-Move%20Zeroes/">283.Move Zeroes</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/move-zeroes/" target="_blank" rel="noopener">283.Move Zeroes</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个长度为n的整数数组。<br>【输出】<br>将其中出现的‘0’都移动到末尾，同时其他非0的元素的相对顺序不变。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [0,1,0,3,12]<br>Output: [1,3,12,0,0]</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
+<li>就地操作，O(1)的space complexity</li>
+<li>使得所有操作的次数尽可能地少</li>
+</ol>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>1.cnt代表0的个数。<br>i从前往后遍历：<br>如果在位置nums[i]发现一个‘0’。<br>cnt++<br>将[i + 1, n - cnt]上面所有的数字向前移动一次。<br>将nums[n - cnt]赋值为0。</p>
+<p>2.直到i = n - cnt为止。</p>
+<p>时间复杂度：O(n ^ 2)<br>空间复杂度：O(1)</p>
+<p>6.Code(<a href="https://leetcode.com/submissions/detail/287111624/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/287111624/</a>)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">moveZeroes</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> cnt = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n - <span class="number">1</span> - cnt;) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (nums[i] == <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">                cnt++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">int</span> cur = i;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">while</span> (cur &lt;= n - <span class="number">1</span> - cnt) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">                    nums[cur] = nums[cur + <span class="number">1</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">                    cur++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">                nums[cur] = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">            &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">                i++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+
+<h3 id="Solution-2：Two-Pointers"><a href="#Solution-2：Two-Pointers" class="headerlink" title="Solution-2：Two Pointers"></a>Solution-2：Two Pointers</h3><p>1.指针j从0开始，指向第一个为0的位置。</p>
+<p>2.指针i从j + 1开始，指向第一个非0的位置。<br>此时将nums[i]赋值给nums[j]。<br>同时i，j往后移一位。</p>
+<p>3.最后，将[j, n - 1]内所有的数字赋值为0。</p>
+<p>4.j的含义：[0, j - 1]的数字都是非0的。<br>i的含义：考虑所有可能非0的位置。</p>
+<p>5.举个例子：<br>[0,1,0,3,12]  n = 5<br>j = 0</p>
+<p>i = 1 : nums[0] = 1, j = 1<br>i = 2 :<br>i = 3 : nums[1] = 3, j = 2<br>i = 4 : nums[2] = 12, j = 3</p>
+<p>j = 3 : nums[3] = 0<br>j = 4 : nums[4] = 0</p>
+<p>nums: [1,3,12,0,0]</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
+<p>6.Code(<a href="https://leetcode.com/submissions/detail/287504746/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/287504746/</a>)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">moveZeroes</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> j = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span> (j &lt;= n - <span class="number">1</span> &amp;&amp; nums[j] != <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">            j++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = j + <span class="number">1</span>; i &lt;= n - <span class="number">1</span>; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (nums[i] != <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">                nums[j++] = nums[i];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span> (j &lt;= n - <span class="number">1</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">            nums[j++] = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/21/2019-12-21-Leetcode-283-Move%20Zeroes/" data-id="ck4fdlqu20018z0t7hmi21419" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2019-12-21-Leetcode-448-Find All Numbers Disappeared in an Array" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/21/2019-12-21-Leetcode-448-Find%20All%20Numbers%20Disappeared%20in%20an%20Array/" class="article-date">
+  <time datetime="2019-12-21T07:09:07.502Z" itemprop="datePublished">2019-12-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/21/2019-12-21-Leetcode-448-Find%20All%20Numbers%20Disappeared%20in%20an%20Array/">448.Find All Numbers Disappeared in an Array</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/" target="_blank" rel="noopener">448.Find All Numbers Disappeared in an Array</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定长度为n的数组。其中所有元素的取值范围都在[1, n]中间。<br>其中有些元素出现了2次，有些元素没有出现。<br>【输出】<br>找出所有没有出现的元素，将其用数组的形式返回。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input:<br>[4,3,2,7,8,2,3,1]<br>Output:<br>[5,6]</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
+<li>要求O(n)的time complexity</li>
+<li>要求O(1)的space complexity</li>
+<li>判断n是否为0，若为0返回空数组即可。</li>
+</ol>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：标记法"><a href="#Solution-1：标记法" class="headerlink" title="Solution-1：标记法"></a>Solution-1：标记法</h3><p>1.由于元素取值范围都在[1, n]中间，<br>所以任意nums[i] - 1都可以作为nums的index。</p>
+<p>2.举个例子：<br>index: [0, 1, 2, 3, 4, 5, 6, 7]<br>nums:  [4, 3, 2, 7, 8, 2, 3, 1]<br>遍历一次，将nums[nums[i] - 1]由正数变为负数；若已经是负数，则不处理：<br>nums:  [-4, -3, -2, -7, 8, 2, -3, -1]<br>此时发现index为4和5的数字仍然是正数。说明数组中不存在5和6这两个数字。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(1) //不包含返回的数组ans</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/287116928/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/287116928/</a>)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; findDisappearedNumbers(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n - <span class="number">1</span>; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">int</span> index = <span class="built_in">abs</span>(nums[i]) - <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (nums[index] &gt; <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">                nums[index] = -nums[index];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n - <span class="number">1</span>; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (nums[i] &gt; <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">                ans.push_back(i + <span class="number">1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/21/2019-12-21-Leetcode-448-Find%20All%20Numbers%20Disappeared%20in%20an%20Array/" data-id="ck4fdlqu2001bz0t76lpn0h5z" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-2019-12-20-Leetcode-494-Target Sum" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/12/20/2019-12-20-Leetcode-494-Target%20Sum/" class="article-date">
@@ -125,7 +289,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/20/2019-12-20-Leetcode-494-Target%20Sum/" data-id="ck4f7zgwd0015ikt7147j2kyq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/20/2019-12-20-Leetcode-494-Target%20Sum/" data-id="ck4fdlqtm0016z0t7fxesh9dk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -188,7 +352,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/20/2019-12-20-Leetcode-011-Container%20With%20Most%20Water/" data-id="ck4f7zgwa0010ikt76nfvgj13" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/20/2019-12-20-Leetcode-011-Container%20With%20Most%20Water/" data-id="ck4fdlqtm0013z0t7h19ncc55" class="article-share-link">Share</a>
       
       
     </footer>
@@ -246,7 +410,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/20/2019-12-20-Leetcode-406-Queue%20Reconstruction%20by%20Height/" data-id="ck4f7zgwe0018ikt712mn3tab" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/20/2019-12-20-Leetcode-406-Queue%20Reconstruction%20by%20Height/" data-id="ck4fdlqtm0015z0t79vc0glcn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -303,7 +467,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/19/2019-12-19-Leetcode-922-Sort%20Array%20By%20Parity%20II/" data-id="ck4f7zgwb0012ikt7c5pwfyig" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/19/2019-12-19-Leetcode-922-Sort%20Array%20By%20Parity%20II/" data-id="ck4fdlqtm0012z0t70ic34y9g" class="article-share-link">Share</a>
       
       
     </footer>
@@ -361,7 +525,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/19/2019-12-19-Leetcode-905-Sort%20Array%20By%20Parity/" data-id="ck4f7zgwc0014ikt7d34p15ov" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/19/2019-12-19-Leetcode-905-Sort%20Array%20By%20Parity/" data-id="ck4fdlqtm0011z0t70a6l18rs" class="article-share-link">Share</a>
       
       
     </footer>
@@ -371,9 +535,9 @@
 
 
   
-    <article id="post-2019-12-19-Leetcode-xxx-Empty" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-empty" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/19/2019-12-19-Leetcode-xxx-Empty/" class="article-date">
+    <a href="/2019/12/19/empty/" class="article-date">
   <time datetime="2019-12-19T01:31:26.065Z" itemprop="datePublished">2019-12-19</time>
 </a>
     
@@ -385,7 +549,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/19/2019-12-19-Leetcode-xxx-Empty/">2019-12-19-Leetcode-xxx-Empty</a>
+      <a class="article-title" href="/2019/12/19/empty/">empty</a>
     </h1>
   
 
@@ -409,7 +573,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/19/2019-12-19-Leetcode-xxx-Empty/" data-id="ck4f7zgwe0017ikt72gef8p6n" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/19/empty/" data-id="ck4fdlqu20019z0t76l68gibq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -534,170 +698,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/18/2019-12-18-Leetcode-912-Sort%20an%20Array/" data-id="ck4f7zgwa000zikt798wg9gr4" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2019-12-18-Leetcode-394-Decode String" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/12/18/2019-12-18-Leetcode-394-Decode%20String/" class="article-date">
-  <time datetime="2019-12-18T02:30:42.678Z" itemprop="datePublished">2019-12-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/18/2019-12-18-Leetcode-394-Decode%20String/">394.Decode String</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/decode-string/" target="_blank" rel="noopener">394.Decode String</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个长度为s的字符串。这个字符串可以理解为“加密串”。<br>【输出】<br>找出该字符串对应的“解密串”。<br>规则：k[str]，代表str出现k次。此处保证k一定是正整数。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>s = “3[a]2[bc]”, return “aaabcbc”.<br>s = “3[a2[c]]”, return “accaccacc”.<br>s = “2[abc]3[cd]ef”, return “abcabccdcdcdef”.</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
-<li>保证方括号都是配对，且合法的。</li>
-<li>保证出现的数字都是正整数。</li>
-<li>“解密串”中不包含字母。所以说“加密串”中出现的数字一定是k，代表次数。</li>
-<li>“加密串”中的“[]”内部不包含数字。</li>
-</ol>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：DFS"><a href="#Solution-1：DFS" class="headerlink" title="Solution-1：DFS"></a>Solution-1：DFS</h3><p>1.从前到后考虑字符串s的每一个位置：[0, n - 1]<br>开始调用：ans = dfs(0, s);</p>
-<p>2.若位置i遇到’[‘，则说明遇到一个子问题，进行递归调用:<br>substr = dfs(i + 1, s);<br>假设这个子问题的答案已经解出来了，答案为：”abcabc”。</p>
-<p>3.任意一个子问题要想解出来答案，说明当前位置j出现了’]’。<br>此时将“计算拼接”出来的子答案返回给上层函数。</p>
-<p>4.回到步骤2，发现：<br>位置i出现了’[‘，寻找子问题的答案。<br>位置j出现了’]’，返回子问题的答案为”abcabc”。<br>说明区间[i, j]上的所有字符都被考虑过了。其value就是”abdabc”。<br>此时我们将i位置之前的num找出来，将其拼接到一起。<br>然后继续考虑位置(j + 1)……<br>注意：由于父亲需要知道子问题返回的时候，走到了哪个位置，所以dfs函数的第一个参数用一个int引用。</p>
-<p>5.继续遍历，知道i &gt; n - 1为止。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(n) //递归开销</p>
-<p>6.Code(<a href="https://leetcode.com/submissions/detail/286626640/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286626640/</a>)</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span>&amp; i, <span class="built_in">string</span> s)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">string</span> <span class="keyword">word</span> = <span class="string">""</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> num = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span> (i &lt; s.<span class="built_in">size</span>()) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">char</span> c = s[i];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (c == <span class="string">'['</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">                <span class="built_in">string</span> next = dfs(++i, s);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= num - <span class="number">1</span>; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">                    <span class="keyword">word</span> += next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">                num = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (c &gt;= <span class="string">'0'</span> &amp;&amp; c &lt;= <span class="string">'9'</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">                num = num * <span class="number">10</span> + c - <span class="string">'0'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (c == <span class="string">']'</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">return</span> <span class="keyword">word</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">            &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">word</span> += c;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">            i++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> <span class="keyword">word</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">decodeString</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> dfs(i, s);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
-
-<h3 id="Solution-2：Stack"><a href="#Solution-2：Stack" class="headerlink" title="Solution-2：Stack"></a>Solution-2：Stack</h3><p>1.若没有方括号嵌套，while循环从前到后一个一个的找出子答案，拼接起来就行。<br>遇到一个’[‘，则继续向后找，直到找到一个’]’，说明这两个是匹配的括号。<br>将前面的这个范围内的字符循环num次即可，拼接到答案ans上。num清零。考虑下一个位置。</p>
-<p>2.当存在括号嵌套的时候，当找到一个’[‘，后面可以继续跟着一个’[‘，<br>此时计算需要由内往外，找出最内层的匹配的一对方括号，将其答案计算出来，返回给上一层计算……</p>
-<p>3.可以观察到，上面先遍历到的’[‘，反而是最后计算，这种特性十分符合栈的“先入后出”。我们用栈来模拟。<br>使用两个辅助栈：<br>int类型的sNum: 当出现’[‘时，将此时num入栈。num清零。<br>string类型的sString: 当出现’[‘时，将此时已有的答案ans入栈。对于第一次入栈来说，一定是””。ans清空。<br>这样我们就把各个状态存起来了。</p>
-<p>4.当出现一个’]’的时候，说明某个子问题计算出来了。<br>此时：sNum栈顶的元素就是其出现的次数。<br>sString栈顶的元素就是其之前已有的答案。<br>ans就是其出现一次的情况。<br>将答案字符串更新为：ans = sString.top() + sNum.top() * ans；<br>然后从两个栈中各自pop出一个元素。</p>
-<p>5.举个例子：3[a2[c]]    n = 8<br>i = 0:  ‘3’  ans = “”  num = 3<br>i = 1:  ‘[‘  push(“”)  push(3)  ans = “”  num = 0<br>i = 2:  ‘a’  ans = “a”<br>i = 3:  ‘2’  num = 2<br>i = 4:  ‘[‘  push(“a”)  push(2)  ans = “”  num = 0<br>i = 5:  ‘c’  ans = “c”<br>i = 6:  ‘]’  ans = “a” + 2 * “c” = “acc”  pop(“a”)  pop(2)<br>i = 7:  ‘]’  ans = “” + 3 * “acc” = “accaccacc”  pop(“”)  pop(3)</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
-<p>6.Code(<a href="https://leetcode.com/submissions/detail/286636665/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286636665/</a>)</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">decodeString</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = s.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> num = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">string</span> ans = <span class="string">""</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; sNum;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">stack</span>&lt;<span class="built_in">string</span>&gt; sString;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span> (i &lt;= n - <span class="number">1</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">char</span> c = s[i];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (<span class="built_in">isdigit</span>(c)) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">                num = num * <span class="number">10</span> + c - <span class="string">'0'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">isalpha</span>(c)) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">                ans += c;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (c == <span class="string">'['</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">                sNum.push(num);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">                sString.push(ans);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">                num = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">                ans = <span class="string">""</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (c == <span class="string">']'</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">                <span class="built_in">string</span> s = <span class="string">""</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= sNum.top() - <span class="number">1</span>; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">                    s += ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">                ans = sString.top() + s;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">                sNum.pop();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">                sString.pop();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">            i++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/18/2019-12-18-Leetcode-394-Decode%20String/" data-id="ck4f7zgwb0011ikt727bg40be" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2019-12-17-Leetcode-611-Valid Triangle Number" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/12/17/2019-12-17-Leetcode-611-Valid%20Triangle%20Number/" class="article-date">
-  <time datetime="2019-12-17T08:52:02.491Z" itemprop="datePublished">2019-12-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/17/2019-12-17-Leetcode-611-Valid%20Triangle%20Number/">611.Valid Triangle Number</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/valid-triangle-number/" target="_blank" rel="noopener">611.Valid Triangle Number</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个长度为n的数组。数组元素都是非负整数。<br>【输出】<br>计算存在多少个三元组，使得这个三元组可以组成三角形。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [2,2,3,4]<br>Output: 3<br>Explanation:<br>Valid combinations are:<br>2,3,4 (using the first 2)<br>2,3,4 (using the second 2)<br>2,2,3</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
-<li>n &lt;= 1000<br>n小于3时直接返回0</li>
-<li>0 &lt;= nums[i] &lt;= 1000</li>
-</ol>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>1.枚举所有的可能性：<br>i: [0, n - 3]<br>j: [i + 1, n - 2]<br>k: [j + 1, n - 1]</p>
-<p>2.对于每一种可能的情况，判断nums[i], nums[j], nums[k]是否能够组成三角形</p>
-<p>时间复杂度：O(n ^ 3)<br>空间复杂度：O(1)<br>结果：TLE</p>
-<p>6.Code(<a href="https://leetcode.com/submissions/detail/286570851/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286570851/</a>)</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> c)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (a + b &lt;= c || a + c &lt;= b || b + c &lt;= a) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">triangleNumber</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (n &lt; <span class="number">3</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n - <span class="number">3</span>; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt;= n - <span class="number">2</span>; j++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> k = j + <span class="number">1</span>; k &lt;= n - <span class="number">1</span>; k++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">                    <span class="keyword">if</span> (check(nums[i], nums[j], nums[k])) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">                        ans++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">                    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
-
-<h3 id="Solution-2：Sort-Three-Pointers"><a href="#Solution-2：Sort-Three-Pointers" class="headerlink" title="Solution-2：Sort + Three Pointers"></a>Solution-2：Sort + Three Pointers</h3><p>1.先将nums数组从小到大排序。</p>
-<p>2.枚举所有的最长边，i: [2, i - 1]</p>
-<p>3.对于任意一个i，初始化左右指针：left = 0; right = i - 1;<br>循环条件：left &lt; right</p>
-<p>当nums[left] + nums[right] &lt;= nums[i]的时候，说明此时的left，right构不成三角形。<br>需要它们两个的和继续变大才有可能，所以left++;<br>当nums[left] + nums[right] &gt; nums[i]的时候，说明此时已经可以构成三角形了。<br>同时说明：以right结尾，[left, right - 1]都可以构成三角形。因为数组升序排列。计数器累加(right - left)次。<br>同时right向前移动，看以right - 1是否能够继续构成三角形……</p>
-<p>4.这样的话，每次不是left++，就是right–，最后两个指针一定会相见。<br>对于每一个nums[i]，需要O(n)的time，来计算出以nums[i]为最长边所能构成的情况数目。<br>所以总的时间复杂度为O(n ^ 2)。</p>
-<p>时间复杂度：O(n ^ 2)<br>空间复杂度：O(1)<br>结果：TLE</p>
-<p>6.Code(<a href="https://leetcode.com/submissions/detail/286586836/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286586836/</a>)</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">triangleNumber</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (n &lt; <span class="number">3</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        sort(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>());</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n - <span class="number">1</span>; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">int</span> left = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">int</span> right = i - <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">while</span> (left &lt; right) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">if</span> (nums[left] + nums[right] &lt;= nums[i]) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">                    left++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">                &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">                    ans += (right - left);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">                    right--;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/17/2019-12-17-Leetcode-611-Valid%20Triangle%20Number/" data-id="ck4f7zgw8000vikt7dat21sih" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2019-12-17-Leetcode-885-Spiral Matrix III" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/12/17/2019-12-17-Leetcode-885-Spiral%20Matrix%20III/" class="article-date">
-  <time datetime="2019-12-17T06:16:25.591Z" itemprop="datePublished">2019-12-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/17/2019-12-17-Leetcode-885-Spiral%20Matrix%20III/">885.Spiral Matrix III</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/spiral-matrix-iii/" target="_blank" rel="noopener">885.Spiral Matrix III</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定正整数R, C。分别代表二维矩阵的行数和列数。<br>给定一个起始坐标(r0, c0)。<br>【输出】<br>从(r0, c0)出发，进行顺时针螺旋运动，直到其经过二维矩阵的所有元素。<br>返回遍历的顺序。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: R = 5, C = 6, r0 = 1, c0 = 4<br>Output: [[1,4],[1,5],[2,5],[2,4],[2,3],[1,3],[0,3],[0,4],[0,5],[3,5],[3,4],[3,3],[3,2],[2,2],[1,2],[0,2],[4,5],[4,4],[4,3],[4,2],[4,1],[3,1],[2,1],[1,1],[0,1],[4,0],[3,0],[2,0],[1,0],[0,0]]</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.1 &lt;= R &lt;= 100<br>2.1 &lt;= C &lt;= 100<br>3.0 &lt;= r0 &lt; R<br>4.0 &lt;= c0 &lt; C</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Layer-by-Layer-One-by-One"><a href="#Solution-1：Layer-by-Layer-One-by-One" class="headerlink" title="Solution-1：Layer by Layer, One by One"></a>Solution-1：Layer by Layer, One by One</h3><p>1.根据<br><a href="https://leetcode.com/problems/spiral-matrix/" target="_blank" rel="noopener">54.Spiral Matrix</a><br><a href="https://leetcode.com/problems/spiral-matrix-ii/" target="_blank" rel="noopener">59.Spiral Matrix II</a>的启示，<br>用同样的方法，从内层到外层，每一层按照right -&gt; bottom -&gt; left -&gt; top的顺序，将当前数字写入到方阵中。并将当前坐标依次存入到ans数组中。</p>
-<p>2.当前数字从1开始，直到R * C结束。</p>
-<p>3.遍历完每一层后，需要考虑下一层，即：<br>r1–;<br>c1–;<br>r2++;<br>c2++;</p>
-<p>4.对于每一层，把四条边（r1 &lt; r2, c1 &lt; c2）上的路径走一次即可：<br>对于坐标在二维矩阵范围内的，将cnt++，并记录此时的坐标。<br>如果该坐标超出了有效index取值，则continue即可。</p>
-<p>时间复杂度：O(R * C)<br>空间复杂度：O(1) // 不包含返回的结果二维方阵</p>
-<p>6.Code(<a href="https://leetcode.com/submissions/detail/286522796/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286522796/</a>)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/17/2019-12-17-Leetcode-885-Spiral%20Matrix%20III/" data-id="ck4f7zgw9000yikt7g0x86q5x" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/18/2019-12-18-Leetcode-912-Sort%20an%20Array/" data-id="ck4fdlqtm0014z0t7cy1bcgv3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -743,23 +744,23 @@
       <ul>
         
           <li>
+            <a href="/2019/12/21/2019-12-21-Leetcode-088-Merge%20Sorted%20Array/">88.Merge Sorted Array</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/21/2019-12-21-Leetcode-283-Move%20Zeroes/">283.Move Zeroes</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/21/2019-12-21-Leetcode-448-Find%20All%20Numbers%20Disappeared%20in%20an%20Array/">448.Find All Numbers Disappeared in an Array</a>
+          </li>
+        
+          <li>
             <a href="/2019/12/20/2019-12-20-Leetcode-494-Target%20Sum/">494.Target Sum</a>
           </li>
         
           <li>
             <a href="/2019/12/20/2019-12-20-Leetcode-011-Container%20With%20Most%20Water/">110.Container With Most Water</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/20/2019-12-20-Leetcode-406-Queue%20Reconstruction%20by%20Height/">406.Queue Reconstruction by Height</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/19/2019-12-19-Leetcode-922-Sort%20Array%20By%20Parity%20II/">922.Sort Array By Parity II</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/19/2019-12-19-Leetcode-905-Sort%20Array%20By%20Parity/">905.Sort Array By Parity</a>
           </li>
         
       </ul>

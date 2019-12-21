@@ -61,6 +61,167 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-2019-12-05-Leetcode84-Largest Rectangle in Histogram" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/05/2019-12-05-Leetcode84-Largest%20Rectangle%20in%20Histogram/" class="article-date">
+  <time datetime="2019-12-05T08:13:48.347Z" itemprop="datePublished">2019-12-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/05/2019-12-05-Leetcode84-Largest%20Rectangle%20in%20Histogram/">Leetcode84-Largest Rectangle in Histogram</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/largest-rectangle-in-histogram/" target="_blank" rel="noopener">Leetcode84-Largest Rectangle in Histogram</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的非负整数数组heights；heights[i]代表第个矩形的高度；矩形宽度都是1；<br>求出这个图中最大的矩形面积。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p> input = [2,1,5,6,2,3]<br>output = 10</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n：当n为0和1的时候，直接返回结果；<br>heights[i]：题目保证非负</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>1.给定两个不同的柱子i, j，则area[i, j] = max(heights[i], heights[j], (j - i + 1) * minHeightBetweenIAndJ);<br>其中minHeightBetweenIAndJ是[i, j]中最短的高度。此过程需要O(n)的时间。<br>2.所以可以考察任意两个不同的i, j。i：[0, n - 2] j：[i + 1, n - 1]</p>
+<p>时间复杂度：O(n ^ 3)<br>空间复杂度：O(1)：<br>结果发现：此方法TLE，说明需要进一步优化。</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/283879193/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283879193/</a>)</p>
+<h3 id="Solution-2：Brute-Force"><a href="#Solution-2：Brute-Force" class="headerlink" title="Solution-2：Brute Force"></a>Solution-2：Brute Force</h3><p>1.由于我们遍历i, j是有序情况下的。在计算出[i, j]之间的结果后，立马考虑[i, j + 1]。<br>此时发现还要遍历n次找到[i, j + 1]中的最低高度，而[i, j]中的最低高度在之前已经计算过了。<br>同时minHeight[i, j + 1] = min(minHeight[i, j], heights[j + 1]);<br>所以保留这个结果，以O(1)的time就可以得到minHeight[i, j + 1]</p>
+<p>时间复杂度：O(n ^ 2)<br>空间复杂度：O(1)：<br>结果发现：此方法TLE，说明需要进一步优化。</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/283882070/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283882070/</a>)</p>
+<h3 id="Solution-3：Brute-Force"><a href="#Solution-3：Brute-Force" class="headerlink" title="Solution-3：Brute Force"></a>Solution-3：Brute Force</h3><p>1.换一种不同于Solution1和Solution2的思路：<br>在上面的枚举方法中，我们是枚举矩形能出现的所有区间[i, j]，固定了区间[i, j]，然后在这个区间中寻找一个最短的长度。<br>换一种思路：考虑每个位置i，找出以当前heights[i]为高度的，最大矩形的面积res[i]。则答案就是res数组的最大值。</p>
+<p>2.对于当前heights[i]来说，需要找到在[0, i - 1]中从后往前第一个比heights[i]小的值leftI。<br>同理，需要找到[i + 1, n - 1]中从前往后第一个比heights[i]小的值rightI。<br>则res[i] = heights[i] * (rightI - leftI - 1)</p>
+<p>时间复杂度：O(n ^ 2)<br>空间复杂度：O(n)：<br>结果发现：此方法TLE，说明需要进一步优化。</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/283922360/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283922360/</a>)</p>
+<h3 id="Solution-4：Monotonous-Stack"><a href="#Solution-4：Monotonous-Stack" class="headerlink" title="Solution-4：Monotonous Stack"></a>Solution-4：Monotonous Stack</h3><p>1.回忆Leetcode739-Daily Temperatures：该问题，我们用Brute Force方法：对于nums[i]，要做的就是找到它后面第一个比它大的元素。<br>同时我们用单调栈的方法使得上述的O(n ^ 2)优化为O(n)。</p>
+<p>2.再回过头来看本题目，对于heights[i]，实质上也是寻找它左右两边第一个比它小的元素。<br>如果我们能在O(n)的时间内，找到所有heights[i]对应的leftI和rightI。那么上面Solution3的时间复杂度就能降低到O(n)。</p>
+<p>3.Leetcode739-Daily Temperatures的单调栈解法是：<br>维护一个单调栈，且栈从顶到底是递增的；<br>当一个元素比栈中某个元素大的时候，将栈中元素抛出k个，直到当前元素不大于栈顶元素。<br>这样的话，对于当前元素，我们可以找到它左边第一个比它小的元素。<br>对于栈中元素，当其出栈时，当前元素就是其右边第一个比它大的元素。（Leetcode739思路就是依据本条）</p>
+<p>4.类似的，维护一个单调栈，且栈从顶到底是递减的；<br>栈中元素指的是对应的数组下标。<br>当我们在位置cur的时候，heights[cur]比栈中某个元素小的时候，将栈中元素抛出k个，直到当前元素不大于栈顶元素。<br>对于抛出去的k个元素：<br>其rightI就是cur。<br>其leftI就是该元素在栈中的下面一个元素，（因为栈任意时刻都是自顶向下递减），如果栈为空了，说明刚刚被抛出去的这个元素在左边没有比它小的，记为-1。<br>然后不断更新，直至遍历完依次heights数组。<br>此时栈中可能还有元素：则它们都是因为自身右边没有比自身小的元素。将其rightI记录为n。<br>这是因为，在[a, b]区间内，不包含a，b本身，一共有(b - a - 1)个元素。当其左边没有，记录为-1；当其右边没有，记录为n；方便计算。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(n)：</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/283927850/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283927850/</a>)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/05/2019-12-05-Leetcode84-Largest%20Rectangle%20in%20Histogram/" data-id="ck4fdlqt70005z0t7hdez59fp" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2019-12-05-Leetcode739-Daily Temperatures" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/05/2019-12-05-Leetcode739-Daily%20Temperatures/" class="article-date">
+  <time datetime="2019-12-05T02:58:12.276Z" itemprop="datePublished">2019-12-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/05/2019-12-05-Leetcode739-Daily%20Temperatures/">Leetcode739-Daily Temperatures</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/daily-temperatures/" target="_blank" rel="noopener">Leetcode739-Daily Temperatures</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组T；T[i]代表第i天的气温；<br>求出一个长度为n的整数数组res；res[i]代表第i天需要等待的天数，直到后面某一天气温比当天高/</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p> input = [73, 74, 75, 71, 69, 72, 76, 73]<br>output = [1, 1, 4, 2, 1, 1, 0, 0]</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n：[1, 30000]<br>T[i]：[30, 100]</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><p>对于当前位置的元素T[i]，找出它后面一个比他大的元素，使得他们俩的距离最小。</p>
+<h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>1.i从[0, n - 1]进行遍历<br>对于T[i]来说，j考虑[i + 1, n - 1]内所有的数，如果发现第一个比T[i]大的数字，则：res[i] = (j - i)</p>
+<p>时间复杂度：O(n ^ 2)<br>空间复杂度：O(1)：不包含函数返回的数组res<br>结果发现：此方法TLE，说明需要进一步优化。</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/283812278/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283812278/</a>)</p>
+<h3 id="Solution-2：Monotonous-Stack"><a href="#Solution-2：Monotonous-Stack" class="headerlink" title="Solution-2：Monotonous Stack"></a>Solution-2：Monotonous Stack</h3><p>1.认识单调栈<br><a href="https://www.cnblogs.com/grandyang/p/8887985.html" target="_blank" rel="noopener">https://www.cnblogs.com/grandyang/p/8887985.html</a><br>单调栈的一大优势就是线性的时间复杂度，所有的元素只会进栈一次，而且一旦出栈后就不会再进来了。<br>单调递增栈可以找到左边第一个比当前数字小的元素。（本题做法）<br>单调递减栈可以找到右边第一个比当前数字大的元素。</p>
+<p>2.[73, 74, 71, 60, 50, 55]<br>先将73压入栈</p>
+<p>对于74，此时栈非空，则考察栈顶元素73。<br>此时74 &gt; 73，说明：对于73来说，找到了第一个比自己大的元素。<br>此时73的答案已经找到，将其从栈中拿出。<br>将74压入栈。</p>
+<p>对于71，此时栈非空，则考察栈顶元素74。<br>此时71 &lt; 74，说明：对于71来说，还是没有找到第一个比自己大的元素。<br>将71入栈。</p>
+<p>对于60，50也是如此。此时栈由顶到下为：50，60，71，74</p>
+<p>对于55来说，此时栈顶是50<br>此时55 &gt; 50，说明：对于50来说，找到了答案。<br>将其出栈。继续考察新的栈顶元素60，不满足了。<br>将55入栈。<br>此时栈由顶到下为： 55，60，71，74。而此时已经遍历完所有的数字了，说明这些元素找不到比自己大的元素了。</p>
+<p>3.可以发现，栈中数据在任何时刻都是有序的，且：最上面的数字最小，最下面的数字最大。<br>考虑遍历到位置nums[i]的时候，此时栈中元素自顶向下为:[a, b, c, d]。<br>若nums[i]不大于a，说明：nums[i]的出现，不会使得栈中任意元素找到答案。此时将nums[i]压入栈即可。<br>若nums[i]大于d，说明：nums[i]的出现，使得栈中任意元素都找到了答案。此时从栈顶依次拿出一个元素，直到栈空了。然后nums[i]入栈。<br>若nums[i]介于这两者中间的话，则“尽自己最大的能力，使得栈中的元素找到答案，然后将其出栈”<br>经过这样遍历的顺序：使得栈中任意时刻的数都是有序的，也使得了每个元素找到的答案都是距离自己最小的那个，也就是题目中要求的这样。</p>
+<p>时间复杂度：O(n) 因为所有元素只会进入栈一次，并且出栈后再也不会进栈了。<br>空间复杂度：O(n)</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/283824761/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283824761/</a>)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/05/2019-12-05-Leetcode739-Daily%20Temperatures/" data-id="ck4fdlqt70002z0t76gjj5977" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2019-12-04-Leetcode300-Longest Increasing Subsequence" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/04/2019-12-04-Leetcode300-Longest%20Increasing%20Subsequence/" class="article-date">
+  <time datetime="2019-12-04T07:18:13.134Z" itemprop="datePublished">2019-12-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/04/2019-12-04-Leetcode300-Longest%20Increasing%20Subsequence/">Leetcode300-Longest Increasing Subsequence</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/longest-increasing-subsequence/" target="_blank" rel="noopener">Leetcode300-Longest Increasing Subsequence</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组nums；数组无序；<br>求出一个最大序列的长度。该序列内所有元素是递增的。序列不同于子数组，不要求连续。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [10,9,2,5,3,7,101,18]<br>Output: 4<br>Explanation: The longest increasing subsequence is [2,3,7,101], therefore the length is 4. </p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>若n为0/1，直接返回0/1即可。</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><p>【LIS】相关的题目。<br>序列不要求连续，所以相较于【最长递增子数组】来说，范围更大。</p>
+<h3 id="Solution-1：Dynamic-Programming"><a href="#Solution-1：Dynamic-Programming" class="headerlink" title="Solution-1：Dynamic Programming"></a>Solution-1：Dynamic Programming</h3><p>1.考虑以下数组[a, b, c, d, e]<br>设res[i]表示以nums[i]结尾的递增子序列的最大长度。那题目要求的答案便是：res数组的最大值了。<br>显然，res[0] = 1；res[1]有两种情况：<br>若nums[1] &lt;= nums[0]，则说明以nums[1]结尾的递增子序列只有一种：就是nums[1]本身。<br>若nums[1] &gt; nums[0]，则说明以nums[1]可以和nums[0]连接起来，形成一个更长的子序列。<br>……<br>考虑nums[i]：<br>若nums[i]都不大于nums[0, i - 1]的任一数字，那res[i] = 1;<br>若能在[0, i - 1]区间找到k个比nums[i]小的值（k &gt;= 1），则找出这k次“拼接”后的最大值。</p>
+<p>2.对于每一个res[i]，<br>“拼接情况”：需要遍历[0, i - 1]的元素，进行判断和统计最大值maxLinkI。<br>“无法拼接情况”：1<br>res[i] = max(1, maxLinkI);</p>
+<p>时间复杂度：O(n ^ 2)<br>空间复杂度：O(n)</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/283644219/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283644219/</a>)</p>
+<h3 id="Solution-2：Dynamic-Programming-Search"><a href="#Solution-2：Dynamic-Programming-Search" class="headerlink" title="Solution-2：Dynamic Programming + Search"></a>Solution-2：Dynamic Programming + Search</h3><p>1.现象1：若同时有2个子序列(1, 5)和(1, 10)，然后取一个随机数x，能构成长度为3的递增子序列吗？<br>答案肯定是可以的，例如：<br>x &lt; 1 :都ok<br>x &gt; 10 :都ok<br>x == 2/3/4 :都不行<br>x == 6/7/8/9 :(1, 5)来说ok，(1, 10)来说不行<br>看起来对于(1, 5)和(1, 10)来说，能扩展成长度为3的递增子序列的“成功率”是不相等的，且(1, 5)的“扩展性”更好。</p>
+<p>2.令tail[i]表示：长度为i的满足条件的若干个序列中，序列末尾元素的最小值。<br>tail[1]初始为nums[0]；此时满足条件的子序列的最大长度就是1；<br>对于nums[i]，此时满足条件的子序列的最大长度是maxLen。<br>如果nums[i] &gt; tail[maxLen]的话，说明可以在当前maxLen的基础上，添加nums[i]形成一个maxLen + 1的子序列。<br>如果nums[i] &lt; tail[1]的话，说明长度为1的子序列的最小值就是nums[i]，此时更新tail[1]。<br>如果 tail[1] == nums[i] || nums[i] == tail[maxLen]的话，不做任何操作<br>如果 tail[1] &lt; nums[i] &lt; tail[maxLen]的话，说明可以更新某个tail[j]的值，来使得长度为j的子序列的“扩展性”更好。<br>所以每次我们在[1, maxLen]上从后往前查找，如果发现nums[i]大于了tail[j]，就使得：tail[j + 1] = nums[i]</p>
+<p>时间复杂度：O(n ^ 2)<br>空间复杂度：O(n)</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/283675471/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283675471/</a>)</p>
+<h3 id="Solution-2：Dynamic-Programming-Binary-Search"><a href="#Solution-2：Dynamic-Programming-Binary-Search" class="headerlink" title="Solution-2：Dynamic Programming + Binary Search"></a>Solution-2：Dynamic Programming + Binary Search</h3><p>1.不难发现，tail数组是递增的，因此，我们可以用二分搜索进一步降低时间复杂度。</p>
+<p>时间复杂度：O(n ^ logn)<br>空间复杂度：O(n)</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/283685139/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283685139/</a>)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/04/2019-12-04-Leetcode300-Longest%20Increasing%20Subsequence/" data-id="ck4fdlqt70007z0t78q0352vv" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-2019-12-04-Leetcode713-Subarray Product Less Than K" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/12/04/2019-12-04-Leetcode713-Subarray%20Product%20Less%20Than%20K/" class="article-date">
@@ -102,7 +263,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/04/2019-12-04-Leetcode713-Subarray%20Product%20Less%20Than%20K/" data-id="ck4f7zgvs0008ikt736o2fv6f" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/04/2019-12-04-Leetcode713-Subarray%20Product%20Less%20Than%20K/" data-id="ck4fdlqt70004z0t7g7k9cnn6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -151,7 +312,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/04/2019-12-04-Leetcode152-Maximum%20Product%20Subarray/" data-id="ck4f7zgvp0003ikt751rl21dd" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/04/2019-12-04-Leetcode152-Maximum%20Product%20Subarray/" data-id="ck4fdlqt70003z0t7gth99ell" class="article-share-link">Share</a>
       
       
     </footer>
@@ -201,7 +362,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/03/2019-12-03-Leetcode53-Maximum%20Subarray/" data-id="ck4f7zgvo0002ikt734uzgful" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/03/2019-12-03-Leetcode53-Maximum%20Subarray/" data-id="ck4fdlqsr0001z0t73w5z4zyl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -248,7 +409,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/03/2019-12-03-Leetcode238-Product%20of%20Array%20Except%20Self/" data-id="ck4f7zgvh0000ikt7gurpa091" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/03/2019-12-03-Leetcode238-Product%20of%20Array%20Except%20Self/" data-id="ck4fdlqsr0000z0t75agx50c0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -288,7 +449,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/02/hello-world/" data-id="ck4f7zgwd0016ikt72pri6qv1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/02/hello-world/" data-id="ck4fdlqu2001az0t76sr70kn4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -334,23 +495,23 @@
       <ul>
         
           <li>
+            <a href="/2019/12/21/2019-12-21-Leetcode-088-Merge%20Sorted%20Array/">88.Merge Sorted Array</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/21/2019-12-21-Leetcode-283-Move%20Zeroes/">283.Move Zeroes</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/21/2019-12-21-Leetcode-448-Find%20All%20Numbers%20Disappeared%20in%20an%20Array/">448.Find All Numbers Disappeared in an Array</a>
+          </li>
+        
+          <li>
             <a href="/2019/12/20/2019-12-20-Leetcode-494-Target%20Sum/">494.Target Sum</a>
           </li>
         
           <li>
             <a href="/2019/12/20/2019-12-20-Leetcode-011-Container%20With%20Most%20Water/">110.Container With Most Water</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/20/2019-12-20-Leetcode-406-Queue%20Reconstruction%20by%20Height/">406.Queue Reconstruction by Height</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/19/2019-12-19-Leetcode-922-Sort%20Array%20By%20Parity%20II/">922.Sort Array By Parity II</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/19/2019-12-19-Leetcode-905-Sort%20Array%20By%20Parity/">905.Sort Array By Parity</a>
           </li>
         
       </ul>

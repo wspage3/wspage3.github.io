@@ -61,6 +61,169 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-2019-12-18-Leetcode-394-Decode String" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/18/2019-12-18-Leetcode-394-Decode%20String/" class="article-date">
+  <time datetime="2019-12-18T02:30:42.678Z" itemprop="datePublished">2019-12-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/18/2019-12-18-Leetcode-394-Decode%20String/">394.Decode String</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/decode-string/" target="_blank" rel="noopener">394.Decode String</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个长度为s的字符串。这个字符串可以理解为“加密串”。<br>【输出】<br>找出该字符串对应的“解密串”。<br>规则：k[str]，代表str出现k次。此处保证k一定是正整数。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>s = “3[a]2[bc]”, return “aaabcbc”.<br>s = “3[a2[c]]”, return “accaccacc”.<br>s = “2[abc]3[cd]ef”, return “abcabccdcdcdef”.</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
+<li>保证方括号都是配对，且合法的。</li>
+<li>保证出现的数字都是正整数。</li>
+<li>“解密串”中不包含字母。所以说“加密串”中出现的数字一定是k，代表次数。</li>
+<li>“加密串”中的“[]”内部不包含数字。</li>
+</ol>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：DFS"><a href="#Solution-1：DFS" class="headerlink" title="Solution-1：DFS"></a>Solution-1：DFS</h3><p>1.从前到后考虑字符串s的每一个位置：[0, n - 1]<br>开始调用：ans = dfs(0, s);</p>
+<p>2.若位置i遇到’[‘，则说明遇到一个子问题，进行递归调用:<br>substr = dfs(i + 1, s);<br>假设这个子问题的答案已经解出来了，答案为：”abcabc”。</p>
+<p>3.任意一个子问题要想解出来答案，说明当前位置j出现了’]’。<br>此时将“计算拼接”出来的子答案返回给上层函数。</p>
+<p>4.回到步骤2，发现：<br>位置i出现了’[‘，寻找子问题的答案。<br>位置j出现了’]’，返回子问题的答案为”abcabc”。<br>说明区间[i, j]上的所有字符都被考虑过了。其value就是”abdabc”。<br>此时我们将i位置之前的num找出来，将其拼接到一起。<br>然后继续考虑位置(j + 1)……<br>注意：由于父亲需要知道子问题返回的时候，走到了哪个位置，所以dfs函数的第一个参数用一个int引用。</p>
+<p>5.继续遍历，知道i &gt; n - 1为止。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(n) //递归开销</p>
+<p>6.Code(<a href="https://leetcode.com/submissions/detail/286626640/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286626640/</a>)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span>&amp; i, <span class="built_in">string</span> s)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">string</span> <span class="keyword">word</span> = <span class="string">""</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> num = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span> (i &lt; s.<span class="built_in">size</span>()) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">char</span> c = s[i];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (c == <span class="string">'['</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">                <span class="built_in">string</span> next = dfs(++i, s);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= num - <span class="number">1</span>; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">                    <span class="keyword">word</span> += next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">                num = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (c &gt;= <span class="string">'0'</span> &amp;&amp; c &lt;= <span class="string">'9'</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">                num = num * <span class="number">10</span> + c - <span class="string">'0'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (c == <span class="string">']'</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">return</span> <span class="keyword">word</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">            &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">word</span> += c;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">            i++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> <span class="keyword">word</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">decodeString</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> dfs(i, s);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+
+<h3 id="Solution-2：Stack"><a href="#Solution-2：Stack" class="headerlink" title="Solution-2：Stack"></a>Solution-2：Stack</h3><p>1.若没有方括号嵌套，while循环从前到后一个一个的找出子答案，拼接起来就行。<br>遇到一个’[‘，则继续向后找，直到找到一个’]’，说明这两个是匹配的括号。<br>将前面的这个范围内的字符循环num次即可，拼接到答案ans上。num清零。考虑下一个位置。</p>
+<p>2.当存在括号嵌套的时候，当找到一个’[‘，后面可以继续跟着一个’[‘，<br>此时计算需要由内往外，找出最内层的匹配的一对方括号，将其答案计算出来，返回给上一层计算……</p>
+<p>3.可以观察到，上面先遍历到的’[‘，反而是最后计算，这种特性十分符合栈的“先入后出”。我们用栈来模拟。<br>使用两个辅助栈：<br>int类型的sNum: 当出现’[‘时，将此时num入栈。num清零。<br>string类型的sString: 当出现’[‘时，将此时已有的答案ans入栈。对于第一次入栈来说，一定是””。ans清空。<br>这样我们就把各个状态存起来了。</p>
+<p>4.当出现一个’]’的时候，说明某个子问题计算出来了。<br>此时：sNum栈顶的元素就是其出现的次数。<br>sString栈顶的元素就是其之前已有的答案。<br>ans就是其出现一次的情况。<br>将答案字符串更新为：ans = sString.top() + sNum.top() * ans；<br>然后从两个栈中各自pop出一个元素。</p>
+<p>5.举个例子：3[a2[c]]    n = 8<br>i = 0:  ‘3’  ans = “”  num = 3<br>i = 1:  ‘[‘  push(“”)  push(3)  ans = “”  num = 0<br>i = 2:  ‘a’  ans = “a”<br>i = 3:  ‘2’  num = 2<br>i = 4:  ‘[‘  push(“a”)  push(2)  ans = “”  num = 0<br>i = 5:  ‘c’  ans = “c”<br>i = 6:  ‘]’  ans = “a” + 2 * “c” = “acc”  pop(“a”)  pop(2)<br>i = 7:  ‘]’  ans = “” + 3 * “acc” = “accaccacc”  pop(“”)  pop(3)</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
+<p>6.Code(<a href="https://leetcode.com/submissions/detail/286636665/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286636665/</a>)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">decodeString</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = s.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> num = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">string</span> ans = <span class="string">""</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; sNum;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">stack</span>&lt;<span class="built_in">string</span>&gt; sString;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span> (i &lt;= n - <span class="number">1</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">char</span> c = s[i];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (<span class="built_in">isdigit</span>(c)) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">                num = num * <span class="number">10</span> + c - <span class="string">'0'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">isalpha</span>(c)) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">                ans += c;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (c == <span class="string">'['</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">                sNum.push(num);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">                sString.push(ans);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">                num = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">                ans = <span class="string">""</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (c == <span class="string">']'</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">                <span class="built_in">string</span> s = <span class="string">""</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= sNum.top() - <span class="number">1</span>; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">                    s += ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">                ans = sString.top() + s;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">                sNum.pop();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">                sString.pop();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">            i++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/18/2019-12-18-Leetcode-394-Decode%20String/" data-id="ck4fdlqtm0010z0t78ztib0ry" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2019-12-17-Leetcode-611-Valid Triangle Number" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/17/2019-12-17-Leetcode-611-Valid%20Triangle%20Number/" class="article-date">
+  <time datetime="2019-12-17T08:52:02.491Z" itemprop="datePublished">2019-12-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/17/2019-12-17-Leetcode-611-Valid%20Triangle%20Number/">611.Valid Triangle Number</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/valid-triangle-number/" target="_blank" rel="noopener">611.Valid Triangle Number</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个长度为n的数组。数组元素都是非负整数。<br>【输出】<br>计算存在多少个三元组，使得这个三元组可以组成三角形。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [2,2,3,4]<br>Output: 3<br>Explanation:<br>Valid combinations are:<br>2,3,4 (using the first 2)<br>2,3,4 (using the second 2)<br>2,2,3</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
+<li>n &lt;= 1000<br>n小于3时直接返回0</li>
+<li>0 &lt;= nums[i] &lt;= 1000</li>
+</ol>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>1.枚举所有的可能性：<br>i: [0, n - 3]<br>j: [i + 1, n - 2]<br>k: [j + 1, n - 1]</p>
+<p>2.对于每一种可能的情况，判断nums[i], nums[j], nums[k]是否能够组成三角形</p>
+<p>时间复杂度：O(n ^ 3)<br>空间复杂度：O(1)<br>结果：TLE</p>
+<p>6.Code(<a href="https://leetcode.com/submissions/detail/286570851/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286570851/</a>)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> c)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (a + b &lt;= c || a + c &lt;= b || b + c &lt;= a) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">triangleNumber</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (n &lt; <span class="number">3</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n - <span class="number">3</span>; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt;= n - <span class="number">2</span>; j++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> k = j + <span class="number">1</span>; k &lt;= n - <span class="number">1</span>; k++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">                    <span class="keyword">if</span> (check(nums[i], nums[j], nums[k])) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">                        ans++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">                    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+
+<h3 id="Solution-2：Sort-Three-Pointers"><a href="#Solution-2：Sort-Three-Pointers" class="headerlink" title="Solution-2：Sort + Three Pointers"></a>Solution-2：Sort + Three Pointers</h3><p>1.先将nums数组从小到大排序。</p>
+<p>2.枚举所有的最长边，i: [2, i - 1]</p>
+<p>3.对于任意一个i，初始化左右指针：left = 0; right = i - 1;<br>循环条件：left &lt; right</p>
+<p>当nums[left] + nums[right] &lt;= nums[i]的时候，说明此时的left，right构不成三角形。<br>需要它们两个的和继续变大才有可能，所以left++;<br>当nums[left] + nums[right] &gt; nums[i]的时候，说明此时已经可以构成三角形了。<br>同时说明：以right结尾，[left, right - 1]都可以构成三角形。因为数组升序排列。计数器累加(right - left)次。<br>同时right向前移动，看以right - 1是否能够继续构成三角形……</p>
+<p>4.这样的话，每次不是left++，就是right–，最后两个指针一定会相见。<br>对于每一个nums[i]，需要O(n)的time，来计算出以nums[i]为最长边所能构成的情况数目。<br>所以总的时间复杂度为O(n ^ 2)。</p>
+<p>时间复杂度：O(n ^ 2)<br>空间复杂度：O(1)<br>结果：TLE</p>
+<p>6.Code(<a href="https://leetcode.com/submissions/detail/286586836/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286586836/</a>)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">triangleNumber</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (n &lt; <span class="number">3</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        sort(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>());</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n - <span class="number">1</span>; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">int</span> left = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">int</span> right = i - <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">while</span> (left &lt; right) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">if</span> (nums[left] + nums[right] &lt;= nums[i]) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">                    left++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">                &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">                    ans += (right - left);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">                    right--;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/17/2019-12-17-Leetcode-611-Valid%20Triangle%20Number/" data-id="ck4fdlqtm000zz0t79zvwaef1" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2019-12-17-Leetcode-885-Spiral Matrix III" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/17/2019-12-17-Leetcode-885-Spiral%20Matrix%20III/" class="article-date">
+  <time datetime="2019-12-17T06:16:25.591Z" itemprop="datePublished">2019-12-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/17/2019-12-17-Leetcode-885-Spiral%20Matrix%20III/">885.Spiral Matrix III</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/spiral-matrix-iii/" target="_blank" rel="noopener">885.Spiral Matrix III</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定正整数R, C。分别代表二维矩阵的行数和列数。<br>给定一个起始坐标(r0, c0)。<br>【输出】<br>从(r0, c0)出发，进行顺时针螺旋运动，直到其经过二维矩阵的所有元素。<br>返回遍历的顺序。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: R = 5, C = 6, r0 = 1, c0 = 4<br>Output: [[1,4],[1,5],[2,5],[2,4],[2,3],[1,3],[0,3],[0,4],[0,5],[3,5],[3,4],[3,3],[3,2],[2,2],[1,2],[0,2],[4,5],[4,4],[4,3],[4,2],[4,1],[3,1],[2,1],[1,1],[0,1],[4,0],[3,0],[2,0],[1,0],[0,0]]</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.1 &lt;= R &lt;= 100<br>2.1 &lt;= C &lt;= 100<br>3.0 &lt;= r0 &lt; R<br>4.0 &lt;= c0 &lt; C</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Layer-by-Layer-One-by-One"><a href="#Solution-1：Layer-by-Layer-One-by-One" class="headerlink" title="Solution-1：Layer by Layer, One by One"></a>Solution-1：Layer by Layer, One by One</h3><p>1.根据<br><a href="https://leetcode.com/problems/spiral-matrix/" target="_blank" rel="noopener">54.Spiral Matrix</a><br><a href="https://leetcode.com/problems/spiral-matrix-ii/" target="_blank" rel="noopener">59.Spiral Matrix II</a>的启示，<br>用同样的方法，从内层到外层，每一层按照right -&gt; bottom -&gt; left -&gt; top的顺序，将当前数字写入到方阵中。并将当前坐标依次存入到ans数组中。</p>
+<p>2.当前数字从1开始，直到R * C结束。</p>
+<p>3.遍历完每一层后，需要考虑下一层，即：<br>r1–;<br>c1–;<br>r2++;<br>c2++;</p>
+<p>4.对于每一层，把四条边（r1 &lt; r2, c1 &lt; c2）上的路径走一次即可：<br>对于坐标在二维矩阵范围内的，将cnt++，并记录此时的坐标。<br>如果该坐标超出了有效index取值，则continue即可。</p>
+<p>时间复杂度：O(R * C)<br>空间复杂度：O(1) // 不包含返回的结果二维方阵</p>
+<p>6.Code(<a href="https://leetcode.com/submissions/detail/286522796/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286522796/</a>)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/17/2019-12-17-Leetcode-885-Spiral%20Matrix%20III/" data-id="ck4fdlqtm000xz0t7aagu7nke" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-2019-12-17-Leetcode-59-Spiral Matrix II" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/12/17/2019-12-17-Leetcode-59-Spiral%20Matrix%20II/" class="article-date">
@@ -99,7 +262,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/17/2019-12-17-Leetcode-59-Spiral%20Matrix%20II/" data-id="ck4f7zgwc0013ikt77uhychix" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/17/2019-12-17-Leetcode-59-Spiral%20Matrix%20II/" data-id="ck4fdlqtm000yz0t70gjnero6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -146,7 +309,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/17/2019-12-17-Leetcode-54-Spiral%20Matrix/" data-id="ck4f7zgw9000xikt76ucb29sh" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/17/2019-12-17-Leetcode-54-Spiral%20Matrix/" data-id="ck4fdlqtm000vz0t7cjwxer2t" class="article-share-link">Share</a>
       
       
     </footer>
@@ -199,7 +362,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/16/2019-12-16-Leetcode-242-Valid%20Anagram/" data-id="ck4f7zgw5000qikt7hrwugpg6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/16/2019-12-16-Leetcode-242-Valid%20Anagram/" data-id="ck4fdlqtm000sz0t7876r9dhp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -252,7 +415,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/16/2019-12-16-Leetcode-426-Partition%20Equal%20Subset%20Sum/" data-id="ck4f7zgw7000uikt7371ngk4n" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/16/2019-12-16-Leetcode-426-Partition%20Equal%20Subset%20Sum/" data-id="ck4fdlqtm000tz0t762qiapgq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -297,7 +460,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/16/2019-12-16-Leetcode-645-Set%20Mismatch/" data-id="ck4f7zgw8000wikt7efgk83g0" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/16/2019-12-16-Leetcode-645-Set%20Mismatch/" data-id="ck4fdlqtm000uz0t70yu78s90" class="article-share-link">Share</a>
       
       
     </footer>
@@ -343,7 +506,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/16/2019-12-16-Leetcode-442-Find%20All%20Duplicates%20in%20an%20Array/" data-id="ck4f7zgw6000sikt7hx8z6zg1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/16/2019-12-16-Leetcode-442-Find%20All%20Duplicates%20in%20an%20Array/" data-id="ck4fdlqtm000wz0t78iwaci1d" class="article-share-link">Share</a>
       
       
     </footer>
@@ -388,178 +551,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/15/2019-12-15-Leetcode-75-Sort%20Colors/" data-id="ck4f7zgw6000rikt7h1300n5z" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2019-12-15-Leetcode-155-Min Stack" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/12/15/2019-12-15-Leetcode-155-Min%20Stack/" class="article-date">
-  <time datetime="2019-12-15T10:45:28.500Z" itemprop="datePublished">2019-12-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/15/2019-12-15-Leetcode-155-Min%20Stack/">155.Min Stack</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/min-stack/" target="_blank" rel="noopener">155.Min Stack</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>设计一个数据结构”最小栈”，具有以下特点：<br>1.push(x) – Push element x onto stack.<br>2.pop() – Removes the element on top of the stack.<br>3.top() – Get the top element.<br>4.getMin() – Retrieve the minimum element in the stack.<br>其中核心功能是第四点，因为如果仅考虑前三点的话，就是常规的栈stack。<br>getMin()要求时间复杂度为O(1)。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>MinStack minStack = new MinStack();<br>minStack.push(-2);<br>minStack.push(0);<br>minStack.push(-3);<br>minStack.getMin();   –&gt; Returns -3.<br>minStack.pop();<br>minStack.top();      –&gt; Returns 0.<br>minStack.getMin();   –&gt; Returns -2.</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.getMin()要求时间复杂度为O(1)。</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><p>思路：看到题目，第一想法是：维护一个stack s和一个最小值m即可。<br>当有更小的值入栈后，更新m即可。<br>但这样有一个问题：如果我当前pop的就是最小值m，那怎么办。<br>因为没有保存第二小的值，所以在pop掉m后，m的值就无法追溯了。</p>
-<h3 id="Solution-1：Two-Stacks"><a href="#Solution-1：Two-Stacks" class="headerlink" title="Solution-1：Two Stacks"></a>Solution-1：Two Stacks</h3><p>1.用两个stack，一个s保存数据，一个m保存最小值。<br>当有更小的值入栈后，将这个值同时加入到栈m中。<br>则当前最小的值就是m的栈顶元素。<br>当pop最小元素的时候，将其从s和m中同时pop掉。</p>
-<p>空间复杂度：O(n)</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/285879960/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285879960/</a>)</p>
-<h3 id="Solution-2：One-Stack"><a href="#Solution-2：One-Stack" class="headerlink" title="Solution-2：One Stack"></a>Solution-2：One Stack</h3><p>1.Solution-1中，我们当遇到更小的值时，都将其保存到m栈中。<br>这样栈顶的就是当前s栈中最小的值，若其被pop出去，同时带走m栈顶的元素。<br>此时m栈顶的元素又是s栈中的最小值了。</p>
-<p>2.现在我们用int minValue来代表当前栈中最小的值。<br>s仍然代表着数据栈。<br>当出现了更小的值时：<br>a.保存当前minValue：将其先push到s中。<br>b.更新minValue<br>c.再将当前minValue push到s中。</p>
-<p>3.则任意时刻，minValue都是代表着当前栈中最小的元素值。</p>
-<p>4.当pop的值是minValue的时候，也就是s.top() == minValue，<br>我们从s中pop一个元素，这个元素就是minValue。<br>同时将此时s.top()赋值给minValue。因为这个元素是“前一个最小值”。<br>同时将其从s中pop出去。</p>
-<p>空间复杂度：O(n)</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/285881659/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285881659/</a>)</p>
-<h3 id="Solution-3：One-Stack"><a href="#Solution-3：One-Stack" class="headerlink" title="Solution-3：One Stack"></a>Solution-3：One Stack</h3><p>1.现在我们将当前元素cur和minValue的差值存入栈s中。</p>
-<p>2.push(x)：<br>当栈中没有元素的时候，将0存入s中，minValue说就是x；<br>当栈中已有元素的时候，将x - minValue存入s中，若该值为负，说明当前x是更小的值。将minValue更新为x。</p>
-<p>3.getMin()<br>任意时刻，minValue的值就是当前栈s中最小元素的值。</p>
-<p>4.top()<br>由于s中存入的已经不是之前的数据了，而是存放的差值。<br>当s栈顶元素小于0的时候，说明：这个元素是当前栈中最小的值minValue。return minValue即可。<br>当s栈顶元素不小于0的时候，说明，这个元素是一个差值，其值 = s.top() + minValue。</p>
-<p>5.pop()<br>当s栈顶元素小于0的时候，说明：这个元素是当前栈中最小的值minValue。<br>  需要更新minValue = minValue - s.top()；然后再从s中把其pop。<br>当s栈顶元素不小于0的时候，说明，这个元素是一个差值，直接pop即可。</p>
-<p>6.缺点1：由于差值可能会导致整数溢出，所以用minValue用long long。<br>缺点2：由于放入栈中的值是一个差值，而非原本的数据本身，即有修改数据的嫌疑。需要确定这种情况再用这个方法。</p>
-<p>空间复杂度：O(1)</p>
-<p>7.Code(<a href="https://leetcode.com/submissions/detail/285885660/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285885660/</a>)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/15/2019-12-15-Leetcode-155-Min%20Stack/" data-id="ck4f7zgw4000pikt79jfg2v0l" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2019-12-15-Leetcode-268-Missing Number" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/12/15/2019-12-15-Leetcode-268-Missing%20Number/" class="article-date">
-  <time datetime="2019-12-15T10:27:54.308Z" itemprop="datePublished">2019-12-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/15/2019-12-15-Leetcode-268-Missing%20Number/">268.Missing Number</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/missing-number/" target="_blank" rel="noopener">268.Missing Number</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个长度为n的整数数组。<br>其中所有的元素取值都是区间[0, n]的，且没有重复的元素。<br>显然，[0, n]一共有(n + 1)个元素，而nums中只有n个，找出这个缺失的元素。<br>【输出】<br>找出这个缺失的数字。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [9,6,4,2,3,5,7,0,1]<br>Output: 8</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.空间复杂度要求为O(1)。<br>2.时间复杂度要求O(n)。</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Accumulate"><a href="#Solution-1：Accumulate" class="headerlink" title="Solution-1：Accumulate"></a>Solution-1：Accumulate</h3><p>1.[0, n]中所有数字的和为[1, n] = n * (n + 1) / 2</p>
-<p>2.我们遍历nums中的数字，累加一个和。<br>然后用上面的公式计算出来的和减去nums中累加的和，答案就是缺失的元素。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/285827066/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285827066/</a>)<br>Code(<a href="https://leetcode.com/submissions/detail/285849852/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285849852/</a>)</p>
-<p>3.缺点：accumulate可以会导致整数溢出，存在局限。</p>
-<h3 id="Solution-2：XOR"><a href="#Solution-2：XOR" class="headerlink" title="Solution-2：XOR"></a>Solution-2：XOR</h3><p>1.任意一个数 异或 它自己 == 0<br>  任意一个数 异或 0     == 它自己<br>  异或满足交换律，结合率</p>
-<p>2.nums中有n个数字，且都在范围[0, n]内，且都不重复。<br>我们把nums中所有的数字都异或起来。记为a。<br>然后把[0, n]所有的数字都异或起来。记为b。<br>此时所有参与异或的数字一共有 n + (n + 1)个。<br>假设missing number为x。则上述n + (n + 1)个数字只有一个x，其它数字都是出现了两次。<br>则 a ^ b == x。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/285850682/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285850682/</a>)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/15/2019-12-15-Leetcode-268-Missing%20Number/" data-id="ck4f7zgw3000nikt7272jg2dc" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2019-12-13-Leetcode-287-Find the Duplicate Number" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/12/13/2019-12-13-Leetcode-287-Find%20the%20Duplicate%20Number/" class="article-date">
-  <time datetime="2019-12-13T14:43:40.211Z" itemprop="datePublished">2019-12-13</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/13/2019-12-13-Leetcode-287-Find%20the%20Duplicate%20Number/">287.Find the Duplicate Number</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/find-the-duplicate-number/" target="_blank" rel="noopener">287.Find the Duplicate Number</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个长度为n的整数数组。<br>其中所有的元素取值都是区间[1, n - 1]的。<br>根据鸽巢原理，可以证明：至少有两个元素是相等的。<br>题目保证：数组中的元素刚好有一个存在重复值，但是重复的次数不一定。次数至少为2。<br>【输出】<br>找出这个重复的数字。<br>【参考】<br><a href="https://zh.wikipedia.org/wiki/%E9%B4%BF%E5%B7%A2%E5%8E%9F%E7%90%86" target="_blank" rel="noopener">https://zh.wikipedia.org/wiki/%E9%B4%BF%E5%B7%A2%E5%8E%9F%E7%90%86</a></p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [1,3,4,2,2]<br>Output: 2</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.数组不允许修改：即不可以排序等操作。<br>2.空间复杂度要求为O(1)。<br>3.时间复杂度要求小于O(n ^ 2)。<br>4.题目保证：数组中的元素刚好有一个存在重复值，但是重复的次数不一定。这个数出现次数至少为2。</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>1.对于每个i: [0, n - 2]。<br>遍历j: [i + 1, n - 1]。<br>如果nums[i] == nums[j]，说明nums[i]就是要找的答案。</p>
-<p>时间复杂度：O(n ^ 2)<br>空间复杂度：O(1)</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/285661538/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285661538/</a>)</p>
-<h3 id="Solution-2：Count"><a href="#Solution-2：Count" class="headerlink" title="Solution-2：Count"></a>Solution-2：Count</h3><p>1.对于每个i: [0, n - 1]，用一个长度为n的数组v记录其出现的次数。<br>对于nums[i]，如果v[nums[i]] == 1了，说明nums[i]这个数字之前出现过了。就是答案。<br>否则的话，将v[nums[i]] = 1。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/285662708/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285662708/</a>)</p>
-<h3 id="Solution-3：Binary-Search"><a href="#Solution-3：Binary-Search" class="headerlink" title="Solution-3：Binary Search"></a>Solution-3：Binary Search</h3><p>1.由于数组长度为n，所以nums[i]的取值范围最大是：[1, n - 1]。此时duplicate出现了两次。</p>
-<p>2.我们对[1, n - 1]区间进行二分搜索。每次找到一个mid。对于每一个mid：<br>遍历nums数组，如果nums[i] &lt;= mid，则cnt加一。<br>如果此时cnt大于mid了，也就是：数组nums中所有小于等于mid的个数大于了mid。<br>例如：数组nums中所有小于等于5的数字的个数大于5。说明duplicate在范围[1, 5]内。<br>此时在[left, mid]中搜索。</p>
-<p>3.如果此时cnt小于等于mid，则说明duplicate在[mid + 1, right]中。</p>
-<p>4.考虑最后一次while循环，left = right - 1。mid = left。<br>判断left位置的合法性：<br>如果left位置合法，则left = mid + 1 = right。<br>如果left位置不合法，则right = mid = left。<br>不管哪种情况，循环都走不下去了，都有left == right。而且两者当前的值就是非法的那个值。<br>此时return left(或right)即可。</p>
-<p>时间复杂度：O(n * log n)<br>空间复杂度：O(1)</p>
-<p>5.Code(<a href="https://leetcode.com/submissions/detail/285704963/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285704963/</a>)</p>
-<p>6.证明：<br>Let count be the number of elements in the range 1 .. mid.</p>
-<p>If count &gt; mid, then there are more than mid elements in the range 1 .. mid and thus that range contains a duplicate.</p>
-<p>If count &lt;= mid, then there are n+1-count elements in the range mid+1 .. n. That is, at least n+1-mid elements in a range of size n-mid. Thus this range must contain a duplicate.</p>
-<h3 id="Solution-4：Two-Pointers"><a href="#Solution-4：Two-Pointers" class="headerlink" title="Solution-4：Two Pointers"></a>Solution-4：Two Pointers</h3><p>1.观察：长度为n的nums数组中，所有元素的大小均在范围：[1, n - 1]中。<br>也就是每个元素的值都可以作为nums的index。</p>
-<p>2.<a href="https://leetcode.com/problems/linked-list-cycle-ii/" target="_blank" rel="noopener">https://leetcode.com/problems/linked-list-cycle-ii/</a><br>类似的，我们把nums数组想象成一个特殊的链表。<br>例如：[3,1,3,4,2]<br>index为0的元素的值为3<br>index为1的元素的值为1<br>index为2的元素的值为3<br>index为3的元素的值为4<br>index为4的元素的值为2<br>可以发现，对于一个目标值3，它有两个对应的index，而这个3就是要找的答案duplicate。</p>
-<p>3.回忆链表中有环的情况：<br>如果一个链表中某一个节点N，存在节点A，B，使得：<br>A -&gt; next == N<br>B -&gt; next == N<br>那么这个链表中一定存在环。且第一次出现环的点就是N。我们可以用【快慢指针法+弗洛伊德探测环路方法】找出该N的位置。</p>
-<p>4.同样的，我们把上面的nums数组想象成一个链表。由于nums数组中存在duplicate，所以至少两个不同的index，对应的值都是duplicate。<br>例如：[1,3,4,2,3]<br>0 -&gt; 1 -&gt; 3 -&gt; 2 -&gt; 4 -&gt; 3 -&gt; 2 -&gt; 4 -&gt; 3……</p>
-<p>5.根据【快慢指针法+弗洛伊德探测环路方法】<br>slow和fast同时从0出发。<br>slow: slow = nums[slow]<br>fast: fast = nums[nums[fast]]<br>当slow和fast相等的时候，break掉。<br>此时head从0出发。<br>head: head = nums[head]<br>slow: slow = nums[slow]<br>如果此时head == slow，那么这个位置就是要找的duplicate。</p>
-<p>6.证明：fast和slow从同一起点出发，fast的速度是slow的2倍。那么当它们相遇时，fast走过的路程是slow走过的2倍。<br>记起点到环点的距离为s1，环点到meet点的距离为s2，meet点再到环点的距离为s3。<br>当slow和fast相遇的时候，有：2(s1 + s2) = s1 + s2 + k(s2 + s3)。其中k &gt;= 1。<br>即：s1 + s2 = ks2 + ks3<br>当k为1的时候，s1 == s3<br>当k为2的时候，s1 == s2 + 2s3 = s3 + (s2 + s3)<br>当k为3的时候，s1 == 2s2 + 3s3 = s3 + 2(s2 + s3)</p>
-<p>可以看出，当head和slow同时出发，它们相遇的时候，一定在环点。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<p>5.Code(<a href="https://leetcode.com/submissions/detail/285811401/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285811401/</a>)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/13/2019-12-13-Leetcode-287-Find%20the%20Duplicate%20Number/" data-id="ck4f7zgw4000oikt7b9tjc9c8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/15/2019-12-15-Leetcode-75-Sort%20Colors/" data-id="ck4fdlqtm000rz0t7frb0e9hw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -605,23 +597,23 @@
       <ul>
         
           <li>
+            <a href="/2019/12/21/2019-12-21-Leetcode-088-Merge%20Sorted%20Array/">88.Merge Sorted Array</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/21/2019-12-21-Leetcode-283-Move%20Zeroes/">283.Move Zeroes</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/21/2019-12-21-Leetcode-448-Find%20All%20Numbers%20Disappeared%20in%20an%20Array/">448.Find All Numbers Disappeared in an Array</a>
+          </li>
+        
+          <li>
             <a href="/2019/12/20/2019-12-20-Leetcode-494-Target%20Sum/">494.Target Sum</a>
           </li>
         
           <li>
             <a href="/2019/12/20/2019-12-20-Leetcode-011-Container%20With%20Most%20Water/">110.Container With Most Water</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/20/2019-12-20-Leetcode-406-Queue%20Reconstruction%20by%20Height/">406.Queue Reconstruction by Height</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/19/2019-12-19-Leetcode-922-Sort%20Array%20By%20Parity%20II/">922.Sort Array By Parity II</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/19/2019-12-19-Leetcode-905-Sort%20Array%20By%20Parity/">905.Sort Array By Parity</a>
           </li>
         
       </ul>
