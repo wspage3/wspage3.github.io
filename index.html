@@ -61,6 +61,80 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-2019-12-20-Leetcode-494-Target Sum" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/20/2019-12-20-Leetcode-494-Target%20Sum/" class="article-date">
+  <time datetime="2019-12-20T14:36:38.243Z" itemprop="datePublished">2019-12-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/20/2019-12-20-Leetcode-494-Target%20Sum/">494.Target Sum</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/target-sum/" target="_blank" rel="noopener">494.Target Sum</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定长度为n的整数数组。数组元素都是非负数。<br>给定一个整数S。<br>【输出】<br>同时你拥有若干个加号，若干个减号。它们加起来为n。<br>把这n个加号或者减号放在nums[i]的前面，使其组成一个加减法表达式。<br>求出存在多少个不同的表达式，使得表达式的值为target。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: nums is [1, 1, 1, 1, 1], S is 3.<br>Output: 5</p>
+<p>Explanation:<br>-1+1+1+1+1 = 3<br>+1-1+1+1+1 = 3<br>+1+1-1+1+1 = 3<br>+1+1+1-1+1 = 3<br>+1+1+1+1-1 = 3<br>There are 5 ways to assign symbols to make the sum of nums be target 3.</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
+<li>0 &lt; n &lt;= 20</li>
+<li>nums数组累加和 &lt;= 1000</li>
+<li>返回结果在32位整数表示范围内</li>
+</ol>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>1.由于需要在n个位置放置，每个位置只能放置’+’或者’-‘。<br>所以一共有(2 ^ n)种不同的放置方案。<br>枚举所有的情况，并计算其表达式的值，统计等于target的次数。</p>
+<p>2.使用递归来简化这个过程：<br>从i = 0出发，当前累加sum为0。<br>若当前i小于等于n - 1，说明所有元素还未全部考虑完成。<br>若当前i等于n，说明所有元素都考虑完成了，统计此时累加的sum，如果和S相等，则统计一次。</p>
+<p>对于位置i，在sum的基础上可以继续累加(+nums[i])，也可以累加(-nums[i])。即：<br>dfs(i + 1, target + nums[i]);<br>dfs(i + 1, target - nums[i]);</p>
+<p>时间复杂度：O(2 ^ N)<br>空间复杂度：O(N) //递归栈的开销</p>
+<p>6.Code(<a href="https://leetcode.com/submissions/detail/287342127/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/287342127/</a>)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> i, <span class="keyword">int</span>&amp; cnt, <span class="keyword">int</span> target, <span class="keyword">int</span> S)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (i &lt;= nums.<span class="built_in">size</span>() - <span class="number">1</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">            dfs(nums, i + <span class="number">1</span>, cnt, target - nums[i], S);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            dfs(nums, i + <span class="number">1</span>, cnt, target + nums[i], S);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (target == S) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">                cnt++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findTargetSumWays</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> S)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> cnt = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        dfs(nums, <span class="number">0</span>, cnt, <span class="number">0</span>, S);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> cnt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+
+<h3 id="Solution-2：Dynamic-Programming"><a href="#Solution-2：Dynamic-Programming" class="headerlink" title="Solution-2：Dynamic Programming"></a>Solution-2：Dynamic Programming</h3><p>1.dp[i][j]表示：区间[0, i - 1]为止，任意组合使得和为j的方案数。<br>i取值范围: [0, n - 1]<br>j取值范围: [-1000, 1000]<br>状态转移方程：dp[i][j] = dp[i - 1][j - nums[i]] + dp[i - 1][j + nums[i]]<br>由于数组index不支持负数。我们把j的区间向右平移：1000。j取值范围: [0, 2000]。<br>对应情况：<br>旧index：[-1000, -999, -998, …, -2, -1, 0, 1, 2, …, 999, 1000]<br>新index：[0, 1, 2, …, 998, 999, 1000, 1001, 1002, …, 1999, 2000]</p>
+<p>2.边界值情况：<br>当i为0的时候，记temp = nums[0]。<br>旧index：dp[0][-temp] = 1, dp[0][temp] = 1<br>新index：dp[0][-temp + 1000] = 1, dp[0][temp + 1000] = 1<br>注意：此时若temp为0的话，分为两种情况：-0，+0。<br>所以应该写成：dp[0][-temp + 1000]++, dp[0][temp + 1000]++</p>
+<p>3.过程：<br>i从1开始，遍历到n - 1为止。<br>j从0开始，遍历到2000为止。<br>dp[i][j] = dp[i - 1][j - nums[i]] + dp[i - 1][j + nums[i]]</p>
+<p>注意1：此时(j - nums[i])和(j + nums[i])代表的是：一种相对距离。<br>举个例子：当i为5，num[i]为20，j为1050的时候：<br>dp[5][1050] = dp[4][1050 - 20] + dp[4][1050 + 20]<br>由于存在index后移的情况，原始转移方程：<br>dp[5][50] = dp[4][30] + dp[4][70]</p>
+<p>注意2：<br>j - nums[i]可能小于0<br>j + nums[i]可能大于2000<br>超过合法范围，均无意义。即为0。</p>
+<p>4.结果返回dp[n - 1][S + 1000]即可。<br>此时若S已经大于了1000，说明就算所有数字选择‘+’，和也不可能达到S。返回0即可。</p>
+<p>5.优化1：不必固定认为和的最大值为1000，每次计算一下，然后再申请数组即可。</p>
+<p>6.优化2：空间压缩。二维空间压缩为一维空间。</p>
+<p>时间复杂度：O(N * sum)<br>空间复杂度：O(sum) //sum为所有nums[i]的和</p>
+<p>6.Code(<a href="https://leetcode.com/submissions/detail/287484139/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/287484139/</a>)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findTargetSumWays</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> S)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">const</span> <span class="keyword">int</span> maxSum = accumulate(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>(), <span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (S &gt; maxSum || S &lt; -maxSum) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">const</span> <span class="keyword">int</span> maxn = maxSum * <span class="number">2</span> + <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; prev(maxn, <span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> temp = nums[<span class="number">0</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        prev[-temp + maxSum]++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        prev[temp + maxSum]++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">//dp[i][j] = dp[i - 1][j - nums[i]] + dp[i - 1][j + nums[i]]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n - <span class="number">1</span>; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">            <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; cur(maxn, <span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= maxn - <span class="number">1</span>; j++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">if</span> (j - nums[i] &gt;= <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">                    cur[j] += prev[j - nums[i]];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">if</span> (j + nums[i] &lt;= maxn - <span class="number">1</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">                    cur[j] += prev[j + nums[i]];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">            cur.swap(prev);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">        </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> prev[maxSum + S];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/20/2019-12-20-Leetcode-494-Target%20Sum/" data-id="ck4f7zgwd0015ikt7147j2kyq" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-2019-12-20-Leetcode-011-Container With Most Water" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/12/20/2019-12-20-Leetcode-011-Container%20With%20Most%20Water/" class="article-date">
@@ -114,7 +188,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/20/2019-12-20-Leetcode-011-Container%20With%20Most%20Water/" data-id="ck4dwqqi70014o0t7hk03dlag" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/20/2019-12-20-Leetcode-011-Container%20With%20Most%20Water/" data-id="ck4f7zgwa0010ikt76nfvgj13" class="article-share-link">Share</a>
       
       
     </footer>
@@ -172,7 +246,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/20/2019-12-20-Leetcode-406-Queue%20Reconstruction%20by%20Height/" data-id="ck4dwqqi80017o0t74h139yag" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/20/2019-12-20-Leetcode-406-Queue%20Reconstruction%20by%20Height/" data-id="ck4f7zgwe0018ikt712mn3tab" class="article-share-link">Share</a>
       
       
     </footer>
@@ -229,7 +303,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/19/2019-12-19-Leetcode-922-Sort%20Array%20By%20Parity%20II/" data-id="ck4dwqqi60013o0t70i5wan8m" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/19/2019-12-19-Leetcode-922-Sort%20Array%20By%20Parity%20II/" data-id="ck4f7zgwb0012ikt7c5pwfyig" class="article-share-link">Share</a>
       
       
     </footer>
@@ -287,7 +361,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/19/2019-12-19-Leetcode-905-Sort%20Array%20By%20Parity/" data-id="ck4dwqqi60012o0t746us79fn" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/19/2019-12-19-Leetcode-905-Sort%20Array%20By%20Parity/" data-id="ck4f7zgwc0014ikt7d34p15ov" class="article-share-link">Share</a>
       
       
     </footer>
@@ -335,7 +409,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/19/2019-12-19-Leetcode-xxx-Empty/" data-id="ck4dwqqi70015o0t76j4086wl" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/19/2019-12-19-Leetcode-xxx-Empty/" data-id="ck4f7zgwe0017ikt72gef8p6n" class="article-share-link">Share</a>
       
       
     </footer>
@@ -460,7 +534,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/18/2019-12-18-Leetcode-912-Sort%20an%20Array/" data-id="ck4dwqqi50011o0t7h76khjho" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/18/2019-12-18-Leetcode-912-Sort%20an%20Array/" data-id="ck4f7zgwa000zikt798wg9gr4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -521,7 +595,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/18/2019-12-18-Leetcode-394-Decode%20String/" data-id="ck4dwqqi4000zo0t7041i5065" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/18/2019-12-18-Leetcode-394-Decode%20String/" data-id="ck4f7zgwb0011ikt727bg40be" class="article-share-link">Share</a>
       
       
     </footer>
@@ -577,7 +651,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/17/2019-12-17-Leetcode-611-Valid%20Triangle%20Number/" data-id="ck4dwqqi50010o0t72fo51o8d" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/17/2019-12-17-Leetcode-611-Valid%20Triangle%20Number/" data-id="ck4f7zgw8000vikt7dat21sih" class="article-share-link">Share</a>
       
       
     </footer>
@@ -623,55 +697,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/17/2019-12-17-Leetcode-885-Spiral%20Matrix%20III/" data-id="ck4dwqqi3000xo0t7cyp45orf" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2019-12-17-Leetcode-59-Spiral Matrix II" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/12/17/2019-12-17-Leetcode-59-Spiral%20Matrix%20II/" class="article-date">
-  <time datetime="2019-12-17T01:53:44.984Z" itemprop="datePublished">2019-12-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/17/2019-12-17-Leetcode-59-Spiral%20Matrix%20II/">59.Spiral Matrix II</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/spiral-matrix-ii/" target="_blank" rel="noopener">59.Spiral Matrix II</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个正整数n。<br>【输出】<br>构造一个1 ~ n ^ 2的方阵，它的螺旋序列为1 ~ n。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: 3<br>Output:<br>[<br> [ 1, 2, 3 ],<br> [ 8, 9, 4 ],<br> [ 7, 6, 5 ]<br>]</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.n为正整数。</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Layer-by-Layer-One-by-One"><a href="#Solution-1：Layer-by-Layer-One-by-One" class="headerlink" title="Solution-1：Layer by Layer, One by One"></a>Solution-1：Layer by Layer, One by One</h3><p>1.根据<a href="https://leetcode.com/problems/spiral-matrix/" target="_blank" rel="noopener">54.Spiral Matrix</a>的启示，<br>用同样的方法，从外层到内层，每一层按照top -&gt; right -&gt; bottom -&gt; left的顺序，将当前数字写入到方阵中。</p>
-<p>2.由于此时是方阵，我们先考虑a点和b点不同的情况。<br>设左上角的点a为(r1, c1)，设右下角的点b为(r2, c2)。<br>初始值a为(0, 0)，b为(n - 1, n - 1)<br>显然，当a，b两点不同的时候，最小为2 * 2的正方形;<br>所以循环结束的条件为r1 &lt; r2, c1 &lt; c2</p>
-<p>3.遍历完每一层后，需要考虑下一层，即：<br>r1++;<br>c1++;<br>r2–;<br>c2–;</p>
-<p>4.对于每一层，把四条边（r1 &lt; r2, c1 &lt; c2）上的路径走一次即可：<br>不考虑r1 == r2，c1 == c2的情况。<br>top：i = r1; j = [c1, c2]<br>right：i = [r1 + 1, r2]; j = c2<br>bottom：i = r2; j = [c2 - 1, c1]<br>left：i = [r2 - 1, r1 + 1]; j = c1</p>
-<p>5.两种情况考虑：<br>当循环最后一次是2 * 2的正方形时，所有元素都遍历完成。<br>当循环最后一次是3 * 3的正方形时，还剩一个1 * 1的需要遍历。</p>
-<p>6.temp代表当前数字，从0开始，每次写入的时候，先自增，后赋值。</p>
-<p>时间复杂度：O(n * n)<br>空间复杂度：O(1) // 不包含返回的结果二维方阵</p>
-<p>6.Code(<a href="https://leetcode.com/submissions/detail/286500431/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286500431/</a>)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/17/2019-12-17-Leetcode-59-Spiral%20Matrix%20II/" data-id="ck4dwqqi4000yo0t7572230n0" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/17/2019-12-17-Leetcode-885-Spiral%20Matrix%20III/" data-id="ck4f7zgw9000yikt7g0x86q5x" class="article-share-link">Share</a>
       
       
     </footer>
@@ -717,6 +743,10 @@
       <ul>
         
           <li>
+            <a href="/2019/12/20/2019-12-20-Leetcode-494-Target%20Sum/">494.Target Sum</a>
+          </li>
+        
+          <li>
             <a href="/2019/12/20/2019-12-20-Leetcode-011-Container%20With%20Most%20Water/">110.Container With Most Water</a>
           </li>
         
@@ -730,10 +760,6 @@
         
           <li>
             <a href="/2019/12/19/2019-12-19-Leetcode-905-Sort%20Array%20By%20Parity/">905.Sort Array By Parity</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/19/2019-12-19-Leetcode-xxx-Empty/">2019-12-19-Leetcode-xxx-Empty</a>
           </li>
         
       </ul>
