@@ -61,6 +61,55 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-2019-12-23-Leetcode-210-Course Schedule II" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/23/2019-12-23-Leetcode-210-Course%20Schedule%20II/" class="article-date">
+  <time datetime="2019-12-23T07:07:23.772Z" itemprop="datePublished">2019-12-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/23/2019-12-23-Leetcode-210-Course%20Schedule%20II/">210.Course Schedule II</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/course-schedule-ii/" target="_blank" rel="noopener">210.Course Schedule II</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【背景】<br>在某学期，有n门课程需要学习，编号为：0 ~ n - 1。<br>某些课程有依赖关系，例如：学习C++前必须先把C语言学习了。<br>如果course 0学习前必须要先学习course 1的话，记为：[0, 1]。<br>【输入】<br>给定数字n代表课程数目。<br>给定二维数组prerequisite代表所有的依赖关系。<br>【输出】<br>判断能否把所有的课程学习完成。<br>若可以，给出一个可能的顺序（可能的顺序可能不止一个，给出一个即可）。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: 4, [[1,0],[2,0],[3,1],[3,2]]<br>Output: [0,1,2,3] or [0,2,1,3]<br>Explanation: There are a total of 4 courses to take. To take course 3 you should have finished both<br>             courses 1 and 2. Both courses 1 and 2 should be taken after you finished course 0.<br>             So one correct course order is [0,1,2,3]. Another correct ordering is [0,2,1,3] .</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
+<li>考虑n的合法性。</li>
+<li>考虑cntEdges的合法性。</li>
+</ol>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>参考Leetcode-207</p>
+<h3 id="Solution-1：Topological-Sort-Kahn’s-Algorithm-BFS"><a href="#Solution-1：Topological-Sort-Kahn’s-Algorithm-BFS" class="headerlink" title="Solution-1：Topological Sort(Kahn’s Algorithm)(BFS)"></a>Solution-1：Topological Sort(Kahn’s Algorithm)(BFS)</h3><p>1.出队列的顺序即为一个有效的拓扑顺序。<br>2.在return的时候判断ans中是否包含了所有的点即可。否则，说明有环，返回空数组。</p>
+<p>时间复杂度：O(n + V) //n是节点个数，V是边的条数<br>空间复杂度：O(n ^ 2)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/287934339/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/287934339/</a>)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; findOrder(<span class="keyword">int</span> numCourses, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; prerequisites) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> cntEdges = prerequisites.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; graph(numCourses);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; indegree(numCourses, <span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= cntEdges - <span class="number">1</span>; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">            <span class="comment">//edge: u -&gt; v</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">int</span> u = prerequisites[i][<span class="number">1</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">int</span> v = prerequisites[i][<span class="number">0</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            graph[u].push_back(v);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">            indegree[v]++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= numCourses - <span class="number">1</span>; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (indegree[i] == <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">                q.push(i);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span> (!q.empty()) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">int</span> temp = q.front();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">            q.pop();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">            ans.push_back(temp);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> v : graph[temp]) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">if</span> (--indegree[v] == <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">                    q.push(v);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (ans.<span class="built_in">size</span>() != numCourses) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">            ans.<span class="built_in">clear</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/23/2019-12-23-Leetcode-210-Course%20Schedule%20II/" data-id="ck4i3sh1d001ck0t74p1w3jt9" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-2019-12-23-Leetcode-207-Course Schedule" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/12/23/2019-12-23-Leetcode-207-Course%20Schedule/" class="article-date">
@@ -87,9 +136,8 @@
 <h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【背景】<br>在某学期，有n门课程需要学习，编号为：0 ~ n - 1。<br>某些课程有依赖关系，例如：学习C++前必须先把C语言学习了。<br>如果course 0学习前必须要先学习course 1的话，记为：[0, 1]。<br>【输入】<br>给定数字n代表课程数目。<br>给定二维数组prerequisite代表所有的依赖关系。<br>【输出】<br>判断能否把所有的课程学习完成。</p>
 <h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: 2, [[1,0],[0,1]]<br>Output: false<br>Explanation: There are a total of 2 courses to take.<br>             To take course 1 you should have finished course 0, and to take course 0 you should also have finished course 1. So it is impossible.</p>
 <h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
-<li></li>
-<li></li>
-<li></li>
+<li>判断n的合法性</li>
+<li>判断cntEdges的合法性</li>
 </ol>
 <h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>本题目实际上是：求一张有向图中是否有环。<br>n代表：该有向图中有n个节点。<br>prerequisite代表：该有向图中所有的边。</p>
 <h3 id="Solution-1：Topological-Sort-Kahn’s-Algorithm-BFS"><a href="#Solution-1：Topological-Sort-Kahn’s-Algorithm-BFS" class="headerlink" title="Solution-1：Topological Sort(Kahn’s Algorithm)(BFS)"></a>Solution-1：Topological Sort(Kahn’s Algorithm)(BFS)</h3><p>1.Kahn’s Algorithm本质上是一个基于入度的拓扑排序。<br>具体步骤是，我们每次去掉入度为0的点，将该点加入拓扑排序，<br>同时删去与其连接的边（其它节点的入度会受到影响），<br>直到去掉所有的点为止，<br>如果中途遇到不存在入度为0的点的情况，那么，就认为这个有向图不是拓扑排序的。</p>
@@ -136,7 +184,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/23/2019-12-23-Leetcode-207-Course%20Schedule/" data-id="ck4i38bgk0015hkt7hj8w19a6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/23/2019-12-23-Leetcode-207-Course%20Schedule/" data-id="ck4i3sh1c001ak0t75v6zernn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -185,7 +233,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/21/2019-12-21-Leetcode-088-Merge%20Sorted%20Array/" data-id="ck4i38bgk0017hkt7b1lfefnt" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/21/2019-12-21-Leetcode-088-Merge%20Sorted%20Array/" data-id="ck4i3sh1b0019k0t7gzs8dubu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -251,7 +299,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/21/2019-12-21-Leetcode-283-Move%20Zeroes/" data-id="ck4i38bgk001chkt7byhk7zu8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/21/2019-12-21-Leetcode-283-Move%20Zeroes/" data-id="ck4i3sh1a0016k0t7fi1aa5s1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -300,7 +348,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/21/2019-12-21-Leetcode-448-Find%20All%20Numbers%20Disappeared%20in%20an%20Array/" data-id="ck4i38bgk001ahkt78n4jfwfu" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/21/2019-12-21-Leetcode-448-Find%20All%20Numbers%20Disappeared%20in%20an%20Array/" data-id="ck4i3sh1b0018k0t7c9isfvb6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -374,7 +422,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/20/2019-12-20-Leetcode-494-Target%20Sum/" data-id="ck4i38bgk0013hkt76bqngu9w" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/20/2019-12-20-Leetcode-494-Target%20Sum/" data-id="ck4i3sh1a0017k0t75s8yewsf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -437,7 +485,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/20/2019-12-20-Leetcode-011-Container%20With%20Most%20Water/" data-id="ck4i38bgk0016hkt756dr481k" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/20/2019-12-20-Leetcode-011-Container%20With%20Most%20Water/" data-id="ck4i3sh190015k0t7cdzk519q" class="article-share-link">Share</a>
       
       
     </footer>
@@ -495,7 +543,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/20/2019-12-20-Leetcode-406-Queue%20Reconstruction%20by%20Height/" data-id="ck4i38bgk0018hkt76kvx2v2v" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/20/2019-12-20-Leetcode-406-Queue%20Reconstruction%20by%20Height/" data-id="ck4i3sh190014k0t7d81whf11" class="article-share-link">Share</a>
       
       
     </footer>
@@ -552,7 +600,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/19/2019-12-19-Leetcode-922-Sort%20Array%20By%20Parity%20II/" data-id="ck4i38bgk0014hkt74z2hfe0s" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/19/2019-12-19-Leetcode-922-Sort%20Array%20By%20Parity%20II/" data-id="ck4i3sh180013k0t76eohebkz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -610,55 +658,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/19/2019-12-19-Leetcode-905-Sort%20Array%20By%20Parity/" data-id="ck4i38bgk0011hkt79x2bdzrw" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-empty" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/12/19/empty/" class="article-date">
-  <time datetime="2019-12-19T01:31:26.065Z" itemprop="datePublished">2019-12-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/19/empty/">empty</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href=""></a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】</p>
-<p>【输出】</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
-<li></li>
-<li></li>
-<li></li>
-</ol>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1："><a href="#Solution-1：" class="headerlink" title="Solution-1："></a>Solution-1：</h3><p>1.</p>
-<p>时间复杂度：O()<br>空间复杂度：O()</p>
-<p>6.Code()</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/19/empty/" data-id="ck4i38bgk0019hkt7dyq2dczj" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/19/2019-12-19-Leetcode-905-Sort%20Array%20By%20Parity/" data-id="ck4i3sh150012k0t7bbu3839d" class="article-share-link">Share</a>
       
       
     </footer>
@@ -704,6 +704,10 @@
       <ul>
         
           <li>
+            <a href="/2019/12/23/2019-12-23-Leetcode-210-Course%20Schedule%20II/">210.Course Schedule II</a>
+          </li>
+        
+          <li>
             <a href="/2019/12/23/2019-12-23-Leetcode-207-Course%20Schedule/">207.Course Schedule</a>
           </li>
         
@@ -717,10 +721,6 @@
         
           <li>
             <a href="/2019/12/21/2019-12-21-Leetcode-448-Find%20All%20Numbers%20Disappeared%20in%20an%20Array/">448.Find All Numbers Disappeared in an Array</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/20/2019-12-20-Leetcode-494-Target%20Sum/">494.Target Sum</a>
           </li>
         
       </ul>

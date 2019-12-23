@@ -61,6 +61,52 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-2019-12-12-Leetcode-17-Letter Combinations of a Phone Number" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/12/2019-12-12-Leetcode-17-Letter%20Combinations%20of%20a%20Phone%20Number/" class="article-date">
+  <time datetime="2019-12-12T03:50:51.060Z" itemprop="datePublished">2019-12-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/12/2019-12-12-Leetcode-17-Letter%20Combinations%20of%20a%20Phone%20Number/">17.Letter Combinations of a Phone Number</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/letter-combinations-of-a-phone-number/" target="_blank" rel="noopener">17.Letter Combinations of a Phone Number</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的字符串。<br>该字符串的每一个元素都是：[2, 9]的整数。<br>对应的，手机键盘上的九键输入法。如2可以代表：[a, b, c]。<br>求出给定的数字序列，所有可能的字符串。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: “23”<br>Output: [“ad”, “ae”, “af”, “bd”, “be”, “bf”, “cd”, “ce”, “cf”].</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n: 当n为0的时候，直接返回空；<br>尽管example中输出的是字典序，但本题目不要求严格的字典序输出。</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>1.对于长度为n的序列，依次考虑每一个数字。</p>
+<p>2.对于[2, 3]来说：<br>先考虑2，由于2可以代表[a, b, c]，则将[a, b, c]放入ans中。<br>再考虑3，由于3可以代表[d, e, f]，则对于ans中的所有元素，分别将d/e/f拼接在其后面。<br>即：[ad, bd, cd, ae, be, ce, af, bf, cf]</p>
+<p>3.所以说，首先外层循环需要考虑n次。<br>对于每个n来说，需要考虑其所有代表的字母。记x次。则x要么是3，要么是4。<br>对于每个代表的字母，需要考虑当前ans中的个数：然后将自己加入到这些已有的ans后面。<br>由于这个过程需要x次，所以可以用一个temp数组，都存起来。当遍历完x次，将ans更新为temp即可。</p>
+<p>4.对于将temp赋值给ans的操作，可以：<br>ans = temp;//vector支持直接赋值过去。<br>参考：<a href="https://zh.cppreference.com/w/cpp/container/vector/operator%3D" target="_blank" rel="noopener">https://zh.cppreference.com/w/cpp/container/vector/operator%3D</a><br>ans.swap(temp)//O(1)的复杂度，更快。因为swap只交换指针，而不替换数据。<br>参考：<a href="http://www.cplusplus.com/reference/vector/vector/swap/" target="_blank" rel="noopener">http://www.cplusplus.com/reference/vector/vector/swap/</a><br><a href="https://www.zhihu.com/question/310462377" target="_blank" rel="noopener">https://www.zhihu.com/question/310462377</a></p>
+<p>时间复杂度：O(3 ^ n)<br>空间复杂度：O(1)</p>
+<p>5.Code(<a href="https://leetcode.com/submissions/detail/285381545/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285381545/</a>)<br>Code(<a href="https://leetcode.com/submissions/detail/285392928/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285392928/</a>)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/12/2019-12-12-Leetcode-17-Letter%20Combinations%20of%20a%20Phone%20Number/" data-id="ck4i3sh0q000ik0t78iml7z1f" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-2019-12-11-Leetcode-48-Rotate Image" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/12/11/2019-12-11-Leetcode-48-Rotate%20Image/" class="article-date">
@@ -97,7 +143,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/11/2019-12-11-Leetcode-48-Rotate%20Image/" data-id="ck4i38bg8000ghkt71yg91kpv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/11/2019-12-11-Leetcode-48-Rotate%20Image/" data-id="ck4i3sh0p000gk0t795jb2h1e" class="article-share-link">Share</a>
       
       
     </footer>
@@ -144,7 +190,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/11/2019-12-11-Leetcode-153-Find%20Minimum%20in%20Rotated%20Sorted%20Array/" data-id="ck4i38bg6000ehkt705hmcskk" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/11/2019-12-11-Leetcode-153-Find%20Minimum%20in%20Rotated%20Sorted%20Array/" data-id="ck4i3sh0n000ek0t7dwt44vz3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -192,7 +238,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/11/2019-12-11-Leetcode-81-Search%20in%20Rotated%20Sorted%20Array%20II/" data-id="ck4i38bg8000hhkt7ahct7xav" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/11/2019-12-11-Leetcode-81-Search%20in%20Rotated%20Sorted%20Array%20II/" data-id="ck4i3sh0p000hk0t7crse10mr" class="article-share-link">Share</a>
       
       
     </footer>
@@ -242,7 +288,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/10/2019-12-10-Leetcode-33-Search%20in%20Rotated%20Sorted%20Array/" data-id="ck4i38bg6000dhkt78zr74ube" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/10/2019-12-10-Leetcode-33-Search%20in%20Rotated%20Sorted%20Array/" data-id="ck4i3sh0o000fk0t78wwm4phu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -288,7 +334,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/10/2019-12-10-Leetcode-309-Best%20Time%20to%20Buy%20and%20Sell%20Stock%20with%20Cooldown/" data-id="ck4i38bg4000bhkt7hqfl2gv7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/10/2019-12-10-Leetcode-309-Best%20Time%20to%20Buy%20and%20Sell%20Stock%20with%20Cooldown/" data-id="ck4i3sh0n000dk0t7gdyu2jrn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -340,7 +386,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/10/2019-12-10-Leetcode-714-Best%20Time%20to%20Buy%20and%20Sell%20Stock%20with%20Transaction%20Fee/" data-id="ck4i38bg7000fhkt7bmf90x4h" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/10/2019-12-10-Leetcode-714-Best%20Time%20to%20Buy%20and%20Sell%20Stock%20with%20Transaction%20Fee/" data-id="ck4i3sh0m000ck0t7gpbu37zx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -391,7 +437,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/09/2019-12-09-Leetcode-188-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20IV/" data-id="ck4i38bg5000chkt7cbjgeshh" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/09/2019-12-09-Leetcode-188-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20IV/" data-id="ck4i3sh0l000bk0t79ile0uox" class="article-share-link">Share</a>
       
       
     </footer>
@@ -453,7 +499,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/08/2019-12-09-Leetcode-123-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20III/" data-id="ck4i38bg30009hkt79gf399e5" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/08/2019-12-09-Leetcode-123-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20III/" data-id="ck4i3sh0k000ak0t7a2gv37yj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -497,55 +543,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/07/2019-12-08-Leetcode-122-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20II/" data-id="ck4i38bg3000ahkt7hmi3gug3" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2019-12-07-Leetcode-121-Best Time to Buy ans Sell Stock" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/12/07/2019-12-07-Leetcode-121-Best%20Time%20to%20Buy%20ans%20Sell%20Stock/" class="article-date">
-  <time datetime="2019-12-07T01:09:15.739Z" itemprop="datePublished">2019-12-07</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/07/2019-12-07-Leetcode-121-Best%20Time%20to%20Buy%20ans%20Sell%20Stock/">Leetcode121-Best Time to Buy and Sell Stock</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/" target="_blank" rel="noopener">Leetcode121-Best Time to Buy and Sell Stock</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组prices；prices[i]代表第i天股票的价格。<br>如果你只能交易一次，即：买一次，卖一次。求出你最多能赚多少钱。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [7,1,5,3,6,4]<br>Output: 5<br>Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.<br>Not 7-1 = 6, as selling price needs to be larger than buying price.</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n：当n为0/1的时候，直接返回0；<br>赚不到钱则返回0；</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>由于要想赚钱，得低价买入，高价卖出；<br>买入卖出不能在同一天，至少买入的第二天才能卖出；<br>对于任意i，本质上就是求出[i + 1, n - 1]范围内最大的数字，然后减去prices[i]，就是第i天能获取到的利润。<br>对于[0, n - 1]上的所有i，找出一个最大值即可。</p>
-<h3 id="Solution-1：Dynamic-programming"><a href="#Solution-1：Dynamic-programming" class="headerlink" title="Solution-1：Dynamic programming"></a>Solution-1：Dynamic programming</h3><p>1.由于我们之前做过题目：Leetcode42-Trapping Rain Water<br>在42的Solution2的时候，本质上也是求：给定一个位置，其左右两边最大的值。<br>对于求n个元素所有的rightMax，使用O(n)的时间和O(n)的空间即可。</p>
-<p>2.rightMax[i]表示：[i + 1, n - 1]范围内最大的数字。<br>则通过递推，可以得到：rightMax[i - 1] = max(prices[i], rightMax[i]);<br>则i从后往前，就可以算出所有的rightMax[i]。<br>同时，使用这个值减去prices[i]的值，来不断更新最大利润即可。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/284225891/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284225891/</a>)</p>
-<h3 id="Solution-2：Further-Optimization"><a href="#Solution-2：Further-Optimization" class="headerlink" title="Solution-2：Further Optimization"></a>Solution-2：Further Optimization</h3><p>1.观察上面的递推式，可以发现：计算rightMax[i - 1]的时候，只用到了rightMax[i]，也就是说可以将数组优化为单个变量。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/284226029/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284226029/</a>)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/07/2019-12-07-Leetcode-121-Best%20Time%20to%20Buy%20ans%20Sell%20Stock/" data-id="ck4i38bg10007hkt7811o8sec" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/07/2019-12-08-Leetcode-122-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20II/" data-id="ck4i3sh0h0006k0t7fa241mso" class="article-share-link">Share</a>
       
       
     </footer>
@@ -591,6 +589,10 @@
       <ul>
         
           <li>
+            <a href="/2019/12/23/2019-12-23-Leetcode-210-Course%20Schedule%20II/">210.Course Schedule II</a>
+          </li>
+        
+          <li>
             <a href="/2019/12/23/2019-12-23-Leetcode-207-Course%20Schedule/">207.Course Schedule</a>
           </li>
         
@@ -604,10 +606,6 @@
         
           <li>
             <a href="/2019/12/21/2019-12-21-Leetcode-448-Find%20All%20Numbers%20Disappeared%20in%20an%20Array/">448.Find All Numbers Disappeared in an Array</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/20/2019-12-20-Leetcode-494-Target%20Sum/">494.Target Sum</a>
           </li>
         
       </ul>

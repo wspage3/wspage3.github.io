@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="一、题意题目链接: 207.Course Schedule 1.Description【背景】在某学期，有n门课程需要学习，编号为：0 ~ n - 1。某些课程有依赖关系，例如：学习C++前必须先把C语言学习了。如果course 0学习前必须要先学习course 1的话，记为：[0, 1]。【输入】给定数字n代表课程数目。给定二维数组prerequisite代表所有的依赖关系。【输出】判断能否把所">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-23T06:56:56.421Z">
+<meta property="og:updated_time" content="2019-12-23T07:08:22.828Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -88,9 +88,8 @@
 <h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【背景】<br>在某学期，有n门课程需要学习，编号为：0 ~ n - 1。<br>某些课程有依赖关系，例如：学习C++前必须先把C语言学习了。<br>如果course 0学习前必须要先学习course 1的话，记为：[0, 1]。<br>【输入】<br>给定数字n代表课程数目。<br>给定二维数组prerequisite代表所有的依赖关系。<br>【输出】<br>判断能否把所有的课程学习完成。</p>
 <h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: 2, [[1,0],[0,1]]<br>Output: false<br>Explanation: There are a total of 2 courses to take.<br>             To take course 1 you should have finished course 0, and to take course 0 you should also have finished course 1. So it is impossible.</p>
 <h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
-<li></li>
-<li></li>
-<li></li>
+<li>判断n的合法性</li>
+<li>判断cntEdges的合法性</li>
 </ol>
 <h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>本题目实际上是：求一张有向图中是否有环。<br>n代表：该有向图中有n个节点。<br>prerequisite代表：该有向图中所有的边。</p>
 <h3 id="Solution-1：Topological-Sort-Kahn’s-Algorithm-BFS"><a href="#Solution-1：Topological-Sort-Kahn’s-Algorithm-BFS" class="headerlink" title="Solution-1：Topological Sort(Kahn’s Algorithm)(BFS)"></a>Solution-1：Topological Sort(Kahn’s Algorithm)(BFS)</h3><p>1.Kahn’s Algorithm本质上是一个基于入度的拓扑排序。<br>具体步骤是，我们每次去掉入度为0的点，将该点加入拓扑排序，<br>同时删去与其连接的边（其它节点的入度会受到影响），<br>直到去掉所有的点为止，<br>如果中途遇到不存在入度为0的点的情况，那么，就认为这个有向图不是拓扑排序的。</p>
@@ -137,7 +136,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/23/2019-12-23-Leetcode-207-Course%20Schedule/" data-id="ck4i38bgk0015hkt7hj8w19a6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/23/2019-12-23-Leetcode-207-Course%20Schedule/" data-id="ck4i3sh1c001ak0t75v6zernn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -145,6 +144,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2019/12/23/2019-12-23-Leetcode-210-Course%20Schedule%20II/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          210.Course Schedule II
+        
+      </div>
+    </a>
   
   
     <a href="/2019/12/21/2019-12-21-Leetcode-088-Merge%20Sorted%20Array/" id="article-nav-older" class="article-nav-link-wrap">
@@ -186,6 +194,10 @@
       <ul>
         
           <li>
+            <a href="/2019/12/23/2019-12-23-Leetcode-210-Course%20Schedule%20II/">210.Course Schedule II</a>
+          </li>
+        
+          <li>
             <a href="/2019/12/23/2019-12-23-Leetcode-207-Course%20Schedule/">207.Course Schedule</a>
           </li>
         
@@ -199,10 +211,6 @@
         
           <li>
             <a href="/2019/12/21/2019-12-21-Leetcode-448-Find%20All%20Numbers%20Disappeared%20in%20an%20Array/">448.Find All Numbers Disappeared in an Array</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/20/2019-12-20-Leetcode-494-Target%20Sum/">494.Target Sum</a>
           </li>
         
       </ul>
