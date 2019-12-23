@@ -7,14 +7,14 @@
   
   <title>【二叉树专项】144.Binary Tree Preorder Traversal | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、题意题目链接: 144.Binary Tree Preorder Traversal 1.Description【输入】给定一棵二叉树。【输出】求出这棵二叉树的前序遍历结果，并以数组的形式返回。 2.ExampleInput: [1,null,2,3]Output: [1,2,3] 3.Corner Case 树为空时，返回空数组。  二、题解二叉树节点的定义：C：struct TreeNod">
+  <meta name="description" content="一、题意题目链接: 144.Binary Tree Preorder Traversal 1.Description【输入】给定一棵二叉树。【输出】求出这棵二叉树的前序遍历结果，并以数组的形式返回。 2.ExampleInput: [1,null,2,3]Output: [1,2,3] 3.Corner Case 树为空时，返回空数组。  二、题解二叉树节点的定义：1C：2struct TreeN">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【二叉树专项】144.Binary Tree Preorder Traversal">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;23&#x2F;2019-12-23-Leetcode-144-Binary%20Tree%20Preorder%20Traversal&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="一、题意题目链接: 144.Binary Tree Preorder Traversal 1.Description【输入】给定一棵二叉树。【输出】求出这棵二叉树的前序遍历结果，并以数组的形式返回。 2.ExampleInput: [1,null,2,3]Output: [1,2,3] 3.Corner Case 树为空时，返回空数组。  二、题解二叉树节点的定义：C：struct TreeNod">
+<meta property="og:description" content="一、题意题目链接: 144.Binary Tree Preorder Traversal 1.Description【输入】给定一棵二叉树。【输出】求出这棵二叉树的前序遍历结果，并以数组的形式返回。 2.ExampleInput: [1,null,2,3]Output: [1,2,3] 3.Corner Case 树为空时，返回空数组。  二、题解二叉树节点的定义：1C：2struct TreeN">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-23T08:24:58.555Z">
+<meta property="og:updated_time" content="2019-12-23T11:33:45.359Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -90,7 +90,8 @@
 <h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
 <li>树为空时，返回空数组。</li>
 </ol>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="二叉树节点的定义："><a href="#二叉树节点的定义：" class="headerlink" title="二叉树节点的定义："></a>二叉树节点的定义：</h3><p>C：<br>struct TreeNode {<br>    int val;<br>    struct TreeNode *left;<br>    struct TreeNode *right;<br>};<br>C++：<br>struct TreeNode {<br>    int val;<br>    TreeNode *left;<br>    TreeNode *right;<br>    TreeNode(int x) : val(x), left(NULL), right(NULL) {}<br>};</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="二叉树节点的定义："><a href="#二叉树节点的定义：" class="headerlink" title="二叉树节点的定义："></a>二叉树节点的定义：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">C：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> val;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span> *<span class="title">left</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span> *<span class="title">right</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">C++：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> val;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    TreeNode *left;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    TreeNode *right;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    TreeNode(<span class="keyword">int</span> x) : val(x), left(<span class="literal">NULL</span>), right(<span class="literal">NULL</span>) &#123;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+
 <h3 id="Solution-1：Recursive-solution"><a href="#Solution-1：Recursive-solution" class="headerlink" title="Solution-1：Recursive solution"></a>Solution-1：Recursive solution</h3><p>1.前序遍历：root -&gt; 左子树 -&gt; 右子树</p>
 <p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
 <p>2.Code(<a href="https://leetcode.com/submissions/detail/274821052/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/274821052/</a>)</p>
@@ -106,7 +107,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/23/2019-12-23-Leetcode-144-Binary%20Tree%20Preorder%20Traversal/" data-id="ck4i8tlxn001a60t7boh50ee1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/23/2019-12-23-Leetcode-144-Binary%20Tree%20Preorder%20Traversal/" data-id="ck4iehtpr001a4wt7d047gq1n" class="article-share-link">Share</a>
       
       
     </footer>
@@ -164,6 +165,10 @@
       <ul>
         
           <li>
+            <a href="/2019/12/23/2019-12-23-Leetcode-102-Binary%20Tree%20Level%20Order%20Traversal/">【二叉树专项】102.Binary Tree Level Order Traversal</a>
+          </li>
+        
+          <li>
             <a href="/2019/12/23/2019-12-23-Leetcode-145-Binary%20Tree%20Postorder%20Traversal/">【二叉树专项】145.Binary Tree Postorder Traversal</a>
           </li>
         
@@ -177,10 +182,6 @@
         
           <li>
             <a href="/2019/12/23/2019-12-23-Leetcode-210-Course%20Schedule%20II/">210.Course Schedule II</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/23/2019-12-23-Leetcode-207-Course%20Schedule/">207.Course Schedule</a>
           </li>
         
       </ul>

@@ -61,6 +61,59 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-2019-12-23-Leetcode-102-Binary Tree Level Order Traversal" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/23/2019-12-23-Leetcode-102-Binary%20Tree%20Level%20Order%20Traversal/" class="article-date">
+  <time datetime="2019-12-23T11:35:16.196Z" itemprop="datePublished">2019-12-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/23/2019-12-23-Leetcode-102-Binary%20Tree%20Level%20Order%20Traversal/">【二叉树专项】102.Binary Tree Level Order Traversal</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/binary-tree-level-order-traversal/" target="_blank" rel="noopener">102.Binary Tree Level Order Traversal</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一棵二叉树。<br>【输出】<br>求出这棵二叉树的level序遍历结果，并以二维数组的形式返回。<br>从根往叶，从左往右。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [3,9,20,null,null,15,7]<br>Output:<br>[<br>  [3],<br>  [9,20],<br>  [15,7]<br>]</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
+<li>树为空时，返回空数组。</li>
+</ol>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="二叉树节点的定义："><a href="#二叉树节点的定义：" class="headerlink" title="二叉树节点的定义："></a>二叉树节点的定义：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">C：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> val;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span> *<span class="title">left</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span> *<span class="title">right</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">C++：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> val;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    TreeNode *left;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    TreeNode *right;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    TreeNode(<span class="keyword">int</span> x) : val(x), left(<span class="literal">NULL</span>), right(<span class="literal">NULL</span>) &#123;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+
+<h3 id="Solution-1：Recursive-solution"><a href="#Solution-1：Recursive-solution" class="headerlink" title="Solution-1：Recursive solution"></a>Solution-1：Recursive solution</h3><p>0.前序、中序、后序：都属于dfs。当实现迭代版本时，我们使用的都是stack。<br>1.层次遍历：依旧用dfs实现。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/275764307/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/275764307/</a>)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; levelOrder(TreeNode* root) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; res;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> res;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        bfs(root, <span class="number">0</span>, res);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> res;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">bfs</span><span class="params">(TreeNode* node, <span class="keyword">int</span> level, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; res)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (node == <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (res.<span class="built_in">size</span>() == level) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">            <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; temp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">            res.push_back(temp);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        res[level].push_back(node-&gt;val);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">        bfs(node-&gt;left, level + <span class="number">1</span>, res);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">        bfs(node-&gt;right, level + <span class="number">1</span>, res);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+
+<h3 id="Solution-2：Iterative-solution-using-Queue"><a href="#Solution-2：Iterative-solution-using-Queue" class="headerlink" title="Solution-2：Iterative solution using Queue"></a>Solution-2：Iterative solution using Queue</h3><p>0.前序、中序、后序：都属于dfs。当实现迭代版本时，我们使用的都是Stack模拟。<br>1.层次遍历：实现迭代版本时，使用bfs，用Queue模拟。<br>2.每一轮，从队列中依次拿出n个元素，这些元素一定是同一层的。将这个结果放入ans中。<br>拿的时候，同时考虑其左右儿子，如果有的话，将其加入队列中。<br>3.直到队列为空的时候，所有的元素都被考虑过了。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/275767633/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/275767633/</a>)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; levelOrder(TreeNode* root) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; res;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> res;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">queue</span>&lt;TreeNode*&gt; treeQueue;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        treeQueue.push(root);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span> (!treeQueue.empty()) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; sub;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">int</span> n = treeQueue.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">                TreeNode* temp = treeQueue.front();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">                sub.push_back(temp-&gt;val);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">                treeQueue.pop();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">if</span> (temp-&gt;left != <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">                    treeQueue.push(temp-&gt;left);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">if</span> (temp-&gt;right != <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">                    treeQueue.push(temp-&gt;right);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">            res.push_back(sub);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> res;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/23/2019-12-23-Leetcode-102-Binary%20Tree%20Level%20Order%20Traversal/" data-id="ck4iehtpr001b4wt7fo6ndkac" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-2019-12-23-Leetcode-145-Binary Tree Postorder Traversal" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/12/23/2019-12-23-Leetcode-145-Binary%20Tree%20Postorder%20Traversal/" class="article-date">
@@ -89,7 +142,8 @@
 <h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
 <li>树为空时，返回空数组。</li>
 </ol>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="二叉树节点的定义："><a href="#二叉树节点的定义：" class="headerlink" title="二叉树节点的定义："></a>二叉树节点的定义：</h3><p>C：<br>struct TreeNode {<br>    int val;<br>    struct TreeNode *left;<br>    struct TreeNode *right;<br>};<br>C++：<br>struct TreeNode {<br>    int val;<br>    TreeNode *left;<br>    TreeNode *right;<br>    TreeNode(int x) : val(x), left(NULL), right(NULL) {}<br>};</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="二叉树节点的定义："><a href="#二叉树节点的定义：" class="headerlink" title="二叉树节点的定义："></a>二叉树节点的定义：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">C：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> val;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span> *<span class="title">left</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span> *<span class="title">right</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">C++：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> val;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    TreeNode *left;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    TreeNode *right;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    TreeNode(<span class="keyword">int</span> x) : val(x), left(<span class="literal">NULL</span>), right(<span class="literal">NULL</span>) &#123;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+
 <h3 id="Solution-1：Recursive-solution"><a href="#Solution-1：Recursive-solution" class="headerlink" title="Solution-1：Recursive solution"></a>Solution-1：Recursive solution</h3><p>1.后序遍历：左子树 -&gt; 右子树 -&gt; root</p>
 <p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
 <p>2.Code(<a href="https://leetcode.com/submissions/detail/274963826/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/274963826/</a>)</p>
@@ -106,7 +160,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/23/2019-12-23-Leetcode-145-Binary%20Tree%20Postorder%20Traversal/" data-id="ck4i8tlxo001c60t72zjp0zjy" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/23/2019-12-23-Leetcode-145-Binary%20Tree%20Postorder%20Traversal/" data-id="ck4iehtpr001c4wt74sf327hs" class="article-share-link">Share</a>
       
       
     </footer>
@@ -144,7 +198,8 @@
 <h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
 <li>树为空时，返回空数组。</li>
 </ol>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="二叉树节点的定义："><a href="#二叉树节点的定义：" class="headerlink" title="二叉树节点的定义："></a>二叉树节点的定义：</h3><p>C：<br>struct TreeNode {<br>    int val;<br>    struct TreeNode *left;<br>    struct TreeNode *right;<br>};<br>C++：<br>struct TreeNode {<br>    int val;<br>    TreeNode *left;<br>    TreeNode *right;<br>    TreeNode(int x) : val(x), left(NULL), right(NULL) {}<br>};</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="二叉树节点的定义："><a href="#二叉树节点的定义：" class="headerlink" title="二叉树节点的定义："></a>二叉树节点的定义：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">C：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> val;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span> *<span class="title">left</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span> *<span class="title">right</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">C++：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> val;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    TreeNode *left;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    TreeNode *right;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    TreeNode(<span class="keyword">int</span> x) : val(x), left(<span class="literal">NULL</span>), right(<span class="literal">NULL</span>) &#123;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+
 <h3 id="Solution-1：Recursive-solution"><a href="#Solution-1：Recursive-solution" class="headerlink" title="Solution-1：Recursive solution"></a>Solution-1：Recursive solution</h3><p>1.中序遍历：左子树 -&gt; root -&gt; 右子树</p>
 <p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
 <p>2.Code(<a href="https://leetcode.com/submissions/detail/274967419/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/274967419/</a>)</p>
@@ -162,7 +217,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/23/2019-12-23-Leetcode-094-Binary%20Tree%20Inorder%20Traversal/" data-id="ck4i8tlxo001b60t78zxxhb5v" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/23/2019-12-23-Leetcode-094-Binary%20Tree%20Inorder%20Traversal/" data-id="ck4iehtpr00164wt7bzfa58x4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -200,7 +255,8 @@
 <h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
 <li>树为空时，返回空数组。</li>
 </ol>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="二叉树节点的定义："><a href="#二叉树节点的定义：" class="headerlink" title="二叉树节点的定义："></a>二叉树节点的定义：</h3><p>C：<br>struct TreeNode {<br>    int val;<br>    struct TreeNode *left;<br>    struct TreeNode *right;<br>};<br>C++：<br>struct TreeNode {<br>    int val;<br>    TreeNode *left;<br>    TreeNode *right;<br>    TreeNode(int x) : val(x), left(NULL), right(NULL) {}<br>};</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="二叉树节点的定义："><a href="#二叉树节点的定义：" class="headerlink" title="二叉树节点的定义："></a>二叉树节点的定义：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">C：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> val;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span> *<span class="title">left</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span> *<span class="title">right</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">C++：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> val;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    TreeNode *left;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    TreeNode *right;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    TreeNode(<span class="keyword">int</span> x) : val(x), left(<span class="literal">NULL</span>), right(<span class="literal">NULL</span>) &#123;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+
 <h3 id="Solution-1：Recursive-solution"><a href="#Solution-1：Recursive-solution" class="headerlink" title="Solution-1：Recursive solution"></a>Solution-1：Recursive solution</h3><p>1.前序遍历：root -&gt; 左子树 -&gt; 右子树</p>
 <p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
 <p>2.Code(<a href="https://leetcode.com/submissions/detail/274821052/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/274821052/</a>)</p>
@@ -216,7 +272,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/23/2019-12-23-Leetcode-144-Binary%20Tree%20Preorder%20Traversal/" data-id="ck4i8tlxn001a60t7boh50ee1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/23/2019-12-23-Leetcode-144-Binary%20Tree%20Preorder%20Traversal/" data-id="ck4iehtpr001a4wt7d047gq1n" class="article-share-link">Share</a>
       
       
     </footer>
@@ -265,7 +321,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/23/2019-12-23-Leetcode-210-Course%20Schedule%20II/" data-id="ck4i8tlxt001e60t72awa7cs4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/23/2019-12-23-Leetcode-210-Course%20Schedule%20II/" data-id="ck4iehtpr001f4wt7difzcfjh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -349,7 +405,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/23/2019-12-23-Leetcode-207-Course%20Schedule/" data-id="ck4i8tlxp001d60t75qebeoh2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/23/2019-12-23-Leetcode-207-Course%20Schedule/" data-id="ck4iehtpr001h4wt74tfmedck" class="article-share-link">Share</a>
       
       
     </footer>
@@ -398,7 +454,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/21/2019-12-21-Leetcode-088-Merge%20Sorted%20Array/" data-id="ck4i8tlxj001660t775jc3uul" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/21/2019-12-21-Leetcode-088-Merge%20Sorted%20Array/" data-id="ck4iehtpr00174wt7duqy07sw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -464,7 +520,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/21/2019-12-21-Leetcode-283-Move%20Zeroes/" data-id="ck4i8tlxm001760t7cbp1chd5" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/21/2019-12-21-Leetcode-283-Move%20Zeroes/" data-id="ck4iehtpr00194wt71d6whepf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -513,7 +569,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/21/2019-12-21-Leetcode-448-Find%20All%20Numbers%20Disappeared%20in%20an%20Array/" data-id="ck4i8tlxn001960t74svt0fph" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/21/2019-12-21-Leetcode-448-Find%20All%20Numbers%20Disappeared%20in%20an%20Array/" data-id="ck4iehtpr001d4wt7fkuz1fl0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -587,70 +643,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/20/2019-12-20-Leetcode-494-Target%20Sum/" data-id="ck4i8tlxi001460t78dka0sy8" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2019-12-20-Leetcode-011-Container With Most Water" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/12/20/2019-12-20-Leetcode-011-Container%20With%20Most%20Water/" class="article-date">
-  <time datetime="2019-12-20T08:10:21.565Z" itemprop="datePublished">2019-12-20</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/20/2019-12-20-Leetcode-011-Container%20With%20Most%20Water/">110.Container With Most Water</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/container-with-most-water/" target="_blank" rel="noopener">110.Container With Most Water</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定长度为n的数组。其中元素都是非负数。<br>height[i]代表：位置i处有一根高度为height[i]的杆子。<br>【输出】<br>任意选择两根杆子，求出以这两根杆子、地面，所能构成的最大矩形面积。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [1,8,6,2,5,4,8,3,7]<br>Output: 49</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
-<li>height[i]非负。</li>
-<li>n &gt;= 2</li>
-</ol>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><ol>
-<li>枚举所有可能的两根杆子组合情况，求出max值。<br>对于i, j两根杆子来说，高度为min(height[i], height[j])，长度为(j - i)。</li>
-</ol>
-<p>时间复杂度：O(n ^ 2)<br>空间复杂度：O(1)</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/287284450/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/287284450/</a>)</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxArea</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; <span class="built_in">height</span>)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = <span class="built_in">height</span>.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> ans = INT_MIN;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n - <span class="number">2</span>; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt;= n - <span class="number">1</span>; j++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">int</span> temp = (j - i) * <span class="built_in">min</span>(<span class="built_in">height</span>[i], <span class="built_in">height</span>[j]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">                ans = <span class="built_in">max</span>(ans, temp);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
-
-<h3 id="Solution-2：Two-Pointers"><a href="#Solution-2：Two-Pointers" class="headerlink" title="Solution-2：Two Pointers"></a>Solution-2：Two Pointers</h3><ol>
-<li><p>使用两个指针：left指向0，right指向n - 1。</p>
-</li>
-<li><p>比较height[left]和height[right]的大小：<br>若height[left] &lt; height[right]，则记h为height[left]，left++，直到nums[left] &gt; h。<br>若height[left] &gt; height[right]，则记h为height[right]，right–，直到nums[right] &gt; h。<br>若height[left] == height[right]，则记h为height[left]（height[right]）。left和right同时往中间移动。直到两者都找到比h大的值为止。<br>这样，当left和right相遇的时候，最优解就已经计算出来了。</p>
-</li>
-<li><p>参考：<br>剪枝理解：(<a href="https://leetcode.com/problems/container-with-most-water/discuss/6099/Yet-another-way-to-see-what-happens-in-the-O(n)-algorithm" target="_blank" rel="noopener">https://leetcode.com/problems/container-with-most-water/discuss/6099/Yet-another-way-to-see-what-happens-in-the-O(n)-algorithm</a>)<br>证明思路：(<a href="https://leetcode.com/problems/container-with-most-water/discuss/6090/Simple-and-fast-C%2B%2BC-with-explanation" target="_blank" rel="noopener">https://leetcode.com/problems/container-with-most-water/discuss/6090/Simple-and-fast-C%2B%2BC-with-explanation</a>)</p>
-</li>
-</ol>
-<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<p>4.Code(<a href="https://leetcode.com/submissions/detail/287300934/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/287300934/</a>)</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxArea</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; <span class="built_in">height</span>)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = <span class="built_in">height</span>.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> ans = INT_MIN;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> right = n - <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span> (left &lt; right) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">int</span> h = <span class="built_in">min</span>(<span class="built_in">height</span>[left], <span class="built_in">height</span>[right]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">            ans = <span class="built_in">max</span>(ans, h * (right - left));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">while</span> (left &lt; right &amp;&amp; <span class="built_in">height</span>[left] &lt;= h) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">                left++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">while</span> (left &lt; right &amp;&amp; <span class="built_in">height</span>[right] &lt;= h) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">                right--;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
-
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/20/2019-12-20-Leetcode-011-Container%20With%20Most%20Water/" data-id="ck4i8tlxi001560t70tsx7cn2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/20/2019-12-20-Leetcode-494-Target%20Sum/" data-id="ck4iehtpr00144wt7ce8c2dao" class="article-share-link">Share</a>
       
       
     </footer>
@@ -696,6 +689,10 @@
       <ul>
         
           <li>
+            <a href="/2019/12/23/2019-12-23-Leetcode-102-Binary%20Tree%20Level%20Order%20Traversal/">【二叉树专项】102.Binary Tree Level Order Traversal</a>
+          </li>
+        
+          <li>
             <a href="/2019/12/23/2019-12-23-Leetcode-145-Binary%20Tree%20Postorder%20Traversal/">【二叉树专项】145.Binary Tree Postorder Traversal</a>
           </li>
         
@@ -709,10 +706,6 @@
         
           <li>
             <a href="/2019/12/23/2019-12-23-Leetcode-210-Course%20Schedule%20II/">210.Course Schedule II</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/23/2019-12-23-Leetcode-207-Course%20Schedule/">207.Course Schedule</a>
           </li>
         
       </ul>
