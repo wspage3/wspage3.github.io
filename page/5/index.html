@@ -61,6 +61,163 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-2019-12-09-Leetcode-188-Best Time to Buy ans Sell Stock IV" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/09/2019-12-09-Leetcode-188-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20IV/" class="article-date">
+  <time datetime="2019-12-09T06:58:57.169Z" itemprop="datePublished">2019-12-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/09/2019-12-09-Leetcode-188-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20IV/">Leetcode188-Best Time to Buy and Sell Stock IV</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/" target="_blank" rel="noopener">Leetcode188-Best Time to Buy and Sell Stock IV</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组prices；prices[i]代表第i天股票的价格。<br>如果你最多能交易k次，即：买k次，卖k次。求出你最多能赚多少钱。<br>前提是：买入下一股的时候，必须将上一股卖掉。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [2,4,1], k = 2<br>Output: 2<br>Explanation: Buy on day 1 (price = 2) and sell on day 2 (price = 4), profit = 4-2 = 2.</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n: 当n为0/1的时候，直接返回0；<br>k: 当k &lt;= 0的时候，直接返回0；<br>   当k &gt;= n的时候，将k赋值为n - 1；<br>赚不到钱则返回0；</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Dynamic-Programming"><a href="#Solution-1：Dynamic-Programming" class="headerlink" title="Solution-1：Dynamic Programming"></a>Solution-1：Dynamic Programming</h3><p>1.根据leetcode123，可以得到相同的状态转移方程：<br>dp[j][i] = max(dp[j][i - 1], dp[j - 1][m] + prices[i] - prices[m]);<br>其中：j:[1, k]  i:[0, n - 1]  m:[0, i]</p>
+<p>2.申请(k + 1) * n的dp数组空间，答案就是dp[k][n - 1];<br>j从[1, k]遍历<br>i从[1, n - 1]遍历<br>m从[0, i]遍历<br>对于每次固定好的j和i，找出一个位置m，使得prices[m] - dp[j - 1][m]的值最小。</p>
+<p>时间复杂度：O(k * n ^ 2)<br>空间复杂度：O(k * n)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/284743219/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284743219/</a>)</p>
+<h3 id="Solution-2：Dynamic-Programming-Optimization"><a href="#Solution-2：Dynamic-Programming-Optimization" class="headerlink" title="Solution-2：Dynamic Programming + Optimization"></a>Solution-2：Dynamic Programming + Optimization</h3><p>1.从Solution-1的解法来看，对于当前(k, i)序列，假设通过O(n)的循环，找到了一个位置m1，使得表达式的值最小了，从而算出了当前(k, i)的答案。<br>接着迭代到当前(k, i + 1)序列，此时还需要O(n)的循环：找到当前序列一个位置m2，使得表达式的值最小。<br>由于我们在上一次循环中已经计算出了[0, i]范围内使得表达式最小的一个位置。当前(k, i + 1)序列，直接通过O(1)的时间就可以算出来，而不必继续遍历[0, i + 1]</p>
+<p>2.所以，对于遍历当前i位置来说，可以直接访问上一次i - 1的计算结果。从而把整体的时间复杂度优化为O(k * n)</p>
+<p>时间复杂度：O(k * n)<br>空间复杂度：O(k * n)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/284745998/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284745998/</a>)</p>
+<h3 id="Solution-3：Dynamic-Programming-Optimization"><a href="#Solution-3：Dynamic-Programming-Optimization" class="headerlink" title="Solution-3：Dynamic Programming + Optimization"></a>Solution-3：Dynamic Programming + Optimization</h3><p>1.尝试调换两次循环的次序<br>2.进一步优化空间，将二维降成一维<br>3.当k &gt;= n / 2的时候，也就意味着可以用leetcode-122的O(n)方法来解。即无限交易次数，orz。。。</p>
+<p>时间复杂度：O(k * n)<br>空间复杂度：O(k)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/284749560/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284749560/</a>)<br>Code(<a href="https://leetcode.com/submissions/detail/284755984/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284755984/</a>)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/09/2019-12-09-Leetcode-188-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20IV/" data-id="ck4i8tlwx000860t77a6mdw7k" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2019-12-09-Leetcode-123-Best Time to Buy ans Sell Stock III" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/08/2019-12-09-Leetcode-123-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20III/" class="article-date">
+  <time datetime="2019-12-08T03:35:57.193Z" itemprop="datePublished">2019-12-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/08/2019-12-09-Leetcode-123-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20III/">Leetcode123-Best Time to Buy and Sell Stock III</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/" target="_blank" rel="noopener">Leetcode123-Best Time to Buy and Sell Stock III</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组prices；prices[i]代表第i天股票的价格。<br>如果你最多能交易2次，即：买2次，卖2次。求出你最多能赚多少钱。<br>前提是：买入下一股的时候，必须将上一股卖掉。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [3,3,5,0,0,3,1,4]<br>Output: 6<br>Explanation: Buy on day 4 (price = 0) and sell on day 6 (price = 3), profit = 3-0 = 3.<br>             Then buy on day 7 (price = 1) and sell on day 8 (price = 4), profit = 4-1 = 3.</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n：当n为0/1的时候，直接返回0；<br>赚不到钱则返回0；</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：峰谷法"><a href="#Solution-1：峰谷法" class="headerlink" title="Solution-1：峰谷法"></a>Solution-1：峰谷法</h3><p>1.将每天的价格画成折线图，折线图中上升的线段就是可以获得利润的时候。<br>由于我们最多可以交易两次，也是就说找到两条折线，其高度差最大。<br>所以说用变量maxProfit1和maxProfit2来维护这两个值，数组从左往右遍历一次，找出所有的valley和peak；然后依次更新两个最大值。<br>最后结果返回这两个值的和即可。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
+<p>结果发现：pass了190/200的用例。<br>其中一个不过的用例是：[1,2,4,2,5,7,2,4,9,0]<br>按照我们上面的思路：找出所有的上升线段：1-&gt;2-&gt;4  2-&gt;5-&gt;7  2-&gt;4-&gt;9<br>挑两个最大的，计算出ans = 5 + 7 = 12<br>但实际上答案是13。分别是：1-&gt;7  2-&gt;9这两个区间。<br>通过观察，可以看出：1-&gt;2-&gt;4  2-&gt;5-&gt;7，这两个区间由于存在范围重叠，导致将其分开计算得到的两个最大值，比在一个计算得到的一个最大值要小。<br>这也是这种思路的问题所在。</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/284240316/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284240316/</a>)</p>
+<h3 id="Solution-2：Divide-and-Conquer"><a href="#Solution-2：Divide-and-Conquer" class="headerlink" title="Solution-2：Divide and Conquer"></a>Solution-2：Divide and Conquer</h3><p>1.根据leetcode121的启示，我们可以找O(n)的时间内，找到一个区间[0, n - 1]交易一次所能获取的最大利润。<br>本题限定，我们最多能交易2次，所以对于位置i，我们可以先找到[0, i - 1]内交易一次所能获得的最大利润。以及[i, n - 1]内交易一次所能获得的最大利润。<br>然后把两部分加起来即可。在[0, n - 1]的范围内，找到一个i，使得其两部分的和最大。相当于进行两次leetcode121。</p>
+<p>2.vector<int> l(n, 0);//l[i]代表：范围[0, i]内，交易一次，能获得的最大利润<br>  vector<int> r(n, 0);//r[i]代表：范围[i, n - 1]内，交易一次，能获得的最大利润<br>  则对于i在[0, n - 1]内，res[i] = l[i] + r[i]，找出最大的res[i]即可。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/284663137/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284663137/</a>)</p>
+<h3 id="Solution-3：Dynamic-Programming"><a href="#Solution-3：Dynamic-Programming" class="headerlink" title="Solution-3：Dynamic Programming"></a>Solution-3：Dynamic Programming</h3><p>1.状态转移：dp[k][i] = max(dp[k][i - 1], dp[k - 1][j] + prices[i] - prices[j])<br>其中dp[k][i]代表：最多交易k次，截止到第i天为止（包含第i天），所能获得的最多利润。则答案就是dp[k][n - 1]<br>分别遍历k和i即可。对于固定的k和i，找到一个j在[0, i]范围内，使得prices[j] - dp[k - 1][j]最小即可。<br>边界条件：<br>当k为0时，dp[k][i]都为0<br>当i为0时，dp[k][i]都为0</p>
+<p>时间复杂度：O(k * n ^ 2)<br>空间复杂度：O(K * n)</p>
+<p>结果TLE</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/284681458/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284681458/</a>)</p>
+<h3 id="Solution-4：Dynamic-Programming-Optimization"><a href="#Solution-4：Dynamic-Programming-Optimization" class="headerlink" title="Solution-4：Dynamic Programming + Optimization"></a>Solution-4：Dynamic Programming + Optimization</h3><p>1.Solution-3的思路是：我们对于一个给定的(k, i)，j在[0, i]中，寻找一个最小的j使得表达式（prices[j] - dp[k - 1][j]）的值最小。<br>找到之后，继续寻找(k, i + 1)..(k, i + 2)……的值，直到所有的k和i遍历完成。</p>
+<p>2.通过观察，我们发现表达式（prices[j] - dp[k - 1][j]）的值只和位置j有关（在k固定的情况下）。<br>所以对于同一个k来说，当计算出了范围[0, i]内表达式的最小值后，计算[0, i + 1]只需要O(1)的时间。<br>也就是说，对于给定的(k, i)，我们保留(k, i - 1)的计算结果，通过递推来算出当前的结果。<br>而不是对于每一个(k, i)，我们通过遍历j来找出当下结果。<br>启示：当计算到某个状态时，而非仅仅考虑当前计算出来正确结果即可。尝试想一下当前结果对下一次的计算是否有用，有用的话将当前结果保留下来即可。</p>
+<p>时间复杂度：O(k * n)<br>空间复杂度：O(K * n)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/284684804/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284684804/</a>)</p>
+<h3 id="Solution-5：Dynamic-Programming-Further-Optimization"><a href="#Solution-5：Dynamic-Programming-Further-Optimization" class="headerlink" title="Solution-5：Dynamic Programming + Further Optimization"></a>Solution-5：Dynamic Programming + Further Optimization</h3><p>1.进一步，我们可以发现k是一个常数，所以尝试将两层循环倒换一下顺序，即：常数级别的k放在内层循环中。</p>
+<p>时间复杂度：O(k * n)<br>空间复杂度：O(K * n)</p>
+<p>Code(<a href="https://leetcode.com/submissions/detail/284698683/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284698683/</a>)</p>
+<p>2.再进一步，我们可以发现dp[i][k]的值只和dp[i - 1][k]的值有关，而和i - 2, i - 3……无关。所以我们可以将第一维用一个变量表示即可，即将二维压缩为一维。空间复杂度变为：O(k)</p>
+<p>时间复杂度：O(k * n)<br>空间复杂度：O(k)</p>
+<p>Code(<a href="https://leetcode.com/submissions/detail/284701294/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284701294/</a>)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/08/2019-12-09-Leetcode-123-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20III/" data-id="ck4i8tlwz000b60t76th1fdri" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2019-12-08-Leetcode-122-Best Time to Buy ans Sell Stock II" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/07/2019-12-08-Leetcode-122-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20II/" class="article-date">
+  <time datetime="2019-12-07T01:53:30.793Z" itemprop="datePublished">2019-12-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/07/2019-12-08-Leetcode-122-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20II/">Leetcode122-Best Time to Buy and Sell Stock II</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/" target="_blank" rel="noopener">Leetcode122-Best Time to Buy and Sell Stock</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组prices；prices[i]代表第i天股票的价格。<br>如果你能交易任意k次，即：买k次，卖k次。求出你最多能赚多少钱。<br>前提是：买入下一股的时候，必须将上一股卖掉。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [7,1,5,3,6,4]<br>Output: 7<br>Explanation: Buy on day 2 (price = 1) and sell on day 3 (price = 5), profit = 5-1 = 4.<br>             Then buy on day 4 (price = 3) and sell on day 5 (price = 6), profit = 6-3 = 3.</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n：当n为0/1的时候，直接返回0；<br>赚不到钱则返回0；</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>考虑现实生活中，唯一不同的是：现实中我们只知道当前的股价，不知道明天的股价。<br>而现在我们知道了：假设今天股价为a，明天股价b大于a，则买下一定会赚钱，一定买。<br>假设今天股价为a，明天股价b小于a，则买下一定会赔钱，一定不买。</p>
+<h3 id="Solution-1：Greedy"><a href="#Solution-1：Greedy" class="headerlink" title="Solution-1：Greedy"></a>Solution-1：Greedy</h3><p>1.我们要做的只是：每天只看今天的价格和明天的价格，然后做决定。<br>不管后天，大后天的价格。因为我们每天都可以做决定，如果后面发现股价一直在涨，则每天都买就行了。<br>然后ans一直累加每天的利润即可。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/284232069/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284232069/</a>)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/07/2019-12-08-Leetcode-122-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20II/" data-id="ck4i8tlwy000960t70galh61z" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-2019-12-07-Leetcode-121-Best Time to Buy ans Sell Stock" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/12/07/2019-12-07-Leetcode-121-Best%20Time%20to%20Buy%20ans%20Sell%20Stock/" class="article-date">
@@ -99,7 +256,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/07/2019-12-07-Leetcode-121-Best%20Time%20to%20Buy%20ans%20Sell%20Stock/" data-id="ck4i3sh0i0008k0t791hla5ci" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/07/2019-12-07-Leetcode-121-Best%20Time%20to%20Buy%20ans%20Sell%20Stock/" data-id="ck4i8tlww000760t7adw0flsk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -157,7 +314,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/06/2019-12-06-Leetcode42-Trapping%20Rain%20Water/" data-id="ck4i3sh0j0009k0t7dv1j5t4i" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/06/2019-12-06-Leetcode42-Trapping%20Rain%20Water/" data-id="ck4i8tlww000660t7bncb98sp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -213,7 +370,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/05/2019-12-05-Leetcode84-Largest%20Rectangle%20in%20Histogram/" data-id="ck4i3sh0i0007k0t77t2mcv71" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/05/2019-12-05-Leetcode84-Largest%20Rectangle%20in%20Histogram/" data-id="ck4i8tlwv000460t77vu3177z" class="article-share-link">Share</a>
       
       
     </footer>
@@ -266,7 +423,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/05/2019-12-05-Leetcode739-Daily%20Temperatures/" data-id="ck4i3sh0g0005k0t70fcq1l05" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/05/2019-12-05-Leetcode739-Daily%20Temperatures/" data-id="ck4i8tlwv000560t7322ahd01" class="article-share-link">Share</a>
       
       
     </footer>
@@ -318,7 +475,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/04/2019-12-04-Leetcode300-Longest%20Increasing%20Subsequence/" data-id="ck4i3sh0f0003k0t7exs8aydj" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/04/2019-12-04-Leetcode300-Longest%20Increasing%20Subsequence/" data-id="ck4i8tlwy000a60t7h3853meh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -369,7 +526,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/04/2019-12-04-Leetcode713-Subarray%20Product%20Less%20Than%20K/" data-id="ck4i3sh0f0004k0t79puwdt1m" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/04/2019-12-04-Leetcode713-Subarray%20Product%20Less%20Than%20K/" data-id="ck4i8tlws000160t7dsj2900c" class="article-share-link">Share</a>
       
       
     </footer>
@@ -418,144 +575,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/04/2019-12-04-Leetcode152-Maximum%20Product%20Subarray/" data-id="ck4i3sh0e0002k0t7gwnh2ut7" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2019-12-03-Leetcode53-Maximum Subarray" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/12/03/2019-12-03-Leetcode53-Maximum%20Subarray/" class="article-date">
-  <time datetime="2019-12-03T10:15:35.010Z" itemprop="datePublished">2019-12-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/03/2019-12-03-Leetcode53-Maximum%20Subarray/">Leetcode-53 Maximum Subarray</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/maximum-subarray/" target="_blank" rel="noopener">Leetcode-53 Maximum Subarray</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组nums。<br>求出nums的连续子数组，这个子数组是nums所有子数组中和最大的那个。返回这个sum。<br>子数组长度至少为1。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [-2,1,-3,4,-1,2,1,-5,4],<br>Output: 6<br>Explanation: [4,-1,2,1] has the largest sum = 6.</p>
-<h3 id="3-Note"><a href="#3-Note" class="headerlink" title="3.Note"></a>3.Note</h3><p>a.多种方法求解，使用一下Divide and Conquer方法<br>b.某种方法的时间复杂度为O(n)</p>
-<h3 id="4-Corner-Case"><a href="#4-Corner-Case" class="headerlink" title="4.Corner Case"></a>4.Corner Case</h3><p>需要对n是否为0判断</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>1.直观的想法就是遍历n次，每次选定一个nums[i]；i的范围[0, n - 1]。<br>然后对于该nums[i]，考察以它为首的所有子数组的和，并更新这个最大值；j的范围[i, n - 1]。<br>这样的话，可以将nums所有可能的子数组都遍历一次，不会遗漏。<br>时间复杂度：O(n ^ 2)<br>空间复杂度：O(1)</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/283334388/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283334388/</a>)</p>
-<h3 id="Solution-2：Divide-and-Conquer"><a href="#Solution-2：Divide-and-Conquer" class="headerlink" title="Solution-2：Divide and Conquer"></a>Solution-2：Divide and Conquer</h3><p>1.现有数组[a, b, c, d, e]，把它分为左右两部分：[a, b, c]和[d, e]。<br>若已经知道左右两部分的答案分别为A和B，能否求出本题的答案C？<br>考虑以下三种情况：<br>a.若答案C对应的子数组就在[a, b, c]范围内，则在[a, b, c, d, e]中的答案等于在[a, b, c]中的答案。如：[1,2,3,-1,-1]<br>b.若答案C对应的子数组就在[d, e]范围内，则在[a, b, c, d, e]中的答案等于在[d, e]中的答案。如：[-2,-3,-5,7,7]<br>c.若答案C对应的子数组在穿过了左右两部分，如[1,2,3,4,5]，则我们可以知道：这个子数组中必然包含[c,d]两个元素。<br>也就是说，只要以c结尾的连续子数组中取最大值left，以d开头的连续子数组中取最大值right；left + right就是这种情况下的答案。<br>可以发现，上述三种情况覆盖了所有可能出现的情况，只要我们找出这三个值的最大值，也就是最后要求的答案了。</p>
-<p>2.对于一个区间[low, high]，求这个范围内的答案，只要把上面三种情况下的最大值找出来，就是答案。<br>如果区间中有1个元素[a]，那么答案就是a本身；<br>记为f(a) = a；<br>如果区间中有2个元素[a, b]，那么答案就是max(a, b, (a + 0) + (b + 0))；(a+0)代表以a为结尾的子数组的最大值；(b+0)同理。<br>记为f(a, b) = max(a, b, (a + 0) + (b + 0))；<br>如果区间中有3个元素[a, b, c]，那么答案就是max(f(a, b), c, max(b, a + b) + c)；max(b, a + b)代表以b为结尾的子数组的最大值，c同理。<br>记为f(a, b, c) = max(f(a, b), c, max(b, a + b) + c)；max(b, a + b)<br>所以：对于求区间[low, high]上的答案，只要分别求得左子区间[low, mid]，右子区间[mid + 1, high]，左右子区间[i, j]。<br>其中，左子区间[low, mid]，右子区间[mid + 1, high]可以递归求得，当low == high时，到达递归的结束条件，返回nums[low]即可。<br>左右子区间的i，可以由mid位置，依次递减到low，每次叠加nums中的元素，找出一个最大和。<br>左右子区间的j，可以由mid + 1位置，依次递增到high，每次叠加nums中的元素，找出一个最大和。</p>
-<p>时间复杂度：O(n ^ logN)<br>空间复杂度：O(n)，递归开销<br>3.Code(<a href="https://leetcode.com/submissions/detail/283548839/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283548839/</a>)</p>
-<h3 id="Solution-3：Dynamic-Programming"><a href="#Solution-3：Dynamic-Programming" class="headerlink" title="Solution-3：Dynamic Programming"></a>Solution-3：Dynamic Programming</h3><p>1.顺着上面的想法继续往下思考。<br>考虑新增两个数组res和start：<br>vector<int> res(n);   //res[i]表示[i, n - 1]内最大连续子数组的和。则res[0]就是我们要找的答案。显然，res[n - 1] = nums[n - 1]<br>vector<int> start(n); //start[i]表示[i, n - 1]内最大连续子数组的和，且该子数组以i为开头。同理，start[n - 1] = nums[n - 1]<br>在元素n - 1考虑完成后，我们考虑它前面的n - 2：<br>start[n - 2] = max(nums[n - 2], nums[n - 2] + start[n - 1])<br>res[n - 2] = max(start[n - 2], res[n - 1])，其中前者代表：当前元素存在于答案中，后者代表：当前元素不存在于答案中<br>依次向前遍历，经过一次循环，即可找到答案，也就是res[0]。<br>时间复杂度：O(n)<br>空间复杂度：O(n * 2)</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/283366882/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283366882/</a>)</p>
-<h3 id="Solution-4：Further-Optimization"><a href="#Solution-4：Further-Optimization" class="headerlink" title="Solution-4：Further Optimization"></a>Solution-4：Further Optimization</h3><p>1.能否进一步优化空间复杂度呢？<br>当我们考虑第i个位置的时候，只需要得到nums[i]，start[i + 1]，res[i + 1]即可求出。<br>也就是说，第i个位置的答案只与它后边的一个元素有关，和其他的都无关。所以可以用两个int变量res和start分别替换上述的两个int数组。<br>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/283367123/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283367123/</a>)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/03/2019-12-03-Leetcode53-Maximum%20Subarray/" data-id="ck4i3sh070001k0t7avyfanbf" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2019-12-03-Leetcode238-Product of Array Except Self" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/12/03/2019-12-03-Leetcode238-Product%20of%20Array%20Except%20Self/" class="article-date">
-  <time datetime="2019-12-03T09:29:50.853Z" itemprop="datePublished">2019-12-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/03/2019-12-03-Leetcode238-Product%20of%20Array%20Except%20Self/">Leetcode-238 Product of Array Except Self</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/product-of-array-except-self/" target="_blank" rel="noopener">Leetcode-238 Product of Array Except Self</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组nums，n &gt; 1。<br>求数组output，其中output[i]表示所有除了i之外，所有其它数字的乘积。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input:  [1,2,3,4]<br>Output: [24,12,8,6]</p>
-<h3 id="3-Note"><a href="#3-Note" class="headerlink" title="3.Note"></a>3.Note</h3><p>a.过程中不使用除法。<br>b.时间复杂度要求：O(n)。<br>c.空间复杂度要求：O(1)，函数返回的数组不算入空间复杂度。</p>
-<h3 id="4-Corner-Case"><a href="#4-Corner-Case" class="headerlink" title="4.Corner Case"></a>4.Corner Case</h3><p>题目保证了n &gt; 1</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>直观的想法就是遍历n次，每次累乘(n - 1)个数字。<br>时间复杂度：O(n ^ 2)<br>空间复杂度：O(1)</p>
-<h3 id="Solution-2：递推"><a href="#Solution-2：递推" class="headerlink" title="Solution-2：递推"></a>Solution-2：递推</h3><p>1.假设我们要求output[i]，i的范围为：[0, n - 1]，也就是nums数组中除了nums[i]之外所有的数字的乘积。也就是求[0, i - 1]以及[i + 1, n - 1]两个范围内所有数的乘积。</p>
-<p>2.新增数组s，设数组s[i]表示范围[0, i - 1]内所有数字的乘积。i的范围为：[1, n - 1]<br>新增数组t，设t[i]为[i + 1, n - 1]所有数字的乘积。i的范围为：[0, n - 2]<br>数组s只需要从前到后遍历一次nums即可求出。<br>数组t从后到前遍历一次nums也能求出。<br>在s和t都求出的情况下，output也只需要O(n)的时间即可求出：output[i] = s[i] * t[i];<br>时间复杂度：O(3 * n)<br>空间复杂度：O(2 * n)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/283206956/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283206956/</a>)</p>
-<h3 id="Solution-3：进一步优化"><a href="#Solution-3：进一步优化" class="headerlink" title="Solution-3：进一步优化"></a>Solution-3：进一步优化</h3><p>1.可以省略数组s，和数组t：<br>数组s的值就保留在output数组中。<br>数组t用一个int变量表示。<br>时间复杂度：O(2 * n)<br>空间复杂度：O(1)</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/283208630/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283208630/</a>)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/03/2019-12-03-Leetcode238-Product%20of%20Array%20Except%20Self/" data-id="ck4i3sh020000k0t701u10vh0" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/12/02/hello-world/" class="article-date">
-  <time datetime="2019-12-02T01:39:02.156Z" itemprop="datePublished">2019-12-02</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/02/hello-world/">Hello Blog</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Hi, My name is wspage3 and this is my first article.<br>Opinions expressed here are mine alone.</p>
-<h2 id="一、定理目录"><a href="#一、定理目录" class="headerlink" title="一、定理目录"></a>一、定理目录</h2><h3 id="1-勾股定理"><a href="#1-勾股定理" class="headerlink" title="1.勾股定理"></a>1.勾股定理</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">a^2 + b^2 = c^2</span></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://wspage3.github.io" target="_blank" rel="noopener">wspage3</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/02/hello-world/" data-id="ck4i3sh1d001bk0t7hyfpg7ml" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/04/2019-12-04-Leetcode152-Maximum%20Product%20Subarray/" data-id="ck4i8tlwu000360t7ck07hfw4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -569,7 +589,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span>
+    <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -601,23 +621,23 @@
       <ul>
         
           <li>
+            <a href="/2019/12/23/2019-12-23-Leetcode-145-Binary%20Tree%20Postorder%20Traversal/">【二叉树专项】145.Binary Tree Postorder Traversal</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/23/2019-12-23-Leetcode-094-Binary%20Tree%20Inorder%20Traversal/">【二叉树专项】094.Binary Tree Inorder Traversal</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/23/2019-12-23-Leetcode-144-Binary%20Tree%20Preorder%20Traversal/">【二叉树专项】144.Binary Tree Preorder Traversal</a>
+          </li>
+        
+          <li>
             <a href="/2019/12/23/2019-12-23-Leetcode-210-Course%20Schedule%20II/">210.Course Schedule II</a>
           </li>
         
           <li>
             <a href="/2019/12/23/2019-12-23-Leetcode-207-Course%20Schedule/">207.Course Schedule</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/21/2019-12-21-Leetcode-088-Merge%20Sorted%20Array/">88.Merge Sorted Array</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/21/2019-12-21-Leetcode-283-Move%20Zeroes/">283.Move Zeroes</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/21/2019-12-21-Leetcode-448-Find%20All%20Numbers%20Disappeared%20in%20an%20Array/">448.Find All Numbers Disappeared in an Array</a>
           </li>
         
       </ul>

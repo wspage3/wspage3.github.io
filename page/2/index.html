@@ -61,6 +61,179 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-2019-12-20-Leetcode-406-Queue Reconstruction by Height" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/20/2019-12-20-Leetcode-406-Queue%20Reconstruction%20by%20Height/" class="article-date">
+  <time datetime="2019-12-20T03:27:54.106Z" itemprop="datePublished">2019-12-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/20/2019-12-20-Leetcode-406-Queue%20Reconstruction%20by%20Height/">406.Queue Reconstruction by Height</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/queue-reconstruction-by-height/" target="_blank" rel="noopener">406.Queue Reconstruction by Height</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定n组数据代表一个队伍的情况。每一组代表一个人的“情况”。<br>一组数据有两个字段：<br>1.我的高度。<br>2.我前面有多少个人，他们的高度大于等于我。<br>例如：[7,1]代表：我的高度是7m，我前面还有一个人，他的高度大于等于7m。<br>【输出】<br>将这个队伍从无序排列到有序。<br>使得队伍的排序满足所有人的“情况”。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input:（原始无序队伍）<br>[[7,0], [4,4], [7,1], [5,0], [6,1], [5,2]]</p>
+<p>Output:（有序队伍）<br>[[5,0], [7,0], [5,2], [6,1], [4,4], [7,1]]</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
+<li>n &lt; 1100</li>
+<li>h：高度是相对的，所以不考虑其正负，是否为0等。任意整数即可。浮点数也行。（本题目给出的是int）</li>
+<li>k：前面不低于自己的个数k应该 &gt;= 0。</li>
+</ol>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Greedy"><a href="#Solution-1：Greedy" class="headerlink" title="Solution-1：Greedy"></a>Solution-1：Greedy</h3><p>1.队伍的长度为n，也就是有n个人。<br>例如：([7,0], [4,4], [7,1], [5,0], [6,1], [5,2])：<br>现在需要对它们重新排列，新建长度为n的数组ans用于存放结果。(-1, -1, -1, -1, -1, -1)<br>对于每个元素cur，假设其前面有k个人。我们在前面预留k个【坑】即可，然后将cur找一个坑。对于坑位的所有数字，都大于等于当前元素cur。</p>
+<p>2.举个例子：<br>a.首先考虑最矮的那个：高度为4；它前面有4个人。所以：从前到后遍历ans，找4个空坑（index为0，1，2，3）。当前元素占用坑位（index为4）<br>  ans数组变为：(-1, -1, -1, -1, 4, -1)<br>b.然后考虑第二矮的那个：发现有两个人高度都是5：<br>  假设[5,2]在[5,0]前面，对于[5,0]来说，不允许自身前面有大于等于5的出现，出现矛盾。<br>  所以当我们从前到后找坑时，对于h相同的若干个人，需要先考虑k值较小的。<br>  考虑：[5, 0]：从前到后遍历ans，找0个坑。当前元素占用坑位（index为0）<br>  (5, -1, -1, -1, 4, -1)<br>  考虑：[5, 2]：从前到后遍历ans，找2个坑。当前元素占用坑位（index为2）<br>  (5, -1, 5, -1, 4, -1)<br>  注意：此时对于第二个5来说，由于第一个5的存在，所以第一个5也算一个【坑】。<br>c.考虑：[6, 1]：从前到后遍历ans，找1个坑。当前元素占用坑位（index为3）<br>  (5, -1, 5, 6, 4, -1)<br>d.考虑：[7, 0]：从前到后遍历ans，找0个坑。当前元素占用坑位（index为1）<br>  (5, 7, 5, 6, 4, -1)<br>e.考虑：[7, 1]：从前到后遍历ans，找0个坑。当前元素占用坑位（index为1）<br>  (5, 7, 5, 6, 4, 7)<br>答案：([5,0], [7,0], [5,2], [6,1], [4,4], [7,1])</p>
+<p>3.具体实现：<br>a.调用sort函数，自定义比较器：按照h从小到大；若h相同，k从小到大。<br>b.遍历[0, n - 1]，考虑每个candidate：<br>c.对于每个candidate，需要遍历ans的[0, n - 1]，找到自己的【专属坑位】</p>
+<p>时间复杂度：O(n * n)<br>空间复杂度：O(n * 2) //需要返回的结果。n行2列。</p>
+<p>4.Code(<a href="https://leetcode.com/submissions/detail/287233156/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/287233156/</a>)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; reconstructQueue(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; people) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = people.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; ans(n, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(<span class="number">2</span>, <span class="number">-1</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">//1.按照高度从小到大排序。</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        sort(people.<span class="built_in">begin</span>(), people.<span class="built_in">end</span>(), [](<span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; a, <span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; b) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (a[<span class="number">0</span>] &lt; b[<span class="number">0</span>]) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (a[<span class="number">0</span>] &gt; b[<span class="number">0</span>]) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">return</span> a[<span class="number">1</span>] &lt; b[<span class="number">1</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">//2.依次考虑每个candidate，其高度是最小的。</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n - <span class="number">1</span>; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">            <span class="comment">//3.对于该candidate，在ans中找一个合适的位置，将其放进去。</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">int</span> candidateHeight = people[i][<span class="number">0</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">int</span> preCnt = people[i][<span class="number">1</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">int</span> cnt = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= n - <span class="number">1</span>; j++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">                <span class="comment">//preCnt代表：candidate前面有几个元素的高度大于等于candidate本身</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">                <span class="comment">//如果1：该位置还没有被占用的话，是比自身高度大的元素。</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">                <span class="comment">//如果2：该位置的高度和当前candidate的高度相等，则将当前位置也累加到cnt</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">if</span> (ans[j][<span class="number">0</span>] == candidateHeight || ans[j][<span class="number">1</span>] == <span class="number">-1</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">                    <span class="keyword">if</span> (cnt == preCnt) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">                        ans[j][<span class="number">0</span>] = candidateHeight;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">                        ans[j][<span class="number">1</span>] = preCnt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">                        <span class="keyword">break</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">                    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">                    cnt++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+
+<h3 id="Solution-2：Greedy"><a href="#Solution-2：Greedy" class="headerlink" title="Solution-2：Greedy"></a>Solution-2：Greedy</h3><p>1.在Solution-1中，我们是先给“矮的人”安排坑位，因为知道它前面有多少个比自身大于等于的。直接预留对应数目的坑位即可。</p>
+<p>2.现在考虑先给“高的人”安排坑位：<br>考虑：[7, 0]，由于k是0，将其放入队列中第一个。ans变成：([7, 0])<br>考虑：[7, 1]，由于k是1，所以放在[7, 0]的后面。ans变成：([7, 0], [7, 1])<br>考虑：[6, 1]，由于k是1，所以放在[7, 0]的后面。ans变成：([7, 0], [6, 1], [7, 1])<br>考虑：[5, 0]，由于k是0，所以放在队列中第一个。ans变成：([5, 0], [7, 0], [6, 1], [7, 1])<br>考虑：[5, 2]，由于k是2，所以放在[7, 0]的后面。ans变成：([5, 0], [7, 0], [5, 2], [6, 1], [7, 1])<br>考虑：[4, 4]，由于k是4，所以放在[6, 1]的后面。ans变成：([5, 0], [7, 0], [5, 2], [6, 1], [4, 4], [7, 1])</p>
+<p>3.观察可以发现：高度位h的元素进入队伍后，不管其怎么插队，都不会影响高度大于h的元素的“合法性”。<br>因为每个元素只关心比在自己前面，且高度大于等于自己的元素个数。</p>
+<p>时间复杂度：O(n ^ 2)<br>空间复杂度：O(n * 2) //需要返回的结果。n行2列。</p>
+<p>参考(<a href="https://leetcode.com/problems/queue-reconstruction-by-height/discuss/89359/Explanation-of-the-neat-Sort%2BInsert-solution" target="_blank" rel="noopener">https://leetcode.com/problems/queue-reconstruction-by-height/discuss/89359/Explanation-of-the-neat-Sort%2BInsert-solution</a>)</p>
+<p>6.Code(<a href="https://leetcode.com/submissions/detail/287237749/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/287237749/</a>)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; reconstructQueue(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; people) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = people.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">//1.按照高度从小到大排序。</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        sort(people.<span class="built_in">begin</span>(), people.<span class="built_in">end</span>(), [](<span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; a, <span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; b) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (a[<span class="number">0</span>] &lt; b[<span class="number">0</span>]) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (a[<span class="number">0</span>] &gt; b[<span class="number">0</span>]) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">return</span> a[<span class="number">1</span>] &lt; b[<span class="number">1</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">//2.依次考虑每个candidate，其高度是最大的。</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n - <span class="number">1</span>; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">            <span class="comment">//3.对于该candidate，插入ans中。</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">            ans.insert(ans.<span class="built_in">begin</span>() + people[i][<span class="number">1</span>], people[i]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/20/2019-12-20-Leetcode-406-Queue%20Reconstruction%20by%20Height/" data-id="ck4i8tlxm001860t73nzg8o5l" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2019-12-19-Leetcode-922-Sort Array By Parity II" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/19/2019-12-19-Leetcode-922-Sort%20Array%20By%20Parity%20II/" class="article-date">
+  <time datetime="2019-12-19T02:53:33.086Z" itemprop="datePublished">2019-12-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/19/2019-12-19-Leetcode-922-Sort%20Array%20By%20Parity%20II/">922.Sort Array By Parity II</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/sort-array-by-parity-ii/" target="_blank" rel="noopener">922.Sort Array By Parity II</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一场长度为n的数组nums。元素都是非负整数。n为偶数。<br>其中一半元素是奇数，一半元素是偶数。<br>【输出】<br>将nums中index为偶数的位置放置偶数，index为奇数的位置放置奇数。<br>即：偶奇偶奇偶奇偶奇<br>答案有许多种，返回任意满足一种的即可。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [4,2,5,7]<br>Output: [4,5,2,7]<br>Explanation: [4,7,2,5], [2,5,4,7], [2,7,4,5] would also have been accepted.</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
+<li>2 &lt;= A.length &lt;= 20000</li>
+<li>A.length % 2 == 0</li>
+<li>0 &lt;= A[i] &lt;= 1000</li>
+</ol>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Two-Pointers-in-place"><a href="#Solution-1：Two-Pointers-in-place" class="headerlink" title="Solution-1：Two Pointers in-place"></a>Solution-1：Two Pointers in-place</h3><p>1.不用额外的空间，就在原始数组上操作。</p>
+<p>2.和上一题目一样，right从后往前找一个偶数。<br>left从前往后找一个奇数。<br>然后交换它们俩的值。<br>两个指针每次都是移动2步。<br>注意边界值的考虑即可。</p>
+<p>3.缺点：虽然节省了空间，但是修改了input。实施前先确认修改input是否可以。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
+<p>5.Code(<a href="https://leetcode.com/submissions/detail/287006385/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/287006385/</a>)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; sortArrayByParityII(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; A) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = A.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> right = n - <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span> (left &lt;= n - <span class="number">2</span> &amp;&amp; right &gt;= <span class="number">1</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">while</span> (right &gt;= <span class="number">1</span> &amp;&amp; A[right] % <span class="number">2</span> == <span class="number">1</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">                right -= <span class="number">2</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">while</span> (left &lt;= n - <span class="number">2</span> &amp;&amp; A[left] % <span class="number">2</span> == <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">                left += <span class="number">2</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (left &lt;= n - <span class="number">2</span> &amp;&amp; right &gt;= <span class="number">1</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">                swap(A[left], A[right]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> A;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+
+<h3 id="Solution-2：Two-Pointers-with-Extra-Space"><a href="#Solution-2：Two-Pointers-with-Extra-Space" class="headerlink" title="Solution-2：Two Pointers with Extra Space"></a>Solution-2：Two Pointers with Extra Space</h3><p>1.考虑避免修改input，我们新建额外的长度为n的数组ans。</p>
+<p>2.left指向0，right指向1。</p>
+<p>3.优点：避免了修改input数组。但是使用了额外的space。</p>
+<p>4.Code(<a href="https://leetcode.com/submissions/detail/287001444/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/287001444/</a>)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; sortArrayByParityII(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; A) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = A.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ans(n);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> right = <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n - <span class="number">1</span>; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (A[i] % <span class="number">2</span> == <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">                ans[left] = A[i];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">                left += <span class="number">2</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">                ans[right] = A[i];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">                right += <span class="number">2</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/19/2019-12-19-Leetcode-922-Sort%20Array%20By%20Parity%20II/" data-id="ck4i8tlxh001260t722s9a8v5" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2019-12-19-Leetcode-905-Sort Array By Parity" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/19/2019-12-19-Leetcode-905-Sort%20Array%20By%20Parity/" class="article-date">
+  <time datetime="2019-12-19T01:36:41.172Z" itemprop="datePublished">2019-12-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/19/2019-12-19-Leetcode-905-Sort%20Array%20By%20Parity/">905.Sort Array By Parity</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/sort-array-by-parity/" target="_blank" rel="noopener">905.Sort Array By Parity</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一场长度为n的数组nums。元素都是非负整数。<br>【输出】<br>将nums中所有的偶数放在所有的奇数前面。答案有许多种，返回任意满足一种的即可。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [3,1,2,4]<br>Output: [2,4,3,1]<br>The outputs [4,2,3,1], [2,4,1,3], and [4,2,1,3] would also be accepted.</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
+<li>1 &lt;= A.length &lt;= 5000</li>
+<li>0 &lt;= A[i] &lt;= 5000</li>
+</ol>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Two-Pointers-in-place"><a href="#Solution-1：Two-Pointers-in-place" class="headerlink" title="Solution-1：Two Pointers in-place"></a>Solution-1：Two Pointers in-place</h3><p>1.不用额外的空间，就在原始数组上操作。</p>
+<p>2.回忆Quick Sort，我们每一轮：选择一个target，然后用left指针指向目标区间最左侧，right指针指向目标区间最右侧。<br>right指针一直往左移，直到其指向的值比target小。<br>left指针一直往右移，直到其指向的值比target大。<br>如果此时left仍然小于right，则交换它们俩的值。<br>直到left == right为止。</p>
+<p>3.对于本题目，也用left和right两个指针，right从后面往前移动，直到找到一个偶数。<br>left从前面往后移动，直到找到一个奇数，然后交换它们的值即可。<br>当left == right的时候，nums数组排序完成：所有偶数在所有奇数的前面。</p>
+<p>4.缺点：虽然节省了空间，但是修改了input。实施前先确认修改input是否可以。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
+<p>5.Code(<a href="https://leetcode.com/submissions/detail/286997150/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286997150/</a>)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; sortArrayByParity(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; A) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = A.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> right = n - <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span> (left &lt; right) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">while</span> (left &lt; right &amp;&amp; A[right] % <span class="number">2</span> == <span class="number">1</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">                right--;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">while</span> (left &lt; right &amp;&amp; A[left] % <span class="number">2</span> == <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">                left++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (left &lt; right) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">                swap(A[left], A[right]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> A;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+
+<h3 id="Solution-2：Two-Pointers-with-Extra-Space"><a href="#Solution-2：Two-Pointers-with-Extra-Space" class="headerlink" title="Solution-2：Two Pointers with Extra Space"></a>Solution-2：Two Pointers with Extra Space</h3><p>1.考虑避免修改input，我们新建额外的长度为n的数组ans。</p>
+<p>2.left指向ans开始，right指向ans结尾。</p>
+<p>3.考虑nums的每一个元素，如果其是偶数，则赋值给ans[left++]，否则赋值给ans[right–]。<br>考虑n次后，return ans即可。</p>
+<p>4.优点：避免了修改input数组。但是使用了额外的space。</p>
+<p>5.Code(<a href="https://leetcode.com/submissions/detail/286999024/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286999024/</a>)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; sortArrayByParity(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; A) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = A.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ans(n);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> right = n - <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n - <span class="number">1</span>; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (A[i] % <span class="number">2</span> == <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">                ans[left++] = A[i];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">                ans[right--] = A[i];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/19/2019-12-19-Leetcode-905-Sort%20Array%20By%20Parity/" data-id="ck4i8tlxh001360t7hhc8b87v" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-empty" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/12/19/empty/" class="article-date">
@@ -99,7 +272,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/19/empty/" data-id="ck4i3sh1d001dk0t7dj429hbn" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/19/empty/" data-id="ck4i8tlxu001g60t77dlzay7v" class="article-share-link">Share</a>
       
       
     </footer>
@@ -224,7 +397,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/18/2019-12-18-Leetcode-912-Sort%20an%20Array/" data-id="ck4i3sh140011k0t70a4m1gpq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/18/2019-12-18-Leetcode-912-Sort%20an%20Array/" data-id="ck4i8tlxg001160t7fvzq4wxq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -285,7 +458,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/18/2019-12-18-Leetcode-394-Decode%20String/" data-id="ck4i3sh140010k0t710zm0tu3" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/18/2019-12-18-Leetcode-394-Decode%20String/" data-id="ck4i8tlxf001060t75abb5tti" class="article-share-link">Share</a>
       
       
     </footer>
@@ -341,7 +514,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/17/2019-12-17-Leetcode-611-Valid%20Triangle%20Number/" data-id="ck4i3sh12000xk0t7gnz04cm3" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/17/2019-12-17-Leetcode-611-Valid%20Triangle%20Number/" data-id="ck4i8tlxe000x60t77218exfd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -387,7 +560,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/17/2019-12-17-Leetcode-885-Spiral%20Matrix%20III/" data-id="ck4i3sh13000zk0t7gxnz562f" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/17/2019-12-17-Leetcode-885-Spiral%20Matrix%20III/" data-id="ck4i8tlxe000z60t77zirf677" class="article-share-link">Share</a>
       
       
     </footer>
@@ -435,7 +608,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/17/2019-12-17-Leetcode-59-Spiral%20Matrix%20II/" data-id="ck4i3sh13000yk0t767shdoxs" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/17/2019-12-17-Leetcode-59-Spiral%20Matrix%20II/" data-id="ck4i8tlxe000y60t7a61f03zj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -482,158 +655,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/17/2019-12-17-Leetcode-54-Spiral%20Matrix/" data-id="ck4i3sh12000wk0t7964r5y6z" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2019-12-16-Leetcode-242-Valid Anagram" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/12/16/2019-12-16-Leetcode-242-Valid%20Anagram/" class="article-date">
-  <time datetime="2019-12-16T13:07:31.626Z" itemprop="datePublished">2019-12-16</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/16/2019-12-16-Leetcode-242-Valid%20Anagram/">242.Valid Anagram</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/valid-anagram/" target="_blank" rel="noopener">242.Valid Anagram</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定两个字符串s和t。<br>【输出】<br>判断这两个字符串是否为：“字母异位词”<br>所谓“字母异位词”，就是两个单词，组成它们的字母是完全一样的，而不关心其排列顺序。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: s = “anagram”, t = “nagaram”<br>Output: true</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.lenS不等于lenT的时候，直接return false。<br>2.s和t中仅包含小写字母。<br>3.如果输入包含unicode字符的话，该程序的扩展性如何。</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Sort"><a href="#Solution-1：Sort" class="headerlink" title="Solution-1：Sort"></a>Solution-1：Sort</h3><p>1.将两个字符串都排序，然后直接比较字符串是否相等即可。<br>2.在C++中：<br>sort(s.begin(), s.end());<br>return s == t;</p>
-<p>时间复杂度：O(n * log n) //n代表字符串的长度<br>空间复杂度：O(1)</p>
-<p>6.Code(<a href="https://leetcode.com/submissions/detail/286349008/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286349008/</a>)</p>
-<h3 id="Solution-2：Hash-Table"><a href="#Solution-2：Hash-Table" class="headerlink" title="Solution-2：Hash Table"></a>Solution-2：Hash Table</h3><p>1.用两个哈希表mapS和mapT，来记录s和t中所有字母出现的次数。<br>2.然后遍历26个小写字母：<br>对于任意一个小写字母：<br>首先，判断其是否在mapS和mapT中同时出现或者同时不出现。<br>然后，判断其出现的频率是否相等。<br>如果上述两点有不满足的，直接返回false即可。<br>3.在C++中，判断其是否出现在unordered_map中可以使用count()，出现返回1，否则返回0。<br>判断其出现的次数的话，直接比较其key对应的value即可。</p>
-<p>时间复杂度：O(n + 26)<br>空间复杂度：O(26)</p>
-<p>4.Code(<a href="https://leetcode.com/submissions/detail/286336480/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286336480/</a>)</p>
-<h3 id="Solution-3：Hash-Table-with-Optimization"><a href="#Solution-3：Hash-Table-with-Optimization" class="headerlink" title="Solution-3：Hash Table with Optimization"></a>Solution-3：Hash Table with Optimization</h3><p>1.我们用一个哈希表即可。<br>2.首先判断lenS, lenT是否相等，不相等的话直接return false。<br>3.遍历n次，每次：<br>s[i]对应的value加一；<br>t[i]对应的value减一；<br>如果遍历n次后，且两个字符串由相同的字母组成的话，那么所有出现的字符的次数都是0了。<br>4.遍历整个哈希表，若其个数非0，则return false。</p>
-<p>时间复杂度：O(n + 26)<br>空间复杂度：O(26)</p>
-<p>4.Code(<a href="https://leetcode.com/submissions/detail/286347847/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286347847/</a>)</p>
-<h3 id="Solution-4：Use-Vector-instead-of-Hash-Table"><a href="#Solution-4：Use-Vector-instead-of-Hash-Table" class="headerlink" title="Solution-4：Use Vector instead of Hash Table"></a>Solution-4：Use Vector instead of Hash Table</h3><p>1.我们用一个固定长度为26的数组即可实现Solution-3的思路。<br>2.在数组中访问赋值的时间复杂度是O(1)。<br>而理论上哈希表的访问的时间复杂度也是O(1)。<br>参考：<br>Hash tables do some complex math in that one operation to get to the value that you want.<br>Simulating a hash table with an array is quicker because that<br>one operation for a lookup is only an offset from the beginning of the array(since you already have the index)<br>vs more difficult mathy stuff with the hash table.</p>
-<p>时间复杂度：O(n + 26)<br>空间复杂度：O(26)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/286348853/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286348853/</a>)</p>
-<p>4.进阶：如果输入字符串包含 unicode 字符怎么办？你能否调整你的解法来应对这种情况？<br>解答：使用哈希表而不是固定大小的计数器。想象一下，分配一个大的数组来适应整个 Unicode 字符范围，这个范围可能超过 100万。<br>哈希表是一种更通用的解决方案，可以适应任何字符范围。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/16/2019-12-16-Leetcode-242-Valid%20Anagram/" data-id="ck4i3sh0z000sk0t758yv56vo" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2019-12-16-Leetcode-426-Partition Equal Subset Sum" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/12/16/2019-12-16-Leetcode-426-Partition%20Equal%20Subset%20Sum/" class="article-date">
-  <time datetime="2019-12-16T05:49:07.443Z" itemprop="datePublished">2019-12-16</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/16/2019-12-16-Leetcode-426-Partition%20Equal%20Subset%20Sum/">416.Partition Equal Subset Sum</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/partition-equal-subset-sum/" target="_blank" rel="noopener">416.Partition Equal Subset Sum</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个长度为n的整数数组。n大于0。<br>其中所有的元素取值都是正整数。<br>【输出】<br>判断这个数组中是否能分成两个数组，它们的和相等。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [1, 5, 11, 5]<br>Output: true<br>Explanation: The array can be partitioned as [1, 5, 5] and [11].</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.n: 大于0<br>2.nums[i]: 大于0</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：0-1-Knapsack"><a href="#Solution-1：0-1-Knapsack" class="headerlink" title="Solution-1：0/1 Knapsack"></a>Solution-1：0/1 Knapsack</h3><p>1.实质上：本题目就是求nums数组的一个子数组，使得其和为nums数组的和的一半。</p>
-<p>2.求出nums数组的和sum。若sum是奇数，则直接return false。</p>
-<p>3.对于任意一个nums[i]，我们可以选择它，也可能不选择它。<br>要是选择的话最多只能使用一次。然后看能不能凑到target（sum / 2）。</p>
-<p>4.0/1 knapsack问题<br>i: [0, n - 1]<br>j: [0, target]<br>dp数组用bool类型即可。若为true，则说明可以凑成target。<br>dp[i][j]代表：从[0, i]区间任意选择一些元素（每个元素只能选一次），使得和为j。<br>则答案就是：dp[0][target] || dp[1][target] … || dp[n - 2][target] || dp[n - 1][target]</p>
-<p>5.边界值：<br>不管i为多少，若j为0，则dp[i][0] = true；<br>若i为0，当j == nums[0]的时候，dp[0][j] = true；<br>状态转移方程：dp[i][j] = (dp[i - 1][j]) &amp;&amp; (dp[i - 1][j - nums[i]])<br>左边代表：不取nums[i]<br>右边代表：选择nums[i]。当nums[i] &gt; j的时候，右边为false。</p>
-<p>时间复杂度：O(n * c) //c代表nums数组累加和的一半<br>空间复杂度：O(n * c)</p>
-<p>6.Code(<a href="https://leetcode.com/submissions/detail/286289354/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286289354/</a>)</p>
-<p>7.进一步，压缩空间复杂度。可以发现dp[i][j]只和dp[i - 1][…]有关。所以把二维数组压缩为一维。<br>dp[j] = dp[j] || dp[j - nums[i]];<br>从二维的方程可以看出，当前位置的值依赖于两个值：这个位置上方的，这个位置左上方的。<br>如果压缩为一维的时候，继续让j从小到大遍历的话，这样当需要‘左上方’的时候，这个值一定是被覆盖过的。<br>所以需要让j从大到小遍历。</p>
-<p>时间复杂度：O(n * c) //c代表nums数组累加和的一半<br>空间复杂度：O(c)</p>
-<p>8.Code(<a href="https://leetcode.com/submissions/detail/286325812/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286325812/</a>)</p>
-<h3 id="Solution-2：DFS"><a href="#Solution-2：DFS" class="headerlink" title="Solution-2：DFS"></a>Solution-2：DFS</h3><p>1.将数组由大到小排序。<br>2.return dfs(nums, sum / 2, 0);<br>3.在递归中：<br>首先判断index是否在[0, n - 1]范围内，若超过该范围，return false。<br>然后判断nums[index] == target，如果满足，则return true。<br>接着判断nums[index] &gt; target，如果满足，则return false。<br>最后递归调用左子树和右子树即可，返回它们的返回值的or运算结果。<br>左子树：dfs(nums, target - nums[index], index + 1);<br>右子树：dfs(nums, target, index + 1);</p>
-<p>4.如果先调用右子树的话，会TLE。</p>
-<p>5.Code(<a href="https://leetcode.com/submissions/detail/286330983/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286330983/</a>)<br>结果发现这个提交beat 100%。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/16/2019-12-16-Leetcode-426-Partition%20Equal%20Subset%20Sum/" data-id="ck4i3sh10000tk0t7cc1sbj6v" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2019-12-16-Leetcode-645-Set Mismatch" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/12/16/2019-12-16-Leetcode-645-Set%20Mismatch/" class="article-date">
-  <time datetime="2019-12-16T02:20:17.020Z" itemprop="datePublished">2019-12-16</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/16/2019-12-16-Leetcode-645-Set%20Mismatch/">645.Set Mismatch</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/set-mismatch/" target="_blank" rel="noopener">645.Set Mismatch</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个长度为n的整数数组。<br>其中所有的元素取值都是范围[1, n]的。<br>但其中某个元素出现了两次，导致另外一个元素没有出现。<br>【输出】<br>找出这两个元素：出现两次的在前，没有出现的在后。<br>以数组的形式返回。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: nums = [1,2,2,4]<br>Output: [2,3]</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.n: [2, 10000]<br>2.nums数组无序。</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：做标记"><a href="#Solution-1：做标记" class="headerlink" title="Solution-1：做标记"></a>Solution-1：做标记</h3><p>1.根据【Leetcode-442-Find All Duplicates in an Array】的启示：<br>对于一个长度为n的数组nums，其所有nums[i]都在[1, n]区间内，我们可以通过将nums[nums[i] - 1]置为负数（相反数）的方法，找出所有出现2次的元素。<br>本题目中保证了只有一个元素出现了两次，所以找到它后break即可。O(n)的time complexity。</p>
-<p>2.同时根据【Leetcode-268-Missing Number】的启示：<br>对于一个长度为n的数组nums，其所有nums[i]都在[0, n]区间内，且不重复。<br>我们可以找到那个缺失的元素x。<br>通过：将0, 1, 2, 3, 4, …, n, nums[0], nums[1], nums[2], …, nums[n - 1]这(n + 1 + n)个元素都异或起来。<br>缺失元素x就是这个异或的值。O(n)的time complexity。</p>
-<p>3.对于本题目，长度为n的nums数组，所有元素取值范围都在[1, n]。<br>某个元素a出现了两次，某个元素b出现了0次。即：[1, 2, 3, 4, …, a, a, …, b - 1, b + 1, …, n]<br>根据1，可以找到a的值。存在res[0]中。res[0] = a;<br>根据2，将nums中所有的元素和[1, n]中所有的元素异或起来的值存到res[1]中。res[1] = a ^ b;<br>然后再将res[1] = res[1] ^ res[0]即可，即找到了b的值。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/286256728/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286256728/</a>)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/16/2019-12-16-Leetcode-645-Set%20Mismatch/" data-id="ck4i3sh11000vk0t7a4761zsy" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/17/2019-12-17-Leetcode-54-Spiral%20Matrix/" data-id="ck4i8tlxd000w60t7gv40ggax" class="article-share-link">Share</a>
       
       
     </footer>
@@ -647,7 +669,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -679,23 +701,23 @@
       <ul>
         
           <li>
+            <a href="/2019/12/23/2019-12-23-Leetcode-145-Binary%20Tree%20Postorder%20Traversal/">【二叉树专项】145.Binary Tree Postorder Traversal</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/23/2019-12-23-Leetcode-094-Binary%20Tree%20Inorder%20Traversal/">【二叉树专项】094.Binary Tree Inorder Traversal</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/23/2019-12-23-Leetcode-144-Binary%20Tree%20Preorder%20Traversal/">【二叉树专项】144.Binary Tree Preorder Traversal</a>
+          </li>
+        
+          <li>
             <a href="/2019/12/23/2019-12-23-Leetcode-210-Course%20Schedule%20II/">210.Course Schedule II</a>
           </li>
         
           <li>
             <a href="/2019/12/23/2019-12-23-Leetcode-207-Course%20Schedule/">207.Course Schedule</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/21/2019-12-21-Leetcode-088-Merge%20Sorted%20Array/">88.Merge Sorted Array</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/21/2019-12-21-Leetcode-283-Move%20Zeroes/">283.Move Zeroes</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/21/2019-12-21-Leetcode-448-Find%20All%20Numbers%20Disappeared%20in%20an%20Array/">448.Find All Numbers Disappeared in an Array</a>
           </li>
         
       </ul>
