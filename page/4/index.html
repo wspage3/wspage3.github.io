@@ -61,6 +61,55 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-2019-12-15-Leetcode-268-Missing Number" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/15/2019-12-15-Leetcode-268-Missing%20Number/" class="article-date">
+  <time datetime="2019-12-15T10:27:54.308Z" itemprop="datePublished">2019-12-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/15/2019-12-15-Leetcode-268-Missing%20Number/">268.Missing Number</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/missing-number/" target="_blank" rel="noopener">268.Missing Number</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个长度为n的整数数组。<br>其中所有的元素取值都是区间[0, n]的，且没有重复的元素。<br>显然，[0, n]一共有(n + 1)个元素，而nums中只有n个，找出这个缺失的元素。<br>【输出】<br>找出这个缺失的数字。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [9,6,4,2,3,5,7,0,1]<br>Output: 8</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.空间复杂度要求为O(1)。<br>2.时间复杂度要求O(n)。</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Accumulate"><a href="#Solution-1：Accumulate" class="headerlink" title="Solution-1：Accumulate"></a>Solution-1：Accumulate</h3><p>1.[0, n]中所有数字的和为[1, n] = n * (n + 1) / 2</p>
+<p>2.我们遍历nums中的数字，累加一个和。<br>然后用上面的公式计算出来的和减去nums中累加的和，答案就是缺失的元素。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/285827066/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285827066/</a>)<br>Code(<a href="https://leetcode.com/submissions/detail/285849852/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285849852/</a>)</p>
+<p>3.缺点：accumulate可以会导致整数溢出，存在局限。</p>
+<h3 id="Solution-2：XOR"><a href="#Solution-2：XOR" class="headerlink" title="Solution-2：XOR"></a>Solution-2：XOR</h3><p>1.任意一个数 异或 它自己 == 0<br>  任意一个数 异或 0     == 它自己<br>  异或满足交换律，结合率</p>
+<p>2.nums中有n个数字，且都在范围[0, n]内，且都不重复。<br>我们把nums中所有的数字都异或起来。记为a。<br>然后把[0, n]所有的数字都异或起来。记为b。<br>此时所有参与异或的数字一共有 n + (n + 1)个。<br>假设missing number为x。则上述n + (n + 1)个数字只有一个x，其它数字都是出现了两次。<br>则 a ^ b == x。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/285850682/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285850682/</a>)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/15/2019-12-15-Leetcode-268-Missing%20Number/" data-id="ck4iky6hb000q28t75vqx7jnd" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-2019-12-13-Leetcode-287-Find the Duplicate Number" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/12/13/2019-12-13-Leetcode-287-Find%20the%20Duplicate%20Number/" class="article-date">
@@ -115,7 +164,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/13/2019-12-13-Leetcode-287-Find%20the%20Duplicate%20Number/" data-id="ck4igkeh2000mb4t7926k6how" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/13/2019-12-13-Leetcode-287-Find%20the%20Duplicate%20Number/" data-id="ck4iky6h9000m28t76f6bb5ad" class="article-share-link">Share</a>
       
       
     </footer>
@@ -160,7 +209,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/13/2019-12-13-Leetcode-278-First%20Bad%20Version/" data-id="ck4igkeh2000lb4t7goad2yg4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/13/2019-12-13-Leetcode-278-First%20Bad%20Version/" data-id="ck4iky6h8000l28t71kgzcp9e" class="article-share-link">Share</a>
       
       
     </footer>
@@ -224,7 +273,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/13/2019-12-13-Leetcode-704-Binary%20Search/" data-id="ck4igkeh4000qb4t7a28x0qx0" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/13/2019-12-13-Leetcode-704-Binary%20Search/" data-id="ck4iky6h9000n28t7glgq9n9x" class="article-share-link">Share</a>
       
       
     </footer>
@@ -273,7 +322,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/12/2019-12-13-Leetcode-34-Find%20First%20and%20Last%20Position%20of%20Element%20in%20Sorted%20Array/" data-id="ck4igkeh3000nb4t7brtyfm3a" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/12/2019-12-13-Leetcode-34-Find%20First%20and%20Last%20Position%20of%20Element%20in%20Sorted%20Array/" data-id="ck4iky6ha000o28t73wcwajyw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -321,7 +370,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/12/2019-12-12-Leetcode-20-Valid%20Parentheses/" data-id="ck4igkeh1000jb4t7cddwckcm" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/12/2019-12-12-Leetcode-20-Valid%20Parentheses/" data-id="ck4iky6h6000h28t7c6ahfkg3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -367,7 +416,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/12/2019-12-12-Leetcode-22-Generate%20Parentheses/" data-id="ck4igkeh1000kb4t7gdsy4pr9" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/12/2019-12-12-Leetcode-22-Generate%20Parentheses/" data-id="ck4iky6h7000i28t73koe8puf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -413,7 +462,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/12/2019-12-12-Leetcode-17-Letter%20Combinations%20of%20a%20Phone%20Number/" data-id="ck4igkeh0000ib4t78iop8pev" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/12/2019-12-12-Leetcode-17-Letter%20Combinations%20of%20a%20Phone%20Number/" data-id="ck4iky6h8000k28t74zznfszh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -459,7 +508,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/11/2019-12-11-Leetcode-48-Rotate%20Image/" data-id="ck4igkeh0000hb4t7cvk4fbrg" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/11/2019-12-11-Leetcode-48-Rotate%20Image/" data-id="ck4iky6h4000g28t7cidu91gk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -506,55 +555,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/11/2019-12-11-Leetcode-153-Find%20Minimum%20in%20Rotated%20Sorted%20Array/" data-id="ck4igkegx000fb4t7f2dbbqwz" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2019-12-11-Leetcode-81-Search in Rotated Sorted Array II" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/12/11/2019-12-11-Leetcode-81-Search%20in%20Rotated%20Sorted%20Array%20II/" class="article-date">
-  <time datetime="2019-12-11T01:06:43.935Z" itemprop="datePublished">2019-12-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/11/2019-12-11-Leetcode-81-Search%20in%20Rotated%20Sorted%20Array%20II/">81. Search in Rotated Sorted Array II</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/search-in-rotated-sorted-array-ii/" target="_blank" rel="noopener">81. Search in Rotated Sorted Array II</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组nums；<br>该数组原本是升序的，结果在某个支点处旋转了一次，如：<br>i.e., [0,0,1,2,2,5,6] might become [2,5,6,0,0,1,2]<br>给定一个整数target；<br>判断nums中是否包含该target，如果是，返回ture；否则，返回false。<br>假设数组中存在相同的数字。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: nums = [2,5,6,0,0,1,2], target = 0<br>Output: true</p>
-<p>Input: nums = [2,5,6,0,0,1,2], target = 3<br>Output: false</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n: 当n为0的时候，直接返回false；</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>1.常规思路：从前到后遍历一遍nums，如果找到target则return true。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<h3 id="Solution-2：Binary-Search"><a href="#Solution-2：Binary-Search" class="headerlink" title="Solution-2：Binary Search"></a>Solution-2：Binary Search</h3><p>1.参考leetcode-33的二分解法，只不过本题目中input可以存在相同的数字。<br>上题中核心思路就是：通过判断nums[mid]和target是否在同一侧，来确定比较器num。<br>前提是：右侧所有的元素都比nums[0]要小。<br>所以可以通过(nums[mid] &lt; nums[0]) == (target &lt; nums[0])来判断。<br>若其在同一侧，则使用nums[mid]作为比较器即可。<br>若其不在同一侧，则对应的将left右移或者right左移。继续考察下一次……</p>
-<p>2.而本题目：右侧所有元素 &lt;= nums[0]<br>假设把其所有和nums[0]相等的元素，都去掉的话，并不影响查找target；<br>这样的话，右边所有的数字都小于nums[0]了，继续使用leetcode-33的二分解法即可。</p>
-<p>3.观察：[0,0,1,2,2,5,6]<br>经过rotate后，可能存在以下几种不同情况：<br>[0,1,2,2,5,6,   0]<br>[1,2,2,5,6,   0,0]<br>[2,2,5,6,   0,0,1]<br>[2,5,6,   0,0,1,2]<br>[5,6,   0,0,1,2,2]<br>[6,   0,0,1,2,2,5]</p>
-<p>时间复杂度：平均O(log n)   最坏O(n)<br>空间复杂度：O(1)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/285139175/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285139175/</a>)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/11/2019-12-11-Leetcode-81-Search%20in%20Rotated%20Sorted%20Array%20II/" data-id="ck4igkegx000gb4t78gpu16x2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/11/2019-12-11-Leetcode-153-Find%20Minimum%20in%20Rotated%20Sorted%20Array/" data-id="ck4iky6h4000f28t7eguxe4ed" class="article-share-link">Share</a>
       
       
     </footer>
@@ -600,6 +601,10 @@
       <ul>
         
           <li>
+            <a href="/2019/12/23/2019-12-23-Leetcode-100-Same%20Tree/">【二叉树专项】100.Same Tree</a>
+          </li>
+        
+          <li>
             <a href="/2019/12/23/2019-12-23-Leetcode-103-Binary%20Tree%20Zigzag%20Level%20Order%20Traversal/">【二叉树专项】103.Binary Tree Zigzag Level Order Traversal</a>
           </li>
         
@@ -613,10 +618,6 @@
         
           <li>
             <a href="/2019/12/23/2019-12-23-Leetcode-145-Binary%20Tree%20Postorder%20Traversal/">【二叉树专项】145.Binary Tree Postorder Traversal</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/23/2019-12-23-Leetcode-094-Binary%20Tree%20Inorder%20Traversal/">【二叉树专项】094.Binary Tree Inorder Traversal</a>
           </li>
         
       </ul>
