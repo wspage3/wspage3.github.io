@@ -61,6 +61,306 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-2019-12-16-Leetcode-242-Valid Anagram" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/16/2019-12-16-Leetcode-242-Valid%20Anagram/" class="article-date">
+  <time datetime="2019-12-16T13:07:31.626Z" itemprop="datePublished">2019-12-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/16/2019-12-16-Leetcode-242-Valid%20Anagram/">242.Valid Anagram</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/valid-anagram/" target="_blank" rel="noopener">242.Valid Anagram</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定两个字符串s和t。<br>【输出】<br>判断这两个字符串是否为：“字母异位词”<br>所谓“字母异位词”，就是两个单词，组成它们的字母是完全一样的，而不关心其排列顺序。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: s = “anagram”, t = “nagaram”<br>Output: true</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.lenS不等于lenT的时候，直接return false。<br>2.s和t中仅包含小写字母。<br>3.如果输入包含unicode字符的话，该程序的扩展性如何。</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Sort"><a href="#Solution-1：Sort" class="headerlink" title="Solution-1：Sort"></a>Solution-1：Sort</h3><p>1.将两个字符串都排序，然后直接比较字符串是否相等即可。<br>2.在C++中：<br>sort(s.begin(), s.end());<br>return s == t;</p>
+<p>时间复杂度：O(n * log n) //n代表字符串的长度<br>空间复杂度：O(1)</p>
+<p>6.Code(<a href="https://leetcode.com/submissions/detail/286349008/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286349008/</a>)</p>
+<h3 id="Solution-2：Hash-Table"><a href="#Solution-2：Hash-Table" class="headerlink" title="Solution-2：Hash Table"></a>Solution-2：Hash Table</h3><p>1.用两个哈希表mapS和mapT，来记录s和t中所有字母出现的次数。<br>2.然后遍历26个小写字母：<br>对于任意一个小写字母：<br>首先，判断其是否在mapS和mapT中同时出现或者同时不出现。<br>然后，判断其出现的频率是否相等。<br>如果上述两点有不满足的，直接返回false即可。<br>3.在C++中，判断其是否出现在unordered_map中可以使用count()，出现返回1，否则返回0。<br>判断其出现的次数的话，直接比较其key对应的value即可。</p>
+<p>时间复杂度：O(n + 26)<br>空间复杂度：O(26)</p>
+<p>4.Code(<a href="https://leetcode.com/submissions/detail/286336480/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286336480/</a>)</p>
+<h3 id="Solution-3：Hash-Table-with-Optimization"><a href="#Solution-3：Hash-Table-with-Optimization" class="headerlink" title="Solution-3：Hash Table with Optimization"></a>Solution-3：Hash Table with Optimization</h3><p>1.我们用一个哈希表即可。<br>2.首先判断lenS, lenT是否相等，不相等的话直接return false。<br>3.遍历n次，每次：<br>s[i]对应的value加一；<br>t[i]对应的value减一；<br>如果遍历n次后，且两个字符串由相同的字母组成的话，那么所有出现的字符的次数都是0了。<br>4.遍历整个哈希表，若其个数非0，则return false。</p>
+<p>时间复杂度：O(n + 26)<br>空间复杂度：O(26)</p>
+<p>4.Code(<a href="https://leetcode.com/submissions/detail/286347847/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286347847/</a>)</p>
+<h3 id="Solution-4：Use-Vector-instead-of-Hash-Table"><a href="#Solution-4：Use-Vector-instead-of-Hash-Table" class="headerlink" title="Solution-4：Use Vector instead of Hash Table"></a>Solution-4：Use Vector instead of Hash Table</h3><p>1.我们用一个固定长度为26的数组即可实现Solution-3的思路。<br>2.在数组中访问赋值的时间复杂度是O(1)。<br>而理论上哈希表的访问的时间复杂度也是O(1)。<br>参考：<br>Hash tables do some complex math in that one operation to get to the value that you want.<br>Simulating a hash table with an array is quicker because that<br>one operation for a lookup is only an offset from the beginning of the array(since you already have the index)<br>vs more difficult mathy stuff with the hash table.</p>
+<p>时间复杂度：O(n + 26)<br>空间复杂度：O(26)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/286348853/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286348853/</a>)</p>
+<p>4.进阶：如果输入字符串包含 unicode 字符怎么办？你能否调整你的解法来应对这种情况？<br>解答：使用哈希表而不是固定大小的计数器。想象一下，分配一个大的数组来适应整个 Unicode 字符范围，这个范围可能超过 100万。<br>哈希表是一种更通用的解决方案，可以适应任何字符范围。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/16/2019-12-16-Leetcode-242-Valid%20Anagram/" data-id="ck4jlxdpm000tmgt7a3s378fj" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2019-12-16-Leetcode-426-Partition Equal Subset Sum" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/16/2019-12-16-Leetcode-426-Partition%20Equal%20Subset%20Sum/" class="article-date">
+  <time datetime="2019-12-16T05:49:07.443Z" itemprop="datePublished">2019-12-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/16/2019-12-16-Leetcode-426-Partition%20Equal%20Subset%20Sum/">416.Partition Equal Subset Sum</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/partition-equal-subset-sum/" target="_blank" rel="noopener">416.Partition Equal Subset Sum</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个长度为n的整数数组。n大于0。<br>其中所有的元素取值都是正整数。<br>【输出】<br>判断这个数组中是否能分成两个数组，它们的和相等。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [1, 5, 11, 5]<br>Output: true<br>Explanation: The array can be partitioned as [1, 5, 5] and [11].</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.n: 大于0<br>2.nums[i]: 大于0</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：0-1-Knapsack"><a href="#Solution-1：0-1-Knapsack" class="headerlink" title="Solution-1：0/1 Knapsack"></a>Solution-1：0/1 Knapsack</h3><p>1.实质上：本题目就是求nums数组的一个子数组，使得其和为nums数组的和的一半。</p>
+<p>2.求出nums数组的和sum。若sum是奇数，则直接return false。</p>
+<p>3.对于任意一个nums[i]，我们可以选择它，也可能不选择它。<br>要是选择的话最多只能使用一次。然后看能不能凑到target（sum / 2）。</p>
+<p>4.0/1 knapsack问题<br>i: [0, n - 1]<br>j: [0, target]<br>dp数组用bool类型即可。若为true，则说明可以凑成target。<br>dp[i][j]代表：从[0, i]区间任意选择一些元素（每个元素只能选一次），使得和为j。<br>则答案就是：dp[0][target] || dp[1][target] … || dp[n - 2][target] || dp[n - 1][target]</p>
+<p>5.边界值：<br>不管i为多少，若j为0，则dp[i][0] = true；<br>若i为0，当j == nums[0]的时候，dp[0][j] = true；<br>状态转移方程：dp[i][j] = (dp[i - 1][j]) &amp;&amp; (dp[i - 1][j - nums[i]])<br>左边代表：不取nums[i]<br>右边代表：选择nums[i]。当nums[i] &gt; j的时候，右边为false。</p>
+<p>时间复杂度：O(n * c) //c代表nums数组累加和的一半<br>空间复杂度：O(n * c)</p>
+<p>6.Code(<a href="https://leetcode.com/submissions/detail/286289354/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286289354/</a>)</p>
+<p>7.进一步，压缩空间复杂度。可以发现dp[i][j]只和dp[i - 1][…]有关。所以把二维数组压缩为一维。<br>dp[j] = dp[j] || dp[j - nums[i]];<br>从二维的方程可以看出，当前位置的值依赖于两个值：这个位置上方的，这个位置左上方的。<br>如果压缩为一维的时候，继续让j从小到大遍历的话，这样当需要‘左上方’的时候，这个值一定是被覆盖过的。<br>所以需要让j从大到小遍历。</p>
+<p>时间复杂度：O(n * c) //c代表nums数组累加和的一半<br>空间复杂度：O(c)</p>
+<p>8.Code(<a href="https://leetcode.com/submissions/detail/286325812/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286325812/</a>)</p>
+<h3 id="Solution-2：DFS"><a href="#Solution-2：DFS" class="headerlink" title="Solution-2：DFS"></a>Solution-2：DFS</h3><p>1.将数组由大到小排序。<br>2.return dfs(nums, sum / 2, 0);<br>3.在递归中：<br>首先判断index是否在[0, n - 1]范围内，若超过该范围，return false。<br>然后判断nums[index] == target，如果满足，则return true。<br>接着判断nums[index] &gt; target，如果满足，则return false。<br>最后递归调用左子树和右子树即可，返回它们的返回值的or运算结果。<br>左子树：dfs(nums, target - nums[index], index + 1);<br>右子树：dfs(nums, target, index + 1);</p>
+<p>4.如果先调用右子树的话，会TLE。</p>
+<p>5.Code(<a href="https://leetcode.com/submissions/detail/286330983/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286330983/</a>)<br>结果发现这个提交beat 100%。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/16/2019-12-16-Leetcode-426-Partition%20Equal%20Subset%20Sum/" data-id="ck4jlxdpm000umgt7e12bgk5k" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2019-12-16-Leetcode-645-Set Mismatch" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/16/2019-12-16-Leetcode-645-Set%20Mismatch/" class="article-date">
+  <time datetime="2019-12-16T02:20:17.020Z" itemprop="datePublished">2019-12-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/16/2019-12-16-Leetcode-645-Set%20Mismatch/">645.Set Mismatch</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/set-mismatch/" target="_blank" rel="noopener">645.Set Mismatch</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个长度为n的整数数组。<br>其中所有的元素取值都是范围[1, n]的。<br>但其中某个元素出现了两次，导致另外一个元素没有出现。<br>【输出】<br>找出这两个元素：出现两次的在前，没有出现的在后。<br>以数组的形式返回。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: nums = [1,2,2,4]<br>Output: [2,3]</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.n: [2, 10000]<br>2.nums数组无序。</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：做标记"><a href="#Solution-1：做标记" class="headerlink" title="Solution-1：做标记"></a>Solution-1：做标记</h3><p>1.根据【Leetcode-442-Find All Duplicates in an Array】的启示：<br>对于一个长度为n的数组nums，其所有nums[i]都在[1, n]区间内，我们可以通过将nums[nums[i] - 1]置为负数（相反数）的方法，找出所有出现2次的元素。<br>本题目中保证了只有一个元素出现了两次，所以找到它后break即可。O(n)的time complexity。</p>
+<p>2.同时根据【Leetcode-268-Missing Number】的启示：<br>对于一个长度为n的数组nums，其所有nums[i]都在[0, n]区间内，且不重复。<br>我们可以找到那个缺失的元素x。<br>通过：将0, 1, 2, 3, 4, …, n, nums[0], nums[1], nums[2], …, nums[n - 1]这(n + 1 + n)个元素都异或起来。<br>缺失元素x就是这个异或的值。O(n)的time complexity。</p>
+<p>3.对于本题目，长度为n的nums数组，所有元素取值范围都在[1, n]。<br>某个元素a出现了两次，某个元素b出现了0次。即：[1, 2, 3, 4, …, a, a, …, b - 1, b + 1, …, n]<br>根据1，可以找到a的值。存在res[0]中。res[0] = a;<br>根据2，将nums中所有的元素和[1, n]中所有的元素异或起来的值存到res[1]中。res[1] = a ^ b;<br>然后再将res[1] = res[1] ^ res[0]即可，即找到了b的值。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/286256728/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286256728/</a>)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/16/2019-12-16-Leetcode-645-Set%20Mismatch/" data-id="ck4jlxdpn000vmgt7gsz6hy20" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2019-12-16-Leetcode-442-Find All Duplicates in an Array" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/16/2019-12-16-Leetcode-442-Find%20All%20Duplicates%20in%20an%20Array/" class="article-date">
+  <time datetime="2019-12-16T02:07:31.209Z" itemprop="datePublished">2019-12-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/16/2019-12-16-Leetcode-442-Find%20All%20Duplicates%20in%20an%20Array/">442.Find All Duplicate in an Array</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/find-all-duplicates-in-an-array/" target="_blank" rel="noopener">442.Find All Duplicate in an Array</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个长度为n的整数数组。<br>其中所有的元素取值都是范围[1, n]的。<br>但其中有些元素出现了两次，其它的元素出现了一次。<br>【输出】<br>找出所有出现两次的元素。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input:<br>[4,3,2,7,8,2,3,1]<br>Output:<br>[2,3]</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.n &lt;= 1, 不存在题目中的情况。考虑n &gt;= 2的情况。<br>2.要求O(1)的space。<br>3.要求O(n)的time。</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：做标记"><a href="#Solution-1：做标记" class="headerlink" title="Solution-1：做标记"></a>Solution-1：做标记</h3><p>1.由于nums数组中的元素都在范围[1, n]中。<br>所以对于任意nums[i] - 1，都可以作为nums的index。</p>
+<p>2.我们对于所有i: [0, n - 1]，将nums[i] - 1作为index。<br>将nums[index]的值替换为其值的相反数。</p>
+<p>3.假设某个数字x出现了两次，那么(x - 1)作为nums的index，将同样会出现两次。<br>第一次：将nums[x - 1]的值由正数变换为负数。<br>第二次：发现nums[x - 1]已经是负数了。说明：(x - 1)这个索引在之前已经出现过了。即：x是一个答案。</p>
+<p>4.由于将nums[index]会变换为其相反数，所以为保证index的合法性，可以：index = abs(nums[i]) - 1;</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/286253289/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286253289/</a>)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/16/2019-12-16-Leetcode-442-Find%20All%20Duplicates%20in%20an%20Array/" data-id="ck4jlxdpl000smgt732i05e28" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2019-12-15-Leetcode-75-Sort Colors" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/15/2019-12-15-Leetcode-75-Sort%20Colors/" class="article-date">
+  <time datetime="2019-12-15T11:38:22.814Z" itemprop="datePublished">2019-12-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/15/2019-12-15-Leetcode-75-Sort%20Colors/">75.Sort Colors</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/sort-colors/" target="_blank" rel="noopener">75.Sort Colors</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个长度为n的整数数组。<br>其中所有的元素取值都是集合[0, 1, 2]的。<br>【输出】<br>将这个数组进行排序，且按照0 -&gt; 1 -&gt; 2这个顺序从前到后排列。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [2,0,2,1,1,0]<br>Output: [0,0,1,1,2,2]</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.n &lt;= 1, 直接return即可。<br>2.要求就地排序，即空间复杂度为O(1)。<br>3.一个直接的想法是：统计0，1，2的个数，然后再重写nums数组。<br>显然这样需要遍历两次nums数组。<br>4.找一个one-pass的方法。</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Three-Pointers"><a href="#Solution-1：Three-Pointers" class="headerlink" title="Solution-1：Three Pointers"></a>Solution-1：Three Pointers</h3><p>1.用三个指针p0，cur，p2。<br>初始化：<br>p0 = 0<br>cur = 0<br>p2 = n - 1<br>分别代表：<br>p0: 元素’0’可能出现的位置，p0之前的位置上都已经全部放上’0’了。<br>cur: 当前考察的位置。<br>p2: 元素’2’可能出现的位置，p2之后的位置上都已经全部放上’2’了。</p>
+<p>2.循环开始：cur从0开始。<br>循环结束：cur == p2是最后一次循环。</p>
+<p>3.过程：<br>如果当前cur位置上的元素是’2’的话，将其与p2位置上的元素交换。p2–；cur保持不动，继续判断交换过来的这个值。<br>如果当前cur位置上的元素是’0’的话，将其与p0位置上的元素交换。p0++；cur向后移动一位（因为当前和p0交换过来的这个值，一定是0或者1，不可能是2）.<br>    如果是0的话，不需要重新考虑。<br>    如果是1的话，也不需要重新考虑。<br>如果当前cur位置上的元素是’1’的话，cur++即可。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/286030421/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286030421/</a>)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/15/2019-12-15-Leetcode-75-Sort%20Colors/" data-id="ck4jlxdpl000rmgt7abtm1en7" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2019-12-15-Leetcode-155-Min Stack" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/15/2019-12-15-Leetcode-155-Min%20Stack/" class="article-date">
+  <time datetime="2019-12-15T10:45:28.500Z" itemprop="datePublished">2019-12-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/15/2019-12-15-Leetcode-155-Min%20Stack/">155.Min Stack</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/min-stack/" target="_blank" rel="noopener">155.Min Stack</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>设计一个数据结构”最小栈”，具有以下特点：<br>1.push(x) – Push element x onto stack.<br>2.pop() – Removes the element on top of the stack.<br>3.top() – Get the top element.<br>4.getMin() – Retrieve the minimum element in the stack.<br>其中核心功能是第四点，因为如果仅考虑前三点的话，就是常规的栈stack。<br>getMin()要求时间复杂度为O(1)。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>MinStack minStack = new MinStack();<br>minStack.push(-2);<br>minStack.push(0);<br>minStack.push(-3);<br>minStack.getMin();   –&gt; Returns -3.<br>minStack.pop();<br>minStack.top();      –&gt; Returns 0.<br>minStack.getMin();   –&gt; Returns -2.</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.getMin()要求时间复杂度为O(1)。</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><p>思路：看到题目，第一想法是：维护一个stack s和一个最小值m即可。<br>当有更小的值入栈后，更新m即可。<br>但这样有一个问题：如果我当前pop的就是最小值m，那怎么办。<br>因为没有保存第二小的值，所以在pop掉m后，m的值就无法追溯了。</p>
+<h3 id="Solution-1：Two-Stacks"><a href="#Solution-1：Two-Stacks" class="headerlink" title="Solution-1：Two Stacks"></a>Solution-1：Two Stacks</h3><p>1.用两个stack，一个s保存数据，一个m保存最小值。<br>当有更小的值入栈后，将这个值同时加入到栈m中。<br>则当前最小的值就是m的栈顶元素。<br>当pop最小元素的时候，将其从s和m中同时pop掉。</p>
+<p>空间复杂度：O(n)</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/285879960/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285879960/</a>)</p>
+<h3 id="Solution-2：One-Stack"><a href="#Solution-2：One-Stack" class="headerlink" title="Solution-2：One Stack"></a>Solution-2：One Stack</h3><p>1.Solution-1中，我们当遇到更小的值时，都将其保存到m栈中。<br>这样栈顶的就是当前s栈中最小的值，若其被pop出去，同时带走m栈顶的元素。<br>此时m栈顶的元素又是s栈中的最小值了。</p>
+<p>2.现在我们用int minValue来代表当前栈中最小的值。<br>s仍然代表着数据栈。<br>当出现了更小的值时：<br>a.保存当前minValue：将其先push到s中。<br>b.更新minValue<br>c.再将当前minValue push到s中。</p>
+<p>3.则任意时刻，minValue都是代表着当前栈中最小的元素值。</p>
+<p>4.当pop的值是minValue的时候，也就是s.top() == minValue，<br>我们从s中pop一个元素，这个元素就是minValue。<br>同时将此时s.top()赋值给minValue。因为这个元素是“前一个最小值”。<br>同时将其从s中pop出去。</p>
+<p>空间复杂度：O(n)</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/285881659/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285881659/</a>)</p>
+<h3 id="Solution-3：One-Stack"><a href="#Solution-3：One-Stack" class="headerlink" title="Solution-3：One Stack"></a>Solution-3：One Stack</h3><p>1.现在我们将当前元素cur和minValue的差值存入栈s中。</p>
+<p>2.push(x)：<br>当栈中没有元素的时候，将0存入s中，minValue说就是x；<br>当栈中已有元素的时候，将x - minValue存入s中，若该值为负，说明当前x是更小的值。将minValue更新为x。</p>
+<p>3.getMin()<br>任意时刻，minValue的值就是当前栈s中最小元素的值。</p>
+<p>4.top()<br>由于s中存入的已经不是之前的数据了，而是存放的差值。<br>当s栈顶元素小于0的时候，说明：这个元素是当前栈中最小的值minValue。return minValue即可。<br>当s栈顶元素不小于0的时候，说明，这个元素是一个差值，其值 = s.top() + minValue。</p>
+<p>5.pop()<br>当s栈顶元素小于0的时候，说明：这个元素是当前栈中最小的值minValue。<br>  需要更新minValue = minValue - s.top()；然后再从s中把其pop。<br>当s栈顶元素不小于0的时候，说明，这个元素是一个差值，直接pop即可。</p>
+<p>6.缺点1：由于差值可能会导致整数溢出，所以用minValue用long long。<br>缺点2：由于放入栈中的值是一个差值，而非原本的数据本身，即有修改数据的嫌疑。需要确定这种情况再用这个方法。</p>
+<p>空间复杂度：O(1)</p>
+<p>7.Code(<a href="https://leetcode.com/submissions/detail/285885660/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285885660/</a>)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/15/2019-12-15-Leetcode-155-Min%20Stack/" data-id="ck4jlxdpj000pmgt711j5b7ug" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-2019-12-15-Leetcode-268-Missing Number" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/12/15/2019-12-15-Leetcode-268-Missing%20Number/" class="article-date">
@@ -100,7 +400,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/15/2019-12-15-Leetcode-268-Missing%20Number/" data-id="ck4iky6hb000q28t75vqx7jnd" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/15/2019-12-15-Leetcode-268-Missing%20Number/" data-id="ck4jlxdpk000qmgt7baic9k5r" class="article-share-link">Share</a>
       
       
     </footer>
@@ -164,7 +464,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/13/2019-12-13-Leetcode-287-Find%20the%20Duplicate%20Number/" data-id="ck4iky6h9000m28t76f6bb5ad" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/13/2019-12-13-Leetcode-287-Find%20the%20Duplicate%20Number/" data-id="ck4jlxdpi000mmgt74zxja6cc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -209,7 +509,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/13/2019-12-13-Leetcode-278-First%20Bad%20Version/" data-id="ck4iky6h8000l28t71kgzcp9e" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/13/2019-12-13-Leetcode-278-First%20Bad%20Version/" data-id="ck4jlxdpg000lmgt742vke5yz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -273,289 +573,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/13/2019-12-13-Leetcode-704-Binary%20Search/" data-id="ck4iky6h9000n28t7glgq9n9x" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2019-12-13-Leetcode-34-Find First and Last Position of Element in Sorted Array" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/12/12/2019-12-13-Leetcode-34-Find%20First%20and%20Last%20Position%20of%20Element%20in%20Sorted%20Array/" class="article-date">
-  <time datetime="2019-12-12T13:28:34.562Z" itemprop="datePublished">2019-12-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/12/2019-12-13-Leetcode-34-Find%20First%20and%20Last%20Position%20of%20Element%20in%20Sorted%20Array/">34.Find First and Last Position of Element in Sorted Array</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/" target="_blank" rel="noopener">34.Find First and Last Position of Element in Sorted Array</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的数组，该数组是升序排列的，中间可能有重复的元素；<br>给定一个整数target；<br>查找target是否在数组中，在的话，返回其开始出现的索引，以及最后一次出现的索引。<br>不存在的话，返回(-1, -1)即可；</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: nums = [5,7,7,8,8,10], target = 8<br>Output: [3,4]</p>
-<p>Input: nums = [5,7,7,8,8,10], target = 6<br>Output: [-1,-1]</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n: 当n为0的时候，直接返回(-1, -1)；</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Binary-Search-Linear-Search"><a href="#Solution-1：Binary-Search-Linear-Search" class="headerlink" title="Solution-1：Binary Search + Linear Search"></a>Solution-1：Binary Search + Linear Search</h3><p>1.二分查找，每次去mid，然后判断nums[mid]的值是否是target，如果是的话：<br>依次向前找，直到当前的数不等于target为止。<br>依次向后找，直到当前的数不等于target位置。<br>找到，并return 即可。<br>如果target大于nums[mid]，则在[mid + 1, right]中搜。<br>如果target小于nums[mid]，则在[left, mid - 1]中搜。</p>
-<p>2.特殊情况考虑：当left，right相差1的时候，满足while循环条件，并进入。<br>此时mid = left，考虑了nums[mid]后:<br>若nums[mid]就是我们要找的target，则寻找它开始结束的位置。<br>若target大于nums[mid]，此时left = right，while循环退出。此时需要考虑left(等于right)这个位置的值。<br>如果是target，则返回{left, left}即可。<br>如果不是，则target不在数组中。<br>若target小于nums[mid]，则target不在数组中。</p>
-<p>时间复杂度：O(log n)，最坏O(n)<br>空间复杂度：O(1)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/285482172/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285482172/</a>)</p>
-<h3 id="Solution-2：Binary-Search-Binary-Search"><a href="#Solution-2：Binary-Search-Binary-Search" class="headerlink" title="Solution-2：Binary Search + Binary Search"></a>Solution-2：Binary Search + Binary Search</h3><p>1.由于我们在Leetcode-704-Binary Search中学会了找target的最小索引和最大索引。<br>正好本题目中就是找这两个值。</p>
-<p>2.先找到target的最小索引；再找到target的最大索引。<br>再返回答案。</p>
-<p>时间复杂度：O(log n)<br>空间复杂度：O(1)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/285598701/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285598701/</a>)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/12/2019-12-13-Leetcode-34-Find%20First%20and%20Last%20Position%20of%20Element%20in%20Sorted%20Array/" data-id="ck4iky6ha000o28t73wcwajyw" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2019-12-12-Leetcode-20-Valid Parentheses" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/12/12/2019-12-12-Leetcode-20-Valid%20Parentheses/" class="article-date">
-  <time datetime="2019-12-12T08:10:34.517Z" itemprop="datePublished">2019-12-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/12/2019-12-12-Leetcode-20-Valid%20Parentheses/">20.Valid Parentheses</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/valid-parentheses/" target="_blank" rel="noopener">20.Valid Parentheses</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的字符串s；<br>判断该字符串是否一个合法的括号表达式；<br>括号有三种：[] {} ()<br>open的bracket最终必须有一个同类型close的bracket与之匹配；<br>且上述匹配的顺序必须是正确的。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: “()[]{}”<br>Output: true</p>
-<p>Input: “([)]”<br>Output: false</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n: 当n为0的时候，也认为是合法的；</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Stack"><a href="#Solution-1：Stack" class="headerlink" title="Solution-1：Stack"></a>Solution-1：Stack</h3><p>1.若n是奇数，那么一定非法。<br>若n是0，则直接return true。</p>
-<p>2.考虑n为大于0的偶数：<br>模拟括号匹配的过程：i在范围[0, n - 1]内遍历：<br>先将s[0]压入栈；<br>考察s[1]，若s[1]和s[0]是同类型的，且一个s[1]是close，s[0]是open的，那么说明这两个是一对。<br>则此时将s[0]从栈中抛出，i跳到位置2，考虑第二个元素。<br>若s[1]的出现无法和s[0]匹配掉，则将s[1]在压入栈，考虑下一个元素。<br>……<br>直到所有的n个元素都遍历过了，此时检查栈，如果栈是空的，说明所有的括号都可以匹配。<br>如果此时栈非空，则说明存在元素无法匹配。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/285447709/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285447709/</a>)</p>
-<h3 id="Solution-2：Stack"><a href="#Solution-2：Stack" class="headerlink" title="Solution-2：Stack"></a>Solution-2：Stack</h3><p>1.另一种方法：<br>从[0, n - 1]考虑每一个s[i]<br>若s[i]是open的bracket，则将其“另一半”压入栈。<br>否则的话，判断此时栈是否为空，是的话，直接return false。<br>栈不空的话，判断当前元素是否和栈顶元素相同，不同的话，也直接return false。<br>相同的话，将栈顶元素抛出，转移到考虑s[i + 1]</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/285450396/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285450396/</a>)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/12/2019-12-12-Leetcode-20-Valid%20Parentheses/" data-id="ck4iky6h6000h28t7c6ahfkg3" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2019-12-12-Leetcode-22-Generate Parentheses" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/12/12/2019-12-12-Leetcode-22-Generate%20Parentheses/" class="article-date">
-  <time datetime="2019-12-12T06:02:01.240Z" itemprop="datePublished">2019-12-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/12/2019-12-12-Leetcode-22-Generate%20Parentheses/">22.Generate Parentheses</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/generate-parentheses/" target="_blank" rel="noopener">22.Generate Parentheses</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个整数n，代表有n对括号。这是一对：( )<br>求出这n对括号所有可能的组合方式，要求组合后是一个有效的括号表达式。<br>即：匹配的一对括号，左边是(，右边是)</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>n = 3<br>[<br>  “((()))”,<br>  “(()())”,<br>  “(())()”,<br>  “()(())”,<br>  “()()()”<br>]</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n: 当n为0的时候，直接返回空；</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Backtracking-Recursive"><a href="#Solution-1：Backtracking-Recursive" class="headerlink" title="Solution-1：Backtracking(Recursive)"></a>Solution-1：Backtracking(Recursive)</h3><p>1.给定的n，代表有n个open bracket，n个close bracket。</p>
-<p>2.对于任意时刻，我们仅可选一个bracket，要么是open的，要么是close的。<br>只要leftCnt大于0，就可以选择open的。<br>而选择close的，需要rightCnt大于leftCnt，以保证结果先左后右的合法性。</p>
-<p>3.当leftCnt, rightCnt的值都为0时，此时构造出来的string s就是一个合法的答案。将其添加到答案中。<br>并且返回。（回溯）</p>
-<p>4.递归树的某一个子节点计算完成后返回了，其父节点进行考虑，若当前还有其他的儿子，则递归调用其他的儿子。<br>对于一个节点来说，其左儿子可以认为是“选择open bracket”，其右儿子可以认为是“选择close bracket”</p>
-<p>时间复杂度：O() //to do<br>空间复杂度：O()</p>
-<p>5.Code(<a href="https://leetcode.com/submissions/detail/285419056/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285419056/</a>)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/12/2019-12-12-Leetcode-22-Generate%20Parentheses/" data-id="ck4iky6h7000i28t73koe8puf" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2019-12-12-Leetcode-17-Letter Combinations of a Phone Number" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/12/12/2019-12-12-Leetcode-17-Letter%20Combinations%20of%20a%20Phone%20Number/" class="article-date">
-  <time datetime="2019-12-12T03:50:51.060Z" itemprop="datePublished">2019-12-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/12/2019-12-12-Leetcode-17-Letter%20Combinations%20of%20a%20Phone%20Number/">17.Letter Combinations of a Phone Number</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/letter-combinations-of-a-phone-number/" target="_blank" rel="noopener">17.Letter Combinations of a Phone Number</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的字符串。<br>该字符串的每一个元素都是：[2, 9]的整数。<br>对应的，手机键盘上的九键输入法。如2可以代表：[a, b, c]。<br>求出给定的数字序列，所有可能的字符串。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: “23”<br>Output: [“ad”, “ae”, “af”, “bd”, “be”, “bf”, “cd”, “ce”, “cf”].</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n: 当n为0的时候，直接返回空；<br>尽管example中输出的是字典序，但本题目不要求严格的字典序输出。</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>1.对于长度为n的序列，依次考虑每一个数字。</p>
-<p>2.对于[2, 3]来说：<br>先考虑2，由于2可以代表[a, b, c]，则将[a, b, c]放入ans中。<br>再考虑3，由于3可以代表[d, e, f]，则对于ans中的所有元素，分别将d/e/f拼接在其后面。<br>即：[ad, bd, cd, ae, be, ce, af, bf, cf]</p>
-<p>3.所以说，首先外层循环需要考虑n次。<br>对于每个n来说，需要考虑其所有代表的字母。记x次。则x要么是3，要么是4。<br>对于每个代表的字母，需要考虑当前ans中的个数：然后将自己加入到这些已有的ans后面。<br>由于这个过程需要x次，所以可以用一个temp数组，都存起来。当遍历完x次，将ans更新为temp即可。</p>
-<p>4.对于将temp赋值给ans的操作，可以：<br>ans = temp;//vector支持直接赋值过去。<br>参考：<a href="https://zh.cppreference.com/w/cpp/container/vector/operator%3D" target="_blank" rel="noopener">https://zh.cppreference.com/w/cpp/container/vector/operator%3D</a><br>ans.swap(temp)//O(1)的复杂度，更快。因为swap只交换指针，而不替换数据。<br>参考：<a href="http://www.cplusplus.com/reference/vector/vector/swap/" target="_blank" rel="noopener">http://www.cplusplus.com/reference/vector/vector/swap/</a><br><a href="https://www.zhihu.com/question/310462377" target="_blank" rel="noopener">https://www.zhihu.com/question/310462377</a></p>
-<p>时间复杂度：O(3 ^ n)<br>空间复杂度：O(1)</p>
-<p>5.Code(<a href="https://leetcode.com/submissions/detail/285381545/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285381545/</a>)<br>Code(<a href="https://leetcode.com/submissions/detail/285392928/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285392928/</a>)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/12/2019-12-12-Leetcode-17-Letter%20Combinations%20of%20a%20Phone%20Number/" data-id="ck4iky6h8000k28t74zznfszh" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2019-12-11-Leetcode-48-Rotate Image" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/12/11/2019-12-11-Leetcode-48-Rotate%20Image/" class="article-date">
-  <time datetime="2019-12-11T08:18:38.951Z" itemprop="datePublished">2019-12-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/11/2019-12-11-Leetcode-48-Rotate%20Image/">48.Rotate Image</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/rotate-image/" target="_blank" rel="noopener">48.Rotate Image</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个n阶矩阵。<br>将这个矩阵顺时针旋转90°。<br>不得申请额外空间。即：in-place就地操作。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Given input matrix =<br>[<br>  [1,2,3],<br>  [4,5,6],<br>  [7,8,9]<br>],<br>rotate the input matrix in-place such that it becomes:<br>[<br>  [7,4,1],<br>  [8,5,2],<br>  [9,6,3]<br>]</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n: 当n为0的时候，直接返回false；</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Layer-By-Layer，One-By-One"><a href="#Solution-1：Layer-By-Layer，One-By-One" class="headerlink" title="Solution-1：Layer By Layer，One By One"></a>Solution-1：Layer By Layer，One By One</h3><p>1.n阶矩阵，需要考虑n / 2层，即层数：[0, n / 2 - 1]<br>2.对于每一层，j：[i, n - 2 - i]</p>
-<p>时间复杂度：O(n ^ 2)<br>空间复杂度：O(1)</p>
-<p>5.Code(<a href="https://leetcode.com/submissions/detail/285218920/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285218920/</a>)</p>
-<h3 id="Solution-2："><a href="#Solution-2：" class="headerlink" title="Solution-2："></a>Solution-2：</h3><p>1.先将二维矩阵reverse，即保持其每一行中元素的顺序。<br>将这n行逆序。<br>[<br>  [1,2,3],<br>  [4,5,6],<br>  [7,8,9]<br>]<br>reverse后：<br>[<br>  [7,8,9],<br>  [4,5,6],<br>  [1,2,3]<br>]<br>2.此时可以发现，从[0, 0]到[n - 1, n - 1]的对角线上所有元素已经排列好了。<br>3.接下来，将对角线左右两侧的元素互换。<br>[<br>  [7,8,9],<br>  [4,5,6],<br>  [1,2,3]<br>]<br>互换后：<br>[<br>  [7,4,1],<br>  [8,5,2],<br>  [9,6,3]<br>]<br>4.此时已经完全排列好了，return即可。</p>
-<p>时间复杂度：O(n ^ 2)<br>空间复杂度：O(1)</p>
-<p>5.Code(<a href="https://leetcode.com/submissions/detail/285220946/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285220946/</a>)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/11/2019-12-11-Leetcode-48-Rotate%20Image/" data-id="ck4iky6h4000g28t7cidu91gk" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2019-12-11-Leetcode-153-Find Minimum in Rotated Sorted Array" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/12/11/2019-12-11-Leetcode-153-Find%20Minimum%20in%20Rotated%20Sorted%20Array/" class="article-date">
-  <time datetime="2019-12-11T03:12:45.411Z" itemprop="datePublished">2019-12-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/11/2019-12-11-Leetcode-153-Find%20Minimum%20in%20Rotated%20Sorted%20Array/">153.Find Minimum in Rotated Sorted Array</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/" target="_blank" rel="noopener">153.Find Minimum in Rotated Sorted Array</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组nums；<br>该数组原本是升序的，结果在某个支点处旋转了一次，如：<br>i.e., [0,1,2,4,5,6,7] might become [4,5,6,7,0,1,2]<br>假设数组中不存在相同的数字。<br>找出这个数组中最小的值。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [3,4,5,1,2]<br>Output: 1</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n: 当n为0的时候，直接返回false；</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>1.常规思路：从前到后遍历一遍nums，找到最小值返回。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<h3 id="Solution-2：Binary-Search"><a href="#Solution-2：Binary-Search" class="headerlink" title="Solution-2：Binary Search"></a>Solution-2：Binary Search</h3><p>1.观察：[0,1,2,4,5,6]<br>经过rotate后，可能存在以下几种不同情况：<br>[1,2,4,5,6,   0]<br>[2,4,5,6,   0,1]<br>[4,5,6,   0,1,2]<br>[5,6,   0,1,2,4]<br>[6,   0,1,2,4,5]</p>
-<p>2.考虑寻找[left, right]中的最小值。<br>若：nums[left] &lt; nums[right]，则说明[left, right]范围内完全升序。nums[left]就是答案。<br>否则：<br>mid = left + (right - left) / 2;<br>若nums[mid] &gt; nums[right]，则说明，这个区间中间某个值比nums[right]还要大，说明mid此时在左侧。<br>而最小值一定在右侧[mid + 1, right]。<br>若nums[mid] &lt; nums[right]，则说明，[mid, right]这个范围是有序的。要寻找的最小值，不可能在mid右侧，一定在包含其的左侧，即：[left, mid]。<br>若nums[mid] == nums[right]，不可能的……</p>
-<p>3.用二分的方法，每次把结果可能出现的区间缩小一半。<br>最终当区间长度为2的时候，left = x, right = x + 1, mid = x<br>判断nums[mid]和nums[right]的大小关系，也就是判断左边元素和右边元素的大小。<br>若nums[mid]大于nums[right]，即答案一定在[mid + 1, right]中，也就是右边元素本身。<br>若nums[mid]小于nums[right]，即答案一定在[left, mid]中，也就是左边元素本身。<br>循环结束后，left一定等于right。此时返回left的值即可。</p>
-<p>时间复杂度：O(log n)<br>空间复杂度：O(1)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/285160090/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285160090/</a>)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/11/2019-12-11-Leetcode-153-Find%20Minimum%20in%20Rotated%20Sorted%20Array/" data-id="ck4iky6h4000f28t7eguxe4ed" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/13/2019-12-13-Leetcode-704-Binary%20Search/" data-id="ck4jlxdpj000omgt76rjcbgis" class="article-share-link">Share</a>
       
       
     </footer>
@@ -569,7 +587,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -601,23 +619,23 @@
       <ul>
         
           <li>
-            <a href="/2019/12/23/2019-12-23-Leetcode-100-Same%20Tree/">【二叉树专项】100.Same Tree</a>
+            <a href="/2019/12/24/2019-12-24-Leetcode-113-Path%20Sum%20II/">【二叉树专项】113.Path Sum II</a>
           </li>
         
           <li>
-            <a href="/2019/12/23/2019-12-23-Leetcode-103-Binary%20Tree%20Zigzag%20Level%20Order%20Traversal/">【二叉树专项】103.Binary Tree Zigzag Level Order Traversal</a>
+            <a href="/2019/12/24/2019-12-24-Leetcode-112-Path%20Sum/">【二叉树专项】112.Path Sum</a>
           </li>
         
           <li>
-            <a href="/2019/12/23/2019-12-23-Leetcode-107-Binary%20Tree%20Level%20Order%20Traversal%20II/">【二叉树专项】107.Binary Tree Level Order Traversal II</a>
+            <a href="/2019/12/24/2019-12-24-Leetcode-226-Invert%20Binary%20Tree/">【二叉树专项】226.Invert Binary Tree</a>
           </li>
         
           <li>
-            <a href="/2019/12/23/2019-12-23-Leetcode-102-Binary%20Tree%20Level%20Order%20Traversal/">【二叉树专项】102.Binary Tree Level Order Traversal</a>
+            <a href="/2019/12/24/2019-12-24-Leetcode-111-Minimum%20Depth%20of%20Binary%20Tree/">【二叉树专项】111.Minimum Depth of Binary Tree</a>
           </li>
         
           <li>
-            <a href="/2019/12/23/2019-12-23-Leetcode-145-Binary%20Tree%20Postorder%20Traversal/">【二叉树专项】145.Binary Tree Postorder Traversal</a>
+            <a href="/2019/12/24/2019-12-24-Leetcode-104-Maximum%20Depth%20of%20Binary%20Tree/">【二叉树专项】104.Maximum Depth of Binary Tree</a>
           </li>
         
       </ul>
