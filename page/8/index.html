@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>wspage3</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="wspage3">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;page&#x2F;8&#x2F;index.html">
+<meta property="og:site_name" content="wspage3">
+<meta property="og:locale" content="en">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="wspage3" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">wspage3</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-2019-12-15-Leetcode-155-Min Stack" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/15/2019-12-15-Leetcode-155-Min%20Stack/" class="article-date">
+  <time datetime="2019-12-15T10:45:28.500Z" itemprop="datePublished">2019-12-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/15/2019-12-15-Leetcode-155-Min%20Stack/">155.Min Stack</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/min-stack/" target="_blank" rel="noopener">155.Min Stack</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>设计一个数据结构”最小栈”，具有以下特点：<br>1.push(x) – Push element x onto stack.<br>2.pop() – Removes the element on top of the stack.<br>3.top() – Get the top element.<br>4.getMin() – Retrieve the minimum element in the stack.<br>其中核心功能是第四点，因为如果仅考虑前三点的话，就是常规的栈stack。<br>getMin()要求时间复杂度为O(1)。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>MinStack minStack = new MinStack();<br>minStack.push(-2);<br>minStack.push(0);<br>minStack.push(-3);<br>minStack.getMin();   –&gt; Returns -3.<br>minStack.pop();<br>minStack.top();      –&gt; Returns 0.<br>minStack.getMin();   –&gt; Returns -2.</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.getMin()要求时间复杂度为O(1)。</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><p>思路：看到题目，第一想法是：维护一个stack s和一个最小值m即可。<br>当有更小的值入栈后，更新m即可。<br>但这样有一个问题：如果我当前pop的就是最小值m，那怎么办。<br>因为没有保存第二小的值，所以在pop掉m后，m的值就无法追溯了。</p>
+<h3 id="Solution-1：Two-Stacks"><a href="#Solution-1：Two-Stacks" class="headerlink" title="Solution-1：Two Stacks"></a>Solution-1：Two Stacks</h3><p>1.用两个stack，一个s保存数据，一个m保存最小值。<br>当有更小的值入栈后，将这个值同时加入到栈m中。<br>则当前最小的值就是m的栈顶元素。<br>当pop最小元素的时候，将其从s和m中同时pop掉。</p>
+<p>空间复杂度：O(n)</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/285879960/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285879960/</a>)</p>
+<h3 id="Solution-2：One-Stack"><a href="#Solution-2：One-Stack" class="headerlink" title="Solution-2：One Stack"></a>Solution-2：One Stack</h3><p>1.Solution-1中，我们当遇到更小的值时，都将其保存到m栈中。<br>这样栈顶的就是当前s栈中最小的值，若其被pop出去，同时带走m栈顶的元素。<br>此时m栈顶的元素又是s栈中的最小值了。</p>
+<p>2.现在我们用int minValue来代表当前栈中最小的值。<br>s仍然代表着数据栈。<br>当出现了更小的值时：<br>a.保存当前minValue：将其先push到s中。<br>b.更新minValue<br>c.再将当前minValue push到s中。</p>
+<p>3.则任意时刻，minValue都是代表着当前栈中最小的元素值。</p>
+<p>4.当pop的值是minValue的时候，也就是s.top() == minValue，<br>我们从s中pop一个元素，这个元素就是minValue。<br>同时将此时s.top()赋值给minValue。因为这个元素是“前一个最小值”。<br>同时将其从s中pop出去。</p>
+<p>空间复杂度：O(n)</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/285881659/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285881659/</a>)</p>
+<h3 id="Solution-3：One-Stack"><a href="#Solution-3：One-Stack" class="headerlink" title="Solution-3：One Stack"></a>Solution-3：One Stack</h3><p>1.现在我们将当前元素cur和minValue的差值存入栈s中。</p>
+<p>2.push(x)：<br>当栈中没有元素的时候，将0存入s中，minValue说就是x；<br>当栈中已有元素的时候，将x - minValue存入s中，若该值为负，说明当前x是更小的值。将minValue更新为x。</p>
+<p>3.getMin()<br>任意时刻，minValue的值就是当前栈s中最小元素的值。</p>
+<p>4.top()<br>由于s中存入的已经不是之前的数据了，而是存放的差值。<br>当s栈顶元素小于0的时候，说明：这个元素是当前栈中最小的值minValue。return minValue即可。<br>当s栈顶元素不小于0的时候，说明，这个元素是一个差值，其值 = s.top() + minValue。</p>
+<p>5.pop()<br>当s栈顶元素小于0的时候，说明：这个元素是当前栈中最小的值minValue。<br>  需要更新minValue = minValue - s.top()；然后再从s中把其pop。<br>当s栈顶元素不小于0的时候，说明，这个元素是一个差值，直接pop即可。</p>
+<p>6.缺点1：由于差值可能会导致整数溢出，所以用minValue用long long。<br>缺点2：由于放入栈中的值是一个差值，而非原本的数据本身，即有修改数据的嫌疑。需要确定这种情况再用这个方法。</p>
+<p>空间复杂度：O(1)</p>
+<p>7.Code(<a href="https://leetcode.com/submissions/detail/285885660/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285885660/</a>)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/15/2019-12-15-Leetcode-155-Min%20Stack/" data-id="ck4jma6dc000p5st73h2khzmz" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2019-12-15-Leetcode-268-Missing Number" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/15/2019-12-15-Leetcode-268-Missing%20Number/" class="article-date">
+  <time datetime="2019-12-15T10:27:54.308Z" itemprop="datePublished">2019-12-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/15/2019-12-15-Leetcode-268-Missing%20Number/">268.Missing Number</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/missing-number/" target="_blank" rel="noopener">268.Missing Number</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个长度为n的整数数组。<br>其中所有的元素取值都是区间[0, n]的，且没有重复的元素。<br>显然，[0, n]一共有(n + 1)个元素，而nums中只有n个，找出这个缺失的元素。<br>【输出】<br>找出这个缺失的数字。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [9,6,4,2,3,5,7,0,1]<br>Output: 8</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.空间复杂度要求为O(1)。<br>2.时间复杂度要求O(n)。</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Accumulate"><a href="#Solution-1：Accumulate" class="headerlink" title="Solution-1：Accumulate"></a>Solution-1：Accumulate</h3><p>1.[0, n]中所有数字的和为[1, n] = n * (n + 1) / 2</p>
+<p>2.我们遍历nums中的数字，累加一个和。<br>然后用上面的公式计算出来的和减去nums中累加的和，答案就是缺失的元素。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/285827066/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285827066/</a>)<br>Code(<a href="https://leetcode.com/submissions/detail/285849852/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285849852/</a>)</p>
+<p>3.缺点：accumulate可以会导致整数溢出，存在局限。</p>
+<h3 id="Solution-2：XOR"><a href="#Solution-2：XOR" class="headerlink" title="Solution-2：XOR"></a>Solution-2：XOR</h3><p>1.任意一个数 异或 它自己 == 0<br>  任意一个数 异或 0     == 它自己<br>  异或满足交换律，结合率</p>
+<p>2.nums中有n个数字，且都在范围[0, n]内，且都不重复。<br>我们把nums中所有的数字都异或起来。记为a。<br>然后把[0, n]所有的数字都异或起来。记为b。<br>此时所有参与异或的数字一共有 n + (n + 1)个。<br>假设missing number为x。则上述n + (n + 1)个数字只有一个x，其它数字都是出现了两次。<br>则 a ^ b == x。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/285850682/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285850682/</a>)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/15/2019-12-15-Leetcode-268-Missing%20Number/" data-id="ck4jma6dd000r5st78xc05r4d" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2019-12-13-Leetcode-287-Find the Duplicate Number" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/13/2019-12-13-Leetcode-287-Find%20the%20Duplicate%20Number/" class="article-date">
+  <time datetime="2019-12-13T14:43:40.211Z" itemprop="datePublished">2019-12-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/13/2019-12-13-Leetcode-287-Find%20the%20Duplicate%20Number/">287.Find the Duplicate Number</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/find-the-duplicate-number/" target="_blank" rel="noopener">287.Find the Duplicate Number</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个长度为n的整数数组。<br>其中所有的元素取值都是区间[1, n - 1]的。<br>根据鸽巢原理，可以证明：至少有两个元素是相等的。<br>题目保证：数组中的元素刚好有一个存在重复值，但是重复的次数不一定。次数至少为2。<br>【输出】<br>找出这个重复的数字。<br>【参考】<br><a href="https://zh.wikipedia.org/wiki/%E9%B4%BF%E5%B7%A2%E5%8E%9F%E7%90%86" target="_blank" rel="noopener">https://zh.wikipedia.org/wiki/%E9%B4%BF%E5%B7%A2%E5%8E%9F%E7%90%86</a></p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [1,3,4,2,2]<br>Output: 2</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.数组不允许修改：即不可以排序等操作。<br>2.空间复杂度要求为O(1)。<br>3.时间复杂度要求小于O(n ^ 2)。<br>4.题目保证：数组中的元素刚好有一个存在重复值，但是重复的次数不一定。这个数出现次数至少为2。</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>1.对于每个i: [0, n - 2]。<br>遍历j: [i + 1, n - 1]。<br>如果nums[i] == nums[j]，说明nums[i]就是要找的答案。</p>
+<p>时间复杂度：O(n ^ 2)<br>空间复杂度：O(1)</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/285661538/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285661538/</a>)</p>
+<h3 id="Solution-2：Count"><a href="#Solution-2：Count" class="headerlink" title="Solution-2：Count"></a>Solution-2：Count</h3><p>1.对于每个i: [0, n - 1]，用一个长度为n的数组v记录其出现的次数。<br>对于nums[i]，如果v[nums[i]] == 1了，说明nums[i]这个数字之前出现过了。就是答案。<br>否则的话，将v[nums[i]] = 1。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/285662708/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285662708/</a>)</p>
+<h3 id="Solution-3：Binary-Search"><a href="#Solution-3：Binary-Search" class="headerlink" title="Solution-3：Binary Search"></a>Solution-3：Binary Search</h3><p>1.由于数组长度为n，所以nums[i]的取值范围最大是：[1, n - 1]。此时duplicate出现了两次。</p>
+<p>2.我们对[1, n - 1]区间进行二分搜索。每次找到一个mid。对于每一个mid：<br>遍历nums数组，如果nums[i] &lt;= mid，则cnt加一。<br>如果此时cnt大于mid了，也就是：数组nums中所有小于等于mid的个数大于了mid。<br>例如：数组nums中所有小于等于5的数字的个数大于5。说明duplicate在范围[1, 5]内。<br>此时在[left, mid]中搜索。</p>
+<p>3.如果此时cnt小于等于mid，则说明duplicate在[mid + 1, right]中。</p>
+<p>4.考虑最后一次while循环，left = right - 1。mid = left。<br>判断left位置的合法性：<br>如果left位置合法，则left = mid + 1 = right。<br>如果left位置不合法，则right = mid = left。<br>不管哪种情况，循环都走不下去了，都有left == right。而且两者当前的值就是非法的那个值。<br>此时return left(或right)即可。</p>
+<p>时间复杂度：O(n * log n)<br>空间复杂度：O(1)</p>
+<p>5.Code(<a href="https://leetcode.com/submissions/detail/285704963/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285704963/</a>)</p>
+<p>6.证明：<br>Let count be the number of elements in the range 1 .. mid.</p>
+<p>If count &gt; mid, then there are more than mid elements in the range 1 .. mid and thus that range contains a duplicate.</p>
+<p>If count &lt;= mid, then there are n+1-count elements in the range mid+1 .. n. That is, at least n+1-mid elements in a range of size n-mid. Thus this range must contain a duplicate.</p>
+<h3 id="Solution-4：Two-Pointers"><a href="#Solution-4：Two-Pointers" class="headerlink" title="Solution-4：Two Pointers"></a>Solution-4：Two Pointers</h3><p>1.观察：长度为n的nums数组中，所有元素的大小均在范围：[1, n - 1]中。<br>也就是每个元素的值都可以作为nums的index。</p>
+<p>2.<a href="https://leetcode.com/problems/linked-list-cycle-ii/" target="_blank" rel="noopener">https://leetcode.com/problems/linked-list-cycle-ii/</a><br>类似的，我们把nums数组想象成一个特殊的链表。<br>例如：[3,1,3,4,2]<br>index为0的元素的值为3<br>index为1的元素的值为1<br>index为2的元素的值为3<br>index为3的元素的值为4<br>index为4的元素的值为2<br>可以发现，对于一个目标值3，它有两个对应的index，而这个3就是要找的答案duplicate。</p>
+<p>3.回忆链表中有环的情况：<br>如果一个链表中某一个节点N，存在节点A，B，使得：<br>A -&gt; next == N<br>B -&gt; next == N<br>那么这个链表中一定存在环。且第一次出现环的点就是N。我们可以用【快慢指针法+弗洛伊德探测环路方法】找出该N的位置。</p>
+<p>4.同样的，我们把上面的nums数组想象成一个链表。由于nums数组中存在duplicate，所以至少两个不同的index，对应的值都是duplicate。<br>例如：[1,3,4,2,3]<br>0 -&gt; 1 -&gt; 3 -&gt; 2 -&gt; 4 -&gt; 3 -&gt; 2 -&gt; 4 -&gt; 3……</p>
+<p>5.根据【快慢指针法+弗洛伊德探测环路方法】<br>slow和fast同时从0出发。<br>slow: slow = nums[slow]<br>fast: fast = nums[nums[fast]]<br>当slow和fast相等的时候，break掉。<br>此时head从0出发。<br>head: head = nums[head]<br>slow: slow = nums[slow]<br>如果此时head == slow，那么这个位置就是要找的duplicate。</p>
+<p>6.证明：fast和slow从同一起点出发，fast的速度是slow的2倍。那么当它们相遇时，fast走过的路程是slow走过的2倍。<br>记起点到环点的距离为s1，环点到meet点的距离为s2，meet点再到环点的距离为s3。<br>当slow和fast相遇的时候，有：2(s1 + s2) = s1 + s2 + k(s2 + s3)。其中k &gt;= 1。<br>即：s1 + s2 = ks2 + ks3<br>当k为1的时候，s1 == s3<br>当k为2的时候，s1 == s2 + 2s3 = s3 + (s2 + s3)<br>当k为3的时候，s1 == 2s2 + 3s3 = s3 + 2(s2 + s3)</p>
+<p>可以看出，当head和slow同时出发，它们相遇的时候，一定在环点。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
+<p>5.Code(<a href="https://leetcode.com/submissions/detail/285811401/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285811401/</a>)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/13/2019-12-13-Leetcode-287-Find%20the%20Duplicate%20Number/" data-id="ck4jma6d9000l5st7gmayfh0m" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2019-12-13-Leetcode-278-First Bad Version" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/13/2019-12-13-Leetcode-278-First%20Bad%20Version/" class="article-date">
+  <time datetime="2019-12-13T05:19:52.802Z" itemprop="datePublished">2019-12-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/13/2019-12-13-Leetcode-278-First%20Bad%20Version/">278.First Bad Version</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/first-bad-version/" target="_blank" rel="noopener">278.First Bad Version</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【背景】<br>你是一个产品经理，你发现当前的产品版本中质量不过关。<br>由于每个版本都是基于上一个版本，修修改改进行发布的。所以当某个版本引入一个bug后，后面所有的版本都由bug。<br>你希望找出来是哪个版本引入了bug。<br>有一个API-isBadVersion可以根据版本号来确定当前版本是否由bug。如果有问题，则返回true。否则，返回false。<br>【输入】<br>给定一个整数n，代表当前版本号。版本号从1开始编号，且连续。<br>所以说n代表当前有n个版本。<br>【输出】<br>输出第一个出现bug的那个版本号。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Given n = 5, and version = 4 is the first bad version.</p>
+<p>call isBadVersion(3) -&gt; false<br>call isBadVersion(5) -&gt; true<br>call isBadVersion(4) -&gt; true</p>
+<p>Then 4 is the first bad version. </p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Binary-Search"><a href="#Solution-1：Binary-Search" class="headerlink" title="Solution-1：Binary Search"></a>Solution-1：Binary Search</h3><p>1.二分搜索。<br>我们要找到第一个有问题的版本，类似【找到target最小的索引】<br>考虑范围[left, right)，取mid：<br>如果当前mid没问题，说明答案一定在[mid + 1, right)范围内。<br>如果当前mid有问题，说明答案一定在[left, mid]范围内。<br>此时我们在[left, mid)上继续搜索。<br>如果[left, mid)上所有版本都没问题，那么答案就是mid。<br>否则答案就在[left, mid)中。</p>
+<p>2.考虑最后一次循环，left = right - 1<br>此时mid = left，然后判断mid的合法性。<br>如果此时mid有问题，right = mid = left。循环结束。left(right)就是答案。<br>如果此时mid没问题，left = mid + 1 = right。循环结束。此时还剩left(right)这个位置没有判断合法性。那么它一定是答案。</p>
+<p>时间复杂度：O(log n)<br>空间复杂度：O(1)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/285606627/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285606627/</a>)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/13/2019-12-13-Leetcode-278-First%20Bad%20Version/" data-id="ck4jma6db000m5st7hv2tfq4j" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2019-12-13-Leetcode-704-Binary Search" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/13/2019-12-13-Leetcode-704-Binary%20Search/" class="article-date">
+  <time datetime="2019-12-13T05:19:51.976Z" itemprop="datePublished">2019-12-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/13/2019-12-13-Leetcode-704-Binary%20Search/">704.Binary Search</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/binary-search/" target="_blank" rel="noopener">704.Binary Search</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的数组，该数组是升序排列的，中间没有有重复的元素；<br>给定一个整数target；<br>查找target是否在数组中，在的话，返回其索引。<br>不存在的话，返回-1即可；</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: nums = [-1,0,3,5,9,12], target = 9<br>Output: 4<br>Explanation: 9 exists in nums and its index is 4</p>
+<p>Input: nums = [-1,0,3,5,9,12], target = 2<br>Output: -1<br>Explanation: 2 does not exist in nums so return -1</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n: [1, 10000]<br>nums[i]: [-9999,9999]</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Binary-Search"><a href="#Solution-1：Binary-Search" class="headerlink" title="Solution-1：Binary Search"></a>Solution-1：Binary Search</h3><p>1.二分查找，每次取mid，然后判断nums[mid]的值是否是target，如果是的话，说明当前mid就是target的索引。<br>如果target大于nums[mid]，则在[mid + 1, right]中搜。<br>如果target小于nums[mid]，则在[left, mid - 1]中搜。</p>
+<p>2.在区间[0, n - 1]上搜索。开始left = 0, right = n - 1。<br>每次考虑nums[mid]，如果其不是答案，则继续在mid左边或者mid右边查找。</p>
+<p>3.循环判断：left &lt;= right，这样可以保证[0, n - 1]上的每个元素都能被考虑到。<br>最终循环结束的时候，一定有left = right + 1。<br>如果循环结束了还没有找到target，说明数组中没有target。</p>
+<p>时间复杂度：O(log n)<br>空间复杂度：O(1)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/285484850/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285484850/</a>)</p>
+<h3 id="Solution-2：Binary-Search-with-minimum-index"><a href="#Solution-2：Binary-Search-with-minimum-index" class="headerlink" title="Solution-2：Binary Search with minimum index"></a>Solution-2：Binary Search with minimum index</h3><p>1.核心思想还是二分查找。我们尝试找target最小的index（如果target有多个的话）</p>
+<p>2.假设某一时刻，在区间[left, right)上查找。<br>继续取mid，判断nums[mid]和target的大小关系。<br>此时区间[left, right)被分成：[left, mid), nums[mid], [mid + 1, right)三部分。<br>我们通过判断nums[mid]和target的大小关系来决定下次搜索在上面范围内：<br>如果target &gt; nums[mid]，说明target的最小索引一定在[mid + 1, right)这个范围上。<br>如果target &lt; nums[mid]，说明target的最小索引一定在[left, mid)这个范围上。<br>如果target == nums[mid]，说明target的最小索引要么就在mid位置；要么在mid位置之前；<br>这种情况下，我们继续在[left, mid)上寻找，如果这个范围内已经没有和target相等的数字了，那么答案就是mid。<br>如果这个范围内又找到了target，说明target的最小索引在这个范围内。</p>
+<p>举个例子：<br>[1, 2, 2, 3], target = 2<br>在范围[0, 4)上搜索，mid = 2, nums[mid] == target。此时将right = mid = 2。<br>在范围[0, 2)上搜索，mid = 1, nums[mid] == target。此时将right = mid = 1。<br>在范围[0, 1)上搜索，mid = 0, target &gt; nums[0]。此时left = mid + 1 = 1。<br>left == right == 1，此时循环结束。<br>可以看出，1就是target的最小索引。</p>
+<p>[1, 1, 2, 3], target = 2<br>在范围[0, 4)上搜索，mid = 2, nums[mid] == target。此时将right = mid = 2。<br>在范围[0, 2)上搜索，mid = 1, target &gt; nums[1]。此时left = mid + 1 = 2。<br>left == right == 2，此时循环结束。<br>可以看出，2就是target的最小索引。</p>
+<p>3.以上两个例子都是nums中包含target的情况，下面看nums中不包含target的情况。<br>[1, 3, 5, 7], target = 0<br>在范围[0, 4)上搜索，mid = 2, target &lt; nums[mid]。此时将right = mid = 2。<br>在范围[0, 2)上搜索，mid = 1, target &lt; nums[mid]。此时将right = mid = 1。<br>在范围[0, 1)上搜索，mid = 0, target &lt; nums[mid]。此时将right = mid = 0。<br>left == rihgt == 0，此时循环结束。<br>再次判断：【如果这个位置是target，则是target的最小索引；】<br>否则的话，说明target不在nums中。<br>而nums[0] = 1，而不是target，说明target不存在于nums中。</p>
+<p>[1, 3, 5, 7], target = 10<br>在范围[0, 4)上搜索，mid = 2, target &gt; nums[mid]。此时将left = mid + 1 = 3。<br>在范围[3, 4)上搜索，mid = 3, target &gt; nums[mid]。此时将left = mid + 1 = 4。<br>left == rihgt == 4，此时循环结束。<br>再次判断：【如果这个位置是target，则是target的最小索引；】<br>而此时的left(right)已经代表不了数组的index了，说明target不在nums中。<br>即：【若left(right) == n，则target不在nums中】</p>
+<p>[1, 3, 5, 7], target = 6<br>在范围[0, 4)上搜索，mid = 2, target &gt; nums[mid]。此时将left = mid + 1 = 3。<br>在范围[3, 4)上搜索，mid = 3, target &lt; nums[mid]。此时将rihgt = mid = 3。<br>left == right == 3，此时循环结束。<br>再次判断：【如果这个位置是target，则是target的最小索引；】<br>否则的话，说明target不在nums中。<br>而nums[3] = 7，而不是target，说明target不存在于nums中。</p>
+<p>时间复杂度：O(log n)<br>空间复杂度：O(1)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/285596680/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285596680/</a>)</p>
+<h3 id="Solution-2：Binary-Search-with-minimum-index-1"><a href="#Solution-2：Binary-Search-with-minimum-index-1" class="headerlink" title="Solution-2：Binary Search with minimum index"></a>Solution-2：Binary Search with minimum index</h3><p>1.核心思想还是二分查找。我们尝试找target最大的index（如果target有多个的话）</p>
+<p>2.假设某一时刻，在区间[left, right)上查找。<br>继续取mid，判断nums[mid]和target的大小关系。<br>此时区间[left, right)被分成：[left, mid), nums[mid], [mid + 1, right)三部分。<br>我们通过判断nums[mid]和target的大小关系来决定下次搜索在上面范围内：<br>如果target &gt; nums[mid]，说明target的最大索引一定在[mid + 1, right)这个范围上。<br>如果target &lt; nums[mid]，说明target的最大索引一定在[left, mid)这个范围上。<br>如果target == nums[mid]，说明target的最大索引要么就在mid位置；要么在mid位置之后；<br>这种情况下，我们继续在[mid + 1, right)上寻找:<br>如果这个范围内已经没有和target相等的数字了，那么答案就是mid。<br>如果这个范围内又找到了target，说明target的最大索引在这个范围内。</p>
+<p>举个例子：<br>[1, 2, 2, 3], target = 2<br>在范围[0, 4)上搜索，mid = 2, nums[mid] == target。此时将left = mid + 1 = 3。<br>在范围[3, 4)上搜索，mid = 3, nums[mid] &gt; target。此时将right = mid = 3。<br>left == right == 3，此时循环结束。<br>可以看出，【3 - 1】就是target的最大索引。</p>
+<p>[1, 1, 2, 3], target = 2<br>在范围[0, 4)上搜索，mid = 2, nums[mid] == target。此时将left = mid + 1 = 3。<br>在范围[3, 4)上搜索，mid = 3, nums[mid] &gt; target。此时right = mid = 3。<br>left == right == 3，此时循环结束。<br>可以看出，【3 - 1】就是target的最大索引。</p>
+<p>3.以上两个例子都是nums中包含target的情况，下面看nums中不包含target的情况。<br>[1, 3, 5, 7], target = 0<br>在范围[0, 4)上搜索，mid = 2, target &lt; nums[mid]。此时将right = mid = 2。<br>在范围[0, 2)上搜索，mid = 1, target &lt; nums[mid]。此时将right = mid = 1。<br>在范围[0, 1)上搜索，mid = 0, target &lt; nums[mid]。此时将right = mid = 0。<br>left == right == 0，此时循环结束。<br>再次判断：【如果这个位置的前一个位置是target，则是target的最大索引；】<br>否则的话，说明target不在nums中。<br>而left(right)的前一个是-1，已经不能表示index了。说明target不存在。<br>即：【若left(right) == 0，则target不在nums中】</p>
+<p>[1, 3, 5, 7], target = 10<br>在范围[0, 4)上搜索，mid = 2, target &gt; nums[mid]。此时将left = mid + 1 = 3。<br>在范围[3, 4)上搜索，mid = 3, target &gt; nums[mid]。此时将left = mid + 1 = 4。<br>left == right == 4，此时循环结束。<br>再次判断：【如果这个位置的前一个位置是target，则是target的最大索引；】<br>否则的话，说明target不在nums中。<br>而nums[3]的值为7，说明target不在nums中。</p>
+<p>[1, 3, 5, 7], target = 2<br>在范围[0, 4)上搜索，mid = 2, target &lt; nums[mid]。此时将right = mid = 2。<br>在范围[0, 2)上搜索，mid = 1, target &lt; nums[mid]。此时将right = mid = 1。<br>在范围[0, 1)上搜索，mid = 0, target &gt; nums[mid]。此时将left = mid + 1 = 1。<br>left == right == 1，此时循环结束。<br>再次判断：【如果这个位置的前一个位置是target，则是target的最大索引；】<br>否则的话，说明target不在nums中。<br>而nums[0]的值为1，说明target不在nums中。</p>
+<p>时间复杂度：O(log n)<br>空间复杂度：O(1)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/285657074/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285657074/</a>)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/13/2019-12-13-Leetcode-704-Binary%20Search/" data-id="ck4jma6dc000o5st76nhp0esl" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/7/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/9/">Next &amp;raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/12/24/2019-12-24-Leetcode-113-Path%20Sum%20II/">【二叉树专项】113.Path Sum II</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/24/2019-12-24-Leetcode-112-Path%20Sum/">【二叉树专项】112.Path Sum</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/24/2019-12-24-Leetcode-226-Invert%20Binary%20Tree/">【二叉树专项】226.Invert Binary Tree</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/24/2019-12-24-Leetcode-111-Minimum%20Depth%20of%20Binary%20Tree/">【二叉树专项】111.Minimum Depth of Binary Tree</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/24/2019-12-24-Leetcode-104-Maximum%20Depth%20of%20Binary%20Tree/">【二叉树专项】104.Maximum Depth of Binary Tree</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 wspage3<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
