@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="wspage3">
 <meta property="og:description" content="一、题意题目链接: 113.Path Sum II 1.Description【输入】给定一棵二叉树。给定一个整数target。【输出】判断是否有一条从root到leaf的路径，这条路径上所有节点的sum为target。如果存在，则返回一个二维数组，代表有n条路径满足题意，每一条路径是一个一维数组。如果不存在，返回空的二维数组。 2.ExampleInput: 22[5,4,8,11,null,1">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-24T08:25:34.445Z">
+<meta property="og:updated_time" content="2019-12-24T08:58:53.365Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="wspage3" type="application/atom+xml">
@@ -91,7 +91,7 @@
 <li>树为NULL时，返回空二维数组。</li>
 <li>树仅包含一个node时，查看node-&gt;val 是否等于target。</li>
 </ol>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Recursive-solution-DFS"><a href="#Solution-1：Recursive-solution-DFS" class="headerlink" title="Solution-1：Recursive solution(DFS)"></a>Solution-1：Recursive solution(DFS)</h3><p>1.遍历顺序为dfs的顺序</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Recursive-solution-DFS-Backtracking"><a href="#Solution-1：Recursive-solution-DFS-Backtracking" class="headerlink" title="Solution-1：Recursive solution(DFS)(Backtracking)"></a>Solution-1：Recursive solution(DFS)(Backtracking)</h3><p>1.遍历顺序为dfs的顺序</p>
 <p>2.对于任一节点来说：<br>父亲调用自身的时候：<br>a.传递一个值target下来。<br>b.传递一个路径下来，存在一维数组sub中。</p>
 <p>3.叶节点需要做：<br>首先，将自己放在路径中。<br>其次，判断自身（如果自身value和target相等，那么将这条路径作为一个合法的子答案加入res；如果不相等的话，不加入ans）<br>然后，删除自身。因为本节点已经被考虑完成了，也不可能有后继节点了。所以从sub中删除本节点。<br>最后，上报父亲。return即可。</p>
 <p>4.非叶节点需要做：<br>首先，将自己放在路径中。<br>其次，判断自身（自身一定不满足，因为不是叶子）<br>然后，判断非空的儿子。将target - node-&gt;val传递下去。<br>接着，删除自身。因为本节点自身不满足，而其非空儿子都考虑完成了。所以从sub中删除本节点。<br>最后，上报父亲。return即可。</p>
@@ -103,7 +103,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/24/2019-12-24-Leetcode-113-Path%20Sum%20II/" data-id="ck4jma6e8001n5st74frp80zm" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/24/2019-12-24-Leetcode-113-Path%20Sum%20II/" data-id="ck4k0lcsn001m80t798qbh9vs" class="article-share-link">Share</a>
       
       
     </footer>
@@ -111,6 +111,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2019/12/24/2019-12-24-Leetcode-437-Path%20Sum%20III/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          【二叉树专项】437.Path Sum III
+        
+      </div>
+    </a>
   
   
     <a href="/2019/12/24/2019-12-24-Leetcode-112-Path%20Sum/" id="article-nav-older" class="article-nav-link-wrap">
@@ -152,6 +161,10 @@
       <ul>
         
           <li>
+            <a href="/2019/12/24/2019-12-24-Leetcode-437-Path%20Sum%20III/">【二叉树专项】437.Path Sum III</a>
+          </li>
+        
+          <li>
             <a href="/2019/12/24/2019-12-24-Leetcode-113-Path%20Sum%20II/">【二叉树专项】113.Path Sum II</a>
           </li>
         
@@ -165,10 +178,6 @@
         
           <li>
             <a href="/2019/12/24/2019-12-24-Leetcode-111-Minimum%20Depth%20of%20Binary%20Tree/">【二叉树专项】111.Minimum Depth of Binary Tree</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/24/2019-12-24-Leetcode-104-Maximum%20Depth%20of%20Binary%20Tree/">【二叉树专项】104.Maximum Depth of Binary Tree</a>
           </li>
         
       </ul>
