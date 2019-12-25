@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-2019-12-10-Leetcode-714-Best Time to Buy and Sell Stock with Transaction Fee" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-2019-12-23-Leetcode-102-Binary Tree Level Order Traversal" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/10/2019-12-10-Leetcode-714-Best%20Time%20to%20Buy%20and%20Sell%20Stock%20with%20Transaction%20Fee/" class="article-date">
-  <time datetime="2019-12-10T02:37:13.968Z" itemprop="datePublished">2019-12-10</time>
+    <a href="/2019/12/23/2019-12-23-Leetcode-102-Binary%20Tree%20Level%20Order%20Traversal/" class="article-date">
+  <time datetime="2019-12-23T11:35:16.196Z" itemprop="datePublished">2019-12-23</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/10/2019-12-10-Leetcode-714-Best%20Time%20to%20Buy%20and%20Sell%20Stock%20with%20Transaction%20Fee/">Leetcode714-Best Time to Buy and Sell Stock with Transaction Fee</a>
+      <a class="article-title" href="/2019/12/23/2019-12-23-Leetcode-102-Binary%20Tree%20Level%20Order%20Traversal/">【二叉树专项】102.Binary Tree Level Order Traversal</a>
     </h1>
   
 
@@ -83,232 +83,26 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/" target="_blank" rel="noopener">Leetcode714-Best Time to Buy and Sell Stock with Transaction Fee</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组prices；prices[i]代表第i天股票的价格。<br>非负数fee代表每次交易需要的费用。<br>最多交易次数不限，求出你最多能赚多少钱。<br>前提是：买入下一股的时候，必须将上一股卖掉。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: prices = [1, 3, 2, 8, 4, 9], fee = 2<br>Output: 8<br>Explanation: The maximum profit can be achieved by:<br>Buying at prices[0] = 1<br>Selling at prices[3] = 8<br>Buying at prices[4] = 4<br>Selling at prices[5] = 9<br>The total profit is ((8 - 1) - 2) + ((9 - 4) - 2) = 8.</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>0 &lt; prices.length &lt;= 50000.<br>0 &lt; prices[i] &lt; 50000.<br>0 &lt;= fee &lt; 50000.</p>
-<p>n: 当n为0/1的时候，直接返回0；<br>赚不到钱则返回0；</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Dynamic-Programming"><a href="#Solution-1：Dynamic-Programming" class="headerlink" title="Solution-1：Dynamic Programming"></a>Solution-1：Dynamic Programming</h3><p>1.根据leetcode123、188，求出状态转移方程。<br>由于不考虑交易次数的限制，而加上了考虑fee，所以可以得出以下方程：<br>dp[i] = max(dp[i - 1], dp[j] + prices[i] - prices[j] - fee);<br>      = max(dp[i - 1], prices[i] - fee - (prices[j] - dp[j]));<br>dp[i]含义为：范围[0, i]内，所能获取的最高利润<br>i:[1, n - 1]  dp[0] = 0<br>j:[0, i - 1]  当j为i的时候，相当于今天买了，今天卖，肯定亏一次手续费。</p>
-<p>2.所以i在[1, n - 1]内循环，对于每个固定的i，在[0, i - 1]中找出一个j，使得表达式”(prices[j] - dp[j])”的值最小。<br>找出来j的位置后，dp[i]就可以求出；结果返回dp[n - 1]即可。</p>
-<p>时间复杂度：O(n ^ 2)<br>空间复杂度：O(n)</p>
-<p>结果和预期一样，TLE</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/284928102/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284928102/</a>)</p>
-<h3 id="Solution-2：Dynamic-Programming-Optimization"><a href="#Solution-2：Dynamic-Programming-Optimization" class="headerlink" title="Solution-2：Dynamic Programming + Optimization"></a>Solution-2：Dynamic Programming + Optimization</h3><p>1.首先，由于i每次递增1：<br>对于当前的i来说，首要任务是在[0, i - 1]找出目标表达式”(prices[j] - dp[j])”的最小值。<br>而前一轮的i - 1，已经计算出了[0, i - 2]内目标表达式的最小值。<br>所以对于当前i来说，直接复用该结果，可以使得O(n)的time complexity降低到O(1)。</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/binary-tree-level-order-traversal/" target="_blank" rel="noopener">102.Binary Tree Level Order Traversal</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一棵二叉树。<br>【输出】<br>求出这棵二叉树的level序遍历结果，并以二维数组的形式返回。<br>从根往叶，从左往右。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [3,9,20,null,null,15,7]<br>Output:<br>[<br>  [3],<br>  [9,20],<br>  [15,7]<br>]</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
+<li>树为空时，返回空数组。</li>
+</ol>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Recursive-solution"><a href="#Solution-1：Recursive-solution" class="headerlink" title="Solution-1：Recursive solution"></a>Solution-1：Recursive solution</h3><p>0.前序、中序、后序：都属于dfs。当实现迭代版本时，我们使用的都是stack。<br>1.层次遍历：依旧用dfs实现。</p>
 <p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/284929795/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284929795/</a>)</p>
-<p>3.由于dp[i]只需要知道dp[i - 1]的值就可以进行计算了。所以可以使得O(n)的space complexity降低到O(1)。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<p>4.Code(<a href="https://leetcode.com/submissions/detail/284930112/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284930112/</a>)</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/275764307/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/275764307/</a>)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; levelOrder(TreeNode* root) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; res;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> res;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        bfs(root, <span class="number">0</span>, res);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> res;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">bfs</span><span class="params">(TreeNode* node, <span class="keyword">int</span> level, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; res)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (node == <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (res.<span class="built_in">size</span>() == level) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">            <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; temp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">            res.push_back(temp);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        res[level].push_back(node-&gt;val);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">        bfs(node-&gt;left, level + <span class="number">1</span>, res);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">        bfs(node-&gt;right, level + <span class="number">1</span>, res);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/10/2019-12-10-Leetcode-714-Best%20Time%20to%20Buy%20and%20Sell%20Stock%20with%20Transaction%20Fee/" data-id="ck4k0lcrw000d80t7bcec0t6l" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2019-12-09-Leetcode-188-Best Time to Buy ans Sell Stock IV" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/12/09/2019-12-09-Leetcode-188-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20IV/" class="article-date">
-  <time datetime="2019-12-09T06:58:57.169Z" itemprop="datePublished">2019-12-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/09/2019-12-09-Leetcode-188-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20IV/">Leetcode188-Best Time to Buy and Sell Stock IV</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/" target="_blank" rel="noopener">Leetcode188-Best Time to Buy and Sell Stock IV</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组prices；prices[i]代表第i天股票的价格。<br>如果你最多能交易k次，即：买k次，卖k次。求出你最多能赚多少钱。<br>前提是：买入下一股的时候，必须将上一股卖掉。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [2,4,1], k = 2<br>Output: 2<br>Explanation: Buy on day 1 (price = 2) and sell on day 2 (price = 4), profit = 4-2 = 2.</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n: 当n为0/1的时候，直接返回0；<br>k: 当k &lt;= 0的时候，直接返回0；<br>   当k &gt;= n的时候，将k赋值为n - 1；<br>赚不到钱则返回0；</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Dynamic-Programming"><a href="#Solution-1：Dynamic-Programming" class="headerlink" title="Solution-1：Dynamic Programming"></a>Solution-1：Dynamic Programming</h3><p>1.根据leetcode123，可以得到相同的状态转移方程：<br>dp[j][i] = max(dp[j][i - 1], dp[j - 1][m] + prices[i] - prices[m]);<br>其中：j:[1, k]  i:[0, n - 1]  m:[0, i]</p>
-<p>2.申请(k + 1) * n的dp数组空间，答案就是dp[k][n - 1];<br>j从[1, k]遍历<br>i从[1, n - 1]遍历<br>m从[0, i]遍历<br>对于每次固定好的j和i，找出一个位置m，使得prices[m] - dp[j - 1][m]的值最小。</p>
-<p>时间复杂度：O(k * n ^ 2)<br>空间复杂度：O(k * n)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/284743219/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284743219/</a>)</p>
-<h3 id="Solution-2：Dynamic-Programming-Optimization"><a href="#Solution-2：Dynamic-Programming-Optimization" class="headerlink" title="Solution-2：Dynamic Programming + Optimization"></a>Solution-2：Dynamic Programming + Optimization</h3><p>1.从Solution-1的解法来看，对于当前(k, i)序列，假设通过O(n)的循环，找到了一个位置m1，使得表达式的值最小了，从而算出了当前(k, i)的答案。<br>接着迭代到当前(k, i + 1)序列，此时还需要O(n)的循环：找到当前序列一个位置m2，使得表达式的值最小。<br>由于我们在上一次循环中已经计算出了[0, i]范围内使得表达式最小的一个位置。当前(k, i + 1)序列，直接通过O(1)的时间就可以算出来，而不必继续遍历[0, i + 1]</p>
-<p>2.所以，对于遍历当前i位置来说，可以直接访问上一次i - 1的计算结果。从而把整体的时间复杂度优化为O(k * n)</p>
-<p>时间复杂度：O(k * n)<br>空间复杂度：O(k * n)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/284745998/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284745998/</a>)</p>
-<h3 id="Solution-3：Dynamic-Programming-Optimization"><a href="#Solution-3：Dynamic-Programming-Optimization" class="headerlink" title="Solution-3：Dynamic Programming + Optimization"></a>Solution-3：Dynamic Programming + Optimization</h3><p>1.尝试调换两次循环的次序<br>2.进一步优化空间，将二维降成一维<br>3.当k &gt;= n / 2的时候，也就意味着可以用leetcode-122的O(n)方法来解。即无限交易次数，orz。。。</p>
-<p>时间复杂度：O(k * n)<br>空间复杂度：O(k)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/284749560/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284749560/</a>)<br>Code(<a href="https://leetcode.com/submissions/detail/284755984/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284755984/</a>)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/09/2019-12-09-Leetcode-188-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20IV/" data-id="ck4k0lcru000b80t7cwdafqr5" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2019-12-09-Leetcode-123-Best Time to Buy ans Sell Stock III" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/12/08/2019-12-09-Leetcode-123-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20III/" class="article-date">
-  <time datetime="2019-12-08T03:35:57.193Z" itemprop="datePublished">2019-12-08</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/08/2019-12-09-Leetcode-123-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20III/">Leetcode123-Best Time to Buy and Sell Stock III</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/" target="_blank" rel="noopener">Leetcode123-Best Time to Buy and Sell Stock III</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组prices；prices[i]代表第i天股票的价格。<br>如果你最多能交易2次，即：买2次，卖2次。求出你最多能赚多少钱。<br>前提是：买入下一股的时候，必须将上一股卖掉。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [3,3,5,0,0,3,1,4]<br>Output: 6<br>Explanation: Buy on day 4 (price = 0) and sell on day 6 (price = 3), profit = 3-0 = 3.<br>             Then buy on day 7 (price = 1) and sell on day 8 (price = 4), profit = 4-1 = 3.</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n：当n为0/1的时候，直接返回0；<br>赚不到钱则返回0；</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：峰谷法"><a href="#Solution-1：峰谷法" class="headerlink" title="Solution-1：峰谷法"></a>Solution-1：峰谷法</h3><p>1.将每天的价格画成折线图，折线图中上升的线段就是可以获得利润的时候。<br>由于我们最多可以交易两次，也是就说找到两条折线，其高度差最大。<br>所以说用变量maxProfit1和maxProfit2来维护这两个值，数组从左往右遍历一次，找出所有的valley和peak；然后依次更新两个最大值。<br>最后结果返回这两个值的和即可。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<p>结果发现：pass了190/200的用例。<br>其中一个不过的用例是：[1,2,4,2,5,7,2,4,9,0]<br>按照我们上面的思路：找出所有的上升线段：1-&gt;2-&gt;4  2-&gt;5-&gt;7  2-&gt;4-&gt;9<br>挑两个最大的，计算出ans = 5 + 7 = 12<br>但实际上答案是13。分别是：1-&gt;7  2-&gt;9这两个区间。<br>通过观察，可以看出：1-&gt;2-&gt;4  2-&gt;5-&gt;7，这两个区间由于存在范围重叠，导致将其分开计算得到的两个最大值，比在一个计算得到的一个最大值要小。<br>这也是这种思路的问题所在。</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/284240316/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284240316/</a>)</p>
-<h3 id="Solution-2：Divide-and-Conquer"><a href="#Solution-2：Divide-and-Conquer" class="headerlink" title="Solution-2：Divide and Conquer"></a>Solution-2：Divide and Conquer</h3><p>1.根据leetcode121的启示，我们可以找O(n)的时间内，找到一个区间[0, n - 1]交易一次所能获取的最大利润。<br>本题限定，我们最多能交易2次，所以对于位置i，我们可以先找到[0, i - 1]内交易一次所能获得的最大利润。以及[i, n - 1]内交易一次所能获得的最大利润。<br>然后把两部分加起来即可。在[0, n - 1]的范围内，找到一个i，使得其两部分的和最大。相当于进行两次leetcode121。</p>
-<p>2.vector<int> l(n, 0);//l[i]代表：范围[0, i]内，交易一次，能获得的最大利润<br>  vector<int> r(n, 0);//r[i]代表：范围[i, n - 1]内，交易一次，能获得的最大利润<br>  则对于i在[0, n - 1]内，res[i] = l[i] + r[i]，找出最大的res[i]即可。</p>
+<h3 id="Solution-2：Iterative-solution-using-Queue"><a href="#Solution-2：Iterative-solution-using-Queue" class="headerlink" title="Solution-2：Iterative solution using Queue"></a>Solution-2：Iterative solution using Queue</h3><p>0.前序、中序、后序：都属于dfs。当实现迭代版本时，我们使用的都是Stack模拟。<br>1.层次遍历：实现迭代版本时，使用bfs，用Queue模拟。<br>2.每一轮，从队列中依次拿出n个元素，这些元素一定是同一层的。将这个结果放入ans中。<br>拿的时候，同时考虑其左右儿子，如果有的话，将其加入队列中。<br>3.直到队列为空的时候，所有的元素都被考虑过了。</p>
 <p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/284663137/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284663137/</a>)</p>
-<h3 id="Solution-3：Dynamic-Programming"><a href="#Solution-3：Dynamic-Programming" class="headerlink" title="Solution-3：Dynamic Programming"></a>Solution-3：Dynamic Programming</h3><p>1.状态转移：dp[k][i] = max(dp[k][i - 1], dp[k - 1][j] + prices[i] - prices[j])<br>其中dp[k][i]代表：最多交易k次，截止到第i天为止（包含第i天），所能获得的最多利润。则答案就是dp[k][n - 1]<br>分别遍历k和i即可。对于固定的k和i，找到一个j在[0, i]范围内，使得prices[j] - dp[k - 1][j]最小即可。<br>边界条件：<br>当k为0时，dp[k][i]都为0<br>当i为0时，dp[k][i]都为0</p>
-<p>时间复杂度：O(k * n ^ 2)<br>空间复杂度：O(K * n)</p>
-<p>结果TLE</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/284681458/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284681458/</a>)</p>
-<h3 id="Solution-4：Dynamic-Programming-Optimization"><a href="#Solution-4：Dynamic-Programming-Optimization" class="headerlink" title="Solution-4：Dynamic Programming + Optimization"></a>Solution-4：Dynamic Programming + Optimization</h3><p>1.Solution-3的思路是：我们对于一个给定的(k, i)，j在[0, i]中，寻找一个最小的j使得表达式（prices[j] - dp[k - 1][j]）的值最小。<br>找到之后，继续寻找(k, i + 1)..(k, i + 2)……的值，直到所有的k和i遍历完成。</p>
-<p>2.通过观察，我们发现表达式（prices[j] - dp[k - 1][j]）的值只和位置j有关（在k固定的情况下）。<br>所以对于同一个k来说，当计算出了范围[0, i]内表达式的最小值后，计算[0, i + 1]只需要O(1)的时间。<br>也就是说，对于给定的(k, i)，我们保留(k, i - 1)的计算结果，通过递推来算出当前的结果。<br>而不是对于每一个(k, i)，我们通过遍历j来找出当下结果。<br>启示：当计算到某个状态时，而非仅仅考虑当前计算出来正确结果即可。尝试想一下当前结果对下一次的计算是否有用，有用的话将当前结果保留下来即可。</p>
-<p>时间复杂度：O(k * n)<br>空间复杂度：O(K * n)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/284684804/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284684804/</a>)</p>
-<h3 id="Solution-5：Dynamic-Programming-Further-Optimization"><a href="#Solution-5：Dynamic-Programming-Further-Optimization" class="headerlink" title="Solution-5：Dynamic Programming + Further Optimization"></a>Solution-5：Dynamic Programming + Further Optimization</h3><p>1.进一步，我们可以发现k是一个常数，所以尝试将两层循环倒换一下顺序，即：常数级别的k放在内层循环中。</p>
-<p>时间复杂度：O(k * n)<br>空间复杂度：O(K * n)</p>
-<p>Code(<a href="https://leetcode.com/submissions/detail/284698683/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284698683/</a>)</p>
-<p>2.再进一步，我们可以发现dp[i][k]的值只和dp[i - 1][k]的值有关，而和i - 2, i - 3……无关。所以我们可以将第一维用一个变量表示即可，即将二维压缩为一维。空间复杂度变为：O(k)</p>
-<p>时间复杂度：O(k * n)<br>空间复杂度：O(k)</p>
-<p>Code(<a href="https://leetcode.com/submissions/detail/284701294/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284701294/</a>)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/275767633/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/275767633/</a>)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; levelOrder(TreeNode* root) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; res;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> res;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">queue</span>&lt;TreeNode*&gt; treeQueue;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        treeQueue.push(root);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span> (!treeQueue.empty()) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; sub;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">int</span> n = treeQueue.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">                TreeNode* temp = treeQueue.front();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">                sub.push_back(temp-&gt;val);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">                treeQueue.pop();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">if</span> (temp-&gt;left != <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">                    treeQueue.push(temp-&gt;left);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">if</span> (temp-&gt;right != <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">                    treeQueue.push(temp-&gt;right);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">            res.push_back(sub);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> res;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/08/2019-12-09-Leetcode-123-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20III/" data-id="ck4k0lcrs000880t7hmf23xva" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2019-12-08-Leetcode-122-Best Time to Buy ans Sell Stock II" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/12/07/2019-12-08-Leetcode-122-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20II/" class="article-date">
-  <time datetime="2019-12-07T01:53:30.793Z" itemprop="datePublished">2019-12-07</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/07/2019-12-08-Leetcode-122-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20II/">Leetcode122-Best Time to Buy and Sell Stock II</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/" target="_blank" rel="noopener">Leetcode122-Best Time to Buy and Sell Stock</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组prices；prices[i]代表第i天股票的价格。<br>如果你能交易任意k次，即：买k次，卖k次。求出你最多能赚多少钱。<br>前提是：买入下一股的时候，必须将上一股卖掉。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [7,1,5,3,6,4]<br>Output: 7<br>Explanation: Buy on day 2 (price = 1) and sell on day 3 (price = 5), profit = 5-1 = 4.<br>             Then buy on day 4 (price = 3) and sell on day 5 (price = 6), profit = 6-3 = 3.</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n：当n为0/1的时候，直接返回0；<br>赚不到钱则返回0；</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>考虑现实生活中，唯一不同的是：现实中我们只知道当前的股价，不知道明天的股价。<br>而现在我们知道了：假设今天股价为a，明天股价b大于a，则买下一定会赚钱，一定买。<br>假设今天股价为a，明天股价b小于a，则买下一定会赔钱，一定不买。</p>
-<h3 id="Solution-1：Greedy"><a href="#Solution-1：Greedy" class="headerlink" title="Solution-1：Greedy"></a>Solution-1：Greedy</h3><p>1.我们要做的只是：每天只看今天的价格和明天的价格，然后做决定。<br>不管后天，大后天的价格。因为我们每天都可以做决定，如果后面发现股价一直在涨，则每天都买就行了。<br>然后ans一直累加每天的利润即可。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/284232069/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284232069/</a>)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/07/2019-12-08-Leetcode-122-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20II/" data-id="ck4k0lcrr000680t7go0fhq2d" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2019-12-07-Leetcode-121-Best Time to Buy ans Sell Stock" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/12/07/2019-12-07-Leetcode-121-Best%20Time%20to%20Buy%20ans%20Sell%20Stock/" class="article-date">
-  <time datetime="2019-12-07T01:09:15.739Z" itemprop="datePublished">2019-12-07</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/07/2019-12-07-Leetcode-121-Best%20Time%20to%20Buy%20ans%20Sell%20Stock/">Leetcode121-Best Time to Buy and Sell Stock</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/" target="_blank" rel="noopener">Leetcode121-Best Time to Buy and Sell Stock</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组prices；prices[i]代表第i天股票的价格。<br>如果你只能交易一次，即：买一次，卖一次。求出你最多能赚多少钱。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [7,1,5,3,6,4]<br>Output: 5<br>Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.<br>Not 7-1 = 6, as selling price needs to be larger than buying price.</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n：当n为0/1的时候，直接返回0；<br>赚不到钱则返回0；</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>由于要想赚钱，得低价买入，高价卖出；<br>买入卖出不能在同一天，至少买入的第二天才能卖出；<br>对于任意i，本质上就是求出[i + 1, n - 1]范围内最大的数字，然后减去prices[i]，就是第i天能获取到的利润。<br>对于[0, n - 1]上的所有i，找出一个最大值即可。</p>
-<h3 id="Solution-1：Dynamic-programming"><a href="#Solution-1：Dynamic-programming" class="headerlink" title="Solution-1：Dynamic programming"></a>Solution-1：Dynamic programming</h3><p>1.由于我们之前做过题目：Leetcode42-Trapping Rain Water<br>在42的Solution2的时候，本质上也是求：给定一个位置，其左右两边最大的值。<br>对于求n个元素所有的rightMax，使用O(n)的时间和O(n)的空间即可。</p>
-<p>2.rightMax[i]表示：[i + 1, n - 1]范围内最大的数字。<br>则通过递推，可以得到：rightMax[i - 1] = max(prices[i], rightMax[i]);<br>则i从后往前，就可以算出所有的rightMax[i]。<br>同时，使用这个值减去prices[i]的值，来不断更新最大利润即可。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/284225891/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284225891/</a>)</p>
-<h3 id="Solution-2：Further-Optimization"><a href="#Solution-2：Further-Optimization" class="headerlink" title="Solution-2：Further Optimization"></a>Solution-2：Further Optimization</h3><p>1.观察上面的递推式，可以发现：计算rightMax[i - 1]的时候，只用到了rightMax[i]，也就是说可以将数组优化为单个变量。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/284226029/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284226029/</a>)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/07/2019-12-07-Leetcode-121-Best%20Time%20to%20Buy%20ans%20Sell%20Stock/" data-id="ck4k0lcrq000580t7hn0xfm7y" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/23/2019-12-23-Leetcode-102-Binary%20Tree%20Level%20Order%20Traversal/" data-id="ck4kogzm0001dk4t71jql92pw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -322,7 +116,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/10/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/12/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/10/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/64/">64</a><a class="extend next" rel="next" href="/page/12/">Next &amp;raquo;</a>
   </nav>
 
 </section>
