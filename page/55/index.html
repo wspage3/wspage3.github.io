@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-2019-12-07-Leetcode-121-Best Time to Buy ans Sell Stock" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-2019-12-11-Leetcode-81-Search in Rotated Sorted Array II" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/07/2019-12-07-Leetcode-121-Best%20Time%20to%20Buy%20ans%20Sell%20Stock/" class="article-date">
-  <time datetime="2019-12-07T01:09:15.739Z" itemprop="datePublished">2019-12-07</time>
+    <a href="/2019/12/11/2019-12-11-Leetcode-81-Search%20in%20Rotated%20Sorted%20Array%20II/" class="article-date">
+  <time datetime="2019-12-11T01:06:43.935Z" itemprop="datePublished">2019-12-11</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/07/2019-12-07-Leetcode-121-Best%20Time%20to%20Buy%20ans%20Sell%20Stock/">Leetcode121-Best Time to Buy and Sell Stock</a>
+      <a class="article-title" href="/2019/12/11/2019-12-11-Leetcode-81-Search%20in%20Rotated%20Sorted%20Array%20II/">81. Search in Rotated Sorted Array II</a>
     </h1>
   
 
@@ -83,23 +83,23 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/" target="_blank" rel="noopener">Leetcode121-Best Time to Buy and Sell Stock</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组prices；prices[i]代表第i天股票的价格。<br>如果你只能交易一次，即：买一次，卖一次。求出你最多能赚多少钱。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [7,1,5,3,6,4]<br>Output: 5<br>Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.<br>Not 7-1 = 6, as selling price needs to be larger than buying price.</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n：当n为0/1的时候，直接返回0；<br>赚不到钱则返回0；</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>由于要想赚钱，得低价买入，高价卖出；<br>买入卖出不能在同一天，至少买入的第二天才能卖出；<br>对于任意i，本质上就是求出[i + 1, n - 1]范围内最大的数字，然后减去prices[i]，就是第i天能获取到的利润。<br>对于[0, n - 1]上的所有i，找出一个最大值即可。</p>
-<h3 id="Solution-1：Dynamic-programming"><a href="#Solution-1：Dynamic-programming" class="headerlink" title="Solution-1：Dynamic programming"></a>Solution-1：Dynamic programming</h3><p>1.由于我们之前做过题目：Leetcode42-Trapping Rain Water<br>在42的Solution2的时候，本质上也是求：给定一个位置，其左右两边最大的值。<br>对于求n个元素所有的rightMax，使用O(n)的时间和O(n)的空间即可。</p>
-<p>2.rightMax[i]表示：[i + 1, n - 1]范围内最大的数字。<br>则通过递推，可以得到：rightMax[i - 1] = max(prices[i], rightMax[i]);<br>则i从后往前，就可以算出所有的rightMax[i]。<br>同时，使用这个值减去prices[i]的值，来不断更新最大利润即可。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/284225891/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284225891/</a>)</p>
-<h3 id="Solution-2：Further-Optimization"><a href="#Solution-2：Further-Optimization" class="headerlink" title="Solution-2：Further Optimization"></a>Solution-2：Further Optimization</h3><p>1.观察上面的递推式，可以发现：计算rightMax[i - 1]的时候，只用到了rightMax[i]，也就是说可以将数组优化为单个变量。</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/search-in-rotated-sorted-array-ii/" target="_blank" rel="noopener">81. Search in Rotated Sorted Array II</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组nums；<br>该数组原本是升序的，结果在某个支点处旋转了一次，如：<br>i.e., [0,0,1,2,2,5,6] might become [2,5,6,0,0,1,2]<br>给定一个整数target；<br>判断nums中是否包含该target，如果是，返回ture；否则，返回false。<br>假设数组中存在相同的数字。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: nums = [2,5,6,0,0,1,2], target = 0<br>Output: true</p>
+<p>Input: nums = [2,5,6,0,0,1,2], target = 3<br>Output: false</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n: 当n为0的时候，直接返回false；</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>1.常规思路：从前到后遍历一遍nums，如果找到target则return true。</p>
 <p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/284226029/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284226029/</a>)</p>
+<h3 id="Solution-2：Binary-Search"><a href="#Solution-2：Binary-Search" class="headerlink" title="Solution-2：Binary Search"></a>Solution-2：Binary Search</h3><p>1.参考leetcode-33的二分解法，只不过本题目中input可以存在相同的数字。<br>上题中核心思路就是：通过判断nums[mid]和target是否在同一侧，来确定比较器num。<br>前提是：右侧所有的元素都比nums[0]要小。<br>所以可以通过(nums[mid] &lt; nums[0]) == (target &lt; nums[0])来判断。<br>若其在同一侧，则使用nums[mid]作为比较器即可。<br>若其不在同一侧，则对应的将left右移或者right左移。继续考察下一次……</p>
+<p>2.而本题目：右侧所有元素 &lt;= nums[0]<br>假设把其所有和nums[0]相等的元素，都去掉的话，并不影响查找target；<br>这样的话，右边所有的数字都小于nums[0]了，继续使用leetcode-33的二分解法即可。</p>
+<p>3.观察：[0,0,1,2,2,5,6]<br>经过rotate后，可能存在以下几种不同情况：<br>[0,1,2,2,5,6,   0]<br>[1,2,2,5,6,   0,0]<br>[2,2,5,6,   0,0,1]<br>[2,5,6,   0,0,1,2]<br>[5,6,   0,0,1,2,2]<br>[6,   0,0,1,2,2,5]</p>
+<p>时间复杂度：平均O(log n)   最坏O(n)<br>空间复杂度：O(1)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/285139175/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285139175/</a>)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/07/2019-12-07-Leetcode-121-Best%20Time%20to%20Buy%20ans%20Sell%20Stock/" data-id="ck4kogzl50009k4t7alp69o9c" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/11/2019-12-11-Leetcode-81-Search%20in%20Rotated%20Sorted%20Array%20II/" data-id="ck4lb7kz6000hl0t79cwogprp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -113,7 +113,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/54/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/53/">53</a><a class="page-number" href="/page/54/">54</a><span class="page-number current">55</span><a class="page-number" href="/page/56/">56</a><a class="page-number" href="/page/57/">57</a><span class="space">&hellip;</span><a class="page-number" href="/page/64/">64</a><a class="extend next" rel="next" href="/page/56/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/54/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/53/">53</a><a class="page-number" href="/page/54/">54</a><span class="page-number current">55</span><a class="page-number" href="/page/56/">56</a><a class="page-number" href="/page/57/">57</a><span class="space">&hellip;</span><a class="page-number" href="/page/71/">71</a><a class="extend next" rel="next" href="/page/56/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -145,23 +145,23 @@
       <ul>
         
           <li>
-            <a href="/2019/12/24/2019-12-24-Leetcode-437-Path%20Sum%20III/">【二叉树专项】437.Path Sum III</a>
+            <a href="/2019/12/25/2019-12-25-Leetcode-501-Find%20Mode%20in%20Binary%20Search%20Tree/">【BST专项】501.Find Mode in Binary Search Tree</a>
           </li>
         
           <li>
-            <a href="/2019/12/24/2019-12-24-Leetcode-113-Path%20Sum%20II/">【二叉树专项】113.Path Sum II</a>
+            <a href="/2019/12/25/2019-12-25-Leetcode-098-Validate%20Binary%20Search%20Tree/">【BST专项】098.Validate Binary Search Tree</a>
           </li>
         
           <li>
-            <a href="/2019/12/24/2019-12-24-Leetcode-112-Path%20Sum/">【二叉树专项】112.Path Sum</a>
+            <a href="/2019/12/25/2019-12-25-Leetcode-129-Sum%20Root%20to%20Leaf%20Numbers/">【二叉树专项】129.Sum Root to Leaf Numbers</a>
           </li>
         
           <li>
-            <a href="/2019/12/24/2019-12-24-Leetcode-226-Invert%20Binary%20Tree/">【二叉树专项】226.Invert Binary Tree</a>
+            <a href="/2019/12/25/2019-12-25-Leetcode-114-Flatten%20Binary%20Tree%20to%20Linked%20List/">【二叉树专项】114.Flatten Binary Tree to Linked List</a>
           </li>
         
           <li>
-            <a href="/2019/12/24/2019-12-24-Leetcode-111-Minimum%20Depth%20of%20Binary%20Tree/">【二叉树专项】111.Minimum Depth of Binary Tree</a>
+            <a href="/2019/12/25/2019-12-25-Leetcode-110-Balanced%20Binary%20Tree/">【二叉树专项】110.Balanced Binary Tree</a>
           </li>
         
       </ul>

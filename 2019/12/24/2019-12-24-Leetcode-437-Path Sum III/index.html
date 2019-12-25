@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="wspage3">
 <meta property="og:description" content="一、题意题目链接: 437.Path Sum III 1.Description【输入】给定一棵二叉树。给定一个整数target。【输出】判断是否存在一条路径，使得路径上所有节点的sum为target。且路径只能是向下的，即从父亲到儿子。如果存在，返回可能的路径数。如果不存在，返回0。 2.ExampleInput:8[10,5,-3,3,2,null,11,3,-2,null,1]Output:">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-24T15:18:37.350Z">
+<meta property="og:updated_time" content="2019-12-25T02:47:26.180Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="wspage3" type="application/atom+xml">
@@ -108,13 +108,13 @@
 <p>2.采用prefixSum的方法，避免进行过多的重复计算。<br>遍历到某个节点时，将从root到该节点这条路径的和累加，缓存起来，在后续过程，可以利用这些有用信息。</p>
 <p>3.具体过程如下：<br>a.访问到每一个节点的时候，cur += node-&gt;val；<br>b.判断(cur - sum)有没有在字典中出现，有的话，答案累加其出现的频率（次数）<br>【原理1】：当遍历到当前节点node时，假设cur为x，也就是sum(root, node) = x。若字典中存在(x - sum)，说明在某个节点node1，sum(root, node1) = (x - sum)。<br>    那么也就可以推断出来：sum(node1-&gt;next, node) = sum。也就是答案要求解的路径。<br>【原理2】：字典中存在的记录，一定是从root到node路径上所有节点的前缀和。也就是说保证了某个节点到当前节点node的【可通性】。因此，我们在遍历完每个节点后，要将其在字典中的“影响”消除。<br>c.将当前cur缓存到字典中，其出现频率加一。<br>至此，当前节点node“自身”考虑完成。</p>
 <p>4.接下来递归考虑node的左儿子和右儿子。<br>当他们都考虑完成的时候，节点node才真正考虑完成。此时将cur在字典中出现的频率减一。<br>同时返回给父亲节点（回溯）</p>
-<p>时间复杂度：O()<br>空间复杂度：O()</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
 <p>3.Code(<a href="https://leetcode.com/submissions/detail/278714068/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/278714068/</a>)</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">pathSum</span><span class="params">(TreeNode* root, <span class="keyword">int</span> sum)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; m;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        m[<span class="number">0</span>]++;<span class="comment">//prefixSum从0开始</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        dfs(root, <span class="number">0</span>, sum, res, m);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> res;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(TreeNode* root, <span class="keyword">int</span> cur, <span class="keyword">int</span> sum, <span class="keyword">int</span>&amp; res, <span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&amp; m)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        cur += root-&gt;val;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (m.<span class="built_in">find</span>(cur - sum) != m.<span class="built_in">end</span>()) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">            res += m[cur - sum];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        m[cur]++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        dfs(root-&gt;left, cur, sum, res, m);<span class="comment">//递归到当前节点的左子树</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        dfs(root-&gt;right, cur, sum, res, m);<span class="comment">//递归到当前节点的右子树</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">        m[cur]--;<span class="comment">//回溯到当前节点</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/24/2019-12-24-Leetcode-437-Path%20Sum%20III/" data-id="ck4kogzm0001mk4t7ailrdla8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/24/2019-12-24-Leetcode-437-Path%20Sum%20III/" data-id="ck4lb7kzw001ol0t7cpy4c06g" class="article-share-link">Share</a>
       
       
     </footer>
@@ -122,6 +122,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2019/12/25/2019-12-25-Leetcode-199-Binary%20Tree%20Right%20Side%20View/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          【二叉树专项】199.Binary Tree Right Side View
+        
+      </div>
+    </a>
   
   
     <a href="/2019/12/24/2019-12-24-Leetcode-113-Path%20Sum%20II/" id="article-nav-older" class="article-nav-link-wrap">
@@ -163,23 +172,23 @@
       <ul>
         
           <li>
-            <a href="/2019/12/24/2019-12-24-Leetcode-437-Path%20Sum%20III/">【二叉树专项】437.Path Sum III</a>
+            <a href="/2019/12/25/2019-12-25-Leetcode-501-Find%20Mode%20in%20Binary%20Search%20Tree/">【BST专项】501.Find Mode in Binary Search Tree</a>
           </li>
         
           <li>
-            <a href="/2019/12/24/2019-12-24-Leetcode-113-Path%20Sum%20II/">【二叉树专项】113.Path Sum II</a>
+            <a href="/2019/12/25/2019-12-25-Leetcode-098-Validate%20Binary%20Search%20Tree/">【BST专项】098.Validate Binary Search Tree</a>
           </li>
         
           <li>
-            <a href="/2019/12/24/2019-12-24-Leetcode-112-Path%20Sum/">【二叉树专项】112.Path Sum</a>
+            <a href="/2019/12/25/2019-12-25-Leetcode-129-Sum%20Root%20to%20Leaf%20Numbers/">【二叉树专项】129.Sum Root to Leaf Numbers</a>
           </li>
         
           <li>
-            <a href="/2019/12/24/2019-12-24-Leetcode-226-Invert%20Binary%20Tree/">【二叉树专项】226.Invert Binary Tree</a>
+            <a href="/2019/12/25/2019-12-25-Leetcode-114-Flatten%20Binary%20Tree%20to%20Linked%20List/">【二叉树专项】114.Flatten Binary Tree to Linked List</a>
           </li>
         
           <li>
-            <a href="/2019/12/24/2019-12-24-Leetcode-111-Minimum%20Depth%20of%20Binary%20Tree/">【二叉树专项】111.Minimum Depth of Binary Tree</a>
+            <a href="/2019/12/25/2019-12-25-Leetcode-110-Balanced%20Binary%20Tree/">【二叉树专项】110.Balanced Binary Tree</a>
           </li>
         
       </ul>

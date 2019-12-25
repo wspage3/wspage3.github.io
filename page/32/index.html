@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-2019-12-16-Leetcode-242-Valid Anagram" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-empty" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/16/2019-12-16-Leetcode-242-Valid%20Anagram/" class="article-date">
-  <time datetime="2019-12-16T13:07:31.626Z" itemprop="datePublished">2019-12-16</time>
+    <a href="/2019/12/19/empty/" class="article-date">
+  <time datetime="2019-12-19T01:31:26.065Z" itemprop="datePublished">2019-12-19</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/16/2019-12-16-Leetcode-242-Valid%20Anagram/">242.Valid Anagram</a>
+      <a class="article-title" href="/2019/12/19/empty/">empty</a>
     </h1>
   
 
@@ -83,28 +83,23 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/valid-anagram/" target="_blank" rel="noopener">242.Valid Anagram</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定两个字符串s和t。<br>【输出】<br>判断这两个字符串是否为：“字母异位词”<br>所谓“字母异位词”，就是两个单词，组成它们的字母是完全一样的，而不关心其排列顺序。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: s = “anagram”, t = “nagaram”<br>Output: true</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.lenS不等于lenT的时候，直接return false。<br>2.s和t中仅包含小写字母。<br>3.如果输入包含unicode字符的话，该程序的扩展性如何。</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Sort"><a href="#Solution-1：Sort" class="headerlink" title="Solution-1：Sort"></a>Solution-1：Sort</h3><p>1.将两个字符串都排序，然后直接比较字符串是否相等即可。<br>2.在C++中：<br>sort(s.begin(), s.end());<br>return s == t;</p>
-<p>时间复杂度：O(n * log n) //n代表字符串的长度<br>空间复杂度：O(1)</p>
-<p>6.Code(<a href="https://leetcode.com/submissions/detail/286349008/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286349008/</a>)</p>
-<h3 id="Solution-2：Hash-Table"><a href="#Solution-2：Hash-Table" class="headerlink" title="Solution-2：Hash Table"></a>Solution-2：Hash Table</h3><p>1.用两个哈希表mapS和mapT，来记录s和t中所有字母出现的次数。<br>2.然后遍历26个小写字母：<br>对于任意一个小写字母：<br>首先，判断其是否在mapS和mapT中同时出现或者同时不出现。<br>然后，判断其出现的频率是否相等。<br>如果上述两点有不满足的，直接返回false即可。<br>3.在C++中，判断其是否出现在unordered_map中可以使用count()，出现返回1，否则返回0。<br>判断其出现的次数的话，直接比较其key对应的value即可。</p>
-<p>时间复杂度：O(n + 26)<br>空间复杂度：O(26)</p>
-<p>4.Code(<a href="https://leetcode.com/submissions/detail/286336480/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286336480/</a>)</p>
-<h3 id="Solution-3：Hash-Table-with-Optimization"><a href="#Solution-3：Hash-Table-with-Optimization" class="headerlink" title="Solution-3：Hash Table with Optimization"></a>Solution-3：Hash Table with Optimization</h3><p>1.我们用一个哈希表即可。<br>2.首先判断lenS, lenT是否相等，不相等的话直接return false。<br>3.遍历n次，每次：<br>s[i]对应的value加一；<br>t[i]对应的value减一；<br>如果遍历n次后，且两个字符串由相同的字母组成的话，那么所有出现的字符的次数都是0了。<br>4.遍历整个哈希表，若其个数非0，则return false。</p>
-<p>时间复杂度：O(n + 26)<br>空间复杂度：O(26)</p>
-<p>4.Code(<a href="https://leetcode.com/submissions/detail/286347847/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286347847/</a>)</p>
-<h3 id="Solution-4：Use-Vector-instead-of-Hash-Table"><a href="#Solution-4：Use-Vector-instead-of-Hash-Table" class="headerlink" title="Solution-4：Use Vector instead of Hash Table"></a>Solution-4：Use Vector instead of Hash Table</h3><p>1.我们用一个固定长度为26的数组即可实现Solution-3的思路。<br>2.在数组中访问赋值的时间复杂度是O(1)。<br>而理论上哈希表的访问的时间复杂度也是O(1)。<br>参考：<br>Hash tables do some complex math in that one operation to get to the value that you want.<br>Simulating a hash table with an array is quicker because that<br>one operation for a lookup is only an offset from the beginning of the array(since you already have the index)<br>vs more difficult mathy stuff with the hash table.</p>
-<p>时间复杂度：O(n + 26)<br>空间复杂度：O(26)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/286348853/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286348853/</a>)</p>
-<p>4.进阶：如果输入字符串包含 unicode 字符怎么办？你能否调整你的解法来应对这种情况？<br>解答：使用哈希表而不是固定大小的计数器。想象一下，分配一个大的数组来适应整个 Unicode 字符范围，这个范围可能超过 100万。<br>哈希表是一种更通用的解决方案，可以适应任何字符范围。</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href=""></a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】</p>
+<p>【输出】</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
+<li></li>
+<li></li>
+<li></li>
+</ol>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1："><a href="#Solution-1：" class="headerlink" title="Solution-1："></a>Solution-1：</h3><p>1.</p>
+<p>时间复杂度：O()<br>空间复杂度：O()</p>
+<p>6.Code()</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/16/2019-12-16-Leetcode-242-Valid%20Anagram/" data-id="ck4kogzlk000sk4t7hj9ra1r1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/19/empty/" data-id="ck4lb7l05001xl0t74tsfae15" class="article-share-link">Share</a>
       
       
     </footer>
@@ -118,7 +113,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/31/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="page-number" href="/page/31/">31</a><span class="page-number current">32</span><a class="page-number" href="/page/33/">33</a><a class="page-number" href="/page/34/">34</a><span class="space">&hellip;</span><a class="page-number" href="/page/64/">64</a><a class="extend next" rel="next" href="/page/33/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/31/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="page-number" href="/page/31/">31</a><span class="page-number current">32</span><a class="page-number" href="/page/33/">33</a><a class="page-number" href="/page/34/">34</a><span class="space">&hellip;</span><a class="page-number" href="/page/71/">71</a><a class="extend next" rel="next" href="/page/33/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -150,23 +145,23 @@
       <ul>
         
           <li>
-            <a href="/2019/12/24/2019-12-24-Leetcode-437-Path%20Sum%20III/">【二叉树专项】437.Path Sum III</a>
+            <a href="/2019/12/25/2019-12-25-Leetcode-501-Find%20Mode%20in%20Binary%20Search%20Tree/">【BST专项】501.Find Mode in Binary Search Tree</a>
           </li>
         
           <li>
-            <a href="/2019/12/24/2019-12-24-Leetcode-113-Path%20Sum%20II/">【二叉树专项】113.Path Sum II</a>
+            <a href="/2019/12/25/2019-12-25-Leetcode-098-Validate%20Binary%20Search%20Tree/">【BST专项】098.Validate Binary Search Tree</a>
           </li>
         
           <li>
-            <a href="/2019/12/24/2019-12-24-Leetcode-112-Path%20Sum/">【二叉树专项】112.Path Sum</a>
+            <a href="/2019/12/25/2019-12-25-Leetcode-129-Sum%20Root%20to%20Leaf%20Numbers/">【二叉树专项】129.Sum Root to Leaf Numbers</a>
           </li>
         
           <li>
-            <a href="/2019/12/24/2019-12-24-Leetcode-226-Invert%20Binary%20Tree/">【二叉树专项】226.Invert Binary Tree</a>
+            <a href="/2019/12/25/2019-12-25-Leetcode-114-Flatten%20Binary%20Tree%20to%20Linked%20List/">【二叉树专项】114.Flatten Binary Tree to Linked List</a>
           </li>
         
           <li>
-            <a href="/2019/12/24/2019-12-24-Leetcode-111-Minimum%20Depth%20of%20Binary%20Tree/">【二叉树专项】111.Minimum Depth of Binary Tree</a>
+            <a href="/2019/12/25/2019-12-25-Leetcode-110-Balanced%20Binary%20Tree/">【二叉树专项】110.Balanced Binary Tree</a>
           </li>
         
       </ul>

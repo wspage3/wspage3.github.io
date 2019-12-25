@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-2019-12-08-Leetcode-122-Best Time to Buy ans Sell Stock II" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-2019-12-11-Leetcode-153-Find Minimum in Rotated Sorted Array" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/07/2019-12-08-Leetcode-122-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20II/" class="article-date">
-  <time datetime="2019-12-07T01:53:30.793Z" itemprop="datePublished">2019-12-07</time>
+    <a href="/2019/12/11/2019-12-11-Leetcode-153-Find%20Minimum%20in%20Rotated%20Sorted%20Array/" class="article-date">
+  <time datetime="2019-12-11T03:12:45.411Z" itemprop="datePublished">2019-12-11</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/07/2019-12-08-Leetcode-122-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20II/">Leetcode122-Best Time to Buy and Sell Stock II</a>
+      <a class="article-title" href="/2019/12/11/2019-12-11-Leetcode-153-Find%20Minimum%20in%20Rotated%20Sorted%20Array/">153.Find Minimum in Rotated Sorted Array</a>
     </h1>
   
 
@@ -83,19 +83,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/" target="_blank" rel="noopener">Leetcode122-Best Time to Buy and Sell Stock</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组prices；prices[i]代表第i天股票的价格。<br>如果你能交易任意k次，即：买k次，卖k次。求出你最多能赚多少钱。<br>前提是：买入下一股的时候，必须将上一股卖掉。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [7,1,5,3,6,4]<br>Output: 7<br>Explanation: Buy on day 2 (price = 1) and sell on day 3 (price = 5), profit = 5-1 = 4.<br>             Then buy on day 4 (price = 3) and sell on day 5 (price = 6), profit = 6-3 = 3.</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n：当n为0/1的时候，直接返回0；<br>赚不到钱则返回0；</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>考虑现实生活中，唯一不同的是：现实中我们只知道当前的股价，不知道明天的股价。<br>而现在我们知道了：假设今天股价为a，明天股价b大于a，则买下一定会赚钱，一定买。<br>假设今天股价为a，明天股价b小于a，则买下一定会赔钱，一定不买。</p>
-<h3 id="Solution-1：Greedy"><a href="#Solution-1：Greedy" class="headerlink" title="Solution-1：Greedy"></a>Solution-1：Greedy</h3><p>1.我们要做的只是：每天只看今天的价格和明天的价格，然后做决定。<br>不管后天，大后天的价格。因为我们每天都可以做决定，如果后面发现股价一直在涨，则每天都买就行了。<br>然后ans一直累加每天的利润即可。</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/" target="_blank" rel="noopener">153.Find Minimum in Rotated Sorted Array</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组nums；<br>该数组原本是升序的，结果在某个支点处旋转了一次，如：<br>i.e., [0,1,2,4,5,6,7] might become [4,5,6,7,0,1,2]<br>假设数组中不存在相同的数字。<br>找出这个数组中最小的值。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [3,4,5,1,2]<br>Output: 1</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n: 当n为0的时候，直接返回false；</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>1.常规思路：从前到后遍历一遍nums，找到最小值返回。</p>
 <p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/284232069/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284232069/</a>)</p>
+<h3 id="Solution-2：Binary-Search"><a href="#Solution-2：Binary-Search" class="headerlink" title="Solution-2：Binary Search"></a>Solution-2：Binary Search</h3><p>1.观察：[0,1,2,4,5,6]<br>经过rotate后，可能存在以下几种不同情况：<br>[1,2,4,5,6,   0]<br>[2,4,5,6,   0,1]<br>[4,5,6,   0,1,2]<br>[5,6,   0,1,2,4]<br>[6,   0,1,2,4,5]</p>
+<p>2.考虑寻找[left, right]中的最小值。<br>若：nums[left] &lt; nums[right]，则说明[left, right]范围内完全升序。nums[left]就是答案。<br>否则：<br>mid = left + (right - left) / 2;<br>若nums[mid] &gt; nums[right]，则说明，这个区间中间某个值比nums[right]还要大，说明mid此时在左侧。<br>而最小值一定在右侧[mid + 1, right]。<br>若nums[mid] &lt; nums[right]，则说明，[mid, right]这个范围是有序的。要寻找的最小值，不可能在mid右侧，一定在包含其的左侧，即：[left, mid]。<br>若nums[mid] == nums[right]，不可能的……</p>
+<p>3.用二分的方法，每次把结果可能出现的区间缩小一半。<br>最终当区间长度为2的时候，left = x, right = x + 1, mid = x<br>判断nums[mid]和nums[right]的大小关系，也就是判断左边元素和右边元素的大小。<br>若nums[mid]大于nums[right]，即答案一定在[mid + 1, right]中，也就是右边元素本身。<br>若nums[mid]小于nums[right]，即答案一定在[left, mid]中，也就是左边元素本身。<br>循环结束后，left一定等于right。此时返回left的值即可。</p>
+<p>时间复杂度：O(log n)<br>空间复杂度：O(1)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/285160090/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285160090/</a>)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/07/2019-12-08-Leetcode-122-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20II/" data-id="ck4kogzl50008k4t7d6c54v7r" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/11/2019-12-11-Leetcode-153-Find%20Minimum%20in%20Rotated%20Sorted%20Array/" data-id="ck4lb7kz5000fl0t72wiqbp7w" class="article-share-link">Share</a>
       
       
     </footer>
@@ -109,7 +112,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/53/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/52/">52</a><a class="page-number" href="/page/53/">53</a><span class="page-number current">54</span><a class="page-number" href="/page/55/">55</a><a class="page-number" href="/page/56/">56</a><span class="space">&hellip;</span><a class="page-number" href="/page/64/">64</a><a class="extend next" rel="next" href="/page/55/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/53/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/52/">52</a><a class="page-number" href="/page/53/">53</a><span class="page-number current">54</span><a class="page-number" href="/page/55/">55</a><a class="page-number" href="/page/56/">56</a><span class="space">&hellip;</span><a class="page-number" href="/page/71/">71</a><a class="extend next" rel="next" href="/page/55/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -141,23 +144,23 @@
       <ul>
         
           <li>
-            <a href="/2019/12/24/2019-12-24-Leetcode-437-Path%20Sum%20III/">【二叉树专项】437.Path Sum III</a>
+            <a href="/2019/12/25/2019-12-25-Leetcode-501-Find%20Mode%20in%20Binary%20Search%20Tree/">【BST专项】501.Find Mode in Binary Search Tree</a>
           </li>
         
           <li>
-            <a href="/2019/12/24/2019-12-24-Leetcode-113-Path%20Sum%20II/">【二叉树专项】113.Path Sum II</a>
+            <a href="/2019/12/25/2019-12-25-Leetcode-098-Validate%20Binary%20Search%20Tree/">【BST专项】098.Validate Binary Search Tree</a>
           </li>
         
           <li>
-            <a href="/2019/12/24/2019-12-24-Leetcode-112-Path%20Sum/">【二叉树专项】112.Path Sum</a>
+            <a href="/2019/12/25/2019-12-25-Leetcode-129-Sum%20Root%20to%20Leaf%20Numbers/">【二叉树专项】129.Sum Root to Leaf Numbers</a>
           </li>
         
           <li>
-            <a href="/2019/12/24/2019-12-24-Leetcode-226-Invert%20Binary%20Tree/">【二叉树专项】226.Invert Binary Tree</a>
+            <a href="/2019/12/25/2019-12-25-Leetcode-114-Flatten%20Binary%20Tree%20to%20Linked%20List/">【二叉树专项】114.Flatten Binary Tree to Linked List</a>
           </li>
         
           <li>
-            <a href="/2019/12/24/2019-12-24-Leetcode-111-Minimum%20Depth%20of%20Binary%20Tree/">【二叉树专项】111.Minimum Depth of Binary Tree</a>
+            <a href="/2019/12/25/2019-12-25-Leetcode-110-Balanced%20Binary%20Tree/">【二叉树专项】110.Balanced Binary Tree</a>
           </li>
         
       </ul>

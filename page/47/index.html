@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-2019-12-11-Leetcode-153-Find Minimum in Rotated Sorted Array" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-2019-12-13-Leetcode-278-First Bad Version" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/11/2019-12-11-Leetcode-153-Find%20Minimum%20in%20Rotated%20Sorted%20Array/" class="article-date">
-  <time datetime="2019-12-11T03:12:45.411Z" itemprop="datePublished">2019-12-11</time>
+    <a href="/2019/12/13/2019-12-13-Leetcode-278-First%20Bad%20Version/" class="article-date">
+  <time datetime="2019-12-13T05:19:52.802Z" itemprop="datePublished">2019-12-13</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/11/2019-12-11-Leetcode-153-Find%20Minimum%20in%20Rotated%20Sorted%20Array/">153.Find Minimum in Rotated Sorted Array</a>
+      <a class="article-title" href="/2019/12/13/2019-12-13-Leetcode-278-First%20Bad%20Version/">278.First Bad Version</a>
     </h1>
   
 
@@ -83,22 +83,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/" target="_blank" rel="noopener">153.Find Minimum in Rotated Sorted Array</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组nums；<br>该数组原本是升序的，结果在某个支点处旋转了一次，如：<br>i.e., [0,1,2,4,5,6,7] might become [4,5,6,7,0,1,2]<br>假设数组中不存在相同的数字。<br>找出这个数组中最小的值。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [3,4,5,1,2]<br>Output: 1</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n: 当n为0的时候，直接返回false；</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>1.常规思路：从前到后遍历一遍nums，找到最小值返回。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<h3 id="Solution-2：Binary-Search"><a href="#Solution-2：Binary-Search" class="headerlink" title="Solution-2：Binary Search"></a>Solution-2：Binary Search</h3><p>1.观察：[0,1,2,4,5,6]<br>经过rotate后，可能存在以下几种不同情况：<br>[1,2,4,5,6,   0]<br>[2,4,5,6,   0,1]<br>[4,5,6,   0,1,2]<br>[5,6,   0,1,2,4]<br>[6,   0,1,2,4,5]</p>
-<p>2.考虑寻找[left, right]中的最小值。<br>若：nums[left] &lt; nums[right]，则说明[left, right]范围内完全升序。nums[left]就是答案。<br>否则：<br>mid = left + (right - left) / 2;<br>若nums[mid] &gt; nums[right]，则说明，这个区间中间某个值比nums[right]还要大，说明mid此时在左侧。<br>而最小值一定在右侧[mid + 1, right]。<br>若nums[mid] &lt; nums[right]，则说明，[mid, right]这个范围是有序的。要寻找的最小值，不可能在mid右侧，一定在包含其的左侧，即：[left, mid]。<br>若nums[mid] == nums[right]，不可能的……</p>
-<p>3.用二分的方法，每次把结果可能出现的区间缩小一半。<br>最终当区间长度为2的时候，left = x, right = x + 1, mid = x<br>判断nums[mid]和nums[right]的大小关系，也就是判断左边元素和右边元素的大小。<br>若nums[mid]大于nums[right]，即答案一定在[mid + 1, right]中，也就是右边元素本身。<br>若nums[mid]小于nums[right]，即答案一定在[left, mid]中，也就是左边元素本身。<br>循环结束后，left一定等于right。此时返回left的值即可。</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/first-bad-version/" target="_blank" rel="noopener">278.First Bad Version</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【背景】<br>你是一个产品经理，你发现当前的产品版本中质量不过关。<br>由于每个版本都是基于上一个版本，修修改改进行发布的。所以当某个版本引入一个bug后，后面所有的版本都由bug。<br>你希望找出来是哪个版本引入了bug。<br>有一个API-isBadVersion可以根据版本号来确定当前版本是否由bug。如果有问题，则返回true。否则，返回false。<br>【输入】<br>给定一个整数n，代表当前版本号。版本号从1开始编号，且连续。<br>所以说n代表当前有n个版本。<br>【输出】<br>输出第一个出现bug的那个版本号。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Given n = 5, and version = 4 is the first bad version.</p>
+<p>call isBadVersion(3) -&gt; false<br>call isBadVersion(5) -&gt; true<br>call isBadVersion(4) -&gt; true</p>
+<p>Then 4 is the first bad version. </p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Binary-Search"><a href="#Solution-1：Binary-Search" class="headerlink" title="Solution-1：Binary Search"></a>Solution-1：Binary Search</h3><p>1.二分搜索。<br>我们要找到第一个有问题的版本，类似【找到target最小的索引】<br>考虑范围[left, right)，取mid：<br>如果当前mid没问题，说明答案一定在[mid + 1, right)范围内。<br>如果当前mid有问题，说明答案一定在[left, mid]范围内。<br>此时我们在[left, mid)上继续搜索。<br>如果[left, mid)上所有版本都没问题，那么答案就是mid。<br>否则答案就在[left, mid)中。</p>
+<p>2.考虑最后一次循环，left = right - 1<br>此时mid = left，然后判断mid的合法性。<br>如果此时mid有问题，right = mid = left。循环结束。left(right)就是答案。<br>如果此时mid没问题，left = mid + 1 = right。循环结束。此时还剩left(right)这个位置没有判断合法性。那么它一定是答案。</p>
 <p>时间复杂度：O(log n)<br>空间复杂度：O(1)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/285160090/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285160090/</a>)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/285606627/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285606627/</a>)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/11/2019-12-11-Leetcode-153-Find%20Minimum%20in%20Rotated%20Sorted%20Array/" data-id="ck4kogzl5000ck4t77mu5ecoj" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/13/2019-12-13-Leetcode-278-First%20Bad%20Version/" data-id="ck4lb7kz8000ll0t7bzrzcw7y" class="article-share-link">Share</a>
       
       
     </footer>
@@ -112,7 +110,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/46/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/45/">45</a><a class="page-number" href="/page/46/">46</a><span class="page-number current">47</span><a class="page-number" href="/page/48/">48</a><a class="page-number" href="/page/49/">49</a><span class="space">&hellip;</span><a class="page-number" href="/page/64/">64</a><a class="extend next" rel="next" href="/page/48/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/46/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/45/">45</a><a class="page-number" href="/page/46/">46</a><span class="page-number current">47</span><a class="page-number" href="/page/48/">48</a><a class="page-number" href="/page/49/">49</a><span class="space">&hellip;</span><a class="page-number" href="/page/71/">71</a><a class="extend next" rel="next" href="/page/48/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -144,23 +142,23 @@
       <ul>
         
           <li>
-            <a href="/2019/12/24/2019-12-24-Leetcode-437-Path%20Sum%20III/">【二叉树专项】437.Path Sum III</a>
+            <a href="/2019/12/25/2019-12-25-Leetcode-501-Find%20Mode%20in%20Binary%20Search%20Tree/">【BST专项】501.Find Mode in Binary Search Tree</a>
           </li>
         
           <li>
-            <a href="/2019/12/24/2019-12-24-Leetcode-113-Path%20Sum%20II/">【二叉树专项】113.Path Sum II</a>
+            <a href="/2019/12/25/2019-12-25-Leetcode-098-Validate%20Binary%20Search%20Tree/">【BST专项】098.Validate Binary Search Tree</a>
           </li>
         
           <li>
-            <a href="/2019/12/24/2019-12-24-Leetcode-112-Path%20Sum/">【二叉树专项】112.Path Sum</a>
+            <a href="/2019/12/25/2019-12-25-Leetcode-129-Sum%20Root%20to%20Leaf%20Numbers/">【二叉树专项】129.Sum Root to Leaf Numbers</a>
           </li>
         
           <li>
-            <a href="/2019/12/24/2019-12-24-Leetcode-226-Invert%20Binary%20Tree/">【二叉树专项】226.Invert Binary Tree</a>
+            <a href="/2019/12/25/2019-12-25-Leetcode-114-Flatten%20Binary%20Tree%20to%20Linked%20List/">【二叉树专项】114.Flatten Binary Tree to Linked List</a>
           </li>
         
           <li>
-            <a href="/2019/12/24/2019-12-24-Leetcode-111-Minimum%20Depth%20of%20Binary%20Tree/">【二叉树专项】111.Minimum Depth of Binary Tree</a>
+            <a href="/2019/12/25/2019-12-25-Leetcode-110-Balanced%20Binary%20Tree/">【二叉树专项】110.Balanced Binary Tree</a>
           </li>
         
       </ul>

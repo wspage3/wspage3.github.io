@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-2019-12-12-Leetcode-20-Valid Parentheses" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-2019-12-15-Leetcode-75-Sort Colors" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/12/2019-12-12-Leetcode-20-Valid%20Parentheses/" class="article-date">
-  <time datetime="2019-12-12T08:10:34.517Z" itemprop="datePublished">2019-12-12</time>
+    <a href="/2019/12/15/2019-12-15-Leetcode-75-Sort%20Colors/" class="article-date">
+  <time datetime="2019-12-15T11:38:22.814Z" itemprop="datePublished">2019-12-15</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/12/2019-12-12-Leetcode-20-Valid%20Parentheses/">20.Valid Parentheses</a>
+      <a class="article-title" href="/2019/12/15/2019-12-15-Leetcode-75-Sort%20Colors/">75.Sort Colors</a>
     </h1>
   
 
@@ -83,23 +83,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/valid-parentheses/" target="_blank" rel="noopener">20.Valid Parentheses</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的字符串s；<br>判断该字符串是否一个合法的括号表达式；<br>括号有三种：[] {} ()<br>open的bracket最终必须有一个同类型close的bracket与之匹配；<br>且上述匹配的顺序必须是正确的。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: “()[]{}”<br>Output: true</p>
-<p>Input: “([)]”<br>Output: false</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n: 当n为0的时候，也认为是合法的；</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Stack"><a href="#Solution-1：Stack" class="headerlink" title="Solution-1：Stack"></a>Solution-1：Stack</h3><p>1.若n是奇数，那么一定非法。<br>若n是0，则直接return true。</p>
-<p>2.考虑n为大于0的偶数：<br>模拟括号匹配的过程：i在范围[0, n - 1]内遍历：<br>先将s[0]压入栈；<br>考察s[1]，若s[1]和s[0]是同类型的，且一个s[1]是close，s[0]是open的，那么说明这两个是一对。<br>则此时将s[0]从栈中抛出，i跳到位置2，考虑第二个元素。<br>若s[1]的出现无法和s[0]匹配掉，则将s[1]在压入栈，考虑下一个元素。<br>……<br>直到所有的n个元素都遍历过了，此时检查栈，如果栈是空的，说明所有的括号都可以匹配。<br>如果此时栈非空，则说明存在元素无法匹配。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/285447709/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285447709/</a>)</p>
-<h3 id="Solution-2：Stack"><a href="#Solution-2：Stack" class="headerlink" title="Solution-2：Stack"></a>Solution-2：Stack</h3><p>1.另一种方法：<br>从[0, n - 1]考虑每一个s[i]<br>若s[i]是open的bracket，则将其“另一半”压入栈。<br>否则的话，判断此时栈是否为空，是的话，直接return false。<br>栈不空的话，判断当前元素是否和栈顶元素相同，不同的话，也直接return false。<br>相同的话，将栈顶元素抛出，转移到考虑s[i + 1]</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/285450396/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285450396/</a>)</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/sort-colors/" target="_blank" rel="noopener">75.Sort Colors</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个长度为n的整数数组。<br>其中所有的元素取值都是集合[0, 1, 2]的。<br>【输出】<br>将这个数组进行排序，且按照0 -&gt; 1 -&gt; 2这个顺序从前到后排列。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [2,0,2,1,1,0]<br>Output: [0,0,1,1,2,2]</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.n &lt;= 1, 直接return即可。<br>2.要求就地排序，即空间复杂度为O(1)。<br>3.一个直接的想法是：统计0，1，2的个数，然后再重写nums数组。<br>显然这样需要遍历两次nums数组。<br>4.找一个one-pass的方法。</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Three-Pointers"><a href="#Solution-1：Three-Pointers" class="headerlink" title="Solution-1：Three Pointers"></a>Solution-1：Three Pointers</h3><p>1.用三个指针p0，cur，p2。<br>初始化：<br>p0 = 0<br>cur = 0<br>p2 = n - 1<br>分别代表：<br>p0: 元素’0’可能出现的位置，p0之前的位置上都已经全部放上’0’了。<br>cur: 当前考察的位置。<br>p2: 元素’2’可能出现的位置，p2之后的位置上都已经全部放上’2’了。</p>
+<p>2.循环开始：cur从0开始。<br>循环结束：cur == p2是最后一次循环。</p>
+<p>3.过程：<br>如果当前cur位置上的元素是’2’的话，将其与p2位置上的元素交换。p2–；cur保持不动，继续判断交换过来的这个值。<br>如果当前cur位置上的元素是’0’的话，将其与p0位置上的元素交换。p0++；cur向后移动一位（因为当前和p0交换过来的这个值，一定是0或者1，不可能是2）.<br>    如果是0的话，不需要重新考虑。<br>    如果是1的话，也不需要重新考虑。<br>如果当前cur位置上的元素是’1’的话，cur++即可。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/286030421/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286030421/</a>)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/12/2019-12-12-Leetcode-20-Valid%20Parentheses/" data-id="ck4kogzlk000jk4t73xlt3rvv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/15/2019-12-15-Leetcode-75-Sort%20Colors/" data-id="ck4lb7kzc000ql0t7ay11h08r" class="article-share-link">Share</a>
       
       
     </footer>
@@ -113,7 +110,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/42/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/41/">41</a><a class="page-number" href="/page/42/">42</a><span class="page-number current">43</span><a class="page-number" href="/page/44/">44</a><a class="page-number" href="/page/45/">45</a><span class="space">&hellip;</span><a class="page-number" href="/page/64/">64</a><a class="extend next" rel="next" href="/page/44/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/42/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/41/">41</a><a class="page-number" href="/page/42/">42</a><span class="page-number current">43</span><a class="page-number" href="/page/44/">44</a><a class="page-number" href="/page/45/">45</a><span class="space">&hellip;</span><a class="page-number" href="/page/71/">71</a><a class="extend next" rel="next" href="/page/44/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -145,23 +142,23 @@
       <ul>
         
           <li>
-            <a href="/2019/12/24/2019-12-24-Leetcode-437-Path%20Sum%20III/">【二叉树专项】437.Path Sum III</a>
+            <a href="/2019/12/25/2019-12-25-Leetcode-501-Find%20Mode%20in%20Binary%20Search%20Tree/">【BST专项】501.Find Mode in Binary Search Tree</a>
           </li>
         
           <li>
-            <a href="/2019/12/24/2019-12-24-Leetcode-113-Path%20Sum%20II/">【二叉树专项】113.Path Sum II</a>
+            <a href="/2019/12/25/2019-12-25-Leetcode-098-Validate%20Binary%20Search%20Tree/">【BST专项】098.Validate Binary Search Tree</a>
           </li>
         
           <li>
-            <a href="/2019/12/24/2019-12-24-Leetcode-112-Path%20Sum/">【二叉树专项】112.Path Sum</a>
+            <a href="/2019/12/25/2019-12-25-Leetcode-129-Sum%20Root%20to%20Leaf%20Numbers/">【二叉树专项】129.Sum Root to Leaf Numbers</a>
           </li>
         
           <li>
-            <a href="/2019/12/24/2019-12-24-Leetcode-226-Invert%20Binary%20Tree/">【二叉树专项】226.Invert Binary Tree</a>
+            <a href="/2019/12/25/2019-12-25-Leetcode-114-Flatten%20Binary%20Tree%20to%20Linked%20List/">【二叉树专项】114.Flatten Binary Tree to Linked List</a>
           </li>
         
           <li>
-            <a href="/2019/12/24/2019-12-24-Leetcode-111-Minimum%20Depth%20of%20Binary%20Tree/">【二叉树专项】111.Minimum Depth of Binary Tree</a>
+            <a href="/2019/12/25/2019-12-25-Leetcode-110-Balanced%20Binary%20Tree/">【二叉树专项】110.Balanced Binary Tree</a>
           </li>
         
       </ul>
