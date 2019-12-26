@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-2019-12-16-Leetcode-645-Set Mismatch" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-2019-12-17-Leetcode-611-Valid Triangle Number" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/16/2019-12-16-Leetcode-645-Set%20Mismatch/" class="article-date">
-  <time datetime="2019-12-16T02:20:17.020Z" itemprop="datePublished">2019-12-16</time>
+    <a href="/2019/12/17/2019-12-17-Leetcode-611-Valid%20Triangle%20Number/" class="article-date">
+  <time datetime="2019-12-17T08:52:02.491Z" itemprop="datePublished">2019-12-17</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/16/2019-12-16-Leetcode-645-Set%20Mismatch/">645.Set Mismatch</a>
+      <a class="article-title" href="/2019/12/17/2019-12-17-Leetcode-611-Valid%20Triangle%20Number/">611.Valid Triangle Number</a>
     </h1>
   
 
@@ -83,20 +83,31 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/set-mismatch/" target="_blank" rel="noopener">645.Set Mismatch</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个长度为n的整数数组。<br>其中所有的元素取值都是范围[1, n]的。<br>但其中某个元素出现了两次，导致另外一个元素没有出现。<br>【输出】<br>找出这两个元素：出现两次的在前，没有出现的在后。<br>以数组的形式返回。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: nums = [1,2,2,4]<br>Output: [2,3]</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.n: [2, 10000]<br>2.nums数组无序。</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：做标记"><a href="#Solution-1：做标记" class="headerlink" title="Solution-1：做标记"></a>Solution-1：做标记</h3><p>1.根据【Leetcode-442-Find All Duplicates in an Array】的启示：<br>对于一个长度为n的数组nums，其所有nums[i]都在[1, n]区间内，我们可以通过将nums[nums[i] - 1]置为负数（相反数）的方法，找出所有出现2次的元素。<br>本题目中保证了只有一个元素出现了两次，所以找到它后break即可。O(n)的time complexity。</p>
-<p>2.同时根据【Leetcode-268-Missing Number】的启示：<br>对于一个长度为n的数组nums，其所有nums[i]都在[0, n]区间内，且不重复。<br>我们可以找到那个缺失的元素x。<br>通过：将0, 1, 2, 3, 4, …, n, nums[0], nums[1], nums[2], …, nums[n - 1]这(n + 1 + n)个元素都异或起来。<br>缺失元素x就是这个异或的值。O(n)的time complexity。</p>
-<p>3.对于本题目，长度为n的nums数组，所有元素取值范围都在[1, n]。<br>某个元素a出现了两次，某个元素b出现了0次。即：[1, 2, 3, 4, …, a, a, …, b - 1, b + 1, …, n]<br>根据1，可以找到a的值。存在res[0]中。res[0] = a;<br>根据2，将nums中所有的元素和[1, n]中所有的元素异或起来的值存到res[1]中。res[1] = a ^ b;<br>然后再将res[1] = res[1] ^ res[0]即可，即找到了b的值。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/286256728/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286256728/</a>)</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/valid-triangle-number/" target="_blank" rel="noopener">611.Valid Triangle Number</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个长度为n的数组。数组元素都是非负整数。<br>【输出】<br>计算存在多少个三元组，使得这个三元组可以组成三角形。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [2,2,3,4]<br>Output: 3<br>Explanation:<br>Valid combinations are:<br>2,3,4 (using the first 2)<br>2,3,4 (using the second 2)<br>2,2,3</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
+<li>n &lt;= 1000<br>n小于3时直接返回0</li>
+<li>0 &lt;= nums[i] &lt;= 1000</li>
+</ol>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>1.枚举所有的可能性：<br>i: [0, n - 3]<br>j: [i + 1, n - 2]<br>k: [j + 1, n - 1]</p>
+<p>2.对于每一种可能的情况，判断nums[i], nums[j], nums[k]是否能够组成三角形</p>
+<p>时间复杂度：O(n ^ 3)<br>空间复杂度：O(1)<br>结果：TLE</p>
+<p>6.Code(<a href="https://leetcode.com/submissions/detail/286570851/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286570851/</a>)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> c)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (a + b &lt;= c || a + c &lt;= b || b + c &lt;= a) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">triangleNumber</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (n &lt; <span class="number">3</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n - <span class="number">3</span>; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt;= n - <span class="number">2</span>; j++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> k = j + <span class="number">1</span>; k &lt;= n - <span class="number">1</span>; k++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">                    <span class="keyword">if</span> (check(nums[i], nums[j], nums[k])) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">                        ans++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">                    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
 
+<h3 id="Solution-2：Sort-Three-Pointers"><a href="#Solution-2：Sort-Three-Pointers" class="headerlink" title="Solution-2：Sort + Three Pointers"></a>Solution-2：Sort + Three Pointers</h3><p>1.先将nums数组从小到大排序。</p>
+<p>2.枚举所有的最长边，i: [2, i - 1]</p>
+<p>3.对于任意一个i，初始化左右指针：left = 0; right = i - 1;<br>循环条件：left &lt; right</p>
+<p>当nums[left] + nums[right] &lt;= nums[i]的时候，说明此时的left，right构不成三角形。<br>需要它们两个的和继续变大才有可能，所以left++;<br>当nums[left] + nums[right] &gt; nums[i]的时候，说明此时已经可以构成三角形了。<br>同时说明：以right结尾，[left, right - 1]都可以构成三角形。因为数组升序排列。计数器累加(right - left)次。<br>同时right向前移动，看以right - 1是否能够继续构成三角形……</p>
+<p>4.这样的话，每次不是left++，就是right–，最后两个指针一定会相见。<br>对于每一个nums[i]，需要O(n)的time，来计算出以nums[i]为最长边所能构成的情况数目。<br>所以总的时间复杂度为O(n ^ 2)。</p>
+<p>时间复杂度：O(n ^ 2)<br>空间复杂度：O(1)<br>结果：TLE</p>
+<p>6.Code(<a href="https://leetcode.com/submissions/detail/286586836/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286586836/</a>)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">triangleNumber</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (n &lt; <span class="number">3</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        sort(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>());</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n - <span class="number">1</span>; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">int</span> left = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">int</span> right = i - <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">while</span> (left &lt; right) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">if</span> (nums[left] + nums[right] &lt;= nums[i]) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">                    left++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">                &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">                    ans += (right - left);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">                    right--;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/16/2019-12-16-Leetcode-645-Set%20Mismatch/" data-id="ck4lb7kze000ul0t7apzk1wqe" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/17/2019-12-17-Leetcode-611-Valid%20Triangle%20Number/" data-id="ck4mtzziu000x3st73y3g8und" class="article-share-link">Share</a>
       
       
     </footer>
@@ -110,7 +121,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/40/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/39/">39</a><a class="page-number" href="/page/40/">40</a><span class="page-number current">41</span><a class="page-number" href="/page/42/">42</a><a class="page-number" href="/page/43/">43</a><span class="space">&hellip;</span><a class="page-number" href="/page/71/">71</a><a class="extend next" rel="next" href="/page/42/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/40/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/39/">39</a><a class="page-number" href="/page/40/">40</a><span class="page-number current">41</span><a class="page-number" href="/page/42/">42</a><a class="page-number" href="/page/43/">43</a><span class="space">&hellip;</span><a class="page-number" href="/page/77/">77</a><a class="extend next" rel="next" href="/page/42/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -142,23 +153,23 @@
       <ul>
         
           <li>
-            <a href="/2019/12/25/2019-12-25-Leetcode-501-Find%20Mode%20in%20Binary%20Search%20Tree/">【BST专项】501.Find Mode in Binary Search Tree</a>
+            <a href="/2019/12/26/2019-12-26-Leetcode-173-Binary%20Search%20Tree%20Iterator/">【BST专项】173.Binary Search Tree Iterator</a>
           </li>
         
           <li>
-            <a href="/2019/12/25/2019-12-25-Leetcode-098-Validate%20Binary%20Search%20Tree/">【BST专项】098.Validate Binary Search Tree</a>
+            <a href="/2019/12/26/2019-12-26-Leetcode-257-Binary%20Tree%20Paths/">【二叉树专项】257.Binary Tree Paths</a>
           </li>
         
           <li>
-            <a href="/2019/12/25/2019-12-25-Leetcode-129-Sum%20Root%20to%20Leaf%20Numbers/">【二叉树专项】129.Sum Root to Leaf Numbers</a>
+            <a href="/2019/12/26/2019-12-26-Leetcode-236-Lowest%20Common%20Ancestor%20of%20a%20Binary%20Tree/">【二叉树专项】236.Lowest Common Ancestor of a Binary Tree</a>
           </li>
         
           <li>
-            <a href="/2019/12/25/2019-12-25-Leetcode-114-Flatten%20Binary%20Tree%20to%20Linked%20List/">【二叉树专项】114.Flatten Binary Tree to Linked List</a>
+            <a href="/2019/12/26/2019-12-26-Leetcode-235-Lowest%20Common%20Ancestor%20of%20a%20Binary%20Search%20Tree/">【BST专项】235.Lowest Common Ancestor of a Binary Search Tree</a>
           </li>
         
           <li>
-            <a href="/2019/12/25/2019-12-25-Leetcode-110-Balanced%20Binary%20Tree/">【二叉树专项】110.Balanced Binary Tree</a>
+            <a href="/2019/12/26/2019-12-26-Leetcode-230-Kth%20Smallest%20Element%20in%20a%20BST/">【BST专项】230.Kth Smallest Element in a BST</a>
           </li>
         
       </ul>

@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-2019-12-16-Leetcode-442-Find All Duplicates in an Array" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-2019-12-17-Leetcode-885-Spiral Matrix III" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/16/2019-12-16-Leetcode-442-Find%20All%20Duplicates%20in%20an%20Array/" class="article-date">
-  <time datetime="2019-12-16T02:07:31.209Z" itemprop="datePublished">2019-12-16</time>
+    <a href="/2019/12/17/2019-12-17-Leetcode-885-Spiral%20Matrix%20III/" class="article-date">
+  <time datetime="2019-12-17T06:16:25.591Z" itemprop="datePublished">2019-12-17</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/16/2019-12-16-Leetcode-442-Find%20All%20Duplicates%20in%20an%20Array/">442.Find All Duplicate in an Array</a>
+      <a class="article-title" href="/2019/12/17/2019-12-17-Leetcode-885-Spiral%20Matrix%20III/">885.Spiral Matrix III</a>
     </h1>
   
 
@@ -83,21 +83,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/find-all-duplicates-in-an-array/" target="_blank" rel="noopener">442.Find All Duplicate in an Array</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个长度为n的整数数组。<br>其中所有的元素取值都是范围[1, n]的。<br>但其中有些元素出现了两次，其它的元素出现了一次。<br>【输出】<br>找出所有出现两次的元素。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input:<br>[4,3,2,7,8,2,3,1]<br>Output:<br>[2,3]</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.n &lt;= 1, 不存在题目中的情况。考虑n &gt;= 2的情况。<br>2.要求O(1)的space。<br>3.要求O(n)的time。</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：做标记"><a href="#Solution-1：做标记" class="headerlink" title="Solution-1：做标记"></a>Solution-1：做标记</h3><p>1.由于nums数组中的元素都在范围[1, n]中。<br>所以对于任意nums[i] - 1，都可以作为nums的index。</p>
-<p>2.我们对于所有i: [0, n - 1]，将nums[i] - 1作为index。<br>将nums[index]的值替换为其值的相反数。</p>
-<p>3.假设某个数字x出现了两次，那么(x - 1)作为nums的index，将同样会出现两次。<br>第一次：将nums[x - 1]的值由正数变换为负数。<br>第二次：发现nums[x - 1]已经是负数了。说明：(x - 1)这个索引在之前已经出现过了。即：x是一个答案。</p>
-<p>4.由于将nums[index]会变换为其相反数，所以为保证index的合法性，可以：index = abs(nums[i]) - 1;</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/286253289/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286253289/</a>)</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/spiral-matrix-iii/" target="_blank" rel="noopener">885.Spiral Matrix III</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定正整数R, C。分别代表二维矩阵的行数和列数。<br>给定一个起始坐标(r0, c0)。<br>【输出】<br>从(r0, c0)出发，进行顺时针螺旋运动，直到其经过二维矩阵的所有元素。<br>返回遍历的顺序。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: R = 5, C = 6, r0 = 1, c0 = 4<br>Output: [[1,4],[1,5],[2,5],[2,4],[2,3],[1,3],[0,3],[0,4],[0,5],[3,5],[3,4],[3,3],[3,2],[2,2],[1,2],[0,2],[4,5],[4,4],[4,3],[4,2],[4,1],[3,1],[2,1],[1,1],[0,1],[4,0],[3,0],[2,0],[1,0],[0,0]]</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.1 &lt;= R &lt;= 100<br>2.1 &lt;= C &lt;= 100<br>3.0 &lt;= r0 &lt; R<br>4.0 &lt;= c0 &lt; C</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Layer-by-Layer-One-by-One"><a href="#Solution-1：Layer-by-Layer-One-by-One" class="headerlink" title="Solution-1：Layer by Layer, One by One"></a>Solution-1：Layer by Layer, One by One</h3><p>1.根据<br><a href="https://leetcode.com/problems/spiral-matrix/" target="_blank" rel="noopener">54.Spiral Matrix</a><br><a href="https://leetcode.com/problems/spiral-matrix-ii/" target="_blank" rel="noopener">59.Spiral Matrix II</a>的启示，<br>用同样的方法，从内层到外层，每一层按照right -&gt; bottom -&gt; left -&gt; top的顺序，将当前数字写入到方阵中。并将当前坐标依次存入到ans数组中。</p>
+<p>2.当前数字从1开始，直到R * C结束。</p>
+<p>3.遍历完每一层后，需要考虑下一层，即：<br>r1–;<br>c1–;<br>r2++;<br>c2++;</p>
+<p>4.对于每一层，把四条边（r1 &lt; r2, c1 &lt; c2）上的路径走一次即可：<br>对于坐标在二维矩阵范围内的，将cnt++，并记录此时的坐标。<br>如果该坐标超出了有效index取值，则continue即可。</p>
+<p>时间复杂度：O(R * C)<br>空间复杂度：O(1) // 不包含返回的结果二维方阵</p>
+<p>6.Code(<a href="https://leetcode.com/submissions/detail/286522796/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286522796/</a>)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/16/2019-12-16-Leetcode-442-Find%20All%20Duplicates%20in%20an%20Array/" data-id="ck4lb7kzf000vl0t7bp2k8vse" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/17/2019-12-17-Leetcode-885-Spiral%20Matrix%20III/" data-id="ck4mtzziv000y3st720kf5ap9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -111,7 +111,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/41/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/40/">40</a><a class="page-number" href="/page/41/">41</a><span class="page-number current">42</span><a class="page-number" href="/page/43/">43</a><a class="page-number" href="/page/44/">44</a><span class="space">&hellip;</span><a class="page-number" href="/page/71/">71</a><a class="extend next" rel="next" href="/page/43/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/41/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/40/">40</a><a class="page-number" href="/page/41/">41</a><span class="page-number current">42</span><a class="page-number" href="/page/43/">43</a><a class="page-number" href="/page/44/">44</a><span class="space">&hellip;</span><a class="page-number" href="/page/77/">77</a><a class="extend next" rel="next" href="/page/43/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -143,23 +143,23 @@
       <ul>
         
           <li>
-            <a href="/2019/12/25/2019-12-25-Leetcode-501-Find%20Mode%20in%20Binary%20Search%20Tree/">【BST专项】501.Find Mode in Binary Search Tree</a>
+            <a href="/2019/12/26/2019-12-26-Leetcode-173-Binary%20Search%20Tree%20Iterator/">【BST专项】173.Binary Search Tree Iterator</a>
           </li>
         
           <li>
-            <a href="/2019/12/25/2019-12-25-Leetcode-098-Validate%20Binary%20Search%20Tree/">【BST专项】098.Validate Binary Search Tree</a>
+            <a href="/2019/12/26/2019-12-26-Leetcode-257-Binary%20Tree%20Paths/">【二叉树专项】257.Binary Tree Paths</a>
           </li>
         
           <li>
-            <a href="/2019/12/25/2019-12-25-Leetcode-129-Sum%20Root%20to%20Leaf%20Numbers/">【二叉树专项】129.Sum Root to Leaf Numbers</a>
+            <a href="/2019/12/26/2019-12-26-Leetcode-236-Lowest%20Common%20Ancestor%20of%20a%20Binary%20Tree/">【二叉树专项】236.Lowest Common Ancestor of a Binary Tree</a>
           </li>
         
           <li>
-            <a href="/2019/12/25/2019-12-25-Leetcode-114-Flatten%20Binary%20Tree%20to%20Linked%20List/">【二叉树专项】114.Flatten Binary Tree to Linked List</a>
+            <a href="/2019/12/26/2019-12-26-Leetcode-235-Lowest%20Common%20Ancestor%20of%20a%20Binary%20Search%20Tree/">【BST专项】235.Lowest Common Ancestor of a Binary Search Tree</a>
           </li>
         
           <li>
-            <a href="/2019/12/25/2019-12-25-Leetcode-110-Balanced%20Binary%20Tree/">【二叉树专项】110.Balanced Binary Tree</a>
+            <a href="/2019/12/26/2019-12-26-Leetcode-230-Kth%20Smallest%20Element%20in%20a%20BST/">【BST专项】230.Kth Smallest Element in a BST</a>
           </li>
         
       </ul>
