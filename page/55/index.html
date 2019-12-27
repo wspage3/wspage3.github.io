@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-2019-12-13-Leetcode-34-Find First and Last Position of Element in Sorted Array" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-2019-12-13-Leetcode-704-Binary Search" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/12/2019-12-13-Leetcode-34-Find%20First%20and%20Last%20Position%20of%20Element%20in%20Sorted%20Array/" class="article-date">
-  <time datetime="2019-12-12T13:28:34.562Z" itemprop="datePublished">2019-12-12</time>
+    <a href="/2019/12/13/2019-12-13-Leetcode-704-Binary%20Search/" class="article-date">
+  <time datetime="2019-12-13T05:19:51.976Z" itemprop="datePublished">2019-12-13</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/12/2019-12-13-Leetcode-34-Find%20First%20and%20Last%20Position%20of%20Element%20in%20Sorted%20Array/">34.Find First and Last Position of Element in Sorted Array</a>
+      <a class="article-title" href="/2019/12/13/2019-12-13-Leetcode-704-Binary%20Search/">704.Binary Search</a>
     </h1>
   
 
@@ -83,24 +83,39 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/" target="_blank" rel="noopener">34.Find First and Last Position of Element in Sorted Array</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的数组，该数组是升序排列的，中间可能有重复的元素；<br>给定一个整数target；<br>查找target是否在数组中，在的话，返回其开始出现的索引，以及最后一次出现的索引。<br>不存在的话，返回(-1, -1)即可；</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: nums = [5,7,7,8,8,10], target = 8<br>Output: [3,4]</p>
-<p>Input: nums = [5,7,7,8,8,10], target = 6<br>Output: [-1,-1]</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n: 当n为0的时候，直接返回(-1, -1)；</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Binary-Search-Linear-Search"><a href="#Solution-1：Binary-Search-Linear-Search" class="headerlink" title="Solution-1：Binary Search + Linear Search"></a>Solution-1：Binary Search + Linear Search</h3><p>1.二分查找，每次去mid，然后判断nums[mid]的值是否是target，如果是的话：<br>依次向前找，直到当前的数不等于target为止。<br>依次向后找，直到当前的数不等于target位置。<br>找到，并return 即可。<br>如果target大于nums[mid]，则在[mid + 1, right]中搜。<br>如果target小于nums[mid]，则在[left, mid - 1]中搜。</p>
-<p>2.特殊情况考虑：当left，right相差1的时候，满足while循环条件，并进入。<br>此时mid = left，考虑了nums[mid]后:<br>若nums[mid]就是我们要找的target，则寻找它开始结束的位置。<br>若target大于nums[mid]，此时left = right，while循环退出。此时需要考虑left(等于right)这个位置的值。<br>如果是target，则返回{left, left}即可。<br>如果不是，则target不在数组中。<br>若target小于nums[mid]，则target不在数组中。</p>
-<p>时间复杂度：O(log n)，最坏O(n)<br>空间复杂度：O(1)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/285482172/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285482172/</a>)</p>
-<h3 id="Solution-2：Binary-Search-Binary-Search"><a href="#Solution-2：Binary-Search-Binary-Search" class="headerlink" title="Solution-2：Binary Search + Binary Search"></a>Solution-2：Binary Search + Binary Search</h3><p>1.由于我们在Leetcode-704-Binary Search中学会了找target的最小索引和最大索引。<br>正好本题目中就是找这两个值。</p>
-<p>2.先找到target的最小索引；再找到target的最大索引。<br>再返回答案。</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/binary-search/" target="_blank" rel="noopener">704.Binary Search</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的数组，该数组是升序排列的，中间没有有重复的元素；<br>给定一个整数target；<br>查找target是否在数组中，在的话，返回其索引。<br>不存在的话，返回-1即可；</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: nums = [-1,0,3,5,9,12], target = 9<br>Output: 4<br>Explanation: 9 exists in nums and its index is 4</p>
+<p>Input: nums = [-1,0,3,5,9,12], target = 2<br>Output: -1<br>Explanation: 2 does not exist in nums so return -1</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n: [1, 10000]<br>nums[i]: [-9999,9999]</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Binary-Search"><a href="#Solution-1：Binary-Search" class="headerlink" title="Solution-1：Binary Search"></a>Solution-1：Binary Search</h3><p>1.二分查找，每次取mid，然后判断nums[mid]的值是否是target，如果是的话，说明当前mid就是target的索引。<br>如果target大于nums[mid]，则在[mid + 1, right]中搜。<br>如果target小于nums[mid]，则在[left, mid - 1]中搜。</p>
+<p>2.在区间[0, n - 1]上搜索。开始left = 0, right = n - 1。<br>每次考虑nums[mid]，如果其不是答案，则继续在mid左边或者mid右边查找。</p>
+<p>3.循环判断：left &lt;= right，这样可以保证[0, n - 1]上的每个元素都能被考虑到。<br>最终循环结束的时候，一定有left = right + 1。<br>如果循环结束了还没有找到target，说明数组中没有target。</p>
 <p>时间复杂度：O(log n)<br>空间复杂度：O(1)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/285598701/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285598701/</a>)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/285484850/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285484850/</a>)</p>
+<h3 id="Solution-2：Binary-Search-with-minimum-index"><a href="#Solution-2：Binary-Search-with-minimum-index" class="headerlink" title="Solution-2：Binary Search with minimum index"></a>Solution-2：Binary Search with minimum index</h3><p>1.核心思想还是二分查找。我们尝试找target最小的index（如果target有多个的话）</p>
+<p>2.假设某一时刻，在区间[left, right)上查找。<br>继续取mid，判断nums[mid]和target的大小关系。<br>此时区间[left, right)被分成：[left, mid), nums[mid], [mid + 1, right)三部分。<br>我们通过判断nums[mid]和target的大小关系来决定下次搜索在上面范围内：<br>如果target &gt; nums[mid]，说明target的最小索引一定在[mid + 1, right)这个范围上。<br>如果target &lt; nums[mid]，说明target的最小索引一定在[left, mid)这个范围上。<br>如果target == nums[mid]，说明target的最小索引要么就在mid位置；要么在mid位置之前；<br>这种情况下，我们继续在[left, mid)上寻找，如果这个范围内已经没有和target相等的数字了，那么答案就是mid。<br>如果这个范围内又找到了target，说明target的最小索引在这个范围内。</p>
+<p>举个例子：<br>[1, 2, 2, 3], target = 2<br>在范围[0, 4)上搜索，mid = 2, nums[mid] == target。此时将right = mid = 2。<br>在范围[0, 2)上搜索，mid = 1, nums[mid] == target。此时将right = mid = 1。<br>在范围[0, 1)上搜索，mid = 0, target &gt; nums[0]。此时left = mid + 1 = 1。<br>left == right == 1，此时循环结束。<br>可以看出，1就是target的最小索引。</p>
+<p>[1, 1, 2, 3], target = 2<br>在范围[0, 4)上搜索，mid = 2, nums[mid] == target。此时将right = mid = 2。<br>在范围[0, 2)上搜索，mid = 1, target &gt; nums[1]。此时left = mid + 1 = 2。<br>left == right == 2，此时循环结束。<br>可以看出，2就是target的最小索引。</p>
+<p>3.以上两个例子都是nums中包含target的情况，下面看nums中不包含target的情况。<br>[1, 3, 5, 7], target = 0<br>在范围[0, 4)上搜索，mid = 2, target &lt; nums[mid]。此时将right = mid = 2。<br>在范围[0, 2)上搜索，mid = 1, target &lt; nums[mid]。此时将right = mid = 1。<br>在范围[0, 1)上搜索，mid = 0, target &lt; nums[mid]。此时将right = mid = 0。<br>left == rihgt == 0，此时循环结束。<br>再次判断：【如果这个位置是target，则是target的最小索引；】<br>否则的话，说明target不在nums中。<br>而nums[0] = 1，而不是target，说明target不存在于nums中。</p>
+<p>[1, 3, 5, 7], target = 10<br>在范围[0, 4)上搜索，mid = 2, target &gt; nums[mid]。此时将left = mid + 1 = 3。<br>在范围[3, 4)上搜索，mid = 3, target &gt; nums[mid]。此时将left = mid + 1 = 4。<br>left == rihgt == 4，此时循环结束。<br>再次判断：【如果这个位置是target，则是target的最小索引；】<br>而此时的left(right)已经代表不了数组的index了，说明target不在nums中。<br>即：【若left(right) == n，则target不在nums中】</p>
+<p>[1, 3, 5, 7], target = 6<br>在范围[0, 4)上搜索，mid = 2, target &gt; nums[mid]。此时将left = mid + 1 = 3。<br>在范围[3, 4)上搜索，mid = 3, target &lt; nums[mid]。此时将rihgt = mid = 3。<br>left == right == 3，此时循环结束。<br>再次判断：【如果这个位置是target，则是target的最小索引；】<br>否则的话，说明target不在nums中。<br>而nums[3] = 7，而不是target，说明target不存在于nums中。</p>
+<p>时间复杂度：O(log n)<br>空间复杂度：O(1)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/285596680/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285596680/</a>)</p>
+<h3 id="Solution-2：Binary-Search-with-minimum-index-1"><a href="#Solution-2：Binary-Search-with-minimum-index-1" class="headerlink" title="Solution-2：Binary Search with minimum index"></a>Solution-2：Binary Search with minimum index</h3><p>1.核心思想还是二分查找。我们尝试找target最大的index（如果target有多个的话）</p>
+<p>2.假设某一时刻，在区间[left, right)上查找。<br>继续取mid，判断nums[mid]和target的大小关系。<br>此时区间[left, right)被分成：[left, mid), nums[mid], [mid + 1, right)三部分。<br>我们通过判断nums[mid]和target的大小关系来决定下次搜索在上面范围内：<br>如果target &gt; nums[mid]，说明target的最大索引一定在[mid + 1, right)这个范围上。<br>如果target &lt; nums[mid]，说明target的最大索引一定在[left, mid)这个范围上。<br>如果target == nums[mid]，说明target的最大索引要么就在mid位置；要么在mid位置之后；<br>这种情况下，我们继续在[mid + 1, right)上寻找:<br>如果这个范围内已经没有和target相等的数字了，那么答案就是mid。<br>如果这个范围内又找到了target，说明target的最大索引在这个范围内。</p>
+<p>举个例子：<br>[1, 2, 2, 3], target = 2<br>在范围[0, 4)上搜索，mid = 2, nums[mid] == target。此时将left = mid + 1 = 3。<br>在范围[3, 4)上搜索，mid = 3, nums[mid] &gt; target。此时将right = mid = 3。<br>left == right == 3，此时循环结束。<br>可以看出，【3 - 1】就是target的最大索引。</p>
+<p>[1, 1, 2, 3], target = 2<br>在范围[0, 4)上搜索，mid = 2, nums[mid] == target。此时将left = mid + 1 = 3。<br>在范围[3, 4)上搜索，mid = 3, nums[mid] &gt; target。此时right = mid = 3。<br>left == right == 3，此时循环结束。<br>可以看出，【3 - 1】就是target的最大索引。</p>
+<p>3.以上两个例子都是nums中包含target的情况，下面看nums中不包含target的情况。<br>[1, 3, 5, 7], target = 0<br>在范围[0, 4)上搜索，mid = 2, target &lt; nums[mid]。此时将right = mid = 2。<br>在范围[0, 2)上搜索，mid = 1, target &lt; nums[mid]。此时将right = mid = 1。<br>在范围[0, 1)上搜索，mid = 0, target &lt; nums[mid]。此时将right = mid = 0。<br>left == right == 0，此时循环结束。<br>再次判断：【如果这个位置的前一个位置是target，则是target的最大索引；】<br>否则的话，说明target不在nums中。<br>而left(right)的前一个是-1，已经不能表示index了。说明target不存在。<br>即：【若left(right) == 0，则target不在nums中】</p>
+<p>[1, 3, 5, 7], target = 10<br>在范围[0, 4)上搜索，mid = 2, target &gt; nums[mid]。此时将left = mid + 1 = 3。<br>在范围[3, 4)上搜索，mid = 3, target &gt; nums[mid]。此时将left = mid + 1 = 4。<br>left == right == 4，此时循环结束。<br>再次判断：【如果这个位置的前一个位置是target，则是target的最大索引；】<br>否则的话，说明target不在nums中。<br>而nums[3]的值为7，说明target不在nums中。</p>
+<p>[1, 3, 5, 7], target = 2<br>在范围[0, 4)上搜索，mid = 2, target &lt; nums[mid]。此时将right = mid = 2。<br>在范围[0, 2)上搜索，mid = 1, target &lt; nums[mid]。此时将right = mid = 1。<br>在范围[0, 1)上搜索，mid = 0, target &gt; nums[mid]。此时将left = mid + 1 = 1。<br>left == right == 1，此时循环结束。<br>再次判断：【如果这个位置的前一个位置是target，则是target的最大索引；】<br>否则的话，说明target不在nums中。<br>而nums[0]的值为1，说明target不在nums中。</p>
+<p>时间复杂度：O(log n)<br>空间复杂度：O(1)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/285657074/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285657074/</a>)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/12/2019-12-13-Leetcode-34-Find%20First%20and%20Last%20Position%20of%20Element%20in%20Sorted%20Array/" data-id="ck4mtzzio000m3st7g8885gso" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/13/2019-12-13-Leetcode-704-Binary%20Search/" data-id="ck4nvzhbz000pe0t72qlkcdr0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -114,7 +129,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/54/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/53/">53</a><a class="page-number" href="/page/54/">54</a><span class="page-number current">55</span><a class="page-number" href="/page/56/">56</a><a class="page-number" href="/page/57/">57</a><span class="space">&hellip;</span><a class="page-number" href="/page/77/">77</a><a class="extend next" rel="next" href="/page/56/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/54/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/53/">53</a><a class="page-number" href="/page/54/">54</a><span class="page-number current">55</span><a class="page-number" href="/page/56/">56</a><a class="page-number" href="/page/57/">57</a><span class="space">&hellip;</span><a class="page-number" href="/page/78/">78</a><a class="extend next" rel="next" href="/page/56/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -146,6 +161,10 @@
       <ul>
         
           <li>
+            <a href="/2019/12/27/2019-12-27-Leetcode-116-Populating%20Next%20Right%20Pointers%20in%20Each%20Node/">【二叉树专项】116.Populating Next Right Pointers in Each Node</a>
+          </li>
+        
+          <li>
             <a href="/2019/12/26/2019-12-26-Leetcode-173-Binary%20Search%20Tree%20Iterator/">【BST专项】173.Binary Search Tree Iterator</a>
           </li>
         
@@ -159,10 +178,6 @@
         
           <li>
             <a href="/2019/12/26/2019-12-26-Leetcode-235-Lowest%20Common%20Ancestor%20of%20a%20Binary%20Search%20Tree/">【BST专项】235.Lowest Common Ancestor of a Binary Search Tree</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/26/2019-12-26-Leetcode-230-Kth%20Smallest%20Element%20in%20a%20BST/">【BST专项】230.Kth Smallest Element in a BST</a>
           </li>
         
       </ul>

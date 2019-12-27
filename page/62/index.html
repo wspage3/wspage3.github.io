@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-2019-12-10-Leetcode-33-Search in Rotated Sorted Array" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-2019-12-11-Leetcode-81-Search in Rotated Sorted Array II" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/10/2019-12-10-Leetcode-33-Search%20in%20Rotated%20Sorted%20Array/" class="article-date">
-  <time datetime="2019-12-10T07:17:33.627Z" itemprop="datePublished">2019-12-10</time>
+    <a href="/2019/12/11/2019-12-11-Leetcode-81-Search%20in%20Rotated%20Sorted%20Array%20II/" class="article-date">
+  <time datetime="2019-12-11T01:06:43.935Z" itemprop="datePublished">2019-12-11</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/10/2019-12-10-Leetcode-33-Search%20in%20Rotated%20Sorted%20Array/">33. Search in Rotated Sorted Array</a>
+      <a class="article-title" href="/2019/12/11/2019-12-11-Leetcode-81-Search%20in%20Rotated%20Sorted%20Array%20II/">81. Search in Rotated Sorted Array II</a>
     </h1>
   
 
@@ -83,25 +83,23 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/search-in-rotated-sorted-array/" target="_blank" rel="noopener">33. Search in Rotated Sorted Array</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组nums；<br>该数组原本是升序的，结果在某个支点处旋转了一次，如：<br>i.e., [0,1,2,4,5,6,7] might become [4,5,6,7,0,1,2]<br>给定一个整数target；<br>判断nums中是否包含该target，如果是，返回其index；否则，返回-1。<br>假设数组中所有数字都不相同。<br>要求时间复杂度为：O(log n)</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: nums = [4,5,6,7,0,1,2], target = 0<br>Output: 4</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n: 当n为0的时候，直接返回-1；</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>1.常规思路：从前到后遍历一遍nums，如果找到target则return。</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/search-in-rotated-sorted-array-ii/" target="_blank" rel="noopener">81. Search in Rotated Sorted Array II</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组nums；<br>该数组原本是升序的，结果在某个支点处旋转了一次，如：<br>i.e., [0,0,1,2,2,5,6] might become [2,5,6,0,0,1,2]<br>给定一个整数target；<br>判断nums中是否包含该target，如果是，返回ture；否则，返回false。<br>假设数组中存在相同的数字。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: nums = [2,5,6,0,0,1,2], target = 0<br>Output: true</p>
+<p>Input: nums = [2,5,6,0,0,1,2], target = 3<br>Output: false</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n: 当n为0的时候，直接返回false；</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>1.常规思路：从前到后遍历一遍nums，如果找到target则return true。</p>
 <p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/284976005/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284976005/</a>)</p>
-<h3 id="Solution-2：Binary-Search"><a href="#Solution-2：Binary-Search" class="headerlink" title="Solution-2：Binary Search"></a>Solution-2：Binary Search</h3><p>1.题目要求time complexity为O(log n)，则第一时间想到了Binary Search</p>
-<p>2.nums由于旋转的原因，虽说整体无序。但有两部分都是升序排列的。</p>
-<p>3.例如原有序数组为：[2,3,5,7,8]，经过rotate后所有可能为：<br>[3,5,7,8,2]<br>[5,7,8,2,3]<br>[7,8,2,3,5]<br>[8,2,3,5,7]<br>可能结果有(n - 1)种。<br>仔细观察可以发现，不管rotate成哪一种，都可以找出左边、右边两部分，它们各自有序。<br>而且：【右边子数组的所有元素一定比左边子数组的第一个元素小；】</p>
-<p>4.举个栗子：<br>对于[3,5,7,8,2]来说，left置为0，right置为4<br>第一次：mid = 2, nums[mid] = 7,<br>此时若target在范围[3, INT_MAX]内，即target不可能在另外一侧，因为另外一侧所有的元素都比nums[0]要小。<br>    直接进行二分搜索即可，用来比较的值就是nums[mid]。<br>此时若target不在范围[3, INT_MAX]内，说明：target不可能在左侧。需要将其在右侧搜索。即left往右移动。</p>
-<p>5.判断target和nums[mid]一个简单明了的方法就是：看他们俩是否都同时比nums[0]大或者比nums[0]小。<br>如果都比nums[0]大的话，说明这两个数都在左侧。<br>如果都比nums[0]小的话，说明这两个数都在右侧。<br>如果一个在左侧，一个在右侧的话，说明当前的nums[mid]对于在另外一侧寻找到target没有参考意义。<br>此时判断target和nums[0]的关系：<br>若target大于nums[0]，说明target此时在左侧，想办法将right指针左移。就是: num = INT_MAX;相当于认为右侧所有数都是INT_MAX<br>若target小于nums[0]，说明target此时在右侧，想办法将left指针右移。就是: num = INT_MIN;相当于认为左侧所有数都是INT_MIN</p>
-<p>时间复杂度：O(log n)<br>空间复杂度：O(1)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/285003804/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285003804/</a>)</p>
+<h3 id="Solution-2：Binary-Search"><a href="#Solution-2：Binary-Search" class="headerlink" title="Solution-2：Binary Search"></a>Solution-2：Binary Search</h3><p>1.参考leetcode-33的二分解法，只不过本题目中input可以存在相同的数字。<br>上题中核心思路就是：通过判断nums[mid]和target是否在同一侧，来确定比较器num。<br>前提是：右侧所有的元素都比nums[0]要小。<br>所以可以通过(nums[mid] &lt; nums[0]) == (target &lt; nums[0])来判断。<br>若其在同一侧，则使用nums[mid]作为比较器即可。<br>若其不在同一侧，则对应的将left右移或者right左移。继续考察下一次……</p>
+<p>2.而本题目：右侧所有元素 &lt;= nums[0]<br>假设把其所有和nums[0]相等的元素，都去掉的话，并不影响查找target；<br>这样的话，右边所有的数字都小于nums[0]了，继续使用leetcode-33的二分解法即可。</p>
+<p>3.观察：[0,0,1,2,2,5,6]<br>经过rotate后，可能存在以下几种不同情况：<br>[0,1,2,2,5,6,   0]<br>[1,2,2,5,6,   0,0]<br>[2,2,5,6,   0,0,1]<br>[2,5,6,   0,0,1,2]<br>[5,6,   0,0,1,2,2]<br>[6,   0,0,1,2,2,5]</p>
+<p>时间复杂度：平均O(log n)   最坏O(n)<br>空间复杂度：O(1)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/285139175/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285139175/</a>)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/10/2019-12-10-Leetcode-33-Search%20in%20Rotated%20Sorted%20Array/" data-id="ck4mtzzih000c3st74ttx77s4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/11/2019-12-11-Leetcode-81-Search%20in%20Rotated%20Sorted%20Array%20II/" data-id="ck4nvzhbz000he0t767kb7krl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -115,7 +113,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/61/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/60/">60</a><a class="page-number" href="/page/61/">61</a><span class="page-number current">62</span><a class="page-number" href="/page/63/">63</a><a class="page-number" href="/page/64/">64</a><span class="space">&hellip;</span><a class="page-number" href="/page/77/">77</a><a class="extend next" rel="next" href="/page/63/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/61/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/60/">60</a><a class="page-number" href="/page/61/">61</a><span class="page-number current">62</span><a class="page-number" href="/page/63/">63</a><a class="page-number" href="/page/64/">64</a><span class="space">&hellip;</span><a class="page-number" href="/page/78/">78</a><a class="extend next" rel="next" href="/page/63/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -147,6 +145,10 @@
       <ul>
         
           <li>
+            <a href="/2019/12/27/2019-12-27-Leetcode-116-Populating%20Next%20Right%20Pointers%20in%20Each%20Node/">【二叉树专项】116.Populating Next Right Pointers in Each Node</a>
+          </li>
+        
+          <li>
             <a href="/2019/12/26/2019-12-26-Leetcode-173-Binary%20Search%20Tree%20Iterator/">【BST专项】173.Binary Search Tree Iterator</a>
           </li>
         
@@ -160,10 +162,6 @@
         
           <li>
             <a href="/2019/12/26/2019-12-26-Leetcode-235-Lowest%20Common%20Ancestor%20of%20a%20Binary%20Search%20Tree/">【BST专项】235.Lowest Common Ancestor of a Binary Search Tree</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/26/2019-12-26-Leetcode-230-Kth%20Smallest%20Element%20in%20a%20BST/">【BST专项】230.Kth Smallest Element in a BST</a>
           </li>
         
       </ul>
