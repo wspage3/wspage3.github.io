@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-2019-12-15-Leetcode-268-Missing Number" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-2019-12-15-Leetcode-75-Sort Colors" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/15/2019-12-15-Leetcode-268-Missing%20Number/" class="article-date">
-  <time datetime="2019-12-15T10:27:54.308Z" itemprop="datePublished">2019-12-15</time>
+    <a href="/2019/12/15/2019-12-15-Leetcode-75-Sort%20Colors/" class="article-date">
+  <time datetime="2019-12-15T11:38:22.814Z" itemprop="datePublished">2019-12-15</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/15/2019-12-15-Leetcode-268-Missing%20Number/">268.Missing Number</a>
+      <a class="article-title" href="/2019/12/15/2019-12-15-Leetcode-75-Sort%20Colors/">75.Sort Colors</a>
     </h1>
   
 
@@ -83,24 +83,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/missing-number/" target="_blank" rel="noopener">268.Missing Number</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个长度为n的整数数组。<br>其中所有的元素取值都是区间[0, n]的，且没有重复的元素。<br>显然，[0, n]一共有(n + 1)个元素，而nums中只有n个，找出这个缺失的元素。<br>【输出】<br>找出这个缺失的数字。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [9,6,4,2,3,5,7,0,1]<br>Output: 8</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.空间复杂度要求为O(1)。<br>2.时间复杂度要求O(n)。</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Accumulate"><a href="#Solution-1：Accumulate" class="headerlink" title="Solution-1：Accumulate"></a>Solution-1：Accumulate</h3><p>1.[0, n]中所有数字的和为[1, n] = n * (n + 1) / 2</p>
-<p>2.我们遍历nums中的数字，累加一个和。<br>然后用上面的公式计算出来的和减去nums中累加的和，答案就是缺失的元素。</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/sort-colors/" target="_blank" rel="noopener">75.Sort Colors</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个长度为n的整数数组。<br>其中所有的元素取值都是集合[0, 1, 2]的。<br>【输出】<br>将这个数组进行排序，且按照0 -&gt; 1 -&gt; 2这个顺序从前到后排列。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [2,0,2,1,1,0]<br>Output: [0,0,1,1,2,2]</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.n &lt;= 1, 直接return即可。<br>2.要求就地排序，即空间复杂度为O(1)。<br>3.一个直接的想法是：统计0，1，2的个数，然后再重写nums数组。<br>显然这样需要遍历两次nums数组。<br>4.找一个one-pass的方法。</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Three-Pointers"><a href="#Solution-1：Three-Pointers" class="headerlink" title="Solution-1：Three Pointers"></a>Solution-1：Three Pointers</h3><p>1.用三个指针p0，cur，p2。<br>初始化：<br>p0 = 0<br>cur = 0<br>p2 = n - 1<br>分别代表：<br>p0: 元素’0’可能出现的位置，p0之前的位置上都已经全部放上’0’了。<br>cur: 当前考察的位置。<br>p2: 元素’2’可能出现的位置，p2之后的位置上都已经全部放上’2’了。</p>
+<p>2.循环开始：cur从0开始。<br>循环结束：cur == p2是最后一次循环。</p>
+<p>3.过程：<br>如果当前cur位置上的元素是’2’的话，将其与p2位置上的元素交换。p2–；cur保持不动，继续判断交换过来的这个值。<br>如果当前cur位置上的元素是’0’的话，将其与p0位置上的元素交换。p0++；cur向后移动一位（因为当前和p0交换过来的这个值，一定是0或者1，不可能是2）.<br>    如果是0的话，不需要重新考虑。<br>    如果是1的话，也不需要重新考虑。<br>如果当前cur位置上的元素是’1’的话，cur++即可。</p>
 <p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/285827066/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285827066/</a>)<br>Code(<a href="https://leetcode.com/submissions/detail/285849852/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285849852/</a>)</p>
-<p>3.缺点：accumulate可以会导致整数溢出，存在局限。</p>
-<h3 id="Solution-2：XOR"><a href="#Solution-2：XOR" class="headerlink" title="Solution-2：XOR"></a>Solution-2：XOR</h3><p>1.任意一个数 异或 它自己 == 0<br>  任意一个数 异或 0     == 它自己<br>  异或满足交换律，结合率</p>
-<p>2.nums中有n个数字，且都在范围[0, n]内，且都不重复。<br>我们把nums中所有的数字都异或起来。记为a。<br>然后把[0, n]所有的数字都异或起来。记为b。<br>此时所有参与异或的数字一共有 n + (n + 1)个。<br>假设missing number为x。则上述n + (n + 1)个数字只有一个x，其它数字都是出现了两次。<br>则 a ^ b == x。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/285850682/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285850682/</a>)</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/286030421/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286030421/</a>)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/15/2019-12-15-Leetcode-268-Missing%20Number/" data-id="ck4nvzhbz000se0t7114ucpsd" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/15/2019-12-15-Leetcode-75-Sort%20Colors/" data-id="ck4qgrtwf000togt7bg5kgvpq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -114,7 +110,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/51/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/50/">50</a><a class="page-number" href="/page/51/">51</a><span class="page-number current">52</span><a class="page-number" href="/page/53/">53</a><a class="page-number" href="/page/54/">54</a><span class="space">&hellip;</span><a class="page-number" href="/page/78/">78</a><a class="extend next" rel="next" href="/page/53/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/51/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/50/">50</a><a class="page-number" href="/page/51/">51</a><span class="page-number current">52</span><a class="page-number" href="/page/53/">53</a><a class="page-number" href="/page/54/">54</a><span class="space">&hellip;</span><a class="page-number" href="/page/80/">80</a><a class="extend next" rel="next" href="/page/53/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -146,6 +142,14 @@
       <ul>
         
           <li>
+            <a href="/2019/12/27/2019-12-27-Leetcode-106-Construct%20Binary%20Tree%20from%20Inorder%20and%20Postorder%20Traversal/">【二叉树专项】106.Construct Binary Tree from Inorder and Postorder Traversal</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/27/2019-12-27-Leetcode-105-Construct%20Binary%20Tree%20from%20Preorder%20and%20Inorder%20Traversal/">【二叉树专项】105.Construct Binary Tree from Preorder and Inorder Traversal</a>
+          </li>
+        
+          <li>
             <a href="/2019/12/27/2019-12-27-Leetcode-116-Populating%20Next%20Right%20Pointers%20in%20Each%20Node/">【二叉树专项】116.Populating Next Right Pointers in Each Node</a>
           </li>
         
@@ -155,14 +159,6 @@
         
           <li>
             <a href="/2019/12/26/2019-12-26-Leetcode-257-Binary%20Tree%20Paths/">【二叉树专项】257.Binary Tree Paths</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/26/2019-12-26-Leetcode-236-Lowest%20Common%20Ancestor%20of%20a%20Binary%20Tree/">【二叉树专项】236.Lowest Common Ancestor of a Binary Tree</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/26/2019-12-26-Leetcode-235-Lowest%20Common%20Ancestor%20of%20a%20Binary%20Search%20Tree/">【BST专项】235.Lowest Common Ancestor of a Binary Search Tree</a>
           </li>
         
       </ul>

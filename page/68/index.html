@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-2019-12-08-Leetcode-122-Best Time to Buy ans Sell Stock II" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-2019-12-09-Leetcode-188-Best Time to Buy ans Sell Stock IV" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/07/2019-12-08-Leetcode-122-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20II/" class="article-date">
-  <time datetime="2019-12-07T01:53:30.793Z" itemprop="datePublished">2019-12-07</time>
+    <a href="/2019/12/09/2019-12-09-Leetcode-188-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20IV/" class="article-date">
+  <time datetime="2019-12-09T06:58:57.169Z" itemprop="datePublished">2019-12-09</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/07/2019-12-08-Leetcode-122-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20II/">Leetcode122-Best Time to Buy and Sell Stock II</a>
+      <a class="article-title" href="/2019/12/09/2019-12-09-Leetcode-188-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20IV/">Leetcode188-Best Time to Buy and Sell Stock IV</a>
     </h1>
   
 
@@ -83,19 +83,26 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/" target="_blank" rel="noopener">Leetcode122-Best Time to Buy and Sell Stock</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组prices；prices[i]代表第i天股票的价格。<br>如果你能交易任意k次，即：买k次，卖k次。求出你最多能赚多少钱。<br>前提是：买入下一股的时候，必须将上一股卖掉。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [7,1,5,3,6,4]<br>Output: 7<br>Explanation: Buy on day 2 (price = 1) and sell on day 3 (price = 5), profit = 5-1 = 4.<br>             Then buy on day 4 (price = 3) and sell on day 5 (price = 6), profit = 6-3 = 3.</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n：当n为0/1的时候，直接返回0；<br>赚不到钱则返回0；</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>考虑现实生活中，唯一不同的是：现实中我们只知道当前的股价，不知道明天的股价。<br>而现在我们知道了：假设今天股价为a，明天股价b大于a，则买下一定会赚钱，一定买。<br>假设今天股价为a，明天股价b小于a，则买下一定会赔钱，一定不买。</p>
-<h3 id="Solution-1：Greedy"><a href="#Solution-1：Greedy" class="headerlink" title="Solution-1：Greedy"></a>Solution-1：Greedy</h3><p>1.我们要做的只是：每天只看今天的价格和明天的价格，然后做决定。<br>不管后天，大后天的价格。因为我们每天都可以做决定，如果后面发现股价一直在涨，则每天都买就行了。<br>然后ans一直累加每天的利润即可。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/284232069/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284232069/</a>)</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/" target="_blank" rel="noopener">Leetcode188-Best Time to Buy and Sell Stock IV</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组prices；prices[i]代表第i天股票的价格。<br>如果你最多能交易k次，即：买k次，卖k次。求出你最多能赚多少钱。<br>前提是：买入下一股的时候，必须将上一股卖掉。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [2,4,1], k = 2<br>Output: 2<br>Explanation: Buy on day 1 (price = 2) and sell on day 2 (price = 4), profit = 4-2 = 2.</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n: 当n为0/1的时候，直接返回0；<br>k: 当k &lt;= 0的时候，直接返回0；<br>   当k &gt;= n的时候，将k赋值为n - 1；<br>赚不到钱则返回0；</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Dynamic-Programming"><a href="#Solution-1：Dynamic-Programming" class="headerlink" title="Solution-1：Dynamic Programming"></a>Solution-1：Dynamic Programming</h3><p>1.根据leetcode123，可以得到相同的状态转移方程：<br>dp[j][i] = max(dp[j][i - 1], dp[j - 1][m] + prices[i] - prices[m]);<br>其中：j:[1, k]  i:[0, n - 1]  m:[0, i]</p>
+<p>2.申请(k + 1) * n的dp数组空间，答案就是dp[k][n - 1];<br>j从[1, k]遍历<br>i从[1, n - 1]遍历<br>m从[0, i]遍历<br>对于每次固定好的j和i，找出一个位置m，使得prices[m] - dp[j - 1][m]的值最小。</p>
+<p>时间复杂度：O(k * n ^ 2)<br>空间复杂度：O(k * n)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/284743219/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284743219/</a>)</p>
+<h3 id="Solution-2：Dynamic-Programming-Optimization"><a href="#Solution-2：Dynamic-Programming-Optimization" class="headerlink" title="Solution-2：Dynamic Programming + Optimization"></a>Solution-2：Dynamic Programming + Optimization</h3><p>1.从Solution-1的解法来看，对于当前(k, i)序列，假设通过O(n)的循环，找到了一个位置m1，使得表达式的值最小了，从而算出了当前(k, i)的答案。<br>接着迭代到当前(k, i + 1)序列，此时还需要O(n)的循环：找到当前序列一个位置m2，使得表达式的值最小。<br>由于我们在上一次循环中已经计算出了[0, i]范围内使得表达式最小的一个位置。当前(k, i + 1)序列，直接通过O(1)的时间就可以算出来，而不必继续遍历[0, i + 1]</p>
+<p>2.所以，对于遍历当前i位置来说，可以直接访问上一次i - 1的计算结果。从而把整体的时间复杂度优化为O(k * n)</p>
+<p>时间复杂度：O(k * n)<br>空间复杂度：O(k * n)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/284745998/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284745998/</a>)</p>
+<h3 id="Solution-3：Dynamic-Programming-Optimization"><a href="#Solution-3：Dynamic-Programming-Optimization" class="headerlink" title="Solution-3：Dynamic Programming + Optimization"></a>Solution-3：Dynamic Programming + Optimization</h3><p>1.尝试调换两次循环的次序<br>2.进一步优化空间，将二维降成一维<br>3.当k &gt;= n / 2的时候，也就意味着可以用leetcode-122的O(n)方法来解。即无限交易次数，orz。。。</p>
+<p>时间复杂度：O(k * n)<br>空间复杂度：O(k)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/284749560/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284749560/</a>)<br>Code(<a href="https://leetcode.com/submissions/detail/284755984/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284755984/</a>)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/07/2019-12-08-Leetcode-122-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20II/" data-id="ck4nvzhbj0008e0t7emsia5jx" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/09/2019-12-09-Leetcode-188-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20IV/" data-id="ck4qgrtw3000cogt73wjvg97v" class="article-share-link">Share</a>
       
       
     </footer>
@@ -109,7 +116,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/67/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/66/">66</a><a class="page-number" href="/page/67/">67</a><span class="page-number current">68</span><a class="page-number" href="/page/69/">69</a><a class="page-number" href="/page/70/">70</a><span class="space">&hellip;</span><a class="page-number" href="/page/78/">78</a><a class="extend next" rel="next" href="/page/69/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/67/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/66/">66</a><a class="page-number" href="/page/67/">67</a><span class="page-number current">68</span><a class="page-number" href="/page/69/">69</a><a class="page-number" href="/page/70/">70</a><span class="space">&hellip;</span><a class="page-number" href="/page/80/">80</a><a class="extend next" rel="next" href="/page/69/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -141,6 +148,14 @@
       <ul>
         
           <li>
+            <a href="/2019/12/27/2019-12-27-Leetcode-106-Construct%20Binary%20Tree%20from%20Inorder%20and%20Postorder%20Traversal/">【二叉树专项】106.Construct Binary Tree from Inorder and Postorder Traversal</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/27/2019-12-27-Leetcode-105-Construct%20Binary%20Tree%20from%20Preorder%20and%20Inorder%20Traversal/">【二叉树专项】105.Construct Binary Tree from Preorder and Inorder Traversal</a>
+          </li>
+        
+          <li>
             <a href="/2019/12/27/2019-12-27-Leetcode-116-Populating%20Next%20Right%20Pointers%20in%20Each%20Node/">【二叉树专项】116.Populating Next Right Pointers in Each Node</a>
           </li>
         
@@ -150,14 +165,6 @@
         
           <li>
             <a href="/2019/12/26/2019-12-26-Leetcode-257-Binary%20Tree%20Paths/">【二叉树专项】257.Binary Tree Paths</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/26/2019-12-26-Leetcode-236-Lowest%20Common%20Ancestor%20of%20a%20Binary%20Tree/">【二叉树专项】236.Lowest Common Ancestor of a Binary Tree</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/26/2019-12-26-Leetcode-235-Lowest%20Common%20Ancestor%20of%20a%20Binary%20Search%20Tree/">【BST专项】235.Lowest Common Ancestor of a Binary Search Tree</a>
           </li>
         
       </ul>

@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-2019-12-11-Leetcode-48-Rotate Image" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-2019-12-12-Leetcode-22-Generate Parentheses" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/11/2019-12-11-Leetcode-48-Rotate%20Image/" class="article-date">
-  <time datetime="2019-12-11T08:18:38.951Z" itemprop="datePublished">2019-12-11</time>
+    <a href="/2019/12/12/2019-12-12-Leetcode-22-Generate%20Parentheses/" class="article-date">
+  <time datetime="2019-12-12T06:02:01.240Z" itemprop="datePublished">2019-12-12</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/11/2019-12-11-Leetcode-48-Rotate%20Image/">48.Rotate Image</a>
+      <a class="article-title" href="/2019/12/12/2019-12-12-Leetcode-22-Generate%20Parentheses/">22.Generate Parentheses</a>
     </h1>
   
 
@@ -83,21 +83,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/rotate-image/" target="_blank" rel="noopener">48.Rotate Image</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个n阶矩阵。<br>将这个矩阵顺时针旋转90°。<br>不得申请额外空间。即：in-place就地操作。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Given input matrix =<br>[<br>  [1,2,3],<br>  [4,5,6],<br>  [7,8,9]<br>],<br>rotate the input matrix in-place such that it becomes:<br>[<br>  [7,4,1],<br>  [8,5,2],<br>  [9,6,3]<br>]</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n: 当n为0的时候，直接返回false；</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Layer-By-Layer，One-By-One"><a href="#Solution-1：Layer-By-Layer，One-By-One" class="headerlink" title="Solution-1：Layer By Layer，One By One"></a>Solution-1：Layer By Layer，One By One</h3><p>1.n阶矩阵，需要考虑n / 2层，即层数：[0, n / 2 - 1]<br>2.对于每一层，j：[i, n - 2 - i]</p>
-<p>时间复杂度：O(n ^ 2)<br>空间复杂度：O(1)</p>
-<p>5.Code(<a href="https://leetcode.com/submissions/detail/285218920/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285218920/</a>)</p>
-<h3 id="Solution-2："><a href="#Solution-2：" class="headerlink" title="Solution-2："></a>Solution-2：</h3><p>1.先将二维矩阵reverse，即保持其每一行中元素的顺序。<br>将这n行逆序。<br>[<br>  [1,2,3],<br>  [4,5,6],<br>  [7,8,9]<br>]<br>reverse后：<br>[<br>  [7,8,9],<br>  [4,5,6],<br>  [1,2,3]<br>]<br>2.此时可以发现，从[0, 0]到[n - 1, n - 1]的对角线上所有元素已经排列好了。<br>3.接下来，将对角线左右两侧的元素互换。<br>[<br>  [7,8,9],<br>  [4,5,6],<br>  [1,2,3]<br>]<br>互换后：<br>[<br>  [7,4,1],<br>  [8,5,2],<br>  [9,6,3]<br>]<br>4.此时已经完全排列好了，return即可。</p>
-<p>时间复杂度：O(n ^ 2)<br>空间复杂度：O(1)</p>
-<p>5.Code(<a href="https://leetcode.com/submissions/detail/285220946/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285220946/</a>)</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/generate-parentheses/" target="_blank" rel="noopener">22.Generate Parentheses</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个整数n，代表有n对括号。这是一对：( )<br>求出这n对括号所有可能的组合方式，要求组合后是一个有效的括号表达式。<br>即：匹配的一对括号，左边是(，右边是)</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>n = 3<br>[<br>  “((()))”,<br>  “(()())”,<br>  “(())()”,<br>  “()(())”,<br>  “()()()”<br>]</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n: 当n为0的时候，直接返回空；</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Backtracking-Recursive"><a href="#Solution-1：Backtracking-Recursive" class="headerlink" title="Solution-1：Backtracking(Recursive)"></a>Solution-1：Backtracking(Recursive)</h3><p>1.给定的n，代表有n个open bracket，n个close bracket。</p>
+<p>2.对于任意时刻，我们仅可选一个bracket，要么是open的，要么是close的。<br>只要leftCnt大于0，就可以选择open的。<br>而选择close的，需要rightCnt大于leftCnt，以保证结果先左后右的合法性。</p>
+<p>3.当leftCnt, rightCnt的值都为0时，此时构造出来的string s就是一个合法的答案。将其添加到答案中。<br>并且返回。（回溯）</p>
+<p>4.递归树的某一个子节点计算完成后返回了，其父节点进行考虑，若当前还有其他的儿子，则递归调用其他的儿子。<br>对于一个节点来说，其左儿子可以认为是“选择open bracket”，其右儿子可以认为是“选择close bracket”</p>
+<p>时间复杂度：O() //to do<br>空间复杂度：O()</p>
+<p>5.Code(<a href="https://leetcode.com/submissions/detail/285419056/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285419056/</a>)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/11/2019-12-11-Leetcode-48-Rotate%20Image/" data-id="ck4nvzhbz000ge0t7dwik02t9" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/12/2019-12-12-Leetcode-22-Generate%20Parentheses/" data-id="ck4qgrtw7000jogt7d3uofecm" class="article-share-link">Share</a>
       
       
     </footer>
@@ -111,7 +111,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/59/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/58/">58</a><a class="page-number" href="/page/59/">59</a><span class="page-number current">60</span><a class="page-number" href="/page/61/">61</a><a class="page-number" href="/page/62/">62</a><span class="space">&hellip;</span><a class="page-number" href="/page/78/">78</a><a class="extend next" rel="next" href="/page/61/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/59/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/58/">58</a><a class="page-number" href="/page/59/">59</a><span class="page-number current">60</span><a class="page-number" href="/page/61/">61</a><a class="page-number" href="/page/62/">62</a><span class="space">&hellip;</span><a class="page-number" href="/page/80/">80</a><a class="extend next" rel="next" href="/page/61/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -143,6 +143,14 @@
       <ul>
         
           <li>
+            <a href="/2019/12/27/2019-12-27-Leetcode-106-Construct%20Binary%20Tree%20from%20Inorder%20and%20Postorder%20Traversal/">【二叉树专项】106.Construct Binary Tree from Inorder and Postorder Traversal</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/27/2019-12-27-Leetcode-105-Construct%20Binary%20Tree%20from%20Preorder%20and%20Inorder%20Traversal/">【二叉树专项】105.Construct Binary Tree from Preorder and Inorder Traversal</a>
+          </li>
+        
+          <li>
             <a href="/2019/12/27/2019-12-27-Leetcode-116-Populating%20Next%20Right%20Pointers%20in%20Each%20Node/">【二叉树专项】116.Populating Next Right Pointers in Each Node</a>
           </li>
         
@@ -152,14 +160,6 @@
         
           <li>
             <a href="/2019/12/26/2019-12-26-Leetcode-257-Binary%20Tree%20Paths/">【二叉树专项】257.Binary Tree Paths</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/26/2019-12-26-Leetcode-236-Lowest%20Common%20Ancestor%20of%20a%20Binary%20Tree/">【二叉树专项】236.Lowest Common Ancestor of a Binary Tree</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/26/2019-12-26-Leetcode-235-Lowest%20Common%20Ancestor%20of%20a%20Binary%20Search%20Tree/">【BST专项】235.Lowest Common Ancestor of a Binary Search Tree</a>
           </li>
         
       </ul>
