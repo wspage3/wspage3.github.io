@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="wspage3">
 <meta property="og:description" content="一、题意题目链接: 206.Reverse Linked List 1.Description【输入】给定一个单链表。【输出】将其反转。 2.ExampleInput: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;5-&amp;gt;NULLOutput: 5-&amp;gt;4-&amp;gt;3-&amp;gt;2-&amp;gt;1-&amp;gt;NULL 3.Corner Case 链表为NULL时，无需操作。 链表为单节点时，无">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-29T07:09:14.967Z">
+<meta property="og:updated_time" content="2019-12-29T13:02:46.874Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="wspage3" type="application/atom+xml">
@@ -102,13 +102,13 @@
 
 <h3 id="Solution-2：Recursive-Solution"><a href="#Solution-2：Recursive-Solution" class="headerlink" title="Solution-2：Recursive Solution"></a>Solution-2：Recursive Solution</h3><p>1.使用递归：<br>对于链表head，先调用reverseList(head-&gt;next);<br>然后将head放在其已经逆序好的链表末尾。</p>
 <p>2.确定结束条件：当链表为NULL或者单节点时，无需reverse。</p>
-<p>时间复杂度：O(1)<br>空间复杂度：O(n)</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
 <p>6.Code(<a href="https://leetcode.com/submissions/detail/279789541/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/279789541/</a>)</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function">ListNode* <span class="title">reverseList</span><span class="params">(ListNode* head)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (head == <span class="literal">NULL</span> || head-&gt;next == <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> head;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        ListNode* newHead = reverseList(head-&gt;next);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        head-&gt;next-&gt;next = head;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        head-&gt;next = <span class="literal">NULL</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> newHead;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/29/Linked%20List/2019-12-29-Leetcode-206-Reverse%20Linked%20List/" data-id="ck4r0jgtg001j6ct7bam546r6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/29/Linked%20List/2019-12-29-Leetcode-206-Reverse%20Linked%20List/" data-id="ck4r2nj83001jpwt7g9vq1qwl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -166,6 +166,10 @@
       <ul>
         
           <li>
+            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-092-Reverse%20Linked%20List%20II/">【链表专项】092.Reverse Linked List II</a>
+          </li>
+        
+          <li>
             <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-141-Linked%20List%20Cycle/">【链表专项】141.Linked List Cycle</a>
           </li>
         
@@ -179,10 +183,6 @@
         
           <li>
             <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-206-Reverse%20Linked%20List/">【链表专项】206.Reverse Linked List</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-203-Remove%20Linked%20List%20Elements/">【链表专项】203.Remove Linked List Elements</a>
           </li>
         
       </ul>
