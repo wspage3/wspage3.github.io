@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-2019-12-11-Leetcode-48-Rotate Image" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-2019-12-13-Leetcode-278-First Bad Version" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/11/2019-12-11-Leetcode-48-Rotate%20Image/" class="article-date">
-  <time datetime="2019-12-11T08:18:38.951Z" itemprop="datePublished">2019-12-11</time>
+    <a href="/2019/12/13/2019-12-13-Leetcode-278-First%20Bad%20Version/" class="article-date">
+  <time datetime="2019-12-13T05:19:52.802Z" itemprop="datePublished">2019-12-13</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/11/2019-12-11-Leetcode-48-Rotate%20Image/">48.Rotate Image</a>
+      <a class="article-title" href="/2019/12/13/2019-12-13-Leetcode-278-First%20Bad%20Version/">278.First Bad Version</a>
     </h1>
   
 
@@ -83,21 +83,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/rotate-image/" target="_blank" rel="noopener">48.Rotate Image</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个n阶矩阵。<br>将这个矩阵顺时针旋转90°。<br>不得申请额外空间。即：in-place就地操作。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Given input matrix =<br>[<br>  [1,2,3],<br>  [4,5,6],<br>  [7,8,9]<br>],<br>rotate the input matrix in-place such that it becomes:<br>[<br>  [7,4,1],<br>  [8,5,2],<br>  [9,6,3]<br>]</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n: 当n为0的时候，直接返回false；</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Layer-By-Layer，One-By-One"><a href="#Solution-1：Layer-By-Layer，One-By-One" class="headerlink" title="Solution-1：Layer By Layer，One By One"></a>Solution-1：Layer By Layer，One By One</h3><p>1.n阶矩阵，需要考虑n / 2层，即层数：[0, n / 2 - 1]<br>2.对于每一层，j：[i, n - 2 - i]</p>
-<p>时间复杂度：O(n ^ 2)<br>空间复杂度：O(1)</p>
-<p>5.Code(<a href="https://leetcode.com/submissions/detail/285218920/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285218920/</a>)</p>
-<h3 id="Solution-2："><a href="#Solution-2：" class="headerlink" title="Solution-2："></a>Solution-2：</h3><p>1.先将二维矩阵reverse，即保持其每一行中元素的顺序。<br>将这n行逆序。<br>[<br>  [1,2,3],<br>  [4,5,6],<br>  [7,8,9]<br>]<br>reverse后：<br>[<br>  [7,8,9],<br>  [4,5,6],<br>  [1,2,3]<br>]<br>2.此时可以发现，从[0, 0]到[n - 1, n - 1]的对角线上所有元素已经排列好了。<br>3.接下来，将对角线左右两侧的元素互换。<br>[<br>  [7,8,9],<br>  [4,5,6],<br>  [1,2,3]<br>]<br>互换后：<br>[<br>  [7,4,1],<br>  [8,5,2],<br>  [9,6,3]<br>]<br>4.此时已经完全排列好了，return即可。</p>
-<p>时间复杂度：O(n ^ 2)<br>空间复杂度：O(1)</p>
-<p>5.Code(<a href="https://leetcode.com/submissions/detail/285220946/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285220946/</a>)</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/first-bad-version/" target="_blank" rel="noopener">278.First Bad Version</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【背景】<br>你是一个产品经理，你发现当前的产品版本中质量不过关。<br>由于每个版本都是基于上一个版本，修修改改进行发布的。所以当某个版本引入一个bug后，后面所有的版本都由bug。<br>你希望找出来是哪个版本引入了bug。<br>有一个API-isBadVersion可以根据版本号来确定当前版本是否由bug。如果有问题，则返回true。否则，返回false。<br>【输入】<br>给定一个整数n，代表当前版本号。版本号从1开始编号，且连续。<br>所以说n代表当前有n个版本。<br>【输出】<br>输出第一个出现bug的那个版本号。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Given n = 5, and version = 4 is the first bad version.</p>
+<p>call isBadVersion(3) -&gt; false<br>call isBadVersion(5) -&gt; true<br>call isBadVersion(4) -&gt; true</p>
+<p>Then 4 is the first bad version. </p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Binary-Search"><a href="#Solution-1：Binary-Search" class="headerlink" title="Solution-1：Binary Search"></a>Solution-1：Binary Search</h3><p>1.二分搜索。<br>我们要找到第一个有问题的版本，类似【找到target最小的索引】<br>考虑范围[left, right)，取mid：<br>如果当前mid没问题，说明答案一定在[mid + 1, right)范围内。<br>如果当前mid有问题，说明答案一定在[left, mid]范围内。<br>此时我们在[left, mid)上继续搜索。<br>如果[left, mid)上所有版本都没问题，那么答案就是mid。<br>否则答案就在[left, mid)中。</p>
+<p>2.考虑最后一次循环，left = right - 1<br>此时mid = left，然后判断mid的合法性。<br>如果此时mid有问题，right = mid = left。循环结束。left(right)就是答案。<br>如果此时mid没问题，left = mid + 1 = right。循环结束。此时还剩left(right)这个位置没有判断合法性。那么它一定是答案。</p>
+<p>时间复杂度：O(log n)<br>空间复杂度：O(1)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/285606627/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285606627/</a>)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/11/2019-12-11-Leetcode-48-Rotate%20Image/" data-id="ck4qgyeae000h2ot7hvl7aqif" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/13/2019-12-13-Leetcode-278-First%20Bad%20Version/" data-id="ck4r0jgsb000l6ct722nf7j20" class="article-share-link">Share</a>
       
       
     </footer>
@@ -111,7 +110,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/61/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/60/">60</a><a class="page-number" href="/page/61/">61</a><span class="page-number current">62</span><a class="page-number" href="/page/63/">63</a><a class="page-number" href="/page/64/">64</a><span class="space">&hellip;</span><a class="page-number" href="/page/80/">80</a><a class="extend next" rel="next" href="/page/63/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/61/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/60/">60</a><a class="page-number" href="/page/61/">61</a><span class="page-number current">62</span><a class="page-number" href="/page/63/">63</a><a class="page-number" href="/page/64/">64</a><span class="space">&hellip;</span><a class="page-number" href="/page/86/">86</a><a class="extend next" rel="next" href="/page/63/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -143,23 +142,23 @@
       <ul>
         
           <li>
-            <a href="/2019/12/27/Tree/2019-12-27-Leetcode-106-Construct%20Binary%20Tree%20from%20Inorder%20and%20Postorder%20Traversal/">【二叉树专项】106.Construct Binary Tree from Inorder and Postorder Traversal</a>
+            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-141-Linked%20List%20Cycle/">【链表专项】141.Linked List Cycle</a>
           </li>
         
           <li>
-            <a href="/2019/12/27/Tree/2019-12-27-Leetcode-105-Construct%20Binary%20Tree%20from%20Preorder%20and%20Inorder%20Traversal/">【二叉树专项】105.Construct Binary Tree from Preorder and Inorder Traversal</a>
+            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-083-Remove%20Duplicates%20from%20Sorted%20List/">【链表专项】083.Remove Duplicates from Sorted List</a>
           </li>
         
           <li>
-            <a href="/2019/12/27/Tree/2019-12-27-Leetcode-116-Populating%20Next%20Right%20Pointers%20in%20Each%20Node/">【二叉树专项】116.Populating Next Right Pointers in Each Node</a>
+            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-021-Merge%20Two%20Sorted%20Lists/">【链表专项】021.Merge Two Sorted Lists</a>
           </li>
         
           <li>
-            <a href="/2019/12/26/Tree/2019-12-26-Leetcode-173-Binary%20Search%20Tree%20Iterator/">【BST专项】173.Binary Search Tree Iterator</a>
+            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-206-Reverse%20Linked%20List/">【链表专项】206.Reverse Linked List</a>
           </li>
         
           <li>
-            <a href="/2019/12/26/Tree/2019-12-26-Leetcode-257-Binary%20Tree%20Paths/">【二叉树专项】257.Binary Tree Paths</a>
+            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-203-Remove%20Linked%20List%20Elements/">【链表专项】203.Remove Linked List Elements</a>
           </li>
         
       </ul>

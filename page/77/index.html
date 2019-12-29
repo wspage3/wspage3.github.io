@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-2019-12-04-Leetcode152-Maximum Product Subarray" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-2019-12-07-Leetcode-121-Best Time to Buy ans Sell Stock" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/04/2019-12-04-Leetcode152-Maximum%20Product%20Subarray/" class="article-date">
-  <time datetime="2019-12-04T00:59:01.751Z" itemprop="datePublished">2019-12-04</time>
+    <a href="/2019/12/07/2019-12-07-Leetcode-121-Best%20Time%20to%20Buy%20ans%20Sell%20Stock/" class="article-date">
+  <time datetime="2019-12-07T01:09:15.739Z" itemprop="datePublished">2019-12-07</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/04/2019-12-04-Leetcode152-Maximum%20Product%20Subarray/">Leetcode-152 Maximum Product Subarray</a>
+      <a class="article-title" href="/2019/12/07/2019-12-07-Leetcode-121-Best%20Time%20to%20Buy%20ans%20Sell%20Stock/">Leetcode121-Best Time to Buy and Sell Stock</a>
     </h1>
   
 
@@ -83,24 +83,23 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/maximum-product-subarray/" target="_blank" rel="noopener">Leetcode-152 Maximum Product Subarray</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组nums。<br>求出nums的连续子数组，这个子数组是nums所有子数组中乘积最大的那个。返回这个sum。<br>子数组长度至少为1。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [2,3,-2,4]<br>Output: 6<br>Explanation: [2,3] has the largest product 6.</p>
-<p>Input: [-2,0,-1]<br>Output: 0<br>Explanation: The result cannot be 2, because [-2,-1] is not a subarray.</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>需要对n是否为0判断</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><p>显然，本题目和Leetcode-53的唯一区别就是：一个求和最大值，一个求乘积最大值。<br>此处，主要需要考虑乘法运算和加法元素的差异。其它分析可参考Leetcode-53</p>
-<h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>1.不感知加法乘法的差异。<br>时间复杂度：O(n ^ 2)<br>空间复杂度：O(1)</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/283351227/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283351227/</a>)</p>
-<h3 id="Solution-2：Divide-and-Conquer"><a href="#Solution-2：Divide-and-Conquer" class="headerlink" title="Solution-2：Divide and Conquer"></a>Solution-2：Divide and Conquer</h3><p>1.考虑区间[low, high]，mid为中点：<br>递归求得[low, mid]和[mid + 1, high]的值。<br>找出[i, mid]使得以mid结尾的最大值。<br>找出[mid + 1, j]使得以mid + 1开头的最大值。<br>假设区间为：[-3, 2, -5]<br>f(-3, 2) = 2<br>f(-5) = -5<br>f(i, j) = 2 * -5 = -10<br>这样求得的值是2，跟实际答案30不符合。<br>可以发现，问题出现在“负负得正”这种场景下。我们在寻找[i, mid]和[mid + 1, j]的时候，单纯的找到了以其开头或者结尾的最大的值。但这两个最大的值的乘积并不一定是最大的。<br>所以根据这个特点，可以分别维护两个值。<br>对于i来说，lMax，lMin分别记录以mid结尾的最大乘积和最小乘积。<br>对于j来说，rMax，rMin分别记录以mid + 1开头的最大乘积和最小乘积。<br>当combine的时候，找出max(lMax * rMax, lMin * rMin)，这样才是[i, j]范围内的最大乘积。</p>
-<p>时间复杂度：O(n ^ logN)<br>空间复杂度：O(n)，递归开销<br>3.Code(<a href="https://leetcode.com/submissions/detail/283358210/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283358210/</a>)</p>
-<h3 id="Solution-3：Dynamic-Programming"><a href="#Solution-3：Dynamic-Programming" class="headerlink" title="Solution-3：Dynamic Programming"></a>Solution-3：Dynamic Programming</h3><p>1.同理，在递推位置i的时候：<br>sum：<br>    start = max(nums[i], nums[i] + start)<br>    res = max(res, start)<br>product：<br>    if (nums[i] &lt; 0)  then swap(startMin, startMax);<br>    startMin = min(nums[i], nums[i] * startMin);<br>    startMax = max(nums[i], nums[i] * startMax);<br>    res = max(res, startMax);<br>当在位置i的时候，此时：<br>startMin代表以i + 1开头的最小乘积<br>startMax代表以i + 1开头的最大乘积<br>如果当前nums[i]非负的话，要想得到以i开头的连续子树组的最大值，并更新它的话，需要结合maxStart。<br>    maxStart = max(nums[i], nums[i] * maxStart)<br>    同理更新minStart：minStart = max(nums[i], nums[i] * minStart)<br>如果当前nums[i]负数的话，要想得到以i开头的连续子树组的最大值，并更新它的话，需要结合minStart。<br>    maxStart = max(nums[i], nums[i] * minStart)<br>    同理更新minStart：minStart = max(nums[i], nums[i] * maxStart)<br>为了表达简便，我们可以在更新前判断，如果当前nums[i]是负数的话，将minStart和maxStart交换值即可。</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/" target="_blank" rel="noopener">Leetcode121-Best Time to Buy and Sell Stock</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组prices；prices[i]代表第i天股票的价格。<br>如果你只能交易一次，即：买一次，卖一次。求出你最多能赚多少钱。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [7,1,5,3,6,4]<br>Output: 5<br>Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.<br>Not 7-1 = 6, as selling price needs to be larger than buying price.</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n：当n为0/1的时候，直接返回0；<br>赚不到钱则返回0；</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>由于要想赚钱，得低价买入，高价卖出；<br>买入卖出不能在同一天，至少买入的第二天才能卖出；<br>对于任意i，本质上就是求出[i + 1, n - 1]范围内最大的数字，然后减去prices[i]，就是第i天能获取到的利润。<br>对于[0, n - 1]上的所有i，找出一个最大值即可。</p>
+<h3 id="Solution-1：Dynamic-programming"><a href="#Solution-1：Dynamic-programming" class="headerlink" title="Solution-1：Dynamic programming"></a>Solution-1：Dynamic programming</h3><p>1.由于我们之前做过题目：Leetcode42-Trapping Rain Water<br>在42的Solution2的时候，本质上也是求：给定一个位置，其左右两边最大的值。<br>对于求n个元素所有的rightMax，使用O(n)的时间和O(n)的空间即可。</p>
+<p>2.rightMax[i]表示：[i + 1, n - 1]范围内最大的数字。<br>则通过递推，可以得到：rightMax[i - 1] = max(prices[i], rightMax[i]);<br>则i从后往前，就可以算出所有的rightMax[i]。<br>同时，使用这个值减去prices[i]的值，来不断更新最大利润即可。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/284225891/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284225891/</a>)</p>
+<h3 id="Solution-2：Further-Optimization"><a href="#Solution-2：Further-Optimization" class="headerlink" title="Solution-2：Further Optimization"></a>Solution-2：Further Optimization</h3><p>1.观察上面的递推式，可以发现：计算rightMax[i - 1]的时候，只用到了rightMax[i]，也就是说可以将数组优化为单个变量。</p>
 <p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/283369314/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283369314/</a>)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/284226029/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284226029/</a>)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/04/2019-12-04-Leetcode152-Maximum%20Product%20Subarray/" data-id="ck4qgyea500032ot769495txx" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/07/2019-12-07-Leetcode-121-Best%20Time%20to%20Buy%20ans%20Sell%20Stock/" data-id="ck4r0jgs900086ct7c0v0cd2h" class="article-share-link">Share</a>
       
       
     </footer>
@@ -114,7 +113,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/76/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/75/">75</a><a class="page-number" href="/page/76/">76</a><span class="page-number current">77</span><a class="page-number" href="/page/78/">78</a><a class="page-number" href="/page/79/">79</a><a class="page-number" href="/page/80/">80</a><a class="extend next" rel="next" href="/page/78/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/76/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/75/">75</a><a class="page-number" href="/page/76/">76</a><span class="page-number current">77</span><a class="page-number" href="/page/78/">78</a><a class="page-number" href="/page/79/">79</a><span class="space">&hellip;</span><a class="page-number" href="/page/86/">86</a><a class="extend next" rel="next" href="/page/78/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -146,23 +145,23 @@
       <ul>
         
           <li>
-            <a href="/2019/12/27/Tree/2019-12-27-Leetcode-106-Construct%20Binary%20Tree%20from%20Inorder%20and%20Postorder%20Traversal/">【二叉树专项】106.Construct Binary Tree from Inorder and Postorder Traversal</a>
+            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-141-Linked%20List%20Cycle/">【链表专项】141.Linked List Cycle</a>
           </li>
         
           <li>
-            <a href="/2019/12/27/Tree/2019-12-27-Leetcode-105-Construct%20Binary%20Tree%20from%20Preorder%20and%20Inorder%20Traversal/">【二叉树专项】105.Construct Binary Tree from Preorder and Inorder Traversal</a>
+            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-083-Remove%20Duplicates%20from%20Sorted%20List/">【链表专项】083.Remove Duplicates from Sorted List</a>
           </li>
         
           <li>
-            <a href="/2019/12/27/Tree/2019-12-27-Leetcode-116-Populating%20Next%20Right%20Pointers%20in%20Each%20Node/">【二叉树专项】116.Populating Next Right Pointers in Each Node</a>
+            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-021-Merge%20Two%20Sorted%20Lists/">【链表专项】021.Merge Two Sorted Lists</a>
           </li>
         
           <li>
-            <a href="/2019/12/26/Tree/2019-12-26-Leetcode-173-Binary%20Search%20Tree%20Iterator/">【BST专项】173.Binary Search Tree Iterator</a>
+            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-206-Reverse%20Linked%20List/">【链表专项】206.Reverse Linked List</a>
           </li>
         
           <li>
-            <a href="/2019/12/26/Tree/2019-12-26-Leetcode-257-Binary%20Tree%20Paths/">【二叉树专项】257.Binary Tree Paths</a>
+            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-203-Remove%20Linked%20List%20Elements/">【链表专项】203.Remove Linked List Elements</a>
           </li>
         
       </ul>

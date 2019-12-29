@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-2019-12-05-Leetcode739-Daily Temperatures" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-2019-12-09-Leetcode-188-Best Time to Buy ans Sell Stock IV" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/05/2019-12-05-Leetcode739-Daily%20Temperatures/" class="article-date">
-  <time datetime="2019-12-05T02:58:12.276Z" itemprop="datePublished">2019-12-05</time>
+    <a href="/2019/12/09/2019-12-09-Leetcode-188-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20IV/" class="article-date">
+  <time datetime="2019-12-09T06:58:57.169Z" itemprop="datePublished">2019-12-09</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/05/2019-12-05-Leetcode739-Daily%20Temperatures/">Leetcode739-Daily Temperatures</a>
+      <a class="article-title" href="/2019/12/09/2019-12-09-Leetcode-188-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20IV/">Leetcode188-Best Time to Buy and Sell Stock IV</a>
     </h1>
   
 
@@ -83,28 +83,26 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/daily-temperatures/" target="_blank" rel="noopener">Leetcode739-Daily Temperatures</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组T；T[i]代表第i天的气温；<br>求出一个长度为n的整数数组res；res[i]代表第i天需要等待的天数，直到后面某一天气温比当天高/</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p> input = [73, 74, 75, 71, 69, 72, 76, 73]<br>output = [1, 1, 4, 2, 1, 1, 0, 0]</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n：[1, 30000]<br>T[i]：[30, 100]</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><p>对于当前位置的元素T[i]，找出它后面一个比他大的元素，使得他们俩的距离最小。</p>
-<h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>1.i从[0, n - 1]进行遍历<br>对于T[i]来说，j考虑[i + 1, n - 1]内所有的数，如果发现第一个比T[i]大的数字，则：res[i] = (j - i)</p>
-<p>时间复杂度：O(n ^ 2)<br>空间复杂度：O(1)：不包含函数返回的数组res<br>结果发现：此方法TLE，说明需要进一步优化。</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/283812278/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283812278/</a>)</p>
-<h3 id="Solution-2：Monotonous-Stack"><a href="#Solution-2：Monotonous-Stack" class="headerlink" title="Solution-2：Monotonous Stack"></a>Solution-2：Monotonous Stack</h3><p>1.认识单调栈<br><a href="https://www.cnblogs.com/grandyang/p/8887985.html" target="_blank" rel="noopener">https://www.cnblogs.com/grandyang/p/8887985.html</a><br>单调栈的一大优势就是线性的时间复杂度，所有的元素只会进栈一次，而且一旦出栈后就不会再进来了。<br>单调递增栈可以找到左边第一个比当前数字小的元素。（本题做法）<br>单调递减栈可以找到右边第一个比当前数字大的元素。</p>
-<p>2.[73, 74, 71, 60, 50, 55]<br>先将73压入栈</p>
-<p>对于74，此时栈非空，则考察栈顶元素73。<br>此时74 &gt; 73，说明：对于73来说，找到了第一个比自己大的元素。<br>此时73的答案已经找到，将其从栈中拿出。<br>将74压入栈。</p>
-<p>对于71，此时栈非空，则考察栈顶元素74。<br>此时71 &lt; 74，说明：对于71来说，还是没有找到第一个比自己大的元素。<br>将71入栈。</p>
-<p>对于60，50也是如此。此时栈由顶到下为：50，60，71，74</p>
-<p>对于55来说，此时栈顶是50<br>此时55 &gt; 50，说明：对于50来说，找到了答案。<br>将其出栈。继续考察新的栈顶元素60，不满足了。<br>将55入栈。<br>此时栈由顶到下为： 55，60，71，74。而此时已经遍历完所有的数字了，说明这些元素找不到比自己大的元素了。</p>
-<p>3.可以发现，栈中数据在任何时刻都是有序的，且：最上面的数字最小，最下面的数字最大。<br>考虑遍历到位置nums[i]的时候，此时栈中元素自顶向下为:[a, b, c, d]。<br>若nums[i]不大于a，说明：nums[i]的出现，不会使得栈中任意元素找到答案。此时将nums[i]压入栈即可。<br>若nums[i]大于d，说明：nums[i]的出现，使得栈中任意元素都找到了答案。此时从栈顶依次拿出一个元素，直到栈空了。然后nums[i]入栈。<br>若nums[i]介于这两者中间的话，则“尽自己最大的能力，使得栈中的元素找到答案，然后将其出栈”<br>经过这样遍历的顺序：使得栈中任意时刻的数都是有序的，也使得了每个元素找到的答案都是距离自己最小的那个，也就是题目中要求的这样。</p>
-<p>时间复杂度：O(n) 因为所有元素只会进入栈一次，并且出栈后再也不会进栈了。<br>空间复杂度：O(n)</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/283824761/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283824761/</a>)</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/" target="_blank" rel="noopener">Leetcode188-Best Time to Buy and Sell Stock IV</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组prices；prices[i]代表第i天股票的价格。<br>如果你最多能交易k次，即：买k次，卖k次。求出你最多能赚多少钱。<br>前提是：买入下一股的时候，必须将上一股卖掉。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [2,4,1], k = 2<br>Output: 2<br>Explanation: Buy on day 1 (price = 2) and sell on day 2 (price = 4), profit = 4-2 = 2.</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n: 当n为0/1的时候，直接返回0；<br>k: 当k &lt;= 0的时候，直接返回0；<br>   当k &gt;= n的时候，将k赋值为n - 1；<br>赚不到钱则返回0；</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Dynamic-Programming"><a href="#Solution-1：Dynamic-Programming" class="headerlink" title="Solution-1：Dynamic Programming"></a>Solution-1：Dynamic Programming</h3><p>1.根据leetcode123，可以得到相同的状态转移方程：<br>dp[j][i] = max(dp[j][i - 1], dp[j - 1][m] + prices[i] - prices[m]);<br>其中：j:[1, k]  i:[0, n - 1]  m:[0, i]</p>
+<p>2.申请(k + 1) * n的dp数组空间，答案就是dp[k][n - 1];<br>j从[1, k]遍历<br>i从[1, n - 1]遍历<br>m从[0, i]遍历<br>对于每次固定好的j和i，找出一个位置m，使得prices[m] - dp[j - 1][m]的值最小。</p>
+<p>时间复杂度：O(k * n ^ 2)<br>空间复杂度：O(k * n)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/284743219/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284743219/</a>)</p>
+<h3 id="Solution-2：Dynamic-Programming-Optimization"><a href="#Solution-2：Dynamic-Programming-Optimization" class="headerlink" title="Solution-2：Dynamic Programming + Optimization"></a>Solution-2：Dynamic Programming + Optimization</h3><p>1.从Solution-1的解法来看，对于当前(k, i)序列，假设通过O(n)的循环，找到了一个位置m1，使得表达式的值最小了，从而算出了当前(k, i)的答案。<br>接着迭代到当前(k, i + 1)序列，此时还需要O(n)的循环：找到当前序列一个位置m2，使得表达式的值最小。<br>由于我们在上一次循环中已经计算出了[0, i]范围内使得表达式最小的一个位置。当前(k, i + 1)序列，直接通过O(1)的时间就可以算出来，而不必继续遍历[0, i + 1]</p>
+<p>2.所以，对于遍历当前i位置来说，可以直接访问上一次i - 1的计算结果。从而把整体的时间复杂度优化为O(k * n)</p>
+<p>时间复杂度：O(k * n)<br>空间复杂度：O(k * n)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/284745998/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284745998/</a>)</p>
+<h3 id="Solution-3：Dynamic-Programming-Optimization"><a href="#Solution-3：Dynamic-Programming-Optimization" class="headerlink" title="Solution-3：Dynamic Programming + Optimization"></a>Solution-3：Dynamic Programming + Optimization</h3><p>1.尝试调换两次循环的次序<br>2.进一步优化空间，将二维降成一维<br>3.当k &gt;= n / 2的时候，也就意味着可以用leetcode-122的O(n)方法来解。即无限交易次数，orz。。。</p>
+<p>时间复杂度：O(k * n)<br>空间复杂度：O(k)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/284749560/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284749560/</a>)<br>Code(<a href="https://leetcode.com/submissions/detail/284755984/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284755984/</a>)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/05/2019-12-05-Leetcode739-Daily%20Temperatures/" data-id="ck4qgyea400022ot7993gdbr5" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/09/2019-12-09-Leetcode-188-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20IV/" data-id="ck4r0jgsb000b6ct7al4zfzqz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -118,7 +116,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/73/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/72/">72</a><a class="page-number" href="/page/73/">73</a><span class="page-number current">74</span><a class="page-number" href="/page/75/">75</a><a class="page-number" href="/page/76/">76</a><span class="space">&hellip;</span><a class="page-number" href="/page/80/">80</a><a class="extend next" rel="next" href="/page/75/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/73/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/72/">72</a><a class="page-number" href="/page/73/">73</a><span class="page-number current">74</span><a class="page-number" href="/page/75/">75</a><a class="page-number" href="/page/76/">76</a><span class="space">&hellip;</span><a class="page-number" href="/page/86/">86</a><a class="extend next" rel="next" href="/page/75/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -150,23 +148,23 @@
       <ul>
         
           <li>
-            <a href="/2019/12/27/Tree/2019-12-27-Leetcode-106-Construct%20Binary%20Tree%20from%20Inorder%20and%20Postorder%20Traversal/">【二叉树专项】106.Construct Binary Tree from Inorder and Postorder Traversal</a>
+            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-141-Linked%20List%20Cycle/">【链表专项】141.Linked List Cycle</a>
           </li>
         
           <li>
-            <a href="/2019/12/27/Tree/2019-12-27-Leetcode-105-Construct%20Binary%20Tree%20from%20Preorder%20and%20Inorder%20Traversal/">【二叉树专项】105.Construct Binary Tree from Preorder and Inorder Traversal</a>
+            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-083-Remove%20Duplicates%20from%20Sorted%20List/">【链表专项】083.Remove Duplicates from Sorted List</a>
           </li>
         
           <li>
-            <a href="/2019/12/27/Tree/2019-12-27-Leetcode-116-Populating%20Next%20Right%20Pointers%20in%20Each%20Node/">【二叉树专项】116.Populating Next Right Pointers in Each Node</a>
+            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-021-Merge%20Two%20Sorted%20Lists/">【链表专项】021.Merge Two Sorted Lists</a>
           </li>
         
           <li>
-            <a href="/2019/12/26/Tree/2019-12-26-Leetcode-173-Binary%20Search%20Tree%20Iterator/">【BST专项】173.Binary Search Tree Iterator</a>
+            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-206-Reverse%20Linked%20List/">【链表专项】206.Reverse Linked List</a>
           </li>
         
           <li>
-            <a href="/2019/12/26/Tree/2019-12-26-Leetcode-257-Binary%20Tree%20Paths/">【二叉树专项】257.Binary Tree Paths</a>
+            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-203-Remove%20Linked%20List%20Elements/">【链表专项】203.Remove Linked List Elements</a>
           </li>
         
       </ul>

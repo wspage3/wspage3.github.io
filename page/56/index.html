@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-2019-12-13-Leetcode-278-First Bad Version" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-2019-12-16-Leetcode-645-Set Mismatch" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/13/2019-12-13-Leetcode-278-First%20Bad%20Version/" class="article-date">
-  <time datetime="2019-12-13T05:19:52.802Z" itemprop="datePublished">2019-12-13</time>
+    <a href="/2019/12/16/2019-12-16-Leetcode-645-Set%20Mismatch/" class="article-date">
+  <time datetime="2019-12-16T02:20:17.020Z" itemprop="datePublished">2019-12-16</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/13/2019-12-13-Leetcode-278-First%20Bad%20Version/">278.First Bad Version</a>
+      <a class="article-title" href="/2019/12/16/2019-12-16-Leetcode-645-Set%20Mismatch/">645.Set Mismatch</a>
     </h1>
   
 
@@ -83,20 +83,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/first-bad-version/" target="_blank" rel="noopener">278.First Bad Version</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【背景】<br>你是一个产品经理，你发现当前的产品版本中质量不过关。<br>由于每个版本都是基于上一个版本，修修改改进行发布的。所以当某个版本引入一个bug后，后面所有的版本都由bug。<br>你希望找出来是哪个版本引入了bug。<br>有一个API-isBadVersion可以根据版本号来确定当前版本是否由bug。如果有问题，则返回true。否则，返回false。<br>【输入】<br>给定一个整数n，代表当前版本号。版本号从1开始编号，且连续。<br>所以说n代表当前有n个版本。<br>【输出】<br>输出第一个出现bug的那个版本号。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Given n = 5, and version = 4 is the first bad version.</p>
-<p>call isBadVersion(3) -&gt; false<br>call isBadVersion(5) -&gt; true<br>call isBadVersion(4) -&gt; true</p>
-<p>Then 4 is the first bad version. </p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Binary-Search"><a href="#Solution-1：Binary-Search" class="headerlink" title="Solution-1：Binary Search"></a>Solution-1：Binary Search</h3><p>1.二分搜索。<br>我们要找到第一个有问题的版本，类似【找到target最小的索引】<br>考虑范围[left, right)，取mid：<br>如果当前mid没问题，说明答案一定在[mid + 1, right)范围内。<br>如果当前mid有问题，说明答案一定在[left, mid]范围内。<br>此时我们在[left, mid)上继续搜索。<br>如果[left, mid)上所有版本都没问题，那么答案就是mid。<br>否则答案就在[left, mid)中。</p>
-<p>2.考虑最后一次循环，left = right - 1<br>此时mid = left，然后判断mid的合法性。<br>如果此时mid有问题，right = mid = left。循环结束。left(right)就是答案。<br>如果此时mid没问题，left = mid + 1 = right。循环结束。此时还剩left(right)这个位置没有判断合法性。那么它一定是答案。</p>
-<p>时间复杂度：O(log n)<br>空间复杂度：O(1)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/285606627/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285606627/</a>)</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/set-mismatch/" target="_blank" rel="noopener">645.Set Mismatch</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个长度为n的整数数组。<br>其中所有的元素取值都是范围[1, n]的。<br>但其中某个元素出现了两次，导致另外一个元素没有出现。<br>【输出】<br>找出这两个元素：出现两次的在前，没有出现的在后。<br>以数组的形式返回。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: nums = [1,2,2,4]<br>Output: [2,3]</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.n: [2, 10000]<br>2.nums数组无序。</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：做标记"><a href="#Solution-1：做标记" class="headerlink" title="Solution-1：做标记"></a>Solution-1：做标记</h3><p>1.根据【Leetcode-442-Find All Duplicates in an Array】的启示：<br>对于一个长度为n的数组nums，其所有nums[i]都在[1, n]区间内，我们可以通过将nums[nums[i] - 1]置为负数（相反数）的方法，找出所有出现2次的元素。<br>本题目中保证了只有一个元素出现了两次，所以找到它后break即可。O(n)的time complexity。</p>
+<p>2.同时根据【Leetcode-268-Missing Number】的启示：<br>对于一个长度为n的数组nums，其所有nums[i]都在[0, n]区间内，且不重复。<br>我们可以找到那个缺失的元素x。<br>通过：将0, 1, 2, 3, 4, …, n, nums[0], nums[1], nums[2], …, nums[n - 1]这(n + 1 + n)个元素都异或起来。<br>缺失元素x就是这个异或的值。O(n)的time complexity。</p>
+<p>3.对于本题目，长度为n的nums数组，所有元素取值范围都在[1, n]。<br>某个元素a出现了两次，某个元素b出现了0次。即：[1, 2, 3, 4, …, a, a, …, b - 1, b + 1, …, n]<br>根据1，可以找到a的值。存在res[0]中。res[0] = a;<br>根据2，将nums中所有的元素和[1, n]中所有的元素异或起来的值存到res[1]中。res[1] = a ^ b;<br>然后再将res[1] = res[1] ^ res[0]即可，即找到了b的值。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/286256728/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286256728/</a>)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/13/2019-12-13-Leetcode-278-First%20Bad%20Version/" data-id="ck4qgyeag000l2ot71ixb1xac" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/16/2019-12-16-Leetcode-645-Set%20Mismatch/" data-id="ck4r0jgsb000v6ct77mss0cqv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -110,7 +110,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/55/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/54/">54</a><a class="page-number" href="/page/55/">55</a><span class="page-number current">56</span><a class="page-number" href="/page/57/">57</a><a class="page-number" href="/page/58/">58</a><span class="space">&hellip;</span><a class="page-number" href="/page/80/">80</a><a class="extend next" rel="next" href="/page/57/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/55/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/54/">54</a><a class="page-number" href="/page/55/">55</a><span class="page-number current">56</span><a class="page-number" href="/page/57/">57</a><a class="page-number" href="/page/58/">58</a><span class="space">&hellip;</span><a class="page-number" href="/page/86/">86</a><a class="extend next" rel="next" href="/page/57/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -142,23 +142,23 @@
       <ul>
         
           <li>
-            <a href="/2019/12/27/Tree/2019-12-27-Leetcode-106-Construct%20Binary%20Tree%20from%20Inorder%20and%20Postorder%20Traversal/">【二叉树专项】106.Construct Binary Tree from Inorder and Postorder Traversal</a>
+            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-141-Linked%20List%20Cycle/">【链表专项】141.Linked List Cycle</a>
           </li>
         
           <li>
-            <a href="/2019/12/27/Tree/2019-12-27-Leetcode-105-Construct%20Binary%20Tree%20from%20Preorder%20and%20Inorder%20Traversal/">【二叉树专项】105.Construct Binary Tree from Preorder and Inorder Traversal</a>
+            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-083-Remove%20Duplicates%20from%20Sorted%20List/">【链表专项】083.Remove Duplicates from Sorted List</a>
           </li>
         
           <li>
-            <a href="/2019/12/27/Tree/2019-12-27-Leetcode-116-Populating%20Next%20Right%20Pointers%20in%20Each%20Node/">【二叉树专项】116.Populating Next Right Pointers in Each Node</a>
+            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-021-Merge%20Two%20Sorted%20Lists/">【链表专项】021.Merge Two Sorted Lists</a>
           </li>
         
           <li>
-            <a href="/2019/12/26/Tree/2019-12-26-Leetcode-173-Binary%20Search%20Tree%20Iterator/">【BST专项】173.Binary Search Tree Iterator</a>
+            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-206-Reverse%20Linked%20List/">【链表专项】206.Reverse Linked List</a>
           </li>
         
           <li>
-            <a href="/2019/12/26/Tree/2019-12-26-Leetcode-257-Binary%20Tree%20Paths/">【二叉树专项】257.Binary Tree Paths</a>
+            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-203-Remove%20Linked%20List%20Elements/">【链表专项】203.Remove Linked List Elements</a>
           </li>
         
       </ul>
