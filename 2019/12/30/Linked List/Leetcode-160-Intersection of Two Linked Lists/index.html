@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="追逐青春的梦想，怀着自信的心，永不放弃！">
 <meta property="og:description" content="一、题意题目链接: 160.Intersection of Two Linked Lists 1.Description【输入】给定两个单链表。【输出】判断这两个链表是否在某个结点相交。如果相交，找出这个交点。否则的话，返回NULL即可。 2.ExamplelistA &#x3D; [0,9,1,2,4]listB &#x3D; [3,2,4]返回结点2。 3.Corner Case 若一个链表为NULL，另一个不为">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-30T13:42:27.197Z">
+<meta property="og:updated_time" content="2019-12-30T13:47:22.303Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="追逐青春的梦想，怀着自信的心，永不放弃！" type="application/atom+xml">
@@ -94,7 +94,7 @@
 <li>要求O(n)的time complexity</li>
 <li>要求O(1)的space complexity</li>
 </ol>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Iterative-Solution"><a href="#Solution-1：Iterative-Solution" class="headerlink" title="Solution-1：Iterative Solution"></a>Solution-1：Iterative Solution</h3><p>1.假设两个链表相交的话，相交前，各自的距离分别为a、b。相交后共同的距离为c。<br>则p、q分别从两个链表头headA、headB出发：若p当前为NULL，则将其转移到headB。若q当前为NULL，则将其转移到headA。<br>如果相交的话，p、q一定会在交点相遇。此时直接返回该点即可。</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Two-Pointers"><a href="#Solution-1：Two-Pointers" class="headerlink" title="Solution-1：Two Pointers"></a>Solution-1：Two Pointers</h3><p>1.假设两个链表相交的话，相交前，各自的距离分别为a、b。相交后共同的距离为c。<br>则p、q分别从两个链表头headA、headB出发：若p当前为NULL，则将其转移到headB。若q当前为NULL，则将其转移到headA。<br>如果相交的话，p、q一定会在交点相遇。此时直接返回该点即可。</p>
 <p>2.原理：<br>p走的距离：a + c + b<br>q走的距离：b + c + a<br>此时p、q一定相遇。</p>
 <p>3.若两个链表本来就不相交的话，各自的距离分别为a、b。<br>p走的距离：a + b<br>q走的距离：b + a<br>此时p、q一定相遇。而此时p、q正好均为NULL。将其返回即可。</p>
 <p>时间复杂度：O(n)<br>空间复杂度：O(1) </p>
@@ -104,7 +104,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/30/Linked%20List/Leetcode-160-Intersection%20of%20Two%20Linked%20Lists/" data-id="ck4shvk9b001j0kt7a1qr0vl2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/30/Linked%20List/Leetcode-160-Intersection%20of%20Two%20Linked%20Lists/" data-id="ck4sls6ug001otst7dt3t9k01" class="article-share-link">Share</a>
       
       
     </footer>
@@ -112,6 +112,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2019/12/30/Linked%20List/Leetcode-142-Linked%20List%20Cycle%20II/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          【链表专项】142.Linked List Cycle II
+        
+      </div>
+    </a>
   
   
     <a href="/2019/12/30/Linked%20List/Leetcode-024-Swap%20Nodes%20in%20Pairs/" id="article-nav-older" class="article-nav-link-wrap">
@@ -153,6 +162,14 @@
       <ul>
         
           <li>
+            <a href="/2019/12/30/Linked%20List/Leetcode-143-Reorder%20List/">【链表专项】143.Reorder List</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/30/Linked%20List/Leetcode-142-Linked%20List%20Cycle%20II/">【链表专项】142.Linked List Cycle II</a>
+          </li>
+        
+          <li>
             <a href="/2019/12/30/Linked%20List/Leetcode-160-Intersection%20of%20Two%20Linked%20Lists/">【链表专项】160.Intersection of Two Linked Lists</a>
           </li>
         
@@ -162,14 +179,6 @@
         
           <li>
             <a href="/2019/12/30/Linked%20List/Leetcode-002-Add%20Two%20Numbers/">【链表专项】002.Add Two Numbers</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/30/Linked%20List/Leetcode-019-Remove%20Nth%20Node%20From%20End%20of%20List/">【链表专项】019.Remove Nth Node From End of List</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/30/Linked%20List/Leetcode-082-Remove%20Duplicates%20from%20Sorted%20List%20II/">【链表专项】082.Remove Duplicates from Sorted List II</a>
           </li>
         
       </ul>

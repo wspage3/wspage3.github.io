@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Leetcode-084-Largest Rectangle in Histogram" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Leetcode-121-Best Time to Buy ans Sell Stock" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/05/Leetcode-084-Largest%20Rectangle%20in%20Histogram/" class="article-date">
-  <time datetime="2019-12-05T08:13:48.347Z" itemprop="datePublished">2019-12-05</time>
+    <a href="/2019/12/07/Leetcode-121-Best%20Time%20to%20Buy%20ans%20Sell%20Stock/" class="article-date">
+  <time datetime="2019-12-07T01:09:15.739Z" itemprop="datePublished">2019-12-07</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/05/Leetcode-084-Largest%20Rectangle%20in%20Histogram/">Leetcode84-Largest Rectangle in Histogram</a>
+      <a class="article-title" href="/2019/12/07/Leetcode-121-Best%20Time%20to%20Buy%20ans%20Sell%20Stock/">Leetcode121-Best Time to Buy and Sell Stock</a>
     </h1>
   
 
@@ -83,31 +83,23 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/largest-rectangle-in-histogram/" target="_blank" rel="noopener">Leetcode84-Largest Rectangle in Histogram</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的非负整数数组heights；heights[i]代表第个矩形的高度；矩形宽度都是1；<br>求出这个图中最大的矩形面积。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p> input = [2,1,5,6,2,3]<br>output = 10</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n：当n为0和1的时候，直接返回结果；<br>heights[i]：题目保证非负</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>1.给定两个不同的柱子i, j，则area[i, j] = max(heights[i], heights[j], (j - i + 1) * minHeightBetweenIAndJ);<br>其中minHeightBetweenIAndJ是[i, j]中最短的高度。此过程需要O(n)的时间。<br>2.所以可以考察任意两个不同的i, j。i：[0, n - 2] j：[i + 1, n - 1]</p>
-<p>时间复杂度：O(n ^ 3)<br>空间复杂度：O(1)：<br>结果发现：此方法TLE，说明需要进一步优化。</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/283879193/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283879193/</a>)</p>
-<h3 id="Solution-2：Brute-Force"><a href="#Solution-2：Brute-Force" class="headerlink" title="Solution-2：Brute Force"></a>Solution-2：Brute Force</h3><p>1.由于我们遍历i, j是有序情况下的。在计算出[i, j]之间的结果后，立马考虑[i, j + 1]。<br>此时发现还要遍历n次找到[i, j + 1]中的最低高度，而[i, j]中的最低高度在之前已经计算过了。<br>同时minHeight[i, j + 1] = min(minHeight[i, j], heights[j + 1]);<br>所以保留这个结果，以O(1)的time就可以得到minHeight[i, j + 1]</p>
-<p>时间复杂度：O(n ^ 2)<br>空间复杂度：O(1)：<br>结果发现：此方法TLE，说明需要进一步优化。</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/283882070/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283882070/</a>)</p>
-<h3 id="Solution-3：Brute-Force"><a href="#Solution-3：Brute-Force" class="headerlink" title="Solution-3：Brute Force"></a>Solution-3：Brute Force</h3><p>1.换一种不同于Solution1和Solution2的思路：<br>在上面的枚举方法中，我们是枚举矩形能出现的所有区间[i, j]，固定了区间[i, j]，然后在这个区间中寻找一个最短的长度。<br>换一种思路：考虑每个位置i，找出以当前heights[i]为高度的，最大矩形的面积res[i]。则答案就是res数组的最大值。</p>
-<p>2.对于当前heights[i]来说，需要找到在[0, i - 1]中从后往前第一个比heights[i]小的值leftI。<br>同理，需要找到[i + 1, n - 1]中从前往后第一个比heights[i]小的值rightI。<br>则res[i] = heights[i] * (rightI - leftI - 1)</p>
-<p>时间复杂度：O(n ^ 2)<br>空间复杂度：O(n)：<br>结果发现：此方法TLE，说明需要进一步优化。</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/283922360/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283922360/</a>)</p>
-<h3 id="Solution-4：Monotonous-Stack"><a href="#Solution-4：Monotonous-Stack" class="headerlink" title="Solution-4：Monotonous Stack"></a>Solution-4：Monotonous Stack</h3><p>1.回忆Leetcode739-Daily Temperatures：该问题，我们用Brute Force方法：对于nums[i]，要做的就是找到它后面第一个比它大的元素。<br>同时我们用单调栈的方法使得上述的O(n ^ 2)优化为O(n)。</p>
-<p>2.再回过头来看本题目，对于heights[i]，实质上也是寻找它左右两边第一个比它小的元素。<br>如果我们能在O(n)的时间内，找到所有heights[i]对应的leftI和rightI。那么上面Solution3的时间复杂度就能降低到O(n)。</p>
-<p>3.Leetcode739-Daily Temperatures的单调栈解法是：<br>维护一个单调栈，且栈从顶到底是递增的；<br>当一个元素比栈中某个元素大的时候，将栈中元素抛出k个，直到当前元素不大于栈顶元素。<br>这样的话，对于当前元素，我们可以找到它左边第一个比它小的元素。<br>对于栈中元素，当其出栈时，当前元素就是其右边第一个比它大的元素。（Leetcode739思路就是依据本条）</p>
-<p>4.类似的，维护一个单调栈，且栈从顶到底是递减的；<br>栈中元素指的是对应的数组下标。<br>当我们在位置cur的时候，heights[cur]比栈中某个元素小的时候，将栈中元素抛出k个，直到当前元素不大于栈顶元素。<br>对于抛出去的k个元素：<br>其rightI就是cur。<br>其leftI就是该元素在栈中的下面一个元素，（因为栈任意时刻都是自顶向下递减），如果栈为空了，说明刚刚被抛出去的这个元素在左边没有比它小的，记为-1。<br>然后不断更新，直至遍历完依次heights数组。<br>此时栈中可能还有元素：则它们都是因为自身右边没有比自身小的元素。将其rightI记录为n。<br>这是因为，在[a, b]区间内，不包含a，b本身，一共有(b - a - 1)个元素。当其左边没有，记录为-1；当其右边没有，记录为n；方便计算。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(n)：</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/283927850/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283927850/</a>)</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/" target="_blank" rel="noopener">Leetcode121-Best Time to Buy and Sell Stock</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组prices；prices[i]代表第i天股票的价格。<br>如果你只能交易一次，即：买一次，卖一次。求出你最多能赚多少钱。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [7,1,5,3,6,4]<br>Output: 5<br>Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.<br>Not 7-1 = 6, as selling price needs to be larger than buying price.</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n：当n为0/1的时候，直接返回0；<br>赚不到钱则返回0；</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>由于要想赚钱，得低价买入，高价卖出；<br>买入卖出不能在同一天，至少买入的第二天才能卖出；<br>对于任意i，本质上就是求出[i + 1, n - 1]范围内最大的数字，然后减去prices[i]，就是第i天能获取到的利润。<br>对于[0, n - 1]上的所有i，找出一个最大值即可。</p>
+<h3 id="Solution-1：Dynamic-programming"><a href="#Solution-1：Dynamic-programming" class="headerlink" title="Solution-1：Dynamic programming"></a>Solution-1：Dynamic programming</h3><p>1.由于我们之前做过题目：Leetcode42-Trapping Rain Water<br>在42的Solution2的时候，本质上也是求：给定一个位置，其左右两边最大的值。<br>对于求n个元素所有的rightMax，使用O(n)的时间和O(n)的空间即可。</p>
+<p>2.rightMax[i]表示：[i + 1, n - 1]范围内最大的数字。<br>则通过递推，可以得到：rightMax[i - 1] = max(prices[i], rightMax[i]);<br>则i从后往前，就可以算出所有的rightMax[i]。<br>同时，使用这个值减去prices[i]的值，来不断更新最大利润即可。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/284225891/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284225891/</a>)</p>
+<h3 id="Solution-2：Further-Optimization"><a href="#Solution-2：Further-Optimization" class="headerlink" title="Solution-2：Further Optimization"></a>Solution-2：Further Optimization</h3><p>1.观察上面的递推式，可以发现：计算rightMax[i - 1]的时候，只用到了rightMax[i]，也就是说可以将数组优化为单个变量。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/284226029/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284226029/</a>)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/05/Leetcode-084-Largest%20Rectangle%20in%20Histogram/" data-id="ck4shvk8g000p0kt76ziz1r5y" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/07/Leetcode-121-Best%20Time%20to%20Buy%20ans%20Sell%20Stock/" data-id="ck4sls6t5000etst7d2y66qwu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -121,7 +113,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/86/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/85/">85</a><a class="page-number" href="/page/86/">86</a><span class="page-number current">87</span><a class="page-number" href="/page/88/">88</a><a class="page-number" href="/page/89/">89</a><span class="space">&hellip;</span><a class="page-number" href="/page/94/">94</a><a class="extend next" rel="next" href="/page/88/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/86/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/85/">85</a><a class="page-number" href="/page/86/">86</a><span class="page-number current">87</span><a class="page-number" href="/page/88/">88</a><a class="page-number" href="/page/89/">89</a><span class="space">&hellip;</span><a class="page-number" href="/page/96/">96</a><a class="extend next" rel="next" href="/page/88/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -153,6 +145,14 @@
       <ul>
         
           <li>
+            <a href="/2019/12/30/Linked%20List/Leetcode-143-Reorder%20List/">【链表专项】143.Reorder List</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/30/Linked%20List/Leetcode-142-Linked%20List%20Cycle%20II/">【链表专项】142.Linked List Cycle II</a>
+          </li>
+        
+          <li>
             <a href="/2019/12/30/Linked%20List/Leetcode-160-Intersection%20of%20Two%20Linked%20Lists/">【链表专项】160.Intersection of Two Linked Lists</a>
           </li>
         
@@ -162,14 +162,6 @@
         
           <li>
             <a href="/2019/12/30/Linked%20List/Leetcode-002-Add%20Two%20Numbers/">【链表专项】002.Add Two Numbers</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/30/Linked%20List/Leetcode-019-Remove%20Nth%20Node%20From%20End%20of%20List/">【链表专项】019.Remove Nth Node From End of List</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/30/Linked%20List/Leetcode-082-Remove%20Duplicates%20from%20Sorted%20List%20II/">【链表专项】082.Remove Duplicates from Sorted List II</a>
           </li>
         
       </ul>

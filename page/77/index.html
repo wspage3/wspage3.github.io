@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Leetcode-153-Find Minimum in Rotated Sorted Array" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Leetcode-017-Letter Combinations of a Phone Number" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/11/Leetcode-153-Find%20Minimum%20in%20Rotated%20Sorted%20Array/" class="article-date">
-  <time datetime="2019-12-11T03:12:45.411Z" itemprop="datePublished">2019-12-11</time>
+    <a href="/2019/12/12/Leetcode-017-Letter%20Combinations%20of%20a%20Phone%20Number/" class="article-date">
+  <time datetime="2019-12-12T03:50:51.060Z" itemprop="datePublished">2019-12-12</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/11/Leetcode-153-Find%20Minimum%20in%20Rotated%20Sorted%20Array/">153.Find Minimum in Rotated Sorted Array</a>
+      <a class="article-title" href="/2019/12/12/Leetcode-017-Letter%20Combinations%20of%20a%20Phone%20Number/">17.Letter Combinations of a Phone Number</a>
     </h1>
   
 
@@ -83,22 +83,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/" target="_blank" rel="noopener">153.Find Minimum in Rotated Sorted Array</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组nums；<br>该数组原本是升序的，结果在某个支点处旋转了一次，如：<br>i.e., [0,1,2,4,5,6,7] might become [4,5,6,7,0,1,2]<br>假设数组中不存在相同的数字。<br>找出这个数组中最小的值。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [3,4,5,1,2]<br>Output: 1</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n: 当n为0的时候，直接返回false；</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>1.常规思路：从前到后遍历一遍nums，找到最小值返回。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<h3 id="Solution-2：Binary-Search"><a href="#Solution-2：Binary-Search" class="headerlink" title="Solution-2：Binary Search"></a>Solution-2：Binary Search</h3><p>1.观察：[0,1,2,4,5,6]<br>经过rotate后，可能存在以下几种不同情况：<br>[1,2,4,5,6,   0]<br>[2,4,5,6,   0,1]<br>[4,5,6,   0,1,2]<br>[5,6,   0,1,2,4]<br>[6,   0,1,2,4,5]</p>
-<p>2.考虑寻找[left, right]中的最小值。<br>若：nums[left] &lt; nums[right]，则说明[left, right]范围内完全升序。nums[left]就是答案。<br>否则：<br>mid = left + (right - left) / 2;<br>若nums[mid] &gt; nums[right]，则说明，这个区间中间某个值比nums[right]还要大，说明mid此时在左侧。<br>而最小值一定在右侧[mid + 1, right]。<br>若nums[mid] &lt; nums[right]，则说明，[mid, right]这个范围是有序的。要寻找的最小值，不可能在mid右侧，一定在包含其的左侧，即：[left, mid]。<br>若nums[mid] == nums[right]，不可能的……</p>
-<p>3.用二分的方法，每次把结果可能出现的区间缩小一半。<br>最终当区间长度为2的时候，left = x, right = x + 1, mid = x<br>判断nums[mid]和nums[right]的大小关系，也就是判断左边元素和右边元素的大小。<br>若nums[mid]大于nums[right]，即答案一定在[mid + 1, right]中，也就是右边元素本身。<br>若nums[mid]小于nums[right]，即答案一定在[left, mid]中，也就是左边元素本身。<br>循环结束后，left一定等于right。此时返回left的值即可。</p>
-<p>时间复杂度：O(log n)<br>空间复杂度：O(1)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/285160090/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285160090/</a>)</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/letter-combinations-of-a-phone-number/" target="_blank" rel="noopener">17.Letter Combinations of a Phone Number</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的字符串。<br>该字符串的每一个元素都是：[2, 9]的整数。<br>对应的，手机键盘上的九键输入法。如2可以代表：[a, b, c]。<br>求出给定的数字序列，所有可能的字符串。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: “23”<br>Output: [“ad”, “ae”, “af”, “bd”, “be”, “bf”, “cd”, “ce”, “cf”].</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n: 当n为0的时候，直接返回空；<br>尽管example中输出的是字典序，但本题目不要求严格的字典序输出。</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>1.对于长度为n的序列，依次考虑每一个数字。</p>
+<p>2.对于[2, 3]来说：<br>先考虑2，由于2可以代表[a, b, c]，则将[a, b, c]放入ans中。<br>再考虑3，由于3可以代表[d, e, f]，则对于ans中的所有元素，分别将d/e/f拼接在其后面。<br>即：[ad, bd, cd, ae, be, ce, af, bf, cf]</p>
+<p>3.所以说，首先外层循环需要考虑n次。<br>对于每个n来说，需要考虑其所有代表的字母。记x次。则x要么是3，要么是4。<br>对于每个代表的字母，需要考虑当前ans中的个数：然后将自己加入到这些已有的ans后面。<br>由于这个过程需要x次，所以可以用一个temp数组，都存起来。当遍历完x次，将ans更新为temp即可。</p>
+<p>4.对于将temp赋值给ans的操作，可以：<br>ans = temp;//vector支持直接赋值过去。<br>参考：<a href="https://zh.cppreference.com/w/cpp/container/vector/operator%3D" target="_blank" rel="noopener">https://zh.cppreference.com/w/cpp/container/vector/operator%3D</a><br>ans.swap(temp)//O(1)的复杂度，更快。因为swap只交换指针，而不替换数据。<br>参考：<a href="http://www.cplusplus.com/reference/vector/vector/swap/" target="_blank" rel="noopener">http://www.cplusplus.com/reference/vector/vector/swap/</a><br><a href="https://www.zhihu.com/question/310462377" target="_blank" rel="noopener">https://www.zhihu.com/question/310462377</a></p>
+<p>时间复杂度：O(3 ^ n)<br>空间复杂度：O(1)</p>
+<p>5.Code(<a href="https://leetcode.com/submissions/detail/285381545/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285381545/</a>)<br>Code(<a href="https://leetcode.com/submissions/detail/285392928/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285392928/</a>)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/11/Leetcode-153-Find%20Minimum%20in%20Rotated%20Sorted%20Array/" data-id="ck4shvk80000f0kt70xqx8atq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/12/Leetcode-017-Letter%20Combinations%20of%20a%20Phone%20Number/" data-id="ck4sls6sp0001tst7gx5uba7q" class="article-share-link">Share</a>
       
       
     </footer>
@@ -112,7 +111,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/76/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/75/">75</a><a class="page-number" href="/page/76/">76</a><span class="page-number current">77</span><a class="page-number" href="/page/78/">78</a><a class="page-number" href="/page/79/">79</a><span class="space">&hellip;</span><a class="page-number" href="/page/94/">94</a><a class="extend next" rel="next" href="/page/78/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/76/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/75/">75</a><a class="page-number" href="/page/76/">76</a><span class="page-number current">77</span><a class="page-number" href="/page/78/">78</a><a class="page-number" href="/page/79/">79</a><span class="space">&hellip;</span><a class="page-number" href="/page/96/">96</a><a class="extend next" rel="next" href="/page/78/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -144,6 +143,14 @@
       <ul>
         
           <li>
+            <a href="/2019/12/30/Linked%20List/Leetcode-143-Reorder%20List/">【链表专项】143.Reorder List</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/30/Linked%20List/Leetcode-142-Linked%20List%20Cycle%20II/">【链表专项】142.Linked List Cycle II</a>
+          </li>
+        
+          <li>
             <a href="/2019/12/30/Linked%20List/Leetcode-160-Intersection%20of%20Two%20Linked%20Lists/">【链表专项】160.Intersection of Two Linked Lists</a>
           </li>
         
@@ -153,14 +160,6 @@
         
           <li>
             <a href="/2019/12/30/Linked%20List/Leetcode-002-Add%20Two%20Numbers/">【链表专项】002.Add Two Numbers</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/30/Linked%20List/Leetcode-019-Remove%20Nth%20Node%20From%20End%20of%20List/">【链表专项】019.Remove Nth Node From End of List</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/30/Linked%20List/Leetcode-082-Remove%20Duplicates%20from%20Sorted%20List%20II/">【链表专项】082.Remove Duplicates from Sorted List II</a>
           </li>
         
       </ul>
