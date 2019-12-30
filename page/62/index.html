@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Leetcode-645-Set Mismatch" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Leetcode-426-Partition Equal Subset Sum" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/16/Leetcode-645-Set%20Mismatch/" class="article-date">
-  <time datetime="2019-12-16T02:20:17.020Z" itemprop="datePublished">2019-12-16</time>
+    <a href="/2019/12/16/Leetcode-426-Partition%20Equal%20Subset%20Sum/" class="article-date">
+  <time datetime="2019-12-16T05:49:07.443Z" itemprop="datePublished">2019-12-16</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/16/Leetcode-645-Set%20Mismatch/">645.Set Mismatch</a>
+      <a class="article-title" href="/2019/12/16/Leetcode-426-Partition%20Equal%20Subset%20Sum/">416.Partition Equal Subset Sum</a>
     </h1>
   
 
@@ -83,20 +83,28 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/set-mismatch/" target="_blank" rel="noopener">645.Set Mismatch</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个长度为n的整数数组。<br>其中所有的元素取值都是范围[1, n]的。<br>但其中某个元素出现了两次，导致另外一个元素没有出现。<br>【输出】<br>找出这两个元素：出现两次的在前，没有出现的在后。<br>以数组的形式返回。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: nums = [1,2,2,4]<br>Output: [2,3]</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.n: [2, 10000]<br>2.nums数组无序。</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：做标记"><a href="#Solution-1：做标记" class="headerlink" title="Solution-1：做标记"></a>Solution-1：做标记</h3><p>1.根据【Leetcode-442-Find All Duplicates in an Array】的启示：<br>对于一个长度为n的数组nums，其所有nums[i]都在[1, n]区间内，我们可以通过将nums[nums[i] - 1]置为负数（相反数）的方法，找出所有出现2次的元素。<br>本题目中保证了只有一个元素出现了两次，所以找到它后break即可。O(n)的time complexity。</p>
-<p>2.同时根据【Leetcode-268-Missing Number】的启示：<br>对于一个长度为n的数组nums，其所有nums[i]都在[0, n]区间内，且不重复。<br>我们可以找到那个缺失的元素x。<br>通过：将0, 1, 2, 3, 4, …, n, nums[0], nums[1], nums[2], …, nums[n - 1]这(n + 1 + n)个元素都异或起来。<br>缺失元素x就是这个异或的值。O(n)的time complexity。</p>
-<p>3.对于本题目，长度为n的nums数组，所有元素取值范围都在[1, n]。<br>某个元素a出现了两次，某个元素b出现了0次。即：[1, 2, 3, 4, …, a, a, …, b - 1, b + 1, …, n]<br>根据1，可以找到a的值。存在res[0]中。res[0] = a;<br>根据2，将nums中所有的元素和[1, n]中所有的元素异或起来的值存到res[1]中。res[1] = a ^ b;<br>然后再将res[1] = res[1] ^ res[0]即可，即找到了b的值。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/286256728/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286256728/</a>)</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/partition-equal-subset-sum/" target="_blank" rel="noopener">416.Partition Equal Subset Sum</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个长度为n的整数数组。n大于0。<br>其中所有的元素取值都是正整数。<br>【输出】<br>判断这个数组中是否能分成两个数组，它们的和相等。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [1, 5, 11, 5]<br>Output: true<br>Explanation: The array can be partitioned as [1, 5, 5] and [11].</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.n: 大于0<br>2.nums[i]: 大于0</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：0-1-Knapsack"><a href="#Solution-1：0-1-Knapsack" class="headerlink" title="Solution-1：0/1 Knapsack"></a>Solution-1：0/1 Knapsack</h3><p>1.实质上：本题目就是求nums数组的一个子数组，使得其和为nums数组的和的一半。</p>
+<p>2.求出nums数组的和sum。若sum是奇数，则直接return false。</p>
+<p>3.对于任意一个nums[i]，我们可以选择它，也可能不选择它。<br>要是选择的话最多只能使用一次。然后看能不能凑到target（sum / 2）。</p>
+<p>4.0/1 knapsack问题<br>i: [0, n - 1]<br>j: [0, target]<br>dp数组用bool类型即可。若为true，则说明可以凑成target。<br>dp[i][j]代表：从[0, i]区间任意选择一些元素（每个元素只能选一次），使得和为j。<br>则答案就是：dp[0][target] || dp[1][target] … || dp[n - 2][target] || dp[n - 1][target]</p>
+<p>5.边界值：<br>不管i为多少，若j为0，则dp[i][0] = true；<br>若i为0，当j == nums[0]的时候，dp[0][j] = true；<br>状态转移方程：dp[i][j] = (dp[i - 1][j]) &amp;&amp; (dp[i - 1][j - nums[i]])<br>左边代表：不取nums[i]<br>右边代表：选择nums[i]。当nums[i] &gt; j的时候，右边为false。</p>
+<p>时间复杂度：O(n * c) //c代表nums数组累加和的一半<br>空间复杂度：O(n * c)</p>
+<p>6.Code(<a href="https://leetcode.com/submissions/detail/286289354/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286289354/</a>)</p>
+<p>7.进一步，压缩空间复杂度。可以发现dp[i][j]只和dp[i - 1][…]有关。所以把二维数组压缩为一维。<br>dp[j] = dp[j] || dp[j - nums[i]];<br>从二维的方程可以看出，当前位置的值依赖于两个值：这个位置上方的，这个位置左上方的。<br>如果压缩为一维的时候，继续让j从小到大遍历的话，这样当需要‘左上方’的时候，这个值一定是被覆盖过的。<br>所以需要让j从大到小遍历。</p>
+<p>时间复杂度：O(n * c) //c代表nums数组累加和的一半<br>空间复杂度：O(c)</p>
+<p>8.Code(<a href="https://leetcode.com/submissions/detail/286325812/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286325812/</a>)</p>
+<h3 id="Solution-2：DFS"><a href="#Solution-2：DFS" class="headerlink" title="Solution-2：DFS"></a>Solution-2：DFS</h3><p>1.将数组由大到小排序。<br>2.return dfs(nums, sum / 2, 0);<br>3.在递归中：<br>首先判断index是否在[0, n - 1]范围内，若超过该范围，return false。<br>然后判断nums[index] == target，如果满足，则return true。<br>接着判断nums[index] &gt; target，如果满足，则return false。<br>最后递归调用左子树和右子树即可，返回它们的返回值的or运算结果。<br>左子树：dfs(nums, target - nums[index], index + 1);<br>右子树：dfs(nums, target, index + 1);</p>
+<p>4.如果先调用右子树的话，会TLE。</p>
+<p>5.Code(<a href="https://leetcode.com/submissions/detail/286330983/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286330983/</a>)<br>结果发现这个提交beat 100%。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/16/Leetcode-645-Set%20Mismatch/" data-id="ck4s7xpus00159gt71gtec0kx" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/16/Leetcode-426-Partition%20Equal%20Subset%20Sum/" data-id="ck4sap52l000xcct7a25i532u" class="article-share-link">Share</a>
       
       
     </footer>
@@ -110,7 +118,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/61/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/60/">60</a><a class="page-number" href="/page/61/">61</a><span class="page-number current">62</span><a class="page-number" href="/page/63/">63</a><a class="page-number" href="/page/64/">64</a><span class="space">&hellip;</span><a class="page-number" href="/page/92/">92</a><a class="extend next" rel="next" href="/page/63/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/61/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/60/">60</a><a class="page-number" href="/page/61/">61</a><span class="page-number current">62</span><a class="page-number" href="/page/63/">63</a><a class="page-number" href="/page/64/">64</a><span class="space">&hellip;</span><a class="page-number" href="/page/93/">93</a><a class="extend next" rel="next" href="/page/63/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -142,6 +150,10 @@
       <ul>
         
           <li>
+            <a href="/2019/12/30/Linked%20List/Leetcode-024-Swap%20Nodes%20in%20Pairs/">【链表专项】024.Swap Nodes in Pairs</a>
+          </li>
+        
+          <li>
             <a href="/2019/12/30/Linked%20List/Leetcode-002-Add%20Two%20Numbers/">【链表专项】002.Add Two Numbers</a>
           </li>
         
@@ -155,10 +167,6 @@
         
           <li>
             <a href="/2019/12/30/Linked%20List/Leetcode-328-Odd%20Even%20Linked%20List/">【链表专项】328.Odd Even Linked List</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/30/Tree/Leetcode-109-Convert%20Sorted%20List%20to%20Binary%20Search%20Tree/">【BST专项】109.Convert Sorted List to Binary Search Tree</a>
           </li>
         
       </ul>

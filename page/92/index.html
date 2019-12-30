@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Leetcode-238-Product of Array Except Self" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/02/hello-world/" class="article-date">
-  <time datetime="2019-12-02T01:39:02.156Z" itemprop="datePublished">2019-12-02</time>
+    <a href="/2019/12/03/Leetcode-238-Product%20of%20Array%20Except%20Self/" class="article-date">
+  <time datetime="2019-12-03T09:29:50.853Z" itemprop="datePublished">2019-12-03</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/02/hello-world/">Hello Blog</a>
+      <a class="article-title" href="/2019/12/03/Leetcode-238-Product%20of%20Array%20Except%20Self/">Leetcode-238 Product of Array Except Self</a>
     </h1>
   
 
@@ -83,15 +83,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Hi, My name is wspage3 and this is my first article.<br>Opinions expressed here are mine alone.</p>
-<h2 id="一、定理目录"><a href="#一、定理目录" class="headerlink" title="一、定理目录"></a>一、定理目录</h2><h3 id="1-勾股定理"><a href="#1-勾股定理" class="headerlink" title="1.勾股定理"></a>1.勾股定理</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">a^2 + b^2 = c^2</span></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://wspage3.github.io" target="_blank" rel="noopener">wspage3</a></p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/product-of-array-except-self/" target="_blank" rel="noopener">Leetcode-238 Product of Array Except Self</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组nums，n &gt; 1。<br>求数组output，其中output[i]表示所有除了i之外，所有其它数字的乘积。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input:  [1,2,3,4]<br>Output: [24,12,8,6]</p>
+<h3 id="3-Note"><a href="#3-Note" class="headerlink" title="3.Note"></a>3.Note</h3><p>a.过程中不使用除法。<br>b.时间复杂度要求：O(n)。<br>c.空间复杂度要求：O(1)，函数返回的数组不算入空间复杂度。</p>
+<h3 id="4-Corner-Case"><a href="#4-Corner-Case" class="headerlink" title="4.Corner Case"></a>4.Corner Case</h3><p>题目保证了n &gt; 1</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>直观的想法就是遍历n次，每次累乘(n - 1)个数字。<br>时间复杂度：O(n ^ 2)<br>空间复杂度：O(1)</p>
+<h3 id="Solution-2：递推"><a href="#Solution-2：递推" class="headerlink" title="Solution-2：递推"></a>Solution-2：递推</h3><p>1.假设我们要求output[i]，i的范围为：[0, n - 1]，也就是nums数组中除了nums[i]之外所有的数字的乘积。也就是求[0, i - 1]以及[i + 1, n - 1]两个范围内所有数的乘积。</p>
+<p>2.新增数组s，设数组s[i]表示范围[0, i - 1]内所有数字的乘积。i的范围为：[1, n - 1]<br>新增数组t，设t[i]为[i + 1, n - 1]所有数字的乘积。i的范围为：[0, n - 2]<br>数组s只需要从前到后遍历一次nums即可求出。<br>数组t从后到前遍历一次nums也能求出。<br>在s和t都求出的情况下，output也只需要O(n)的时间即可求出：output[i] = s[i] * t[i];<br>时间复杂度：O(3 * n)<br>空间复杂度：O(2 * n)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/283206956/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283206956/</a>)</p>
+<h3 id="Solution-3：进一步优化"><a href="#Solution-3：进一步优化" class="headerlink" title="Solution-3：进一步优化"></a>Solution-3：进一步优化</h3><p>1.可以省略数组s，和数组t：<br>数组s的值就保留在output数组中。<br>数组t用一个int变量表示。<br>时间复杂度：O(2 * n)<br>空间复杂度：O(1)</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/283208630/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283208630/</a>)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/02/hello-world/" data-id="ck4s7xpuw001c9gt7e7aa30r1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/03/Leetcode-238-Product%20of%20Array%20Except%20Self/" data-id="ck4sap52d000ncct7d40n2f5r" class="article-share-link">Share</a>
       
       
     </footer>
@@ -105,7 +112,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/91/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/90/">90</a><a class="page-number" href="/page/91/">91</a><span class="page-number current">92</span>
+    <a class="extend prev" rel="prev" href="/page/91/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/90/">90</a><a class="page-number" href="/page/91/">91</a><span class="page-number current">92</span><a class="page-number" href="/page/93/">93</a><a class="extend next" rel="next" href="/page/93/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -137,6 +144,10 @@
       <ul>
         
           <li>
+            <a href="/2019/12/30/Linked%20List/Leetcode-024-Swap%20Nodes%20in%20Pairs/">【链表专项】024.Swap Nodes in Pairs</a>
+          </li>
+        
+          <li>
             <a href="/2019/12/30/Linked%20List/Leetcode-002-Add%20Two%20Numbers/">【链表专项】002.Add Two Numbers</a>
           </li>
         
@@ -150,10 +161,6 @@
         
           <li>
             <a href="/2019/12/30/Linked%20List/Leetcode-328-Odd%20Even%20Linked%20List/">【链表专项】328.Odd Even Linked List</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/30/Tree/Leetcode-109-Convert%20Sorted%20List%20to%20Binary%20Search%20Tree/">【BST专项】109.Convert Sorted List to Binary Search Tree</a>
           </li>
         
       </ul>

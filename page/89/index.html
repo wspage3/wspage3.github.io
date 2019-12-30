@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Leetcode-152-Maximum Product Subarray" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Leetcode-713-Subarray Product Less Than K" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/04/Leetcode-152-Maximum%20Product%20Subarray/" class="article-date">
-  <time datetime="2019-12-04T00:59:01.751Z" itemprop="datePublished">2019-12-04</time>
+    <a href="/2019/12/04/Leetcode-713-Subarray%20Product%20Less%20Than%20K/" class="article-date">
+  <time datetime="2019-12-04T02:14:22.621Z" itemprop="datePublished">2019-12-04</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/04/Leetcode-152-Maximum%20Product%20Subarray/">Leetcode-152 Maximum Product Subarray</a>
+      <a class="article-title" href="/2019/12/04/Leetcode-713-Subarray%20Product%20Less%20Than%20K/">Leetcode713-Subarray Product Less Than K</a>
     </h1>
   
 
@@ -83,24 +83,26 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/maximum-product-subarray/" target="_blank" rel="noopener">Leetcode-152 Maximum Product Subarray</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组nums。<br>求出nums的连续子数组，这个子数组是nums所有子数组中乘积最大的那个。返回这个sum。<br>子数组长度至少为1。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [2,3,-2,4]<br>Output: 6<br>Explanation: [2,3] has the largest product 6.</p>
-<p>Input: [-2,0,-1]<br>Output: 0<br>Explanation: The result cannot be 2, because [-2,-1] is not a subarray.</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>需要对n是否为0判断</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><p>显然，本题目和Leetcode-53的唯一区别就是：一个求和最大值，一个求乘积最大值。<br>此处，主要需要考虑乘法运算和加法元素的差异。其它分析可参考Leetcode-53</p>
-<h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>1.不感知加法乘法的差异。<br>时间复杂度：O(n ^ 2)<br>空间复杂度：O(1)</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/283351227/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283351227/</a>)</p>
-<h3 id="Solution-2：Divide-and-Conquer"><a href="#Solution-2：Divide-and-Conquer" class="headerlink" title="Solution-2：Divide and Conquer"></a>Solution-2：Divide and Conquer</h3><p>1.考虑区间[low, high]，mid为中点：<br>递归求得[low, mid]和[mid + 1, high]的值。<br>找出[i, mid]使得以mid结尾的最大值。<br>找出[mid + 1, j]使得以mid + 1开头的最大值。<br>假设区间为：[-3, 2, -5]<br>f(-3, 2) = 2<br>f(-5) = -5<br>f(i, j) = 2 * -5 = -10<br>这样求得的值是2，跟实际答案30不符合。<br>可以发现，问题出现在“负负得正”这种场景下。我们在寻找[i, mid]和[mid + 1, j]的时候，单纯的找到了以其开头或者结尾的最大的值。但这两个最大的值的乘积并不一定是最大的。<br>所以根据这个特点，可以分别维护两个值。<br>对于i来说，lMax，lMin分别记录以mid结尾的最大乘积和最小乘积。<br>对于j来说，rMax，rMin分别记录以mid + 1开头的最大乘积和最小乘积。<br>当combine的时候，找出max(lMax * rMax, lMin * rMin)，这样才是[i, j]范围内的最大乘积。</p>
-<p>时间复杂度：O(n ^ logN)<br>空间复杂度：O(n)，递归开销<br>3.Code(<a href="https://leetcode.com/submissions/detail/283358210/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283358210/</a>)</p>
-<h3 id="Solution-3：Dynamic-Programming"><a href="#Solution-3：Dynamic-Programming" class="headerlink" title="Solution-3：Dynamic Programming"></a>Solution-3：Dynamic Programming</h3><p>1.同理，在递推位置i的时候：<br>sum：<br>    start = max(nums[i], nums[i] + start)<br>    res = max(res, start)<br>product：<br>    if (nums[i] &lt; 0)  then swap(startMin, startMax);<br>    startMin = min(nums[i], nums[i] * startMin);<br>    startMax = max(nums[i], nums[i] * startMax);<br>    res = max(res, startMax);<br>当在位置i的时候，此时：<br>startMin代表以i + 1开头的最小乘积<br>startMax代表以i + 1开头的最大乘积<br>如果当前nums[i]非负的话，要想得到以i开头的连续子树组的最大值，并更新它的话，需要结合maxStart。<br>    maxStart = max(nums[i], nums[i] * maxStart)<br>    同理更新minStart：minStart = max(nums[i], nums[i] * minStart)<br>如果当前nums[i]负数的话，要想得到以i开头的连续子树组的最大值，并更新它的话，需要结合minStart。<br>    maxStart = max(nums[i], nums[i] * minStart)<br>    同理更新minStart：minStart = max(nums[i], nums[i] * maxStart)<br>为了表达简便，我们可以在更新前判断，如果当前nums[i]是负数的话，将minStart和maxStart交换值即可。</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/subarray-product-less-than-k/" target="_blank" rel="noopener">Leetcode713-Subarray Product Less Than K</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的正整数数组nums；给定一个整数k；<br>求出满足条件的连续子数组的个数cnt：这个子数组的product小于给定的k</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: nums = [10, 5, 2, 6], k = 100<br>Output: 8<br>Explanation:<br>[10], [5], [2], [6], [10, 5], [5, 2], [2, 6], [5, 2, 6]</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>0 &lt; nums.length &lt;= 50000.<br>0 &lt; nums[i] &lt; 1000.<br>0 &lt;= k &lt; 10^6.<br>需要对k是否为0判断：若k为0，根据题目正整数数组的描述，直接返回0即可</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><p>【连续子数组的乘积】相关的题目。</p>
+<h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>1.i从[0, n - 1]遍历。<br>每次固定i，然后j从[i, n - 1]遍历：找出以i开头所有的连续子数组。其中累乘product，若小于k，则计数器加一。<br>结果发现Runtime Error：累乘的数据太大了，以至于用long long也会溢出。<br>2.一个显而易见有问题的地方在于：<br>给定的k的范围为[0, 1e6]，而我们固定i，试图找出以i开头的所有连续子数组的时候，为什么还会导致累乘的积溢出long long呢？<br>显然是因为：当发现累乘的积大于k的时候，没有跳出循环，直接考虑i + 1。（由于nums数组中的元素都是正数）<br>修改后发现结果是：TLE超时。</p>
+<p>时间复杂度：O(n ^ 2)<br>空间复杂度：O(1)</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/283569919/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283569919/</a>)</p>
+<h3 id="Solution-2：Sliding-Window"><a href="#Solution-2：Sliding-Window" class="headerlink" title="Solution-2：Sliding Window"></a>Solution-2：Sliding Window</h3><p>考虑数组[a, b, c, d, e, f, g, h, i]</p>
+<p>1.首先我们考虑以a开头的子树组：a,ab,abc,abcd,abcde……<br>若a本身大于等于k，则以a开头的所有子数组都不符合条件，跳过到b。<br>若a本身不大于k，则可以继续考察ab,abc,abcd,abcde……，某个时刻发现abcdefg不符合条件了：<br>但我们知道：abcdef是ok的，说明：abcdef内的任意连续子数组都是满足的。<br>Solution1的做法是break后考察以b开头的。这样的话，就会有重复计算了，不能充分利用上述已知信息。</p>
+<p>2.退一步，假设当前位置在”f”，我们已经知道了abcde是合法的，同时abcdef也是合法的。<br>考虑：把当前的”f”添加到abcde中，新增了一个元素，对应新增了多少个满足条件的子数组呢？<br>结果是：f, ef, def, cdef, bcdef, abcdef共6个，也就是index(f) - index(a) + 1。<br>同理我们知道序列abcde对应的答案为：1 + 2 + 3 + 4 + 5 = 15<br>那么abcdef对应的答案就是：15 + 6 = 21</p>
+<p>3.进一步，当前位置在”g”，当发现abcdefg不合法的时候，说明此时答案无法在21的基础上直接加上7。<br>这时，我们找到以g为结尾的满足条件的一个最大子数组，假设是序列cdefg。即：abcdefg,bcdefg均不合法；而cdefg合法。<br>此时就可以将g对应的cnt添加到已有的21中了：g, fg, efg, defg, cdefg。<br>而且这些包含g的子数组不可能和之前的21个子数组有相同的。<br>同时我们跳过的a和b，他们所有满足的情况都已经被考虑过了。也不会造成遗漏。<br>然后我们再在这个cdefg的基础上，考察下一个位置”h”……直到所有位置都被考察过了，最后的答案就是本题目的答案。</p>
+<p>4.根据以上思路，进行实现：<br>用一个start指针指向当前window的开始，初始化为0。<br>每次考察数组nums[i]，i的范围[0, n - 1]，依次将nums[i]添加到window中，并进行判断。<br>如果此时合法，则考察[i + 1]。并累加：i - start + 1。<br>如果此时非法，则将window向后滑动，找到start的位置，使得区间[start, i](start &lt;= i&gt;)合法。并累加：i - start + 1。<br>如果此时发现start &gt; i，则说明start == i + 1，且i位置不存在满足条件的子数组，累加0即可。然后考察i + 1</p>
 <p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/283369314/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283369314/</a>)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/283582840/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283582840/</a>)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/04/Leetcode-152-Maximum%20Product%20Subarray/" data-id="ck4s7xpue000i9gt78k531drf" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/04/Leetcode-713-Subarray%20Product%20Less%20Than%20K/" data-id="ck4sap52p0014cct7aeje1r08" class="article-share-link">Share</a>
       
       
     </footer>
@@ -114,7 +116,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/88/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/87/">87</a><a class="page-number" href="/page/88/">88</a><span class="page-number current">89</span><a class="page-number" href="/page/90/">90</a><a class="page-number" href="/page/91/">91</a><a class="page-number" href="/page/92/">92</a><a class="extend next" rel="next" href="/page/90/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/88/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/87/">87</a><a class="page-number" href="/page/88/">88</a><span class="page-number current">89</span><a class="page-number" href="/page/90/">90</a><a class="page-number" href="/page/91/">91</a><span class="space">&hellip;</span><a class="page-number" href="/page/93/">93</a><a class="extend next" rel="next" href="/page/90/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -146,6 +148,10 @@
       <ul>
         
           <li>
+            <a href="/2019/12/30/Linked%20List/Leetcode-024-Swap%20Nodes%20in%20Pairs/">【链表专项】024.Swap Nodes in Pairs</a>
+          </li>
+        
+          <li>
             <a href="/2019/12/30/Linked%20List/Leetcode-002-Add%20Two%20Numbers/">【链表专项】002.Add Two Numbers</a>
           </li>
         
@@ -159,10 +165,6 @@
         
           <li>
             <a href="/2019/12/30/Linked%20List/Leetcode-328-Odd%20Even%20Linked%20List/">【链表专项】328.Odd Even Linked List</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/30/Tree/Leetcode-109-Convert%20Sorted%20List%20to%20Binary%20Search%20Tree/">【BST专项】109.Convert Sorted List to Binary Search Tree</a>
           </li>
         
       </ul>

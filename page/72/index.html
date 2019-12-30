@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Leetcode-022-Generate Parentheses" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Leetcode-020-Valid Parentheses" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/12/Leetcode-022-Generate%20Parentheses/" class="article-date">
-  <time datetime="2019-12-12T06:02:01.240Z" itemprop="datePublished">2019-12-12</time>
+    <a href="/2019/12/12/Leetcode-020-Valid%20Parentheses/" class="article-date">
+  <time datetime="2019-12-12T08:10:34.517Z" itemprop="datePublished">2019-12-12</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/12/Leetcode-022-Generate%20Parentheses/">22.Generate Parentheses</a>
+      <a class="article-title" href="/2019/12/12/Leetcode-020-Valid%20Parentheses/">20.Valid Parentheses</a>
     </h1>
   
 
@@ -83,21 +83,23 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/generate-parentheses/" target="_blank" rel="noopener">22.Generate Parentheses</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个整数n，代表有n对括号。这是一对：( )<br>求出这n对括号所有可能的组合方式，要求组合后是一个有效的括号表达式。<br>即：匹配的一对括号，左边是(，右边是)</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>n = 3<br>[<br>  “((()))”,<br>  “(()())”,<br>  “(())()”,<br>  “()(())”,<br>  “()()()”<br>]</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n: 当n为0的时候，直接返回空；</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Backtracking-Recursive"><a href="#Solution-1：Backtracking-Recursive" class="headerlink" title="Solution-1：Backtracking(Recursive)"></a>Solution-1：Backtracking(Recursive)</h3><p>1.给定的n，代表有n个open bracket，n个close bracket。</p>
-<p>2.对于任意时刻，我们仅可选一个bracket，要么是open的，要么是close的。<br>只要leftCnt大于0，就可以选择open的。<br>而选择close的，需要rightCnt大于leftCnt，以保证结果先左后右的合法性。</p>
-<p>3.当leftCnt, rightCnt的值都为0时，此时构造出来的string s就是一个合法的答案。将其添加到答案中。<br>并且返回。（回溯）</p>
-<p>4.递归树的某一个子节点计算完成后返回了，其父节点进行考虑，若当前还有其他的儿子，则递归调用其他的儿子。<br>对于一个节点来说，其左儿子可以认为是“选择open bracket”，其右儿子可以认为是“选择close bracket”</p>
-<p>时间复杂度：O() //to do<br>空间复杂度：O()</p>
-<p>5.Code(<a href="https://leetcode.com/submissions/detail/285419056/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285419056/</a>)</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/valid-parentheses/" target="_blank" rel="noopener">20.Valid Parentheses</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的字符串s；<br>判断该字符串是否一个合法的括号表达式；<br>括号有三种：[] {} ()<br>open的bracket最终必须有一个同类型close的bracket与之匹配；<br>且上述匹配的顺序必须是正确的。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: “()[]{}”<br>Output: true</p>
+<p>Input: “([)]”<br>Output: false</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n: 当n为0的时候，也认为是合法的；</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Stack"><a href="#Solution-1：Stack" class="headerlink" title="Solution-1：Stack"></a>Solution-1：Stack</h3><p>1.若n是奇数，那么一定非法。<br>若n是0，则直接return true。</p>
+<p>2.考虑n为大于0的偶数：<br>模拟括号匹配的过程：i在范围[0, n - 1]内遍历：<br>先将s[0]压入栈；<br>考察s[1]，若s[1]和s[0]是同类型的，且一个s[1]是close，s[0]是open的，那么说明这两个是一对。<br>则此时将s[0]从栈中抛出，i跳到位置2，考虑第二个元素。<br>若s[1]的出现无法和s[0]匹配掉，则将s[1]在压入栈，考虑下一个元素。<br>……<br>直到所有的n个元素都遍历过了，此时检查栈，如果栈是空的，说明所有的括号都可以匹配。<br>如果此时栈非空，则说明存在元素无法匹配。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/285447709/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285447709/</a>)</p>
+<h3 id="Solution-2：Stack"><a href="#Solution-2：Stack" class="headerlink" title="Solution-2：Stack"></a>Solution-2：Stack</h3><p>1.另一种方法：<br>从[0, n - 1]考虑每一个s[i]<br>若s[i]是open的bracket，则将其“另一半”压入栈。<br>否则的话，判断此时栈是否为空，是的话，直接return false。<br>栈不空的话，判断当前元素是否和栈顶元素相同，不同的话，也直接return false。<br>相同的话，将栈顶元素抛出，转移到考虑s[i + 1]</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/285450396/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285450396/</a>)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/12/Leetcode-022-Generate%20Parentheses/" data-id="ck4s7xpu500059gt732yp69dx" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/12/Leetcode-020-Valid%20Parentheses/" data-id="ck4sap5200004cct724cod7kt" class="article-share-link">Share</a>
       
       
     </footer>
@@ -111,7 +113,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/71/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/70/">70</a><a class="page-number" href="/page/71/">71</a><span class="page-number current">72</span><a class="page-number" href="/page/73/">73</a><a class="page-number" href="/page/74/">74</a><span class="space">&hellip;</span><a class="page-number" href="/page/92/">92</a><a class="extend next" rel="next" href="/page/73/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/71/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/70/">70</a><a class="page-number" href="/page/71/">71</a><span class="page-number current">72</span><a class="page-number" href="/page/73/">73</a><a class="page-number" href="/page/74/">74</a><span class="space">&hellip;</span><a class="page-number" href="/page/93/">93</a><a class="extend next" rel="next" href="/page/73/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -143,6 +145,10 @@
       <ul>
         
           <li>
+            <a href="/2019/12/30/Linked%20List/Leetcode-024-Swap%20Nodes%20in%20Pairs/">【链表专项】024.Swap Nodes in Pairs</a>
+          </li>
+        
+          <li>
             <a href="/2019/12/30/Linked%20List/Leetcode-002-Add%20Two%20Numbers/">【链表专项】002.Add Two Numbers</a>
           </li>
         
@@ -156,10 +162,6 @@
         
           <li>
             <a href="/2019/12/30/Linked%20List/Leetcode-328-Odd%20Even%20Linked%20List/">【链表专项】328.Odd Even Linked List</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/30/Tree/Leetcode-109-Convert%20Sorted%20List%20to%20Binary%20Search%20Tree/">【BST专项】109.Convert Sorted List to Binary Search Tree</a>
           </li>
         
       </ul>

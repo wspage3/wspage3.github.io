@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Leetcode-121-Best Time to Buy ans Sell Stock" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Leetcode-122-Best Time to Buy ans Sell Stock II" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/07/Leetcode-121-Best%20Time%20to%20Buy%20ans%20Sell%20Stock/" class="article-date">
-  <time datetime="2019-12-07T01:09:15.739Z" itemprop="datePublished">2019-12-07</time>
+    <a href="/2019/12/07/Leetcode-122-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20II/" class="article-date">
+  <time datetime="2019-12-07T01:53:30.793Z" itemprop="datePublished">2019-12-07</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/07/Leetcode-121-Best%20Time%20to%20Buy%20ans%20Sell%20Stock/">Leetcode121-Best Time to Buy and Sell Stock</a>
+      <a class="article-title" href="/2019/12/07/Leetcode-122-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20II/">Leetcode122-Best Time to Buy and Sell Stock II</a>
     </h1>
   
 
@@ -83,23 +83,19 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/" target="_blank" rel="noopener">Leetcode121-Best Time to Buy and Sell Stock</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组prices；prices[i]代表第i天股票的价格。<br>如果你只能交易一次，即：买一次，卖一次。求出你最多能赚多少钱。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [7,1,5,3,6,4]<br>Output: 5<br>Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.<br>Not 7-1 = 6, as selling price needs to be larger than buying price.</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/" target="_blank" rel="noopener">Leetcode122-Best Time to Buy and Sell Stock</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组prices；prices[i]代表第i天股票的价格。<br>如果你能交易任意k次，即：买k次，卖k次。求出你最多能赚多少钱。<br>前提是：买入下一股的时候，必须将上一股卖掉。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [7,1,5,3,6,4]<br>Output: 7<br>Explanation: Buy on day 2 (price = 1) and sell on day 3 (price = 5), profit = 5-1 = 4.<br>             Then buy on day 4 (price = 3) and sell on day 5 (price = 6), profit = 6-3 = 3.</p>
 <h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n：当n为0/1的时候，直接返回0；<br>赚不到钱则返回0；</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>由于要想赚钱，得低价买入，高价卖出；<br>买入卖出不能在同一天，至少买入的第二天才能卖出；<br>对于任意i，本质上就是求出[i + 1, n - 1]范围内最大的数字，然后减去prices[i]，就是第i天能获取到的利润。<br>对于[0, n - 1]上的所有i，找出一个最大值即可。</p>
-<h3 id="Solution-1：Dynamic-programming"><a href="#Solution-1：Dynamic-programming" class="headerlink" title="Solution-1：Dynamic programming"></a>Solution-1：Dynamic programming</h3><p>1.由于我们之前做过题目：Leetcode42-Trapping Rain Water<br>在42的Solution2的时候，本质上也是求：给定一个位置，其左右两边最大的值。<br>对于求n个元素所有的rightMax，使用O(n)的时间和O(n)的空间即可。</p>
-<p>2.rightMax[i]表示：[i + 1, n - 1]范围内最大的数字。<br>则通过递推，可以得到：rightMax[i - 1] = max(prices[i], rightMax[i]);<br>则i从后往前，就可以算出所有的rightMax[i]。<br>同时，使用这个值减去prices[i]的值，来不断更新最大利润即可。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/284225891/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284225891/</a>)</p>
-<h3 id="Solution-2：Further-Optimization"><a href="#Solution-2：Further-Optimization" class="headerlink" title="Solution-2：Further Optimization"></a>Solution-2：Further Optimization</h3><p>1.观察上面的递推式，可以发现：计算rightMax[i - 1]的时候，只用到了rightMax[i]，也就是说可以将数组优化为单个变量。</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>考虑现实生活中，唯一不同的是：现实中我们只知道当前的股价，不知道明天的股价。<br>而现在我们知道了：假设今天股价为a，明天股价b大于a，则买下一定会赚钱，一定买。<br>假设今天股价为a，明天股价b小于a，则买下一定会赔钱，一定不买。</p>
+<h3 id="Solution-1：Greedy"><a href="#Solution-1：Greedy" class="headerlink" title="Solution-1：Greedy"></a>Solution-1：Greedy</h3><p>1.我们要做的只是：每天只看今天的价格和明天的价格，然后做决定。<br>不管后天，大后天的价格。因为我们每天都可以做决定，如果后面发现股价一直在涨，则每天都买就行了。<br>然后ans一直累加每天的利润即可。</p>
 <p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/284226029/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284226029/</a>)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/284232069/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284232069/</a>)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/07/Leetcode-121-Best%20Time%20to%20Buy%20ans%20Sell%20Stock/" data-id="ck4s7xpuc000f9gt7cgnoh5ic" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/07/Leetcode-122-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20II/" data-id="ck4sap528000gcct7gpes46p2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -113,7 +109,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/82/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/81/">81</a><a class="page-number" href="/page/82/">82</a><span class="page-number current">83</span><a class="page-number" href="/page/84/">84</a><a class="page-number" href="/page/85/">85</a><span class="space">&hellip;</span><a class="page-number" href="/page/92/">92</a><a class="extend next" rel="next" href="/page/84/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/82/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/81/">81</a><a class="page-number" href="/page/82/">82</a><span class="page-number current">83</span><a class="page-number" href="/page/84/">84</a><a class="page-number" href="/page/85/">85</a><span class="space">&hellip;</span><a class="page-number" href="/page/93/">93</a><a class="extend next" rel="next" href="/page/84/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -145,6 +141,10 @@
       <ul>
         
           <li>
+            <a href="/2019/12/30/Linked%20List/Leetcode-024-Swap%20Nodes%20in%20Pairs/">【链表专项】024.Swap Nodes in Pairs</a>
+          </li>
+        
+          <li>
             <a href="/2019/12/30/Linked%20List/Leetcode-002-Add%20Two%20Numbers/">【链表专项】002.Add Two Numbers</a>
           </li>
         
@@ -158,10 +158,6 @@
         
           <li>
             <a href="/2019/12/30/Linked%20List/Leetcode-328-Odd%20Even%20Linked%20List/">【链表专项】328.Odd Even Linked List</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/30/Tree/Leetcode-109-Convert%20Sorted%20List%20to%20Binary%20Search%20Tree/">【BST专项】109.Convert Sorted List to Binary Search Tree</a>
           </li>
         
       </ul>
