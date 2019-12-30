@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-2019-12-16-Leetcode-645-Set Mismatch" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Leetcode-059-Spiral Matrix II" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/16/2019-12-16-Leetcode-645-Set%20Mismatch/" class="article-date">
-  <time datetime="2019-12-16T02:20:17.020Z" itemprop="datePublished">2019-12-16</time>
+    <a href="/2019/12/17/Leetcode-059-Spiral%20Matrix%20II/" class="article-date">
+  <time datetime="2019-12-17T01:53:44.984Z" itemprop="datePublished">2019-12-17</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/16/2019-12-16-Leetcode-645-Set%20Mismatch/">645.Set Mismatch</a>
+      <a class="article-title" href="/2019/12/17/Leetcode-059-Spiral%20Matrix%20II/">59.Spiral Matrix II</a>
     </h1>
   
 
@@ -83,20 +83,23 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/set-mismatch/" target="_blank" rel="noopener">645.Set Mismatch</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个长度为n的整数数组。<br>其中所有的元素取值都是范围[1, n]的。<br>但其中某个元素出现了两次，导致另外一个元素没有出现。<br>【输出】<br>找出这两个元素：出现两次的在前，没有出现的在后。<br>以数组的形式返回。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: nums = [1,2,2,4]<br>Output: [2,3]</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.n: [2, 10000]<br>2.nums数组无序。</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：做标记"><a href="#Solution-1：做标记" class="headerlink" title="Solution-1：做标记"></a>Solution-1：做标记</h3><p>1.根据【Leetcode-442-Find All Duplicates in an Array】的启示：<br>对于一个长度为n的数组nums，其所有nums[i]都在[1, n]区间内，我们可以通过将nums[nums[i] - 1]置为负数（相反数）的方法，找出所有出现2次的元素。<br>本题目中保证了只有一个元素出现了两次，所以找到它后break即可。O(n)的time complexity。</p>
-<p>2.同时根据【Leetcode-268-Missing Number】的启示：<br>对于一个长度为n的数组nums，其所有nums[i]都在[0, n]区间内，且不重复。<br>我们可以找到那个缺失的元素x。<br>通过：将0, 1, 2, 3, 4, …, n, nums[0], nums[1], nums[2], …, nums[n - 1]这(n + 1 + n)个元素都异或起来。<br>缺失元素x就是这个异或的值。O(n)的time complexity。</p>
-<p>3.对于本题目，长度为n的nums数组，所有元素取值范围都在[1, n]。<br>某个元素a出现了两次，某个元素b出现了0次。即：[1, 2, 3, 4, …, a, a, …, b - 1, b + 1, …, n]<br>根据1，可以找到a的值。存在res[0]中。res[0] = a;<br>根据2，将nums中所有的元素和[1, n]中所有的元素异或起来的值存到res[1]中。res[1] = a ^ b;<br>然后再将res[1] = res[1] ^ res[0]即可，即找到了b的值。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/286256728/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286256728/</a>)</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/spiral-matrix-ii/" target="_blank" rel="noopener">59.Spiral Matrix II</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个正整数n。<br>【输出】<br>构造一个1 ~ n ^ 2的方阵，它的螺旋序列为1 ~ n。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: 3<br>Output:<br>[<br> [ 1, 2, 3 ],<br> [ 8, 9, 4 ],<br> [ 7, 6, 5 ]<br>]</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.n为正整数。</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Layer-by-Layer-One-by-One"><a href="#Solution-1：Layer-by-Layer-One-by-One" class="headerlink" title="Solution-1：Layer by Layer, One by One"></a>Solution-1：Layer by Layer, One by One</h3><p>1.根据<a href="https://leetcode.com/problems/spiral-matrix/" target="_blank" rel="noopener">54.Spiral Matrix</a>的启示，<br>用同样的方法，从外层到内层，每一层按照top -&gt; right -&gt; bottom -&gt; left的顺序，将当前数字写入到方阵中。</p>
+<p>2.由于此时是方阵，我们先考虑a点和b点不同的情况。<br>设左上角的点a为(r1, c1)，设右下角的点b为(r2, c2)。<br>初始值a为(0, 0)，b为(n - 1, n - 1)<br>显然，当a，b两点不同的时候，最小为2 * 2的正方形;<br>所以循环结束的条件为r1 &lt; r2, c1 &lt; c2</p>
+<p>3.遍历完每一层后，需要考虑下一层，即：<br>r1++;<br>c1++;<br>r2–;<br>c2–;</p>
+<p>4.对于每一层，把四条边（r1 &lt; r2, c1 &lt; c2）上的路径走一次即可：<br>不考虑r1 == r2，c1 == c2的情况。<br>top：i = r1; j = [c1, c2]<br>right：i = [r1 + 1, r2]; j = c2<br>bottom：i = r2; j = [c2 - 1, c1]<br>left：i = [r2 - 1, r1 + 1]; j = c1</p>
+<p>5.两种情况考虑：<br>当循环最后一次是2 * 2的正方形时，所有元素都遍历完成。<br>当循环最后一次是3 * 3的正方形时，还剩一个1 * 1的需要遍历。</p>
+<p>6.temp代表当前数字，从0开始，每次写入的时候，先自增，后赋值。</p>
+<p>时间复杂度：O(n * n)<br>空间复杂度：O(1) // 不包含返回的结果二维方阵</p>
+<p>6.Code(<a href="https://leetcode.com/submissions/detail/286500431/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286500431/</a>)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/16/2019-12-16-Leetcode-645-Set%20Mismatch/" data-id="ck4rrx7vg000wegt7gykv07q3" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/17/Leetcode-059-Spiral%20Matrix%20II/" data-id="ck4s5iosr0009ast7dang6rqw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -110,7 +113,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/57/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/56/">56</a><a class="page-number" href="/page/57/">57</a><span class="page-number current">58</span><a class="page-number" href="/page/59/">59</a><a class="page-number" href="/page/60/">60</a><span class="space">&hellip;</span><a class="page-number" href="/page/88/">88</a><a class="extend next" rel="next" href="/page/59/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/57/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/56/">56</a><a class="page-number" href="/page/57/">57</a><span class="page-number current">58</span><a class="page-number" href="/page/59/">59</a><a class="page-number" href="/page/60/">60</a><span class="space">&hellip;</span><a class="page-number" href="/page/92/">92</a><a class="extend next" rel="next" href="/page/59/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -142,23 +145,23 @@
       <ul>
         
           <li>
-            <a href="/2019/12/30/Linked%20List/2019-12-30-Leetcode-234-Palindrome%20Linked%20List/">【链表专项】234.Palindrome Linked List</a>
+            <a href="/2019/12/30/Linked%20List/Leetcode-002-Add%20Two%20Numbers/">【链表专项】019.Remove Nth Node From End of List</a>
           </li>
         
           <li>
-            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-092-Reverse%20Linked%20List%20II/">【链表专项】092.Reverse Linked List II</a>
+            <a href="/2019/12/30/Linked%20List/Leetcode-019-Remove%20Nth%20Node%20From%20End%20of%20List/">【链表专项】019.Remove Nth Node From End of List</a>
           </li>
         
           <li>
-            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-141-Linked%20List%20Cycle/">【链表专项】141.Linked List Cycle</a>
+            <a href="/2019/12/30/Linked%20List/Leetcode-082-Remove%20Duplicates%20from%20Sorted%20List%20II/">【链表专项】082.Remove Duplicates from Sorted List II</a>
           </li>
         
           <li>
-            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-083-Remove%20Duplicates%20from%20Sorted%20List/">【链表专项】083.Remove Duplicates from Sorted List</a>
+            <a href="/2019/12/30/Linked%20List/Leetcode-328-Odd%20Even%20Linked%20List/">【链表专项】328.Odd Even Linked List</a>
           </li>
         
           <li>
-            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-021-Merge%20Two%20Sorted%20Lists/">【链表专项】021.Merge Two Sorted Lists</a>
+            <a href="/2019/12/30/Tree/Leetcode-109-Convert%20Sorted%20List%20to%20Binary%20Search%20Tree/">【BST专项】109.Convert Sorted List to Binary Search Tree</a>
           </li>
         
       </ul>

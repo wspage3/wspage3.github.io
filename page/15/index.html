@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Tree/2019-12-26-Leetcode-235-Lowest Common Ancestor of a Binary Search Tree" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Tree/Leetcode-105-Construct Binary Tree from Preorder and Inorder Traversal" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/26/Tree/2019-12-26-Leetcode-235-Lowest%20Common%20Ancestor%20of%20a%20Binary%20Search%20Tree/" class="article-date">
-  <time datetime="2019-12-26T06:16:44.447Z" itemprop="datePublished">2019-12-26</time>
+    <a href="/2019/12/27/Tree/Leetcode-105-Construct%20Binary%20Tree%20from%20Preorder%20and%20Inorder%20Traversal/" class="article-date">
+  <time datetime="2019-12-27T08:21:51.680Z" itemprop="datePublished">2019-12-27</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/26/Tree/2019-12-26-Leetcode-235-Lowest%20Common%20Ancestor%20of%20a%20Binary%20Search%20Tree/">【BST专项】235.Lowest Common Ancestor of a Binary Search Tree</a>
+      <a class="article-title" href="/2019/12/27/Tree/Leetcode-105-Construct%20Binary%20Tree%20from%20Preorder%20and%20Inorder%20Traversal/">【二叉树专项】105.Construct Binary Tree from Preorder and Inorder Traversal</a>
     </h1>
   
 
@@ -83,30 +83,24 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/" target="_blank" rel="noopener">235.Lowest Common Ancestor of a Binary Search Tree</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一棵BST。<br>给定两个节点p、q。<br>【输出】<br>求出p、q的最近公共祖先LCA(Lowest Common Ancestor)。<br>LCA：对于节点p、q来说，若T都是它们的祖先，而且是距离p、q最近的一个。则T就是节点p、q的LCA。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 8<br>Output: 6<br>Explanation: The LCA of nodes 2 and 8 is 6.</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/" target="_blank" rel="noopener">105.Construct Binary Tree from Preorder and Inorder Traversal</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定两个二维数组，分别代表一棵二叉树的：<br>前序遍历序列<br>中序遍历序列<br>【输出】<br>求出这棵二叉树。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input:<br>preorder = [3,9,20,15,7]<br>inorder = [9,3,15,20,7]</p>
+<p>Output: [3,9,20,NULL,NULL,15,7]</p>
 <h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
-<li>所有节点的value不重复。</li>
-<li>p和q是两个不同的node，且都是存在的。</li>
-<li>任一节点是它自身的祖先（后代）。</li>
-<li>根据上面第3点，若p已经是q的祖先了，则p是二者的LCA。</li>
+<li>目标数组为空时，树为NULL。</li>
+<li>目标数组长度为1时，树为单节点。</li>
 </ol>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Recursive-Solution"><a href="#Solution-1：Recursive-Solution" class="headerlink" title="Solution-1：Recursive Solution"></a>Solution-1：Recursive Solution</h3><p>1.思路：根据BST的性质：对于任意node来说，左子树中的所有节点都小于node的值；右子树中的所有节点都大于node的值；</p>
-<p>2.具体方法：<br>从root节点开始，若p和q的val均小于root的val，则结果一定在root的左子树中<br>若p和q的val均大于root的val，则结果一定在root的右子树中<br>若一个大于root的val，一个小于，则pq的LCA一定为root</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Recursive-Solution-Postorder"><a href="#Solution-1：Recursive-Solution-Postorder" class="headerlink" title="Solution-1：Recursive Solution(Postorder)"></a>Solution-1：Recursive Solution(Postorder)</h3><p>1.根据以下特性：<br>preorder序列的第一个数字一定是：root的值<br>inorder序列：root的值左边都是root的左子树，右边都是root的右子树。</p>
+<p>2.对于任意任意两个序列：build(preStart, preEnd, inStart, inEnd)<br>a.根节点root一定是preorder[preStart]<br>b.在inorder中找到root的位置，记为pos。则左子树的节点数目：pos - inStart<br>c.递归构建左子树：build(preStart + 1, preStart + (pos - inStart), inStart, pos - 1)<br>d.递归构建右子树：build(preStart + (pos - inStart) + 1, preEnd, pos + 1, inEnd)<br>e.将c.d两步的返回值赋值为root的左子树和右子树，return给上一层。</p>
 <p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/276781092/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/276781092/</a>)</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function">TreeNode* <span class="title">lowestCommonAncestor</span><span class="params">(TreeNode* root, TreeNode* p, TreeNode* q)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (root-&gt;val &gt; p-&gt;val &amp;&amp; root-&gt;val &gt; q-&gt;val) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> lowestCommonAncestor(root-&gt;left, p, q);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (root-&gt;val &lt; p-&gt;val &amp;&amp; root-&gt;val &lt; q-&gt;val) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> lowestCommonAncestor(root-&gt;right, p, q);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> root;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/278085336/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/278085336/</a>)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function">TreeNode* <span class="title">buildTree</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; preorder, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; inorder)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> build(preorder, inorder, <span class="number">0</span>, preorder.<span class="built_in">size</span>() - <span class="number">1</span>, <span class="number">0</span>, inorder.<span class="built_in">size</span>() - <span class="number">1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="function">TreeNode* <span class="title">build</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; preorder, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; inorder, <span class="keyword">int</span> preStart, <span class="keyword">int</span> preEnd, <span class="keyword">int</span> inStart, <span class="keyword">int</span> inEnd)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (preStart &gt; preEnd) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="literal">NULL</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        TreeNode* root = <span class="keyword">new</span> TreeNode(preorder[preStart]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> pos;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (pos = inStart; pos &lt;= inEnd; pos++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (root-&gt;val == inorder[pos]) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">break</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        root-&gt;left = build(preorder, inorder, preStart + <span class="number">1</span>, pos - inStart + preStart, inStart, pos - <span class="number">1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        root-&gt;right = build(preorder, inorder, pos - inStart + preStart + <span class="number">1</span>, preEnd, pos + <span class="number">1</span>, inEnd);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> root;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
 
-<h3 id="Solution-2：Iterative-Solution"><a href="#Solution-2：Iterative-Solution" class="headerlink" title="Solution-2：Iterative Solution"></a>Solution-2：Iterative Solution</h3><p>1.减少递归栈的space complexity</p>
-<p>2.具体方法：<br>每次修改root节点，将其赋值为其左儿子或者其右儿子。<br>缺点：修改了原始数据，使用前需确认评估。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/276783571/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/276783571/</a>)</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function">TreeNode* <span class="title">lowestCommonAncestor</span><span class="params">(TreeNode* root, TreeNode* p, TreeNode* q)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span> ((root-&gt;val - p-&gt;val) * (root-&gt;val - q-&gt;val) &gt; <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">            root = root-&gt;val &gt; p-&gt;val ? root-&gt;left : root-&gt;right;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> root;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/26/Tree/2019-12-26-Leetcode-235-Lowest%20Common%20Ancestor%20of%20a%20Binary%20Search%20Tree/" data-id="ck4rrx7wg0029egt72x340pm9" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/27/Tree/Leetcode-105-Construct%20Binary%20Tree%20from%20Preorder%20and%20Inorder%20Traversal/" data-id="ck4s5iou7001wast7cl08eqj3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -120,7 +114,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/14/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/88/">88</a><a class="extend next" rel="next" href="/page/16/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/14/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/92/">92</a><a class="extend next" rel="next" href="/page/16/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -152,23 +146,23 @@
       <ul>
         
           <li>
-            <a href="/2019/12/30/Linked%20List/2019-12-30-Leetcode-234-Palindrome%20Linked%20List/">【链表专项】234.Palindrome Linked List</a>
+            <a href="/2019/12/30/Linked%20List/Leetcode-002-Add%20Two%20Numbers/">【链表专项】019.Remove Nth Node From End of List</a>
           </li>
         
           <li>
-            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-092-Reverse%20Linked%20List%20II/">【链表专项】092.Reverse Linked List II</a>
+            <a href="/2019/12/30/Linked%20List/Leetcode-019-Remove%20Nth%20Node%20From%20End%20of%20List/">【链表专项】019.Remove Nth Node From End of List</a>
           </li>
         
           <li>
-            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-141-Linked%20List%20Cycle/">【链表专项】141.Linked List Cycle</a>
+            <a href="/2019/12/30/Linked%20List/Leetcode-082-Remove%20Duplicates%20from%20Sorted%20List%20II/">【链表专项】082.Remove Duplicates from Sorted List II</a>
           </li>
         
           <li>
-            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-083-Remove%20Duplicates%20from%20Sorted%20List/">【链表专项】083.Remove Duplicates from Sorted List</a>
+            <a href="/2019/12/30/Linked%20List/Leetcode-328-Odd%20Even%20Linked%20List/">【链表专项】328.Odd Even Linked List</a>
           </li>
         
           <li>
-            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-021-Merge%20Two%20Sorted%20Lists/">【链表专项】021.Merge Two Sorted Lists</a>
+            <a href="/2019/12/30/Tree/Leetcode-109-Convert%20Sorted%20List%20to%20Binary%20Search%20Tree/">【BST专项】109.Convert Sorted List to Binary Search Tree</a>
           </li>
         
       </ul>

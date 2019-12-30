@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-2019-12-15-Leetcode-268-Missing Number" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Leetcode-645-Set Mismatch" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/15/2019-12-15-Leetcode-268-Missing%20Number/" class="article-date">
-  <time datetime="2019-12-15T10:27:54.308Z" itemprop="datePublished">2019-12-15</time>
+    <a href="/2019/12/16/Leetcode-645-Set%20Mismatch/" class="article-date">
+  <time datetime="2019-12-16T02:20:17.020Z" itemprop="datePublished">2019-12-16</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/15/2019-12-15-Leetcode-268-Missing%20Number/">268.Missing Number</a>
+      <a class="article-title" href="/2019/12/16/Leetcode-645-Set%20Mismatch/">645.Set Mismatch</a>
     </h1>
   
 
@@ -83,24 +83,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/missing-number/" target="_blank" rel="noopener">268.Missing Number</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个长度为n的整数数组。<br>其中所有的元素取值都是区间[0, n]的，且没有重复的元素。<br>显然，[0, n]一共有(n + 1)个元素，而nums中只有n个，找出这个缺失的元素。<br>【输出】<br>找出这个缺失的数字。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [9,6,4,2,3,5,7,0,1]<br>Output: 8</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.空间复杂度要求为O(1)。<br>2.时间复杂度要求O(n)。</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Accumulate"><a href="#Solution-1：Accumulate" class="headerlink" title="Solution-1：Accumulate"></a>Solution-1：Accumulate</h3><p>1.[0, n]中所有数字的和为[1, n] = n * (n + 1) / 2</p>
-<p>2.我们遍历nums中的数字，累加一个和。<br>然后用上面的公式计算出来的和减去nums中累加的和，答案就是缺失的元素。</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/set-mismatch/" target="_blank" rel="noopener">645.Set Mismatch</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个长度为n的整数数组。<br>其中所有的元素取值都是范围[1, n]的。<br>但其中某个元素出现了两次，导致另外一个元素没有出现。<br>【输出】<br>找出这两个元素：出现两次的在前，没有出现的在后。<br>以数组的形式返回。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: nums = [1,2,2,4]<br>Output: [2,3]</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.n: [2, 10000]<br>2.nums数组无序。</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：做标记"><a href="#Solution-1：做标记" class="headerlink" title="Solution-1：做标记"></a>Solution-1：做标记</h3><p>1.根据【Leetcode-442-Find All Duplicates in an Array】的启示：<br>对于一个长度为n的数组nums，其所有nums[i]都在[1, n]区间内，我们可以通过将nums[nums[i] - 1]置为负数（相反数）的方法，找出所有出现2次的元素。<br>本题目中保证了只有一个元素出现了两次，所以找到它后break即可。O(n)的time complexity。</p>
+<p>2.同时根据【Leetcode-268-Missing Number】的启示：<br>对于一个长度为n的数组nums，其所有nums[i]都在[0, n]区间内，且不重复。<br>我们可以找到那个缺失的元素x。<br>通过：将0, 1, 2, 3, 4, …, n, nums[0], nums[1], nums[2], …, nums[n - 1]这(n + 1 + n)个元素都异或起来。<br>缺失元素x就是这个异或的值。O(n)的time complexity。</p>
+<p>3.对于本题目，长度为n的nums数组，所有元素取值范围都在[1, n]。<br>某个元素a出现了两次，某个元素b出现了0次。即：[1, 2, 3, 4, …, a, a, …, b - 1, b + 1, …, n]<br>根据1，可以找到a的值。存在res[0]中。res[0] = a;<br>根据2，将nums中所有的元素和[1, n]中所有的元素异或起来的值存到res[1]中。res[1] = a ^ b;<br>然后再将res[1] = res[1] ^ res[0]即可，即找到了b的值。</p>
 <p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/285827066/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285827066/</a>)<br>Code(<a href="https://leetcode.com/submissions/detail/285849852/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285849852/</a>)</p>
-<p>3.缺点：accumulate可以会导致整数溢出，存在局限。</p>
-<h3 id="Solution-2：XOR"><a href="#Solution-2：XOR" class="headerlink" title="Solution-2：XOR"></a>Solution-2：XOR</h3><p>1.任意一个数 异或 它自己 == 0<br>  任意一个数 异或 0     == 它自己<br>  异或满足交换律，结合率</p>
-<p>2.nums中有n个数字，且都在范围[0, n]内，且都不重复。<br>我们把nums中所有的数字都异或起来。记为a。<br>然后把[0, n]所有的数字都异或起来。记为b。<br>此时所有参与异或的数字一共有 n + (n + 1)个。<br>假设missing number为x。则上述n + (n + 1)个数字只有一个x，其它数字都是出现了两次。<br>则 a ^ b == x。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/285850682/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285850682/</a>)</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/286256728/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286256728/</a>)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/15/2019-12-15-Leetcode-268-Missing%20Number/" data-id="ck4rrx7ve000regt770lp1xfx" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/16/Leetcode-645-Set%20Mismatch/" data-id="ck4s5iotf0014ast7azrb4p62" class="article-share-link">Share</a>
       
       
     </footer>
@@ -114,7 +110,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/61/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/60/">60</a><a class="page-number" href="/page/61/">61</a><span class="page-number current">62</span><a class="page-number" href="/page/63/">63</a><a class="page-number" href="/page/64/">64</a><span class="space">&hellip;</span><a class="page-number" href="/page/88/">88</a><a class="extend next" rel="next" href="/page/63/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/61/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/60/">60</a><a class="page-number" href="/page/61/">61</a><span class="page-number current">62</span><a class="page-number" href="/page/63/">63</a><a class="page-number" href="/page/64/">64</a><span class="space">&hellip;</span><a class="page-number" href="/page/92/">92</a><a class="extend next" rel="next" href="/page/63/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -146,23 +142,23 @@
       <ul>
         
           <li>
-            <a href="/2019/12/30/Linked%20List/2019-12-30-Leetcode-234-Palindrome%20Linked%20List/">【链表专项】234.Palindrome Linked List</a>
+            <a href="/2019/12/30/Linked%20List/Leetcode-002-Add%20Two%20Numbers/">【链表专项】019.Remove Nth Node From End of List</a>
           </li>
         
           <li>
-            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-092-Reverse%20Linked%20List%20II/">【链表专项】092.Reverse Linked List II</a>
+            <a href="/2019/12/30/Linked%20List/Leetcode-019-Remove%20Nth%20Node%20From%20End%20of%20List/">【链表专项】019.Remove Nth Node From End of List</a>
           </li>
         
           <li>
-            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-141-Linked%20List%20Cycle/">【链表专项】141.Linked List Cycle</a>
+            <a href="/2019/12/30/Linked%20List/Leetcode-082-Remove%20Duplicates%20from%20Sorted%20List%20II/">【链表专项】082.Remove Duplicates from Sorted List II</a>
           </li>
         
           <li>
-            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-083-Remove%20Duplicates%20from%20Sorted%20List/">【链表专项】083.Remove Duplicates from Sorted List</a>
+            <a href="/2019/12/30/Linked%20List/Leetcode-328-Odd%20Even%20Linked%20List/">【链表专项】328.Odd Even Linked List</a>
           </li>
         
           <li>
-            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-021-Merge%20Two%20Sorted%20Lists/">【链表专项】021.Merge Two Sorted Lists</a>
+            <a href="/2019/12/30/Tree/Leetcode-109-Convert%20Sorted%20List%20to%20Binary%20Search%20Tree/">【BST专项】109.Convert Sorted List to Binary Search Tree</a>
           </li>
         
       </ul>

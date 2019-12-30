@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-2019-12-03-Leetcode53-Maximum Subarray" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Leetcode-739-Daily Temperatures" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/03/2019-12-03-Leetcode53-Maximum%20Subarray/" class="article-date">
-  <time datetime="2019-12-03T10:15:35.010Z" itemprop="datePublished">2019-12-03</time>
+    <a href="/2019/12/05/Leetcode-739-Daily%20Temperatures/" class="article-date">
+  <time datetime="2019-12-05T02:58:12.276Z" itemprop="datePublished">2019-12-05</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/03/2019-12-03-Leetcode53-Maximum%20Subarray/">Leetcode-53 Maximum Subarray</a>
+      <a class="article-title" href="/2019/12/05/Leetcode-739-Daily%20Temperatures/">Leetcode739-Daily Temperatures</a>
     </h1>
   
 
@@ -83,25 +83,28 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/maximum-subarray/" target="_blank" rel="noopener">Leetcode-53 Maximum Subarray</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组nums。<br>求出nums的连续子数组，这个子数组是nums所有子数组中和最大的那个。返回这个sum。<br>子数组长度至少为1。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [-2,1,-3,4,-1,2,1,-5,4],<br>Output: 6<br>Explanation: [4,-1,2,1] has the largest sum = 6.</p>
-<h3 id="3-Note"><a href="#3-Note" class="headerlink" title="3.Note"></a>3.Note</h3><p>a.多种方法求解，使用一下Divide and Conquer方法<br>b.某种方法的时间复杂度为O(n)</p>
-<h3 id="4-Corner-Case"><a href="#4-Corner-Case" class="headerlink" title="4.Corner Case"></a>4.Corner Case</h3><p>需要对n是否为0判断</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>1.直观的想法就是遍历n次，每次选定一个nums[i]；i的范围[0, n - 1]。<br>然后对于该nums[i]，考察以它为首的所有子数组的和，并更新这个最大值；j的范围[i, n - 1]。<br>这样的话，可以将nums所有可能的子数组都遍历一次，不会遗漏。<br>时间复杂度：O(n ^ 2)<br>空间复杂度：O(1)</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/283334388/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283334388/</a>)</p>
-<h3 id="Solution-2：Divide-and-Conquer"><a href="#Solution-2：Divide-and-Conquer" class="headerlink" title="Solution-2：Divide and Conquer"></a>Solution-2：Divide and Conquer</h3><p>1.现有数组[a, b, c, d, e]，把它分为左右两部分：[a, b, c]和[d, e]。<br>若已经知道左右两部分的答案分别为A和B，能否求出本题的答案C？<br>考虑以下三种情况：<br>a.若答案C对应的子数组就在[a, b, c]范围内，则在[a, b, c, d, e]中的答案等于在[a, b, c]中的答案。如：[1,2,3,-1,-1]<br>b.若答案C对应的子数组就在[d, e]范围内，则在[a, b, c, d, e]中的答案等于在[d, e]中的答案。如：[-2,-3,-5,7,7]<br>c.若答案C对应的子数组在穿过了左右两部分，如[1,2,3,4,5]，则我们可以知道：这个子数组中必然包含[c,d]两个元素。<br>也就是说，只要以c结尾的连续子数组中取最大值left，以d开头的连续子数组中取最大值right；left + right就是这种情况下的答案。<br>可以发现，上述三种情况覆盖了所有可能出现的情况，只要我们找出这三个值的最大值，也就是最后要求的答案了。</p>
-<p>2.对于一个区间[low, high]，求这个范围内的答案，只要把上面三种情况下的最大值找出来，就是答案。<br>如果区间中有1个元素[a]，那么答案就是a本身；<br>记为f(a) = a；<br>如果区间中有2个元素[a, b]，那么答案就是max(a, b, (a + 0) + (b + 0))；(a+0)代表以a为结尾的子数组的最大值；(b+0)同理。<br>记为f(a, b) = max(a, b, (a + 0) + (b + 0))；<br>如果区间中有3个元素[a, b, c]，那么答案就是max(f(a, b), c, max(b, a + b) + c)；max(b, a + b)代表以b为结尾的子数组的最大值，c同理。<br>记为f(a, b, c) = max(f(a, b), c, max(b, a + b) + c)；max(b, a + b)<br>所以：对于求区间[low, high]上的答案，只要分别求得左子区间[low, mid]，右子区间[mid + 1, high]，左右子区间[i, j]。<br>其中，左子区间[low, mid]，右子区间[mid + 1, high]可以递归求得，当low == high时，到达递归的结束条件，返回nums[low]即可。<br>左右子区间的i，可以由mid位置，依次递减到low，每次叠加nums中的元素，找出一个最大和。<br>左右子区间的j，可以由mid + 1位置，依次递增到high，每次叠加nums中的元素，找出一个最大和。</p>
-<p>时间复杂度：O(n ^ logN)<br>空间复杂度：O(n)，递归开销<br>3.Code(<a href="https://leetcode.com/submissions/detail/283548839/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283548839/</a>)</p>
-<h3 id="Solution-3：Dynamic-Programming"><a href="#Solution-3：Dynamic-Programming" class="headerlink" title="Solution-3：Dynamic Programming"></a>Solution-3：Dynamic Programming</h3><p>1.顺着上面的想法继续往下思考。<br>考虑新增两个数组res和start：<br>vector<int> res(n);   //res[i]表示[i, n - 1]内最大连续子数组的和。则res[0]就是我们要找的答案。显然，res[n - 1] = nums[n - 1]<br>vector<int> start(n); //start[i]表示[i, n - 1]内最大连续子数组的和，且该子数组以i为开头。同理，start[n - 1] = nums[n - 1]<br>在元素n - 1考虑完成后，我们考虑它前面的n - 2：<br>start[n - 2] = max(nums[n - 2], nums[n - 2] + start[n - 1])<br>res[n - 2] = max(start[n - 2], res[n - 1])，其中前者代表：当前元素存在于答案中，后者代表：当前元素不存在于答案中<br>依次向前遍历，经过一次循环，即可找到答案，也就是res[0]。<br>时间复杂度：O(n)<br>空间复杂度：O(n * 2)</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/283366882/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283366882/</a>)</p>
-<h3 id="Solution-4：Further-Optimization"><a href="#Solution-4：Further-Optimization" class="headerlink" title="Solution-4：Further Optimization"></a>Solution-4：Further Optimization</h3><p>1.能否进一步优化空间复杂度呢？<br>当我们考虑第i个位置的时候，只需要得到nums[i]，start[i + 1]，res[i + 1]即可求出。<br>也就是说，第i个位置的答案只与它后边的一个元素有关，和其他的都无关。所以可以用两个int变量res和start分别替换上述的两个int数组。<br>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/283367123/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283367123/</a>)</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/daily-temperatures/" target="_blank" rel="noopener">Leetcode739-Daily Temperatures</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组T；T[i]代表第i天的气温；<br>求出一个长度为n的整数数组res；res[i]代表第i天需要等待的天数，直到后面某一天气温比当天高/</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p> input = [73, 74, 75, 71, 69, 72, 76, 73]<br>output = [1, 1, 4, 2, 1, 1, 0, 0]</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n：[1, 30000]<br>T[i]：[30, 100]</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><p>对于当前位置的元素T[i]，找出它后面一个比他大的元素，使得他们俩的距离最小。</p>
+<h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>1.i从[0, n - 1]进行遍历<br>对于T[i]来说，j考虑[i + 1, n - 1]内所有的数，如果发现第一个比T[i]大的数字，则：res[i] = (j - i)</p>
+<p>时间复杂度：O(n ^ 2)<br>空间复杂度：O(1)：不包含函数返回的数组res<br>结果发现：此方法TLE，说明需要进一步优化。</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/283812278/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283812278/</a>)</p>
+<h3 id="Solution-2：Monotonous-Stack"><a href="#Solution-2：Monotonous-Stack" class="headerlink" title="Solution-2：Monotonous Stack"></a>Solution-2：Monotonous Stack</h3><p>1.认识单调栈<br><a href="https://www.cnblogs.com/grandyang/p/8887985.html" target="_blank" rel="noopener">https://www.cnblogs.com/grandyang/p/8887985.html</a><br>单调栈的一大优势就是线性的时间复杂度，所有的元素只会进栈一次，而且一旦出栈后就不会再进来了。<br>单调递增栈可以找到左边第一个比当前数字小的元素。（本题做法）<br>单调递减栈可以找到右边第一个比当前数字大的元素。</p>
+<p>2.[73, 74, 71, 60, 50, 55]<br>先将73压入栈</p>
+<p>对于74，此时栈非空，则考察栈顶元素73。<br>此时74 &gt; 73，说明：对于73来说，找到了第一个比自己大的元素。<br>此时73的答案已经找到，将其从栈中拿出。<br>将74压入栈。</p>
+<p>对于71，此时栈非空，则考察栈顶元素74。<br>此时71 &lt; 74，说明：对于71来说，还是没有找到第一个比自己大的元素。<br>将71入栈。</p>
+<p>对于60，50也是如此。此时栈由顶到下为：50，60，71，74</p>
+<p>对于55来说，此时栈顶是50<br>此时55 &gt; 50，说明：对于50来说，找到了答案。<br>将其出栈。继续考察新的栈顶元素60，不满足了。<br>将55入栈。<br>此时栈由顶到下为： 55，60，71，74。而此时已经遍历完所有的数字了，说明这些元素找不到比自己大的元素了。</p>
+<p>3.可以发现，栈中数据在任何时刻都是有序的，且：最上面的数字最小，最下面的数字最大。<br>考虑遍历到位置nums[i]的时候，此时栈中元素自顶向下为:[a, b, c, d]。<br>若nums[i]不大于a，说明：nums[i]的出现，不会使得栈中任意元素找到答案。此时将nums[i]压入栈即可。<br>若nums[i]大于d，说明：nums[i]的出现，使得栈中任意元素都找到了答案。此时从栈顶依次拿出一个元素，直到栈空了。然后nums[i]入栈。<br>若nums[i]介于这两者中间的话，则“尽自己最大的能力，使得栈中的元素找到答案，然后将其出栈”<br>经过这样遍历的顺序：使得栈中任意时刻的数都是有序的，也使得了每个元素找到的答案都是距离自己最小的那个，也就是题目中要求的这样。</p>
+<p>时间复杂度：O(n) 因为所有元素只会进入栈一次，并且出栈后再也不会进栈了。<br>空间复杂度：O(n)</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/283824761/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283824761/</a>)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/03/2019-12-03-Leetcode53-Maximum%20Subarray/" data-id="ck4rrx7ut0001egt74x2g2vzs" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/05/Leetcode-739-Daily%20Temperatures/" data-id="ck4s5ioth0017ast75fl36u0m" class="article-share-link">Share</a>
       
       
     </footer>
@@ -115,7 +118,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/85/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/84/">84</a><a class="page-number" href="/page/85/">85</a><span class="page-number current">86</span><a class="page-number" href="/page/87/">87</a><a class="page-number" href="/page/88/">88</a><a class="extend next" rel="next" href="/page/87/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/85/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/84/">84</a><a class="page-number" href="/page/85/">85</a><span class="page-number current">86</span><a class="page-number" href="/page/87/">87</a><a class="page-number" href="/page/88/">88</a><span class="space">&hellip;</span><a class="page-number" href="/page/92/">92</a><a class="extend next" rel="next" href="/page/87/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -147,23 +150,23 @@
       <ul>
         
           <li>
-            <a href="/2019/12/30/Linked%20List/2019-12-30-Leetcode-234-Palindrome%20Linked%20List/">【链表专项】234.Palindrome Linked List</a>
+            <a href="/2019/12/30/Linked%20List/Leetcode-002-Add%20Two%20Numbers/">【链表专项】019.Remove Nth Node From End of List</a>
           </li>
         
           <li>
-            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-092-Reverse%20Linked%20List%20II/">【链表专项】092.Reverse Linked List II</a>
+            <a href="/2019/12/30/Linked%20List/Leetcode-019-Remove%20Nth%20Node%20From%20End%20of%20List/">【链表专项】019.Remove Nth Node From End of List</a>
           </li>
         
           <li>
-            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-141-Linked%20List%20Cycle/">【链表专项】141.Linked List Cycle</a>
+            <a href="/2019/12/30/Linked%20List/Leetcode-082-Remove%20Duplicates%20from%20Sorted%20List%20II/">【链表专项】082.Remove Duplicates from Sorted List II</a>
           </li>
         
           <li>
-            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-083-Remove%20Duplicates%20from%20Sorted%20List/">【链表专项】083.Remove Duplicates from Sorted List</a>
+            <a href="/2019/12/30/Linked%20List/Leetcode-328-Odd%20Even%20Linked%20List/">【链表专项】328.Odd Even Linked List</a>
           </li>
         
           <li>
-            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-021-Merge%20Two%20Sorted%20Lists/">【链表专项】021.Merge Two Sorted Lists</a>
+            <a href="/2019/12/30/Tree/Leetcode-109-Convert%20Sorted%20List%20to%20Binary%20Search%20Tree/">【BST专项】109.Convert Sorted List to Binary Search Tree</a>
           </li>
         
       </ul>

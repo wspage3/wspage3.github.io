@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>885.Spiral Matrix III | 追逐青春的梦想，怀着自信的心，永不放弃！</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一、题意题目链接: 885.Spiral Matrix III 1.Description【输入】给定正整数R, C。分别代表二维矩阵的行数和列数。给定一个起始坐标(r0, c0)。【输出】从(r0, c0)出发，进行顺时针螺旋运动，直到其经过二维矩阵的所有元素。返回遍历的顺序。 2.ExampleInput: R &#x3D; 5, C &#x3D; 6, r0 &#x3D; 1, c0 &#x3D; 4Output: [[1,4],">
+<meta property="og:type" content="article">
+<meta property="og:title" content="885.Spiral Matrix III">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;17&#x2F;Leetcode-885-Spiral%20Matrix%20III&#x2F;index.html">
+<meta property="og:site_name" content="追逐青春的梦想，怀着自信的心，永不放弃！">
+<meta property="og:description" content="一、题意题目链接: 885.Spiral Matrix III 1.Description【输入】给定正整数R, C。分别代表二维矩阵的行数和列数。给定一个起始坐标(r0, c0)。【输出】从(r0, c0)出发，进行顺时针螺旋运动，直到其经过二维矩阵的所有元素。返回遍历的顺序。 2.ExampleInput: R &#x3D; 5, C &#x3D; 6, r0 &#x3D; 1, c0 &#x3D; 4Output: [[1,4],">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-12-17T06:25:10.819Z">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="追逐青春的梦想，怀着自信的心，永不放弃！" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">追逐青春的梦想，怀着自信的心，永不放弃！</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Leetcode-885-Spiral Matrix III" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/17/Leetcode-885-Spiral%20Matrix%20III/" class="article-date">
+  <time datetime="2019-12-17T06:16:25.591Z" itemprop="datePublished">2019-12-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      885.Spiral Matrix III
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/spiral-matrix-iii/" target="_blank" rel="noopener">885.Spiral Matrix III</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定正整数R, C。分别代表二维矩阵的行数和列数。<br>给定一个起始坐标(r0, c0)。<br>【输出】<br>从(r0, c0)出发，进行顺时针螺旋运动，直到其经过二维矩阵的所有元素。<br>返回遍历的顺序。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: R = 5, C = 6, r0 = 1, c0 = 4<br>Output: [[1,4],[1,5],[2,5],[2,4],[2,3],[1,3],[0,3],[0,4],[0,5],[3,5],[3,4],[3,3],[3,2],[2,2],[1,2],[0,2],[4,5],[4,4],[4,3],[4,2],[4,1],[3,1],[2,1],[1,1],[0,1],[4,0],[3,0],[2,0],[1,0],[0,0]]</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.1 &lt;= R &lt;= 100<br>2.1 &lt;= C &lt;= 100<br>3.0 &lt;= r0 &lt; R<br>4.0 &lt;= c0 &lt; C</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Layer-by-Layer-One-by-One"><a href="#Solution-1：Layer-by-Layer-One-by-One" class="headerlink" title="Solution-1：Layer by Layer, One by One"></a>Solution-1：Layer by Layer, One by One</h3><p>1.根据<br><a href="https://leetcode.com/problems/spiral-matrix/" target="_blank" rel="noopener">54.Spiral Matrix</a><br><a href="https://leetcode.com/problems/spiral-matrix-ii/" target="_blank" rel="noopener">59.Spiral Matrix II</a>的启示，<br>用同样的方法，从内层到外层，每一层按照right -&gt; bottom -&gt; left -&gt; top的顺序，将当前数字写入到方阵中。并将当前坐标依次存入到ans数组中。</p>
+<p>2.当前数字从1开始，直到R * C结束。</p>
+<p>3.遍历完每一层后，需要考虑下一层，即：<br>r1–;<br>c1–;<br>r2++;<br>c2++;</p>
+<p>4.对于每一层，把四条边（r1 &lt; r2, c1 &lt; c2）上的路径走一次即可：<br>对于坐标在二维矩阵范围内的，将cnt++，并记录此时的坐标。<br>如果该坐标超出了有效index取值，则continue即可。</p>
+<p>时间复杂度：O(R * C)<br>空间复杂度：O(1) // 不包含返回的结果二维方阵</p>
+<p>6.Code(<a href="https://leetcode.com/submissions/detail/286522796/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286522796/</a>)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/17/Leetcode-885-Spiral%20Matrix%20III/" data-id="ck4s5ioti0018ast74wrq97ov" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/12/17/Leetcode-611-Valid%20Triangle%20Number/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          611.Valid Triangle Number
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/12/17/Leetcode-059-Spiral%20Matrix%20II/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">59.Spiral Matrix II</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/12/30/Linked%20List/Leetcode-002-Add%20Two%20Numbers/">【链表专项】019.Remove Nth Node From End of List</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/30/Linked%20List/Leetcode-019-Remove%20Nth%20Node%20From%20End%20of%20List/">【链表专项】019.Remove Nth Node From End of List</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/30/Linked%20List/Leetcode-082-Remove%20Duplicates%20from%20Sorted%20List%20II/">【链表专项】082.Remove Duplicates from Sorted List II</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/30/Linked%20List/Leetcode-328-Odd%20Even%20Linked%20List/">【链表专项】328.Odd Even Linked List</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/30/Tree/Leetcode-109-Convert%20Sorted%20List%20to%20Binary%20Search%20Tree/">【BST专项】109.Convert Sorted List to Binary Search Tree</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 wspage3<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-2019-12-04-Leetcode300-Longest Increasing Subsequence" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Leetcode-121-Best Time to Buy ans Sell Stock" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/04/2019-12-04-Leetcode300-Longest%20Increasing%20Subsequence/" class="article-date">
-  <time datetime="2019-12-04T07:18:13.134Z" itemprop="datePublished">2019-12-04</time>
+    <a href="/2019/12/07/Leetcode-121-Best%20Time%20to%20Buy%20ans%20Sell%20Stock/" class="article-date">
+  <time datetime="2019-12-07T01:09:15.739Z" itemprop="datePublished">2019-12-07</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/04/2019-12-04-Leetcode300-Longest%20Increasing%20Subsequence/">Leetcode300-Longest Increasing Subsequence</a>
+      <a class="article-title" href="/2019/12/07/Leetcode-121-Best%20Time%20to%20Buy%20ans%20Sell%20Stock/">Leetcode121-Best Time to Buy and Sell Stock</a>
     </h1>
   
 
@@ -83,27 +83,23 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/longest-increasing-subsequence/" target="_blank" rel="noopener">Leetcode300-Longest Increasing Subsequence</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组nums；数组无序；<br>求出一个最大序列的长度。该序列内所有元素是递增的。序列不同于子数组，不要求连续。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [10,9,2,5,3,7,101,18]<br>Output: 4<br>Explanation: The longest increasing subsequence is [2,3,7,101], therefore the length is 4. </p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>若n为0/1，直接返回0/1即可。</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><p>【LIS】相关的题目。<br>序列不要求连续，所以相较于【最长递增子数组】来说，范围更大。</p>
-<h3 id="Solution-1：Dynamic-Programming"><a href="#Solution-1：Dynamic-Programming" class="headerlink" title="Solution-1：Dynamic Programming"></a>Solution-1：Dynamic Programming</h3><p>1.考虑以下数组[a, b, c, d, e]<br>设res[i]表示以nums[i]结尾的递增子序列的最大长度。那题目要求的答案便是：res数组的最大值了。<br>显然，res[0] = 1；res[1]有两种情况：<br>若nums[1] &lt;= nums[0]，则说明以nums[1]结尾的递增子序列只有一种：就是nums[1]本身。<br>若nums[1] &gt; nums[0]，则说明以nums[1]可以和nums[0]连接起来，形成一个更长的子序列。<br>……<br>考虑nums[i]：<br>若nums[i]都不大于nums[0, i - 1]的任一数字，那res[i] = 1;<br>若能在[0, i - 1]区间找到k个比nums[i]小的值（k &gt;= 1），则找出这k次“拼接”后的最大值。</p>
-<p>2.对于每一个res[i]，<br>“拼接情况”：需要遍历[0, i - 1]的元素，进行判断和统计最大值maxLinkI。<br>“无法拼接情况”：1<br>res[i] = max(1, maxLinkI);</p>
-<p>时间复杂度：O(n ^ 2)<br>空间复杂度：O(n)</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/283644219/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283644219/</a>)</p>
-<h3 id="Solution-2：Dynamic-Programming-Search"><a href="#Solution-2：Dynamic-Programming-Search" class="headerlink" title="Solution-2：Dynamic Programming + Search"></a>Solution-2：Dynamic Programming + Search</h3><p>1.现象1：若同时有2个子序列(1, 5)和(1, 10)，然后取一个随机数x，能构成长度为3的递增子序列吗？<br>答案肯定是可以的，例如：<br>x &lt; 1 :都ok<br>x &gt; 10 :都ok<br>x == 2/3/4 :都不行<br>x == 6/7/8/9 :(1, 5)来说ok，(1, 10)来说不行<br>看起来对于(1, 5)和(1, 10)来说，能扩展成长度为3的递增子序列的“成功率”是不相等的，且(1, 5)的“扩展性”更好。</p>
-<p>2.令tail[i]表示：长度为i的满足条件的若干个序列中，序列末尾元素的最小值。<br>tail[1]初始为nums[0]；此时满足条件的子序列的最大长度就是1；<br>对于nums[i]，此时满足条件的子序列的最大长度是maxLen。<br>如果nums[i] &gt; tail[maxLen]的话，说明可以在当前maxLen的基础上，添加nums[i]形成一个maxLen + 1的子序列。<br>如果nums[i] &lt; tail[1]的话，说明长度为1的子序列的最小值就是nums[i]，此时更新tail[1]。<br>如果 tail[1] == nums[i] || nums[i] == tail[maxLen]的话，不做任何操作<br>如果 tail[1] &lt; nums[i] &lt; tail[maxLen]的话，说明可以更新某个tail[j]的值，来使得长度为j的子序列的“扩展性”更好。<br>所以每次我们在[1, maxLen]上从后往前查找，如果发现nums[i]大于了tail[j]，就使得：tail[j + 1] = nums[i]</p>
-<p>时间复杂度：O(n ^ 2)<br>空间复杂度：O(n)</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/283675471/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283675471/</a>)</p>
-<h3 id="Solution-2：Dynamic-Programming-Binary-Search"><a href="#Solution-2：Dynamic-Programming-Binary-Search" class="headerlink" title="Solution-2：Dynamic Programming + Binary Search"></a>Solution-2：Dynamic Programming + Binary Search</h3><p>1.不难发现，tail数组是递增的，因此，我们可以用二分搜索进一步降低时间复杂度。</p>
-<p>时间复杂度：O(n ^ logn)<br>空间复杂度：O(n)</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/283685139/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283685139/</a>)</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/" target="_blank" rel="noopener">Leetcode121-Best Time to Buy and Sell Stock</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组prices；prices[i]代表第i天股票的价格。<br>如果你只能交易一次，即：买一次，卖一次。求出你最多能赚多少钱。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [7,1,5,3,6,4]<br>Output: 5<br>Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.<br>Not 7-1 = 6, as selling price needs to be larger than buying price.</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n：当n为0/1的时候，直接返回0；<br>赚不到钱则返回0；</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>由于要想赚钱，得低价买入，高价卖出；<br>买入卖出不能在同一天，至少买入的第二天才能卖出；<br>对于任意i，本质上就是求出[i + 1, n - 1]范围内最大的数字，然后减去prices[i]，就是第i天能获取到的利润。<br>对于[0, n - 1]上的所有i，找出一个最大值即可。</p>
+<h3 id="Solution-1：Dynamic-programming"><a href="#Solution-1：Dynamic-programming" class="headerlink" title="Solution-1：Dynamic programming"></a>Solution-1：Dynamic programming</h3><p>1.由于我们之前做过题目：Leetcode42-Trapping Rain Water<br>在42的Solution2的时候，本质上也是求：给定一个位置，其左右两边最大的值。<br>对于求n个元素所有的rightMax，使用O(n)的时间和O(n)的空间即可。</p>
+<p>2.rightMax[i]表示：[i + 1, n - 1]范围内最大的数字。<br>则通过递推，可以得到：rightMax[i - 1] = max(prices[i], rightMax[i]);<br>则i从后往前，就可以算出所有的rightMax[i]。<br>同时，使用这个值减去prices[i]的值，来不断更新最大利润即可。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/284225891/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284225891/</a>)</p>
+<h3 id="Solution-2：Further-Optimization"><a href="#Solution-2：Further-Optimization" class="headerlink" title="Solution-2：Further Optimization"></a>Solution-2：Further Optimization</h3><p>1.观察上面的递推式，可以发现：计算rightMax[i - 1]的时候，只用到了rightMax[i]，也就是说可以将数组优化为单个变量。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/284226029/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284226029/</a>)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/04/2019-12-04-Leetcode300-Longest%20Increasing%20Subsequence/" data-id="ck4rrx7uw0005egt7dgn58ptv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/07/Leetcode-121-Best%20Time%20to%20Buy%20ans%20Sell%20Stock/" data-id="ck4s5iosu000dast77ttj42au" class="article-share-link">Share</a>
       
       
     </footer>
@@ -117,7 +113,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/82/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/81/">81</a><a class="page-number" href="/page/82/">82</a><span class="page-number current">83</span><a class="page-number" href="/page/84/">84</a><a class="page-number" href="/page/85/">85</a><span class="space">&hellip;</span><a class="page-number" href="/page/88/">88</a><a class="extend next" rel="next" href="/page/84/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/82/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/81/">81</a><a class="page-number" href="/page/82/">82</a><span class="page-number current">83</span><a class="page-number" href="/page/84/">84</a><a class="page-number" href="/page/85/">85</a><span class="space">&hellip;</span><a class="page-number" href="/page/92/">92</a><a class="extend next" rel="next" href="/page/84/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -149,23 +145,23 @@
       <ul>
         
           <li>
-            <a href="/2019/12/30/Linked%20List/2019-12-30-Leetcode-234-Palindrome%20Linked%20List/">【链表专项】234.Palindrome Linked List</a>
+            <a href="/2019/12/30/Linked%20List/Leetcode-002-Add%20Two%20Numbers/">【链表专项】019.Remove Nth Node From End of List</a>
           </li>
         
           <li>
-            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-092-Reverse%20Linked%20List%20II/">【链表专项】092.Reverse Linked List II</a>
+            <a href="/2019/12/30/Linked%20List/Leetcode-019-Remove%20Nth%20Node%20From%20End%20of%20List/">【链表专项】019.Remove Nth Node From End of List</a>
           </li>
         
           <li>
-            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-141-Linked%20List%20Cycle/">【链表专项】141.Linked List Cycle</a>
+            <a href="/2019/12/30/Linked%20List/Leetcode-082-Remove%20Duplicates%20from%20Sorted%20List%20II/">【链表专项】082.Remove Duplicates from Sorted List II</a>
           </li>
         
           <li>
-            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-083-Remove%20Duplicates%20from%20Sorted%20List/">【链表专项】083.Remove Duplicates from Sorted List</a>
+            <a href="/2019/12/30/Linked%20List/Leetcode-328-Odd%20Even%20Linked%20List/">【链表专项】328.Odd Even Linked List</a>
           </li>
         
           <li>
-            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-021-Merge%20Two%20Sorted%20Lists/">【链表专项】021.Merge Two Sorted Lists</a>
+            <a href="/2019/12/30/Tree/Leetcode-109-Convert%20Sorted%20List%20to%20Binary%20Search%20Tree/">【BST专项】109.Convert Sorted List to Binary Search Tree</a>
           </li>
         
       </ul>

@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-2019-12-08-Leetcode-122-Best Time to Buy ans Sell Stock II" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Leetcode-309-Best Time to Buy and Sell Stock with Cooldown" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/07/2019-12-08-Leetcode-122-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20II/" class="article-date">
-  <time datetime="2019-12-07T01:53:30.793Z" itemprop="datePublished">2019-12-07</time>
+    <a href="/2019/12/10/Leetcode-309-Best%20Time%20to%20Buy%20and%20Sell%20Stock%20with%20Cooldown/" class="article-date">
+  <time datetime="2019-12-10T06:51:24.948Z" itemprop="datePublished">2019-12-10</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/07/2019-12-08-Leetcode-122-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20II/">Leetcode122-Best Time to Buy and Sell Stock II</a>
+      <a class="article-title" href="/2019/12/10/Leetcode-309-Best%20Time%20to%20Buy%20and%20Sell%20Stock%20with%20Cooldown/">Leetcode309-Best Time to Buy and Sell Stock with Cooldown</a>
     </h1>
   
 
@@ -83,19 +83,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/" target="_blank" rel="noopener">Leetcode122-Best Time to Buy and Sell Stock</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组prices；prices[i]代表第i天股票的价格。<br>如果你能交易任意k次，即：买k次，卖k次。求出你最多能赚多少钱。<br>前提是：买入下一股的时候，必须将上一股卖掉。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [7,1,5,3,6,4]<br>Output: 7<br>Explanation: Buy on day 2 (price = 1) and sell on day 3 (price = 5), profit = 5-1 = 4.<br>             Then buy on day 4 (price = 3) and sell on day 5 (price = 6), profit = 6-3 = 3.</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n：当n为0/1的时候，直接返回0；<br>赚不到钱则返回0；</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>考虑现实生活中，唯一不同的是：现实中我们只知道当前的股价，不知道明天的股价。<br>而现在我们知道了：假设今天股价为a，明天股价b大于a，则买下一定会赚钱，一定买。<br>假设今天股价为a，明天股价b小于a，则买下一定会赔钱，一定不买。</p>
-<h3 id="Solution-1：Greedy"><a href="#Solution-1：Greedy" class="headerlink" title="Solution-1：Greedy"></a>Solution-1：Greedy</h3><p>1.我们要做的只是：每天只看今天的价格和明天的价格，然后做决定。<br>不管后天，大后天的价格。因为我们每天都可以做决定，如果后面发现股价一直在涨，则每天都买就行了。<br>然后ans一直累加每天的利润即可。</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/" target="_blank" rel="noopener">Leetcode309-Best Time to Buy and Sell Stock with Cooldown</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组prices；prices[i]代表第i天股票的价格。<br>最多交易次数不限，求出你最多能赚多少钱。<br>前提是：买入下一股的时候，必须将上一股卖掉。<br>而且建议冷却期为1天，即：今天卖掉，后天才能买入。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [1,2,3,0,2]<br>Output: 3<br>Explanation: transactions = [buy, sell, cooldown, buy, sell]</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n: 当n为0/1的时候，直接返回0；<br>赚不到钱则返回0；</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Dynamic-Programming"><a href="#Solution-1：Dynamic-Programming" class="headerlink" title="Solution-1：Dynamic Programming"></a>Solution-1：Dynamic Programming</h3><p>1.对于任意一天i，有三种选择：buy, sell, rest<br>2.状态转移方程：<br>buy[i] = max(buy[i - 1], sell[i - 2] - prices[i]);//左边代表：今天休息；右边代表：今天用前天的利润来进一批货。<br>sell[i] = max(sell[i - 1], buy[i - 1] + prices[i]);//左边代表：今天休息；右边代表：今天在昨天进货的基础上，卖掉货。<br>buy[i]:时间范围[0, i]内，最后一次操作是buy或者rest，所能获得的最高利润<br>sell[i]:时间范围[0, i]内，最后一次操作是sell或者rest，所能获得的最高利润</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/284970939/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284970939/</a>)</p>
+<h3 id="Solution-2：Dynamic-Programming-Optimization"><a href="#Solution-2：Dynamic-Programming-Optimization" class="headerlink" title="Solution-2：Dynamic Programming + Optimization"></a>Solution-2：Dynamic Programming + Optimization</h3><p>1.优化空间复杂度</p>
 <p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/284232069/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284232069/</a>)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/284973472/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284973472/</a>)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/07/2019-12-08-Leetcode-122-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20II/" data-id="ck4rrx7v1000degt7207bdqr9" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/10/Leetcode-309-Best%20Time%20to%20Buy%20and%20Sell%20Stock%20with%20Cooldown/" data-id="ck4s5iot9000uast74ubd0p8i" class="article-share-link">Share</a>
       
       
     </footer>
@@ -109,7 +111,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/77/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/76/">76</a><a class="page-number" href="/page/77/">77</a><span class="page-number current">78</span><a class="page-number" href="/page/79/">79</a><a class="page-number" href="/page/80/">80</a><span class="space">&hellip;</span><a class="page-number" href="/page/88/">88</a><a class="extend next" rel="next" href="/page/79/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/77/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/76/">76</a><a class="page-number" href="/page/77/">77</a><span class="page-number current">78</span><a class="page-number" href="/page/79/">79</a><a class="page-number" href="/page/80/">80</a><span class="space">&hellip;</span><a class="page-number" href="/page/92/">92</a><a class="extend next" rel="next" href="/page/79/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -141,23 +143,23 @@
       <ul>
         
           <li>
-            <a href="/2019/12/30/Linked%20List/2019-12-30-Leetcode-234-Palindrome%20Linked%20List/">【链表专项】234.Palindrome Linked List</a>
+            <a href="/2019/12/30/Linked%20List/Leetcode-002-Add%20Two%20Numbers/">【链表专项】019.Remove Nth Node From End of List</a>
           </li>
         
           <li>
-            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-092-Reverse%20Linked%20List%20II/">【链表专项】092.Reverse Linked List II</a>
+            <a href="/2019/12/30/Linked%20List/Leetcode-019-Remove%20Nth%20Node%20From%20End%20of%20List/">【链表专项】019.Remove Nth Node From End of List</a>
           </li>
         
           <li>
-            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-141-Linked%20List%20Cycle/">【链表专项】141.Linked List Cycle</a>
+            <a href="/2019/12/30/Linked%20List/Leetcode-082-Remove%20Duplicates%20from%20Sorted%20List%20II/">【链表专项】082.Remove Duplicates from Sorted List II</a>
           </li>
         
           <li>
-            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-083-Remove%20Duplicates%20from%20Sorted%20List/">【链表专项】083.Remove Duplicates from Sorted List</a>
+            <a href="/2019/12/30/Linked%20List/Leetcode-328-Odd%20Even%20Linked%20List/">【链表专项】328.Odd Even Linked List</a>
           </li>
         
           <li>
-            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-021-Merge%20Two%20Sorted%20Lists/">【链表专项】021.Merge Two Sorted Lists</a>
+            <a href="/2019/12/30/Tree/Leetcode-109-Convert%20Sorted%20List%20to%20Binary%20Search%20Tree/">【BST专项】109.Convert Sorted List to Binary Search Tree</a>
           </li>
         
       </ul>

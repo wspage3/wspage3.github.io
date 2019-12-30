@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>【链表专项】237.Delete Node in a Linked List | 追逐青春的梦想，怀着自信的心，永不放弃！</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一、题意题目链接: 237.Delete Node in a Linked List 1.Description【输入】给定一个单链表中的节点node（非链表尾）。【输出】在原链表中删除该目标节点node。 2.ExampleInput: head &#x3D; [4,5,1,9], node &#x3D; 1Output: [4,5,9]Explanation: You are given the third no">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【链表专项】237.Delete Node in a Linked List">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;29&#x2F;Linked%20List&#x2F;Leetcode-237-Delete%20Node%20in%20a%20Linked%20List&#x2F;index.html">
+<meta property="og:site_name" content="追逐青春的梦想，怀着自信的心，永不放弃！">
+<meta property="og:description" content="一、题意题目链接: 237.Delete Node in a Linked List 1.Description【输入】给定一个单链表中的节点node（非链表尾）。【输出】在原链表中删除该目标节点node。 2.ExampleInput: head &#x3D; [4,5,1,9], node &#x3D; 1Output: [4,5,9]Explanation: You are given the third no">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-12-29T06:21:50.410Z">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="追逐青春的梦想，怀着自信的心，永不放弃！" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">追逐青春的梦想，怀着自信的心，永不放弃！</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Linked List/Leetcode-237-Delete Node in a Linked List" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/29/Linked%20List/Leetcode-237-Delete%20Node%20in%20a%20Linked%20List/" class="article-date">
+  <time datetime="2019-12-29T03:46:33.088Z" itemprop="datePublished">2019-12-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      【链表专项】237.Delete Node in a Linked List
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/delete-node-in-a-linked-list/" target="_blank" rel="noopener">237.Delete Node in a Linked List</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个单链表中的节点node（非链表尾）。<br>【输出】<br>在原链表中删除该目标节点node。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: head = [4,5,1,9], node = 1<br>Output: [4,5,9]<br>Explanation: You are given the third node with value 1, the linked list should become 4 -&gt; 5 -&gt; 9 after calling your function.</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
+<li>目标节点node不是链表尾，且保证是链表中的合法节点。</li>
+<li>单链表至少有两个元素。</li>
+<li>所有节点的value不重复。</li>
+<li>函数返回值为void。</li>
+</ol>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution-1"></a>Solution-1</h3><p>1.给定一个节点，在链表中删除掉该节点，但是并没有给定链表的head。</p>
+<p>2.思路1：如果给定了head的话，就可以直接把node的前一个节点接到node的后一个节点，这样node就不在链表中了。</p>
+<p>3.思路2：本题目并没有给定head指针。<br>所以：把node后面一个节点的值拷贝到node里面，然后删除掉node-&gt;next，达成同样的删除效果。</p>
+<p>4.结构体变量直接赋值；不使用的节点记得释放内存；</p>
+<p>时间复杂度：O(1)<br>空间复杂度：O(1)</p>
+<p>5.Code(<a href="https://leetcode.com/submissions/detail/280512957/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/280512957/</a>)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">deleteNode</span><span class="params">(ListNode* node)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        ListNode* temp = node-&gt;next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        *node = *temp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">delete</span> temp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/29/Linked%20List/Leetcode-237-Delete%20Node%20in%20a%20Linked%20List/" data-id="ck4s5iou3001nast7akpo9w2e" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/12/29/Linked%20List/Leetcode-203-Remove%20Linked%20List%20Elements/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          【链表专项】203.Remove Linked List Elements
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/12/27/Tree/Leetcode-106-Construct%20Binary%20Tree%20from%20Inorder%20and%20Postorder%20Traversal/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">【二叉树专项】106.Construct Binary Tree from Inorder and Postorder Traversal</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/12/30/Linked%20List/Leetcode-002-Add%20Two%20Numbers/">【链表专项】019.Remove Nth Node From End of List</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/30/Linked%20List/Leetcode-019-Remove%20Nth%20Node%20From%20End%20of%20List/">【链表专项】019.Remove Nth Node From End of List</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/30/Linked%20List/Leetcode-082-Remove%20Duplicates%20from%20Sorted%20List%20II/">【链表专项】082.Remove Duplicates from Sorted List II</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/30/Linked%20List/Leetcode-328-Odd%20Even%20Linked%20List/">【链表专项】328.Odd Even Linked List</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/30/Tree/Leetcode-109-Convert%20Sorted%20List%20to%20Binary%20Search%20Tree/">【BST专项】109.Convert Sorted List to Binary Search Tree</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 wspage3<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-2019-12-11-Leetcode-153-Find Minimum in Rotated Sorted Array" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Leetcode-020-Valid Parentheses" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/11/2019-12-11-Leetcode-153-Find%20Minimum%20in%20Rotated%20Sorted%20Array/" class="article-date">
-  <time datetime="2019-12-11T03:12:45.411Z" itemprop="datePublished">2019-12-11</time>
+    <a href="/2019/12/12/Leetcode-020-Valid%20Parentheses/" class="article-date">
+  <time datetime="2019-12-12T08:10:34.517Z" itemprop="datePublished">2019-12-12</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/11/2019-12-11-Leetcode-153-Find%20Minimum%20in%20Rotated%20Sorted%20Array/">153.Find Minimum in Rotated Sorted Array</a>
+      <a class="article-title" href="/2019/12/12/Leetcode-020-Valid%20Parentheses/">20.Valid Parentheses</a>
     </h1>
   
 
@@ -83,22 +83,23 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/" target="_blank" rel="noopener">153.Find Minimum in Rotated Sorted Array</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组nums；<br>该数组原本是升序的，结果在某个支点处旋转了一次，如：<br>i.e., [0,1,2,4,5,6,7] might become [4,5,6,7,0,1,2]<br>假设数组中不存在相同的数字。<br>找出这个数组中最小的值。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [3,4,5,1,2]<br>Output: 1</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n: 当n为0的时候，直接返回false；</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>1.常规思路：从前到后遍历一遍nums，找到最小值返回。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<h3 id="Solution-2：Binary-Search"><a href="#Solution-2：Binary-Search" class="headerlink" title="Solution-2：Binary Search"></a>Solution-2：Binary Search</h3><p>1.观察：[0,1,2,4,5,6]<br>经过rotate后，可能存在以下几种不同情况：<br>[1,2,4,5,6,   0]<br>[2,4,5,6,   0,1]<br>[4,5,6,   0,1,2]<br>[5,6,   0,1,2,4]<br>[6,   0,1,2,4,5]</p>
-<p>2.考虑寻找[left, right]中的最小值。<br>若：nums[left] &lt; nums[right]，则说明[left, right]范围内完全升序。nums[left]就是答案。<br>否则：<br>mid = left + (right - left) / 2;<br>若nums[mid] &gt; nums[right]，则说明，这个区间中间某个值比nums[right]还要大，说明mid此时在左侧。<br>而最小值一定在右侧[mid + 1, right]。<br>若nums[mid] &lt; nums[right]，则说明，[mid, right]这个范围是有序的。要寻找的最小值，不可能在mid右侧，一定在包含其的左侧，即：[left, mid]。<br>若nums[mid] == nums[right]，不可能的……</p>
-<p>3.用二分的方法，每次把结果可能出现的区间缩小一半。<br>最终当区间长度为2的时候，left = x, right = x + 1, mid = x<br>判断nums[mid]和nums[right]的大小关系，也就是判断左边元素和右边元素的大小。<br>若nums[mid]大于nums[right]，即答案一定在[mid + 1, right]中，也就是右边元素本身。<br>若nums[mid]小于nums[right]，即答案一定在[left, mid]中，也就是左边元素本身。<br>循环结束后，left一定等于right。此时返回left的值即可。</p>
-<p>时间复杂度：O(log n)<br>空间复杂度：O(1)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/285160090/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285160090/</a>)</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/valid-parentheses/" target="_blank" rel="noopener">20.Valid Parentheses</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的字符串s；<br>判断该字符串是否一个合法的括号表达式；<br>括号有三种：[] {} ()<br>open的bracket最终必须有一个同类型close的bracket与之匹配；<br>且上述匹配的顺序必须是正确的。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: “()[]{}”<br>Output: true</p>
+<p>Input: “([)]”<br>Output: false</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n: 当n为0的时候，也认为是合法的；</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Stack"><a href="#Solution-1：Stack" class="headerlink" title="Solution-1：Stack"></a>Solution-1：Stack</h3><p>1.若n是奇数，那么一定非法。<br>若n是0，则直接return true。</p>
+<p>2.考虑n为大于0的偶数：<br>模拟括号匹配的过程：i在范围[0, n - 1]内遍历：<br>先将s[0]压入栈；<br>考察s[1]，若s[1]和s[0]是同类型的，且一个s[1]是close，s[0]是open的，那么说明这两个是一对。<br>则此时将s[0]从栈中抛出，i跳到位置2，考虑第二个元素。<br>若s[1]的出现无法和s[0]匹配掉，则将s[1]在压入栈，考虑下一个元素。<br>……<br>直到所有的n个元素都遍历过了，此时检查栈，如果栈是空的，说明所有的括号都可以匹配。<br>如果此时栈非空，则说明存在元素无法匹配。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/285447709/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285447709/</a>)</p>
+<h3 id="Solution-2：Stack"><a href="#Solution-2：Stack" class="headerlink" title="Solution-2：Stack"></a>Solution-2：Stack</h3><p>1.另一种方法：<br>从[0, n - 1]考虑每一个s[i]<br>若s[i]是open的bracket，则将其“另一半”压入栈。<br>否则的话，判断此时栈是否为空，是的话，直接return false。<br>栈不空的话，判断当前元素是否和栈顶元素相同，不同的话，也直接return false。<br>相同的话，将栈顶元素抛出，转移到考虑s[i + 1]</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/285450396/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285450396/</a>)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/11/2019-12-11-Leetcode-153-Find%20Minimum%20in%20Rotated%20Sorted%20Array/" data-id="ck4rrx7v1000eegt785kz8q4s" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/12/Leetcode-020-Valid%20Parentheses/" data-id="ck4s5iosm0002ast72yro9kj2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -112,7 +113,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/70/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/69/">69</a><a class="page-number" href="/page/70/">70</a><span class="page-number current">71</span><a class="page-number" href="/page/72/">72</a><a class="page-number" href="/page/73/">73</a><span class="space">&hellip;</span><a class="page-number" href="/page/88/">88</a><a class="extend next" rel="next" href="/page/72/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/70/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/69/">69</a><a class="page-number" href="/page/70/">70</a><span class="page-number current">71</span><a class="page-number" href="/page/72/">72</a><a class="page-number" href="/page/73/">73</a><span class="space">&hellip;</span><a class="page-number" href="/page/92/">92</a><a class="extend next" rel="next" href="/page/72/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -144,23 +145,23 @@
       <ul>
         
           <li>
-            <a href="/2019/12/30/Linked%20List/2019-12-30-Leetcode-234-Palindrome%20Linked%20List/">【链表专项】234.Palindrome Linked List</a>
+            <a href="/2019/12/30/Linked%20List/Leetcode-002-Add%20Two%20Numbers/">【链表专项】019.Remove Nth Node From End of List</a>
           </li>
         
           <li>
-            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-092-Reverse%20Linked%20List%20II/">【链表专项】092.Reverse Linked List II</a>
+            <a href="/2019/12/30/Linked%20List/Leetcode-019-Remove%20Nth%20Node%20From%20End%20of%20List/">【链表专项】019.Remove Nth Node From End of List</a>
           </li>
         
           <li>
-            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-141-Linked%20List%20Cycle/">【链表专项】141.Linked List Cycle</a>
+            <a href="/2019/12/30/Linked%20List/Leetcode-082-Remove%20Duplicates%20from%20Sorted%20List%20II/">【链表专项】082.Remove Duplicates from Sorted List II</a>
           </li>
         
           <li>
-            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-083-Remove%20Duplicates%20from%20Sorted%20List/">【链表专项】083.Remove Duplicates from Sorted List</a>
+            <a href="/2019/12/30/Linked%20List/Leetcode-328-Odd%20Even%20Linked%20List/">【链表专项】328.Odd Even Linked List</a>
           </li>
         
           <li>
-            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-021-Merge%20Two%20Sorted%20Lists/">【链表专项】021.Merge Two Sorted Lists</a>
+            <a href="/2019/12/30/Tree/Leetcode-109-Convert%20Sorted%20List%20to%20Binary%20Search%20Tree/">【BST专项】109.Convert Sorted List to Binary Search Tree</a>
           </li>
         
       </ul>

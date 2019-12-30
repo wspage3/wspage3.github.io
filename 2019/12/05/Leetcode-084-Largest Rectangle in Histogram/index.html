@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Leetcode84-Largest Rectangle in Histogram | 追逐青春的梦想，怀着自信的心，永不放弃！</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一、题意题目链接: Leetcode84-Largest Rectangle in Histogram 1.Description给定一个长度为n的非负整数数组heights；heights[i]代表第个矩形的高度；矩形宽度都是1；求出这个图中最大的矩形面积。 2.Example input &#x3D; [2,1,5,6,2,3]output &#x3D; 10 3.Corner Casen：当n为0和1的时候，直">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Leetcode84-Largest Rectangle in Histogram">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;05&#x2F;Leetcode-084-Largest%20Rectangle%20in%20Histogram&#x2F;index.html">
+<meta property="og:site_name" content="追逐青春的梦想，怀着自信的心，永不放弃！">
+<meta property="og:description" content="一、题意题目链接: Leetcode84-Largest Rectangle in Histogram 1.Description给定一个长度为n的非负整数数组heights；heights[i]代表第个矩形的高度；矩形宽度都是1；求出这个图中最大的矩形面积。 2.Example input &#x3D; [2,1,5,6,2,3]output &#x3D; 10 3.Corner Casen：当n为0和1的时候，直">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-12-05T15:28:44.353Z">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="追逐青春的梦想，怀着自信的心，永不放弃！" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">追逐青春的梦想，怀着自信的心，永不放弃！</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Leetcode-084-Largest Rectangle in Histogram" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/05/Leetcode-084-Largest%20Rectangle%20in%20Histogram/" class="article-date">
+  <time datetime="2019-12-05T08:13:48.347Z" itemprop="datePublished">2019-12-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Leetcode84-Largest Rectangle in Histogram
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/largest-rectangle-in-histogram/" target="_blank" rel="noopener">Leetcode84-Largest Rectangle in Histogram</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的非负整数数组heights；heights[i]代表第个矩形的高度；矩形宽度都是1；<br>求出这个图中最大的矩形面积。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p> input = [2,1,5,6,2,3]<br>output = 10</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n：当n为0和1的时候，直接返回结果；<br>heights[i]：题目保证非负</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>1.给定两个不同的柱子i, j，则area[i, j] = max(heights[i], heights[j], (j - i + 1) * minHeightBetweenIAndJ);<br>其中minHeightBetweenIAndJ是[i, j]中最短的高度。此过程需要O(n)的时间。<br>2.所以可以考察任意两个不同的i, j。i：[0, n - 2] j：[i + 1, n - 1]</p>
+<p>时间复杂度：O(n ^ 3)<br>空间复杂度：O(1)：<br>结果发现：此方法TLE，说明需要进一步优化。</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/283879193/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283879193/</a>)</p>
+<h3 id="Solution-2：Brute-Force"><a href="#Solution-2：Brute-Force" class="headerlink" title="Solution-2：Brute Force"></a>Solution-2：Brute Force</h3><p>1.由于我们遍历i, j是有序情况下的。在计算出[i, j]之间的结果后，立马考虑[i, j + 1]。<br>此时发现还要遍历n次找到[i, j + 1]中的最低高度，而[i, j]中的最低高度在之前已经计算过了。<br>同时minHeight[i, j + 1] = min(minHeight[i, j], heights[j + 1]);<br>所以保留这个结果，以O(1)的time就可以得到minHeight[i, j + 1]</p>
+<p>时间复杂度：O(n ^ 2)<br>空间复杂度：O(1)：<br>结果发现：此方法TLE，说明需要进一步优化。</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/283882070/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283882070/</a>)</p>
+<h3 id="Solution-3：Brute-Force"><a href="#Solution-3：Brute-Force" class="headerlink" title="Solution-3：Brute Force"></a>Solution-3：Brute Force</h3><p>1.换一种不同于Solution1和Solution2的思路：<br>在上面的枚举方法中，我们是枚举矩形能出现的所有区间[i, j]，固定了区间[i, j]，然后在这个区间中寻找一个最短的长度。<br>换一种思路：考虑每个位置i，找出以当前heights[i]为高度的，最大矩形的面积res[i]。则答案就是res数组的最大值。</p>
+<p>2.对于当前heights[i]来说，需要找到在[0, i - 1]中从后往前第一个比heights[i]小的值leftI。<br>同理，需要找到[i + 1, n - 1]中从前往后第一个比heights[i]小的值rightI。<br>则res[i] = heights[i] * (rightI - leftI - 1)</p>
+<p>时间复杂度：O(n ^ 2)<br>空间复杂度：O(n)：<br>结果发现：此方法TLE，说明需要进一步优化。</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/283922360/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283922360/</a>)</p>
+<h3 id="Solution-4：Monotonous-Stack"><a href="#Solution-4：Monotonous-Stack" class="headerlink" title="Solution-4：Monotonous Stack"></a>Solution-4：Monotonous Stack</h3><p>1.回忆Leetcode739-Daily Temperatures：该问题，我们用Brute Force方法：对于nums[i]，要做的就是找到它后面第一个比它大的元素。<br>同时我们用单调栈的方法使得上述的O(n ^ 2)优化为O(n)。</p>
+<p>2.再回过头来看本题目，对于heights[i]，实质上也是寻找它左右两边第一个比它小的元素。<br>如果我们能在O(n)的时间内，找到所有heights[i]对应的leftI和rightI。那么上面Solution3的时间复杂度就能降低到O(n)。</p>
+<p>3.Leetcode739-Daily Temperatures的单调栈解法是：<br>维护一个单调栈，且栈从顶到底是递增的；<br>当一个元素比栈中某个元素大的时候，将栈中元素抛出k个，直到当前元素不大于栈顶元素。<br>这样的话，对于当前元素，我们可以找到它左边第一个比它小的元素。<br>对于栈中元素，当其出栈时，当前元素就是其右边第一个比它大的元素。（Leetcode739思路就是依据本条）</p>
+<p>4.类似的，维护一个单调栈，且栈从顶到底是递减的；<br>栈中元素指的是对应的数组下标。<br>当我们在位置cur的时候，heights[cur]比栈中某个元素小的时候，将栈中元素抛出k个，直到当前元素不大于栈顶元素。<br>对于抛出去的k个元素：<br>其rightI就是cur。<br>其leftI就是该元素在栈中的下面一个元素，（因为栈任意时刻都是自顶向下递减），如果栈为空了，说明刚刚被抛出去的这个元素在左边没有比它小的，记为-1。<br>然后不断更新，直至遍历完依次heights数组。<br>此时栈中可能还有元素：则它们都是因为自身右边没有比自身小的元素。将其rightI记录为n。<br>这是因为，在[a, b]区间内，不包含a，b本身，一共有(b - a - 1)个元素。当其左边没有，记录为-1；当其右边没有，记录为n；方便计算。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(n)：</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/283927850/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283927850/</a>)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/05/Leetcode-084-Largest%20Rectangle%20in%20Histogram/" data-id="ck4s5iost000cast7gdl00toa" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/12/06/Leetcode-042-Trapping%20Rain%20Water/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Leetcode42-Trapping Rain Water
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/12/05/Leetcode-739-Daily%20Temperatures/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Leetcode739-Daily Temperatures</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/12/30/Linked%20List/Leetcode-002-Add%20Two%20Numbers/">【链表专项】019.Remove Nth Node From End of List</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/30/Linked%20List/Leetcode-019-Remove%20Nth%20Node%20From%20End%20of%20List/">【链表专项】019.Remove Nth Node From End of List</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/30/Linked%20List/Leetcode-082-Remove%20Duplicates%20from%20Sorted%20List%20II/">【链表专项】082.Remove Duplicates from Sorted List II</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/30/Linked%20List/Leetcode-328-Odd%20Even%20Linked%20List/">【链表专项】328.Odd Even Linked List</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/30/Tree/Leetcode-109-Convert%20Sorted%20List%20to%20Binary%20Search%20Tree/">【BST专项】109.Convert Sorted List to Binary Search Tree</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 wspage3<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-2019-12-15-Leetcode-155-Min Stack" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Leetcode-426-Partition Equal Subset Sum" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/15/2019-12-15-Leetcode-155-Min%20Stack/" class="article-date">
-  <time datetime="2019-12-15T10:45:28.500Z" itemprop="datePublished">2019-12-15</time>
+    <a href="/2019/12/16/Leetcode-426-Partition%20Equal%20Subset%20Sum/" class="article-date">
+  <time datetime="2019-12-16T05:49:07.443Z" itemprop="datePublished">2019-12-16</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/15/2019-12-15-Leetcode-155-Min%20Stack/">155.Min Stack</a>
+      <a class="article-title" href="/2019/12/16/Leetcode-426-Partition%20Equal%20Subset%20Sum/">416.Partition Equal Subset Sum</a>
     </h1>
   
 
@@ -83,33 +83,28 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/min-stack/" target="_blank" rel="noopener">155.Min Stack</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>设计一个数据结构”最小栈”，具有以下特点：<br>1.push(x) – Push element x onto stack.<br>2.pop() – Removes the element on top of the stack.<br>3.top() – Get the top element.<br>4.getMin() – Retrieve the minimum element in the stack.<br>其中核心功能是第四点，因为如果仅考虑前三点的话，就是常规的栈stack。<br>getMin()要求时间复杂度为O(1)。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>MinStack minStack = new MinStack();<br>minStack.push(-2);<br>minStack.push(0);<br>minStack.push(-3);<br>minStack.getMin();   –&gt; Returns -3.<br>minStack.pop();<br>minStack.top();      –&gt; Returns 0.<br>minStack.getMin();   –&gt; Returns -2.</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.getMin()要求时间复杂度为O(1)。</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><p>思路：看到题目，第一想法是：维护一个stack s和一个最小值m即可。<br>当有更小的值入栈后，更新m即可。<br>但这样有一个问题：如果我当前pop的就是最小值m，那怎么办。<br>因为没有保存第二小的值，所以在pop掉m后，m的值就无法追溯了。</p>
-<h3 id="Solution-1：Two-Stacks"><a href="#Solution-1：Two-Stacks" class="headerlink" title="Solution-1：Two Stacks"></a>Solution-1：Two Stacks</h3><p>1.用两个stack，一个s保存数据，一个m保存最小值。<br>当有更小的值入栈后，将这个值同时加入到栈m中。<br>则当前最小的值就是m的栈顶元素。<br>当pop最小元素的时候，将其从s和m中同时pop掉。</p>
-<p>空间复杂度：O(n)</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/285879960/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285879960/</a>)</p>
-<h3 id="Solution-2：One-Stack"><a href="#Solution-2：One-Stack" class="headerlink" title="Solution-2：One Stack"></a>Solution-2：One Stack</h3><p>1.Solution-1中，我们当遇到更小的值时，都将其保存到m栈中。<br>这样栈顶的就是当前s栈中最小的值，若其被pop出去，同时带走m栈顶的元素。<br>此时m栈顶的元素又是s栈中的最小值了。</p>
-<p>2.现在我们用int minValue来代表当前栈中最小的值。<br>s仍然代表着数据栈。<br>当出现了更小的值时：<br>a.保存当前minValue：将其先push到s中。<br>b.更新minValue<br>c.再将当前minValue push到s中。</p>
-<p>3.则任意时刻，minValue都是代表着当前栈中最小的元素值。</p>
-<p>4.当pop的值是minValue的时候，也就是s.top() == minValue，<br>我们从s中pop一个元素，这个元素就是minValue。<br>同时将此时s.top()赋值给minValue。因为这个元素是“前一个最小值”。<br>同时将其从s中pop出去。</p>
-<p>空间复杂度：O(n)</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/285881659/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285881659/</a>)</p>
-<h3 id="Solution-3：One-Stack"><a href="#Solution-3：One-Stack" class="headerlink" title="Solution-3：One Stack"></a>Solution-3：One Stack</h3><p>1.现在我们将当前元素cur和minValue的差值存入栈s中。</p>
-<p>2.push(x)：<br>当栈中没有元素的时候，将0存入s中，minValue说就是x；<br>当栈中已有元素的时候，将x - minValue存入s中，若该值为负，说明当前x是更小的值。将minValue更新为x。</p>
-<p>3.getMin()<br>任意时刻，minValue的值就是当前栈s中最小元素的值。</p>
-<p>4.top()<br>由于s中存入的已经不是之前的数据了，而是存放的差值。<br>当s栈顶元素小于0的时候，说明：这个元素是当前栈中最小的值minValue。return minValue即可。<br>当s栈顶元素不小于0的时候，说明，这个元素是一个差值，其值 = s.top() + minValue。</p>
-<p>5.pop()<br>当s栈顶元素小于0的时候，说明：这个元素是当前栈中最小的值minValue。<br>  需要更新minValue = minValue - s.top()；然后再从s中把其pop。<br>当s栈顶元素不小于0的时候，说明，这个元素是一个差值，直接pop即可。</p>
-<p>6.缺点1：由于差值可能会导致整数溢出，所以用minValue用long long。<br>缺点2：由于放入栈中的值是一个差值，而非原本的数据本身，即有修改数据的嫌疑。需要确定这种情况再用这个方法。</p>
-<p>空间复杂度：O(1)</p>
-<p>7.Code(<a href="https://leetcode.com/submissions/detail/285885660/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285885660/</a>)</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/partition-equal-subset-sum/" target="_blank" rel="noopener">416.Partition Equal Subset Sum</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个长度为n的整数数组。n大于0。<br>其中所有的元素取值都是正整数。<br>【输出】<br>判断这个数组中是否能分成两个数组，它们的和相等。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [1, 5, 11, 5]<br>Output: true<br>Explanation: The array can be partitioned as [1, 5, 5] and [11].</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.n: 大于0<br>2.nums[i]: 大于0</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：0-1-Knapsack"><a href="#Solution-1：0-1-Knapsack" class="headerlink" title="Solution-1：0/1 Knapsack"></a>Solution-1：0/1 Knapsack</h3><p>1.实质上：本题目就是求nums数组的一个子数组，使得其和为nums数组的和的一半。</p>
+<p>2.求出nums数组的和sum。若sum是奇数，则直接return false。</p>
+<p>3.对于任意一个nums[i]，我们可以选择它，也可能不选择它。<br>要是选择的话最多只能使用一次。然后看能不能凑到target（sum / 2）。</p>
+<p>4.0/1 knapsack问题<br>i: [0, n - 1]<br>j: [0, target]<br>dp数组用bool类型即可。若为true，则说明可以凑成target。<br>dp[i][j]代表：从[0, i]区间任意选择一些元素（每个元素只能选一次），使得和为j。<br>则答案就是：dp[0][target] || dp[1][target] … || dp[n - 2][target] || dp[n - 1][target]</p>
+<p>5.边界值：<br>不管i为多少，若j为0，则dp[i][0] = true；<br>若i为0，当j == nums[0]的时候，dp[0][j] = true；<br>状态转移方程：dp[i][j] = (dp[i - 1][j]) &amp;&amp; (dp[i - 1][j - nums[i]])<br>左边代表：不取nums[i]<br>右边代表：选择nums[i]。当nums[i] &gt; j的时候，右边为false。</p>
+<p>时间复杂度：O(n * c) //c代表nums数组累加和的一半<br>空间复杂度：O(n * c)</p>
+<p>6.Code(<a href="https://leetcode.com/submissions/detail/286289354/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286289354/</a>)</p>
+<p>7.进一步，压缩空间复杂度。可以发现dp[i][j]只和dp[i - 1][…]有关。所以把二维数组压缩为一维。<br>dp[j] = dp[j] || dp[j - nums[i]];<br>从二维的方程可以看出，当前位置的值依赖于两个值：这个位置上方的，这个位置左上方的。<br>如果压缩为一维的时候，继续让j从小到大遍历的话，这样当需要‘左上方’的时候，这个值一定是被覆盖过的。<br>所以需要让j从大到小遍历。</p>
+<p>时间复杂度：O(n * c) //c代表nums数组累加和的一半<br>空间复杂度：O(c)</p>
+<p>8.Code(<a href="https://leetcode.com/submissions/detail/286325812/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286325812/</a>)</p>
+<h3 id="Solution-2：DFS"><a href="#Solution-2：DFS" class="headerlink" title="Solution-2：DFS"></a>Solution-2：DFS</h3><p>1.将数组由大到小排序。<br>2.return dfs(nums, sum / 2, 0);<br>3.在递归中：<br>首先判断index是否在[0, n - 1]范围内，若超过该范围，return false。<br>然后判断nums[index] == target，如果满足，则return true。<br>接着判断nums[index] &gt; target，如果满足，则return false。<br>最后递归调用左子树和右子树即可，返回它们的返回值的or运算结果。<br>左子树：dfs(nums, target - nums[index], index + 1);<br>右子树：dfs(nums, target, index + 1);</p>
+<p>4.如果先调用右子树的话，会TLE。</p>
+<p>5.Code(<a href="https://leetcode.com/submissions/detail/286330983/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286330983/</a>)<br>结果发现这个提交beat 100%。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/15/2019-12-15-Leetcode-155-Min%20Stack/" data-id="ck4rrx7vd000qegt7gmhabj40" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/16/Leetcode-426-Partition%20Equal%20Subset%20Sum/" data-id="ck4s5iotb000xast7409tg033" class="article-share-link">Share</a>
       
       
     </footer>
@@ -123,7 +118,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/60/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/59/">59</a><a class="page-number" href="/page/60/">60</a><span class="page-number current">61</span><a class="page-number" href="/page/62/">62</a><a class="page-number" href="/page/63/">63</a><span class="space">&hellip;</span><a class="page-number" href="/page/88/">88</a><a class="extend next" rel="next" href="/page/62/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/60/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/59/">59</a><a class="page-number" href="/page/60/">60</a><span class="page-number current">61</span><a class="page-number" href="/page/62/">62</a><a class="page-number" href="/page/63/">63</a><span class="space">&hellip;</span><a class="page-number" href="/page/92/">92</a><a class="extend next" rel="next" href="/page/62/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -155,23 +150,23 @@
       <ul>
         
           <li>
-            <a href="/2019/12/30/Linked%20List/2019-12-30-Leetcode-234-Palindrome%20Linked%20List/">【链表专项】234.Palindrome Linked List</a>
+            <a href="/2019/12/30/Linked%20List/Leetcode-002-Add%20Two%20Numbers/">【链表专项】019.Remove Nth Node From End of List</a>
           </li>
         
           <li>
-            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-092-Reverse%20Linked%20List%20II/">【链表专项】092.Reverse Linked List II</a>
+            <a href="/2019/12/30/Linked%20List/Leetcode-019-Remove%20Nth%20Node%20From%20End%20of%20List/">【链表专项】019.Remove Nth Node From End of List</a>
           </li>
         
           <li>
-            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-141-Linked%20List%20Cycle/">【链表专项】141.Linked List Cycle</a>
+            <a href="/2019/12/30/Linked%20List/Leetcode-082-Remove%20Duplicates%20from%20Sorted%20List%20II/">【链表专项】082.Remove Duplicates from Sorted List II</a>
           </li>
         
           <li>
-            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-083-Remove%20Duplicates%20from%20Sorted%20List/">【链表专项】083.Remove Duplicates from Sorted List</a>
+            <a href="/2019/12/30/Linked%20List/Leetcode-328-Odd%20Even%20Linked%20List/">【链表专项】328.Odd Even Linked List</a>
           </li>
         
           <li>
-            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-021-Merge%20Two%20Sorted%20Lists/">【链表专项】021.Merge Two Sorted Lists</a>
+            <a href="/2019/12/30/Tree/Leetcode-109-Convert%20Sorted%20List%20to%20Binary%20Search%20Tree/">【BST专项】109.Convert Sorted List to Binary Search Tree</a>
           </li>
         
       </ul>

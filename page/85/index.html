@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-2019-12-04-Leetcode152-Maximum Product Subarray" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Leetcode-084-Largest Rectangle in Histogram" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/04/2019-12-04-Leetcode152-Maximum%20Product%20Subarray/" class="article-date">
-  <time datetime="2019-12-04T00:59:01.751Z" itemprop="datePublished">2019-12-04</time>
+    <a href="/2019/12/05/Leetcode-084-Largest%20Rectangle%20in%20Histogram/" class="article-date">
+  <time datetime="2019-12-05T08:13:48.347Z" itemprop="datePublished">2019-12-05</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/04/2019-12-04-Leetcode152-Maximum%20Product%20Subarray/">Leetcode-152 Maximum Product Subarray</a>
+      <a class="article-title" href="/2019/12/05/Leetcode-084-Largest%20Rectangle%20in%20Histogram/">Leetcode84-Largest Rectangle in Histogram</a>
     </h1>
   
 
@@ -83,24 +83,31 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/maximum-product-subarray/" target="_blank" rel="noopener">Leetcode-152 Maximum Product Subarray</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组nums。<br>求出nums的连续子数组，这个子数组是nums所有子数组中乘积最大的那个。返回这个sum。<br>子数组长度至少为1。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [2,3,-2,4]<br>Output: 6<br>Explanation: [2,3] has the largest product 6.</p>
-<p>Input: [-2,0,-1]<br>Output: 0<br>Explanation: The result cannot be 2, because [-2,-1] is not a subarray.</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>需要对n是否为0判断</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><p>显然，本题目和Leetcode-53的唯一区别就是：一个求和最大值，一个求乘积最大值。<br>此处，主要需要考虑乘法运算和加法元素的差异。其它分析可参考Leetcode-53</p>
-<h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>1.不感知加法乘法的差异。<br>时间复杂度：O(n ^ 2)<br>空间复杂度：O(1)</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/283351227/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283351227/</a>)</p>
-<h3 id="Solution-2：Divide-and-Conquer"><a href="#Solution-2：Divide-and-Conquer" class="headerlink" title="Solution-2：Divide and Conquer"></a>Solution-2：Divide and Conquer</h3><p>1.考虑区间[low, high]，mid为中点：<br>递归求得[low, mid]和[mid + 1, high]的值。<br>找出[i, mid]使得以mid结尾的最大值。<br>找出[mid + 1, j]使得以mid + 1开头的最大值。<br>假设区间为：[-3, 2, -5]<br>f(-3, 2) = 2<br>f(-5) = -5<br>f(i, j) = 2 * -5 = -10<br>这样求得的值是2，跟实际答案30不符合。<br>可以发现，问题出现在“负负得正”这种场景下。我们在寻找[i, mid]和[mid + 1, j]的时候，单纯的找到了以其开头或者结尾的最大的值。但这两个最大的值的乘积并不一定是最大的。<br>所以根据这个特点，可以分别维护两个值。<br>对于i来说，lMax，lMin分别记录以mid结尾的最大乘积和最小乘积。<br>对于j来说，rMax，rMin分别记录以mid + 1开头的最大乘积和最小乘积。<br>当combine的时候，找出max(lMax * rMax, lMin * rMin)，这样才是[i, j]范围内的最大乘积。</p>
-<p>时间复杂度：O(n ^ logN)<br>空间复杂度：O(n)，递归开销<br>3.Code(<a href="https://leetcode.com/submissions/detail/283358210/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283358210/</a>)</p>
-<h3 id="Solution-3：Dynamic-Programming"><a href="#Solution-3：Dynamic-Programming" class="headerlink" title="Solution-3：Dynamic Programming"></a>Solution-3：Dynamic Programming</h3><p>1.同理，在递推位置i的时候：<br>sum：<br>    start = max(nums[i], nums[i] + start)<br>    res = max(res, start)<br>product：<br>    if (nums[i] &lt; 0)  then swap(startMin, startMax);<br>    startMin = min(nums[i], nums[i] * startMin);<br>    startMax = max(nums[i], nums[i] * startMax);<br>    res = max(res, startMax);<br>当在位置i的时候，此时：<br>startMin代表以i + 1开头的最小乘积<br>startMax代表以i + 1开头的最大乘积<br>如果当前nums[i]非负的话，要想得到以i开头的连续子树组的最大值，并更新它的话，需要结合maxStart。<br>    maxStart = max(nums[i], nums[i] * maxStart)<br>    同理更新minStart：minStart = max(nums[i], nums[i] * minStart)<br>如果当前nums[i]负数的话，要想得到以i开头的连续子树组的最大值，并更新它的话，需要结合minStart。<br>    maxStart = max(nums[i], nums[i] * minStart)<br>    同理更新minStart：minStart = max(nums[i], nums[i] * maxStart)<br>为了表达简便，我们可以在更新前判断，如果当前nums[i]是负数的话，将minStart和maxStart交换值即可。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/283369314/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283369314/</a>)</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/largest-rectangle-in-histogram/" target="_blank" rel="noopener">Leetcode84-Largest Rectangle in Histogram</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的非负整数数组heights；heights[i]代表第个矩形的高度；矩形宽度都是1；<br>求出这个图中最大的矩形面积。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p> input = [2,1,5,6,2,3]<br>output = 10</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n：当n为0和1的时候，直接返回结果；<br>heights[i]：题目保证非负</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>1.给定两个不同的柱子i, j，则area[i, j] = max(heights[i], heights[j], (j - i + 1) * minHeightBetweenIAndJ);<br>其中minHeightBetweenIAndJ是[i, j]中最短的高度。此过程需要O(n)的时间。<br>2.所以可以考察任意两个不同的i, j。i：[0, n - 2] j：[i + 1, n - 1]</p>
+<p>时间复杂度：O(n ^ 3)<br>空间复杂度：O(1)：<br>结果发现：此方法TLE，说明需要进一步优化。</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/283879193/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283879193/</a>)</p>
+<h3 id="Solution-2：Brute-Force"><a href="#Solution-2：Brute-Force" class="headerlink" title="Solution-2：Brute Force"></a>Solution-2：Brute Force</h3><p>1.由于我们遍历i, j是有序情况下的。在计算出[i, j]之间的结果后，立马考虑[i, j + 1]。<br>此时发现还要遍历n次找到[i, j + 1]中的最低高度，而[i, j]中的最低高度在之前已经计算过了。<br>同时minHeight[i, j + 1] = min(minHeight[i, j], heights[j + 1]);<br>所以保留这个结果，以O(1)的time就可以得到minHeight[i, j + 1]</p>
+<p>时间复杂度：O(n ^ 2)<br>空间复杂度：O(1)：<br>结果发现：此方法TLE，说明需要进一步优化。</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/283882070/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283882070/</a>)</p>
+<h3 id="Solution-3：Brute-Force"><a href="#Solution-3：Brute-Force" class="headerlink" title="Solution-3：Brute Force"></a>Solution-3：Brute Force</h3><p>1.换一种不同于Solution1和Solution2的思路：<br>在上面的枚举方法中，我们是枚举矩形能出现的所有区间[i, j]，固定了区间[i, j]，然后在这个区间中寻找一个最短的长度。<br>换一种思路：考虑每个位置i，找出以当前heights[i]为高度的，最大矩形的面积res[i]。则答案就是res数组的最大值。</p>
+<p>2.对于当前heights[i]来说，需要找到在[0, i - 1]中从后往前第一个比heights[i]小的值leftI。<br>同理，需要找到[i + 1, n - 1]中从前往后第一个比heights[i]小的值rightI。<br>则res[i] = heights[i] * (rightI - leftI - 1)</p>
+<p>时间复杂度：O(n ^ 2)<br>空间复杂度：O(n)：<br>结果发现：此方法TLE，说明需要进一步优化。</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/283922360/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283922360/</a>)</p>
+<h3 id="Solution-4：Monotonous-Stack"><a href="#Solution-4：Monotonous-Stack" class="headerlink" title="Solution-4：Monotonous Stack"></a>Solution-4：Monotonous Stack</h3><p>1.回忆Leetcode739-Daily Temperatures：该问题，我们用Brute Force方法：对于nums[i]，要做的就是找到它后面第一个比它大的元素。<br>同时我们用单调栈的方法使得上述的O(n ^ 2)优化为O(n)。</p>
+<p>2.再回过头来看本题目，对于heights[i]，实质上也是寻找它左右两边第一个比它小的元素。<br>如果我们能在O(n)的时间内，找到所有heights[i]对应的leftI和rightI。那么上面Solution3的时间复杂度就能降低到O(n)。</p>
+<p>3.Leetcode739-Daily Temperatures的单调栈解法是：<br>维护一个单调栈，且栈从顶到底是递增的；<br>当一个元素比栈中某个元素大的时候，将栈中元素抛出k个，直到当前元素不大于栈顶元素。<br>这样的话，对于当前元素，我们可以找到它左边第一个比它小的元素。<br>对于栈中元素，当其出栈时，当前元素就是其右边第一个比它大的元素。（Leetcode739思路就是依据本条）</p>
+<p>4.类似的，维护一个单调栈，且栈从顶到底是递减的；<br>栈中元素指的是对应的数组下标。<br>当我们在位置cur的时候，heights[cur]比栈中某个元素小的时候，将栈中元素抛出k个，直到当前元素不大于栈顶元素。<br>对于抛出去的k个元素：<br>其rightI就是cur。<br>其leftI就是该元素在栈中的下面一个元素，（因为栈任意时刻都是自顶向下递减），如果栈为空了，说明刚刚被抛出去的这个元素在左边没有比它小的，记为-1。<br>然后不断更新，直至遍历完依次heights数组。<br>此时栈中可能还有元素：则它们都是因为自身右边没有比自身小的元素。将其rightI记录为n。<br>这是因为，在[a, b]区间内，不包含a，b本身，一共有(b - a - 1)个元素。当其左边没有，记录为-1；当其右边没有，记录为n；方便计算。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(n)：</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/283927850/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283927850/</a>)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/04/2019-12-04-Leetcode152-Maximum%20Product%20Subarray/" data-id="ck4rrx7uu0003egt754v01ev6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/05/Leetcode-084-Largest%20Rectangle%20in%20Histogram/" data-id="ck4s5iost000cast7gdl00toa" class="article-share-link">Share</a>
       
       
     </footer>
@@ -114,7 +121,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/84/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/83/">83</a><a class="page-number" href="/page/84/">84</a><span class="page-number current">85</span><a class="page-number" href="/page/86/">86</a><a class="page-number" href="/page/87/">87</a><a class="page-number" href="/page/88/">88</a><a class="extend next" rel="next" href="/page/86/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/84/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/83/">83</a><a class="page-number" href="/page/84/">84</a><span class="page-number current">85</span><a class="page-number" href="/page/86/">86</a><a class="page-number" href="/page/87/">87</a><span class="space">&hellip;</span><a class="page-number" href="/page/92/">92</a><a class="extend next" rel="next" href="/page/86/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -146,23 +153,23 @@
       <ul>
         
           <li>
-            <a href="/2019/12/30/Linked%20List/2019-12-30-Leetcode-234-Palindrome%20Linked%20List/">【链表专项】234.Palindrome Linked List</a>
+            <a href="/2019/12/30/Linked%20List/Leetcode-002-Add%20Two%20Numbers/">【链表专项】019.Remove Nth Node From End of List</a>
           </li>
         
           <li>
-            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-092-Reverse%20Linked%20List%20II/">【链表专项】092.Reverse Linked List II</a>
+            <a href="/2019/12/30/Linked%20List/Leetcode-019-Remove%20Nth%20Node%20From%20End%20of%20List/">【链表专项】019.Remove Nth Node From End of List</a>
           </li>
         
           <li>
-            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-141-Linked%20List%20Cycle/">【链表专项】141.Linked List Cycle</a>
+            <a href="/2019/12/30/Linked%20List/Leetcode-082-Remove%20Duplicates%20from%20Sorted%20List%20II/">【链表专项】082.Remove Duplicates from Sorted List II</a>
           </li>
         
           <li>
-            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-083-Remove%20Duplicates%20from%20Sorted%20List/">【链表专项】083.Remove Duplicates from Sorted List</a>
+            <a href="/2019/12/30/Linked%20List/Leetcode-328-Odd%20Even%20Linked%20List/">【链表专项】328.Odd Even Linked List</a>
           </li>
         
           <li>
-            <a href="/2019/12/29/Linked%20List/2019-12-29-Leetcode-021-Merge%20Two%20Sorted%20Lists/">【链表专项】021.Merge Two Sorted Lists</a>
+            <a href="/2019/12/30/Tree/Leetcode-109-Convert%20Sorted%20List%20to%20Binary%20Search%20Tree/">【BST专项】109.Convert Sorted List to Binary Search Tree</a>
           </li>
         
       </ul>
