@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Linked List/Leetcode-143-Reorder List" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-DP/Leetcode-070-Climbing Stairs" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/30/Linked%20List/Leetcode-143-Reorder%20List/" class="article-date">
-  <time datetime="2019-12-30T14:42:30.823Z" itemprop="datePublished">2019-12-30</time>
+    <a href="/2020/01/01/DP/Leetcode-070-Climbing%20Stairs/" class="article-date">
+  <time datetime="2020-01-01T12:54:31.157Z" itemprop="datePublished">2020-01-01</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/30/Linked%20List/Leetcode-143-Reorder%20List/">【链表专项】143.Reorder List</a>
+      <a class="article-title" href="/2020/01/01/DP/Leetcode-070-Climbing%20Stairs/">【DP专项】070.Climbing Stairs</a>
     </h1>
   
 
@@ -83,24 +83,59 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/reorder-list/" target="_blank" rel="noopener">143.Reorder List</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个单链表：L0→L1→…→Ln-1→Ln。<br>【输出】<br>将其转换为：L0→Ln→L1→Ln-1→L2→Ln-2→…<br>返回值void。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Given 1-&gt;2-&gt;3-&gt;4-&gt;5, reorder it to 1-&gt;5-&gt;2-&gt;4-&gt;3.</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
-<li>如果链表为NULL，则无需处理。</li>
-<li>如果链表为节点数小于等于2，无需处理。</li>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/climbing-stairs/" target="_blank" rel="noopener">070.Climbing Stairs</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个正整数n，代表有n个台阶。<br>【输出】<br>假设你每次只能走一步或者两步。<br>求你达到楼顶，有多少种不同的方式？</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: 3<br>Output: 3<br>Explanation: There are three ways to climb to the top.</p>
+<ol>
+<li>1 step + 1 step + 1 step</li>
+<li>1 step + 2 steps</li>
+<li>2 steps + 1 step</li>
 </ol>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Fast-and-Slow-Pointers"><a href="#Solution-1：Fast-and-Slow-Pointers" class="headerlink" title="Solution-1：Fast and Slow Pointers"></a>Solution-1：Fast and Slow Pointers</h3><p>1.回忆【234.Palindrome Linked List】中判断回文链表：找到中间点，顺带着reverse了前半部分。然后与后半部分的结点逐一比较。</p>
-<p>2.本题中，我们先利用快慢指针找到链表中间点。然后reverse后半部分链表。最后merge两部分。</p>
-<p>3.举个例子1：<br>链表为：[1-&gt;2-&gt;3-&gt;4-&gt;NULL]<br>经过快慢指针，fast：NULL。slow：3。cur：4。<br>以cur为首结点，进行reverse：[1-&gt;2-&gt;3-&gt;NULL] [4-&gt;NULL]<br>此时：pre指向4。prepre指向1。<br>进行merge：[1-&gt;4-&gt;2-&gt;3-&gt;NULL]</p>
-<p>4.举个例子2：<br>链表为：[1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL]<br>经过快慢指针，fast：5。slow：3。cur：4。<br>以cur为首结点，进行reverse：[1-&gt;2-&gt;3-&gt;NULL] [5-&gt;4-&gt;NULL]<br>此时：pre指向5。prepre指向1。<br>进行遍历，交替拼接：[1-&gt;5-&gt;2-&gt;4-&gt;3-&gt;NULL]</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<p>5.Code(<a href="https://leetcode.com/submissions/detail/289773356/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/289773356/</a>)</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">reorderList</span><span class="params">(ListNode* head)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (head == <span class="literal">NULL</span> || head-&gt;next == <span class="literal">NULL</span> || head-&gt;next-&gt;next == <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        ListNode* slow = head;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        ListNode* fast = head;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        ListNode* pre = <span class="literal">NULL</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        ListNode* prepre = <span class="literal">NULL</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">//find the mid</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span> (fast != <span class="literal">NULL</span> &amp;&amp; fast-&gt;next != <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            slow = slow-&gt;next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">            fast = fast-&gt;next-&gt;next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        ListNode* cur = slow-&gt;next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        slow-&gt;next = <span class="literal">NULL</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">//reverse right half</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span> (cur != <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">            pre = cur;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">            cur = cur-&gt;next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">            pre-&gt;next = prepre;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">            prepre = pre;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">        </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">//merge</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">        prepre = head;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">        ListNode* tempPP = <span class="literal">NULL</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">        ListNode* tempP = <span class="literal">NULL</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span> (pre != <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">            tempPP = prepre;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">            tempP = pre;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">            prepre = prepre-&gt;next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">            pre = pre-&gt;next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">            tempPP-&gt;next = tempP;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">            tempP-&gt;next = prepre;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
+<li>n为1时，答案为1</li>
+<li>n为2时，答案为2</li>
+<li>题目保证n是正整数</li>
+</ol>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><ol>
+<li>状态定义：dp[i]：有多少种不同的方法到达第i个台阶。</li>
+<li>转移方程：dp[i] = dp[i - 2] + dp[i - 1]；答案就是dp[n - 1]；</li>
+<li>边界条件：dp[0] = 1, dp[1] = 2</li>
+<li>计算顺序：从2开始，到n - 1结束。</li>
+</ol>
+<h3 id="Solution-1：Dynamic-Programming-Iterative"><a href="#Solution-1：Dynamic-Programming-Iterative" class="headerlink" title="Solution-1：Dynamic Programming(Iterative)"></a>Solution-1：Dynamic Programming(Iterative)</h3><p>1.dp[i] = dp[i - 2] + dp[i - 1]</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/261623472/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/261623472/</a>)<br>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">climbStairs</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (<span class="number">1</span> == n || <span class="number">2</span> == n) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> n;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dp(n, <span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        dp[<span class="number">0</span>] = <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        dp[<span class="number">1</span>] = <span class="number">2</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; n; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            dp[i] = dp[i - <span class="number">1</span>] + dp[i - <span class="number">2</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> dp[n - <span class="number">1</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+
+<h3 id="Solution-2：Dynamic-Programming-Iterative-Space-Optimization"><a href="#Solution-2：Dynamic-Programming-Iterative-Space-Optimization" class="headerlink" title="Solution-2：Dynamic Programming(Iterative) + Space Optimization"></a>Solution-2：Dynamic Programming(Iterative) + Space Optimization</h3><p>1.dp[i] = dp[i - 2] + dp[i - 1]</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/261625030/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/261625030/</a>)<br>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">climbStairs</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (n == <span class="number">1</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> first = <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> second = <span class="number">2</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">3</span>; i &lt;= n; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">int</span> third = first + second;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            first = second;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            second = third;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> second;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/30/Linked%20List/Leetcode-143-Reorder%20List/" data-id="ck4whum68001vtct75ow6ew17" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/01/01/DP/Leetcode-070-Climbing%20Stairs/" data-id="ck4wp32vo001fg4t79q3o9qy6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -114,7 +149,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/7/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/103/">103</a><a class="extend next" rel="next" href="/page/9/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/7/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/104/">104</a><a class="extend next" rel="next" href="/page/9/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -146,6 +181,10 @@
       <ul>
         
           <li>
+            <a href="/2020/01/02/DP/Leetcode-120-Triangle/">【DP专项】120.Triangle</a>
+          </li>
+        
+          <li>
             <a href="/2020/01/02/DP/Leetcode-213-House%20Robber%20II/">【DP专项】213.House Robber II</a>
           </li>
         
@@ -159,10 +198,6 @@
         
           <li>
             <a href="/2020/01/02/DP/Leetcode-064-Minimum%20Path%20Sum/">【DP专项】064.Minimum Path Sum</a>
-          </li>
-        
-          <li>
-            <a href="/2020/01/02/DP/Leetcode-198-House%20Robber/">【DP专项】198.House Robber</a>
           </li>
         
       </ul>

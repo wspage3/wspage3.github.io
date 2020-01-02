@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Linked List/Leetcode-019-Remove Nth Node From End of List" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Linked List/Leetcode-002-Add Two Numbers" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/30/Linked%20List/Leetcode-019-Remove%20Nth%20Node%20From%20End%20of%20List/" class="article-date">
-  <time datetime="2019-12-30T07:40:51.855Z" itemprop="datePublished">2019-12-30</time>
+    <a href="/2019/12/30/Linked%20List/Leetcode-002-Add%20Two%20Numbers/" class="article-date">
+  <time datetime="2019-12-30T07:57:04.319Z" itemprop="datePublished">2019-12-30</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/30/Linked%20List/Leetcode-019-Remove%20Nth%20Node%20From%20End%20of%20List/">【链表专项】019.Remove Nth Node From End of List</a>
+      <a class="article-title" href="/2019/12/30/Linked%20List/Leetcode-002-Add%20Two%20Numbers/">【链表专项】002.Add Two Numbers</a>
     </h1>
   
 
@@ -83,24 +83,23 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/remove-nth-node-from-end-of-list/" target="_blank" rel="noopener">019.Remove Nth Node From End of List</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个单链表，头为head。<br>给定一个正整数n：[0, num]。其中num是链表中结点的数目。<br>【输出】<br>将上述单链表中从后面数第n个结点删除掉。<br>注意：编号不管从前还是从后，都是从1开始。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Given linked list: 1-&gt;2-&gt;3-&gt;4-&gt;5, and n = 2.<br>After removing the second node from the end, the linked list becomes 1-&gt;2-&gt;3-&gt;5.</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/add-two-numbers/" target="_blank" rel="noopener">002.Add Two Numbers</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定两个非空的单链表。<br>代表两个非负整数。链表中第一个结点为个位，其次十位、百位…<br>【输出】<br>计算出上述两个非负整数的和。并用同样的形式表示该数字，即以链表的形式返回。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: (2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)<br>Output: 7 -&gt; 0 -&gt; 8<br>Explanation: 342 + 465 = 807.</p>
 <h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
-<li>链表为NULL时，无需处理。</li>
-<li>n为0时，无需处理。</li>
-<li>one pass处理。即：仅仅遍历链表一次。</li>
+<li>给定的两个单链表均至少有一个结点。</li>
+<li>非零的数字不会以0开头的。即不会用[3-&gt;2-&gt;1-&gt;0-&gt;0]来表示123。</li>
 </ol>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Iterative-Solution"><a href="#Solution-1：Iterative-Solution" class="headerlink" title="Solution-1：Iterative Solution"></a>Solution-1：Iterative Solution</h3><p>1.常规思路：先获取到链表中有多少结点，然后推算出来从前往后是要删除哪一个节点。<br>再经过一次遍历，删除对应的结点。</p>
-<p>2.本题要求one pass处理，即不允许遍历链表两次。可以使用快慢指针法：<br>slow指针初始化为head<br>fast指针初始化为head，fast先向后走n步（1 &lt;= n &lt;= num）。此时检查fast是否为NULL。<br>a.如果NULL，说明n == num，要删除链表中第一个元素。<br>b.如果不为NULL的话，说明n &lt; num，要删除的结点非head。</p>
-<p>3.此时slow，fast同时出发，它们之间相距n个结点。<br>它们俩同时往后移动，直到fast遍历到链表中的最后一个结点，停止。此时slow-&gt;next即要删除的结点。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<p>5.Code(<a href="https://leetcode.com/submissions/detail/279781260/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/279781260/</a>)</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function">ListNode* <span class="title">removeNthFromEnd</span><span class="params">(ListNode* head, <span class="keyword">int</span> n)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (head == <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="literal">NULL</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (n == <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> head;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        ListNode* slow = head;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        ListNode* fast = head;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        ListNode* temp = <span class="literal">NULL</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            fast = fast-&gt;next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (fast == <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">            <span class="comment">/* 说明此时要删除的节点是链表的首节点 */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">            temp = head-&gt;next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">delete</span> head;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> temp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span> (fast-&gt;next != <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">            slow = slow-&gt;next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">            fast = fast-&gt;next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">        temp = slow-&gt;next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">        slow-&gt;next = slow-&gt;next-&gt;next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">delete</span> temp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> head;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Iterative-Solution"><a href="#Solution-1：Iterative-Solution" class="headerlink" title="Solution-1：Iterative Solution"></a>Solution-1：Iterative Solution</h3><p>1.回忆【021.Merge Two Sorted Lists】中，我们使用了dummy，初始化cur指向它。每次后接一个结点，同时cur后移。直到两个链表都被遍历完。最终返回dummy.next即可。</p>
+<p>2.思路：模拟加法运算。由于链表的头一定都是数字的个位，所以相加，产生的进位用extra存起来，放在下一次运算中，把它加上即可。</p>
+<p>3.当l1或者l2不为空时，或extra还存在时，说明还可以进行计算：</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(1) //返回的结构不计入其中</p>
+<p>5.Code(<a href="https://leetcode.com/submissions/detail/289719293/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/289719293/</a>)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function">ListNode* <span class="title">addTwoNumbers</span><span class="params">(ListNode* l1, ListNode* l2)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="function">ListNode <span class="title">dummy</span><span class="params">(<span class="number">0</span>)</span></span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        ListNode* cur = &amp;dummy;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> extra = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span> (l1 != <span class="literal">NULL</span> || l2 != <span class="literal">NULL</span> || extra != <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">int</span> sum = (l1 != <span class="literal">NULL</span> ? l1-&gt;val : <span class="number">0</span>) + (l2 != <span class="literal">NULL</span> ? l2-&gt;val : <span class="number">0</span>) + extra;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">            ListNode* next = <span class="keyword">new</span> ListNode(sum % <span class="number">10</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">            cur-&gt;next = next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            cur = cur-&gt;next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            extra = sum / <span class="number">10</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">            l1 = (l1 != <span class="literal">NULL</span> ? l1-&gt;next : l1);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            l2 = (l2 != <span class="literal">NULL</span> ? l2-&gt;next : l2);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> dummy.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/30/Linked%20List/Leetcode-019-Remove%20Nth%20Node%20From%20End%20of%20List/" data-id="ck4whum63001mtct76mnfdlpj" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/30/Linked%20List/Leetcode-002-Add%20Two%20Numbers/" data-id="ck4wp32vq001lg4t751at1msn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -114,7 +113,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/12/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/103/">103</a><a class="extend next" rel="next" href="/page/14/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/12/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/104/">104</a><a class="extend next" rel="next" href="/page/14/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -146,6 +145,10 @@
       <ul>
         
           <li>
+            <a href="/2020/01/02/DP/Leetcode-120-Triangle/">【DP专项】120.Triangle</a>
+          </li>
+        
+          <li>
             <a href="/2020/01/02/DP/Leetcode-213-House%20Robber%20II/">【DP专项】213.House Robber II</a>
           </li>
         
@@ -159,10 +162,6 @@
         
           <li>
             <a href="/2020/01/02/DP/Leetcode-064-Minimum%20Path%20Sum/">【DP专项】064.Minimum Path Sum</a>
-          </li>
-        
-          <li>
-            <a href="/2020/01/02/DP/Leetcode-198-House%20Robber/">【DP专项】198.House Robber</a>
           </li>
         
       </ul>
