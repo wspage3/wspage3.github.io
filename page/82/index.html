@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Leetcode-309-Best Time to Buy and Sell Stock with Cooldown" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Leetcode-020-Valid Parentheses" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/10/Leetcode-309-Best%20Time%20to%20Buy%20and%20Sell%20Stock%20with%20Cooldown/" class="article-date">
-  <time datetime="2019-12-10T06:51:24.948Z" itemprop="datePublished">2019-12-10</time>
+    <a href="/2019/12/12/Leetcode-020-Valid%20Parentheses/" class="article-date">
+  <time datetime="2019-12-12T08:10:34.517Z" itemprop="datePublished">2019-12-12</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/10/Leetcode-309-Best%20Time%20to%20Buy%20and%20Sell%20Stock%20with%20Cooldown/">Leetcode309-Best Time to Buy and Sell Stock with Cooldown</a>
+      <a class="article-title" href="/2019/12/12/Leetcode-020-Valid%20Parentheses/">20.Valid Parentheses</a>
     </h1>
   
 
@@ -83,21 +83,23 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/" target="_blank" rel="noopener">Leetcode309-Best Time to Buy and Sell Stock with Cooldown</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组prices；prices[i]代表第i天股票的价格。<br>最多交易次数不限，求出你最多能赚多少钱。<br>前提是：买入下一股的时候，必须将上一股卖掉。<br>而且建议冷却期为1天，即：今天卖掉，后天才能买入。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [1,2,3,0,2]<br>Output: 3<br>Explanation: transactions = [buy, sell, cooldown, buy, sell]</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n: 当n为0/1的时候，直接返回0；<br>赚不到钱则返回0；</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Dynamic-Programming"><a href="#Solution-1：Dynamic-Programming" class="headerlink" title="Solution-1：Dynamic Programming"></a>Solution-1：Dynamic Programming</h3><p>1.对于任意一天i，有三种选择：buy, sell, rest<br>2.状态转移方程：<br>buy[i] = max(buy[i - 1], sell[i - 2] - prices[i]);//左边代表：今天休息；右边代表：今天用前天的利润来进一批货。<br>sell[i] = max(sell[i - 1], buy[i - 1] + prices[i]);//左边代表：今天休息；右边代表：今天在昨天进货的基础上，卖掉货。<br>buy[i]:时间范围[0, i]内，最后一次操作是buy或者rest，所能获得的最高利润<br>sell[i]:时间范围[0, i]内，最后一次操作是sell或者rest，所能获得的最高利润</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/valid-parentheses/" target="_blank" rel="noopener">20.Valid Parentheses</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的字符串s；<br>判断该字符串是否一个合法的括号表达式；<br>括号有三种：[] {} ()<br>open的bracket最终必须有一个同类型close的bracket与之匹配；<br>且上述匹配的顺序必须是正确的。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: “()[]{}”<br>Output: true</p>
+<p>Input: “([)]”<br>Output: false</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n: 当n为0的时候，也认为是合法的；</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Stack"><a href="#Solution-1：Stack" class="headerlink" title="Solution-1：Stack"></a>Solution-1：Stack</h3><p>1.若n是奇数，那么一定非法。<br>若n是0，则直接return true。</p>
+<p>2.考虑n为大于0的偶数：<br>模拟括号匹配的过程：i在范围[0, n - 1]内遍历：<br>先将s[0]压入栈；<br>考察s[1]，若s[1]和s[0]是同类型的，且一个s[1]是close，s[0]是open的，那么说明这两个是一对。<br>则此时将s[0]从栈中抛出，i跳到位置2，考虑第二个元素。<br>若s[1]的出现无法和s[0]匹配掉，则将s[1]在压入栈，考虑下一个元素。<br>……<br>直到所有的n个元素都遍历过了，此时检查栈，如果栈是空的，说明所有的括号都可以匹配。<br>如果此时栈非空，则说明存在元素无法匹配。</p>
 <p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/284970939/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284970939/</a>)</p>
-<h3 id="Solution-2：Dynamic-Programming-Optimization"><a href="#Solution-2：Dynamic-Programming-Optimization" class="headerlink" title="Solution-2：Dynamic Programming + Optimization"></a>Solution-2：Dynamic Programming + Optimization</h3><p>1.优化空间复杂度</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/284973472/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284973472/</a>)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/285447709/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285447709/</a>)</p>
+<h3 id="Solution-2：Stack"><a href="#Solution-2：Stack" class="headerlink" title="Solution-2：Stack"></a>Solution-2：Stack</h3><p>1.另一种方法：<br>从[0, n - 1]考虑每一个s[i]<br>若s[i]是open的bracket，则将其“另一半”压入栈。<br>否则的话，判断此时栈是否为空，是的话，直接return false。<br>栈不空的话，判断当前元素是否和栈顶元素相同，不同的话，也直接return false。<br>相同的话，将栈顶元素抛出，转移到考虑s[i + 1]</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/285450396/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285450396/</a>)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/10/Leetcode-309-Best%20Time%20to%20Buy%20and%20Sell%20Stock%20with%20Cooldown/" data-id="ck4slunp3000uc0t78h95515r" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/12/Leetcode-020-Valid%20Parentheses/" data-id="ck4whum470002tct74fqp1tzi" class="article-share-link">Share</a>
       
       
     </footer>
@@ -111,7 +113,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/81/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/80/">80</a><a class="page-number" href="/page/81/">81</a><span class="page-number current">82</span><a class="page-number" href="/page/83/">83</a><a class="page-number" href="/page/84/">84</a><span class="space">&hellip;</span><a class="page-number" href="/page/96/">96</a><a class="extend next" rel="next" href="/page/83/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/81/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/80/">80</a><a class="page-number" href="/page/81/">81</a><span class="page-number current">82</span><a class="page-number" href="/page/83/">83</a><a class="page-number" href="/page/84/">84</a><span class="space">&hellip;</span><a class="page-number" href="/page/103/">103</a><a class="extend next" rel="next" href="/page/83/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -130,7 +132,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li></ul>
     </div>
   </div>
 
@@ -143,23 +145,23 @@
       <ul>
         
           <li>
-            <a href="/2019/12/30/Linked%20List/Leetcode-143-Reorder%20List/">【链表专项】143.Reorder List</a>
+            <a href="/2020/01/02/DP/Leetcode-213-House%20Robber%20II/">【DP专项】213.House Robber II</a>
           </li>
         
           <li>
-            <a href="/2019/12/30/Linked%20List/Leetcode-142-Linked%20List%20Cycle%20II/">【链表专项】142.Linked List Cycle II</a>
+            <a href="/2020/01/02/DP/Leetcode-063-Unique%20Paths%20II/">【DP专项】063.Unique Paths II</a>
           </li>
         
           <li>
-            <a href="/2019/12/30/Linked%20List/Leetcode-160-Intersection%20of%20Two%20Linked%20Lists/">【链表专项】160.Intersection of Two Linked Lists</a>
+            <a href="/2020/01/02/DP/Leetcode-062-Unique%20Paths/">【DP专项】062.Unique Paths</a>
           </li>
         
           <li>
-            <a href="/2019/12/30/Linked%20List/Leetcode-024-Swap%20Nodes%20in%20Pairs/">【链表专项】024.Swap Nodes in Pairs</a>
+            <a href="/2020/01/02/DP/Leetcode-064-Minimum%20Path%20Sum/">【DP专项】064.Minimum Path Sum</a>
           </li>
         
           <li>
-            <a href="/2019/12/30/Linked%20List/Leetcode-002-Add%20Two%20Numbers/">【链表专项】002.Add Two Numbers</a>
+            <a href="/2020/01/02/DP/Leetcode-198-House%20Robber/">【DP专项】198.House Robber</a>
           </li>
         
       </ul>
@@ -174,7 +176,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2019 wspage3<br>
+      &copy; 2020 wspage3<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

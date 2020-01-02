@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Leetcode-238-Product of Array Except Self" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Leetcode-042-Trapping Rain Water" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/03/Leetcode-238-Product%20of%20Array%20Except%20Self/" class="article-date">
-  <time datetime="2019-12-03T09:29:50.853Z" itemprop="datePublished">2019-12-03</time>
+    <a href="/2019/12/06/Leetcode-042-Trapping%20Rain%20Water/" class="article-date">
+  <time datetime="2019-12-06T02:46:59.128Z" itemprop="datePublished">2019-12-06</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/03/Leetcode-238-Product%20of%20Array%20Except%20Self/">Leetcode-238 Product of Array Except Self</a>
+      <a class="article-title" href="/2019/12/06/Leetcode-042-Trapping%20Rain%20Water/">Leetcode42-Trapping Rain Water</a>
     </h1>
   
 
@@ -83,22 +83,33 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/product-of-array-except-self/" target="_blank" rel="noopener">Leetcode-238 Product of Array Except Self</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组nums，n &gt; 1。<br>求数组output，其中output[i]表示所有除了i之外，所有其它数字的乘积。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input:  [1,2,3,4]<br>Output: [24,12,8,6]</p>
-<h3 id="3-Note"><a href="#3-Note" class="headerlink" title="3.Note"></a>3.Note</h3><p>a.过程中不使用除法。<br>b.时间复杂度要求：O(n)。<br>c.空间复杂度要求：O(1)，函数返回的数组不算入空间复杂度。</p>
-<h3 id="4-Corner-Case"><a href="#4-Corner-Case" class="headerlink" title="4.Corner Case"></a>4.Corner Case</h3><p>题目保证了n &gt; 1</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>直观的想法就是遍历n次，每次累乘(n - 1)个数字。<br>时间复杂度：O(n ^ 2)<br>空间复杂度：O(1)</p>
-<h3 id="Solution-2：递推"><a href="#Solution-2：递推" class="headerlink" title="Solution-2：递推"></a>Solution-2：递推</h3><p>1.假设我们要求output[i]，i的范围为：[0, n - 1]，也就是nums数组中除了nums[i]之外所有的数字的乘积。也就是求[0, i - 1]以及[i + 1, n - 1]两个范围内所有数的乘积。</p>
-<p>2.新增数组s，设数组s[i]表示范围[0, i - 1]内所有数字的乘积。i的范围为：[1, n - 1]<br>新增数组t，设t[i]为[i + 1, n - 1]所有数字的乘积。i的范围为：[0, n - 2]<br>数组s只需要从前到后遍历一次nums即可求出。<br>数组t从后到前遍历一次nums也能求出。<br>在s和t都求出的情况下，output也只需要O(n)的时间即可求出：output[i] = s[i] * t[i];<br>时间复杂度：O(3 * n)<br>空间复杂度：O(2 * n)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/283206956/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283206956/</a>)</p>
-<h3 id="Solution-3：进一步优化"><a href="#Solution-3：进一步优化" class="headerlink" title="Solution-3：进一步优化"></a>Solution-3：进一步优化</h3><p>1.可以省略数组s，和数组t：<br>数组s的值就保留在output数组中。<br>数组t用一个int变量表示。<br>时间复杂度：O(2 * n)<br>空间复杂度：O(1)</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/283208630/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283208630/</a>)</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/trapping-rain-water/" target="_blank" rel="noopener">Leetcode42-Trapping Rain Water</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的非负整数数组height；height[i]代表第个石头的高度；石头宽度都是1；<br>求出这个图中所有石头可以存储的水的体积。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [0,1,0,2,1,0,1,3,2,1,2,1]<br>Output: 6</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n：当n为0/1/2的时候，直接返回0；<br>heights[i]：题目保证非负</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>要想可以存储水，则n的数目至少为2。<br>例如[2,1,3]此时，由于中间高度为1，两边都比它高，所以可以存储水，水量为min(2, 3) - 1 = 1。<br>所以，我们对[0, n - 1]的每个位置进行遍历，找出每个位置可以存储的水量resI，则答案就是所有resI的和。<br>对于位置i来说，需要找到[0, i - 1]最高的高度a；以及[i + 1, n - 1]最高的高度b；<br>且min(a, b)大于height[i]的时候，位置i才可以存储水。<br>所以问题转化为：求给定一个元素i，它左边最大的值，以及它右边最大的值。</p>
+<h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>1.i从[0, n - 1]遍历。<br>对于每个i，leftMax和rightMax记录其左右两侧最大的值，则res[i] = min(leftMax, rightMax) - height[i]<br>leftMax/rightMax 均初始化为height[i]。这样假设左边或者右边没有比自身大的话，答案就是0了。<br>然后ans累加每次计算出来的resI。</p>
+<p>时间复杂度：O(n ^ 2)<br>空间复杂度：O(1)：<br>结果发现：此方法仅打败了5%的时间复杂度。</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/284036549/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284036549/</a>)</p>
+<h3 id="Solution-2：Dynamic-programming"><a href="#Solution-2：Dynamic-programming" class="headerlink" title="Solution-2：Dynamic programming"></a>Solution-2：Dynamic programming</h3><p>1.上面的核心思路是“对于任意一个i，找到[0, i - 1]和[i + 1, n - 1]内的最大值，然后计算res[i]”<br>而对于任意一个i，我们找到左边、右边最大值的复杂度都是O(n)。而对于n个i，则是O(n ^ 2)。</p>
+<p>2.根据Leetcode84-Largest Rectangle in Histogram的Solution2的启示：<br>求所有区间[i, j]内的最小值，从O(n ^ 3)优化为O(n ^ 2)，其中区间个数为n ^ 2。也就是说，求每个区间内最值的时间复杂度可以优化为O(1)。</p>
+<p>3.leftMax[i]表示：[0, i - 1]内的最大值，那leftMax[i + 1] = max(height[i], leftMax[i]);<br>也就是说，求当前的最大值，可以通过上一次的结果递推得到。<br>那么对于所有的i（i在[0, n - 1]），只要从前到后遍历一次即可求得所有的leftMax[i];<br>同理，rightMax[i]一样。<br>可以看出，通过空间换时间的方法，将O(n ^ 2)优化为O(n)<br>这样，我们在O(n)的时间内就解决了本题目。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/284056325/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284056325/</a>)</p>
+<h3 id="Solution-3：Monotonous-Stack"><a href="#Solution-3：Monotonous-Stack" class="headerlink" title="Solution-3：Monotonous Stack"></a>Solution-3：Monotonous Stack</h3><p>1.上面的想法是：对于第i个位置，找出它左边最大的数字a，右边最大的数字b，然后答案就可以计算了。<br>换个思路，对于位置cur，我们不去找它左边或者右边最大的数字；<br>我们找第一个比它大的数字：左边下标记为i，右边下标记录为j。<br>如果找到的话，计算出来这个凹坑的面积，答案累加上这个值。res += min(height[i], height[j]) * (j - i - 1)<br>此时，由于这块面积已经被累加过了，则可以想象成这个凹坑已经被填上了。遍历了所有的凹坑后，答案就出来了。<br>自然地，根据739. Daily Temperatures的启示，我们使用单调栈很容易找到一个元素左边和右边第一个比自己大的值。</p>
+<p>2.具体算法：如果出现一个新元素，大于栈顶元素，则将栈中元素抛出k个，且每个计算结果，并累加。<br>如果当前元素小于栈顶元素，则将其压入栈内即可。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/284093452/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284093452/</a>)</p>
+<h3 id="Solution-4：Two-Pointers"><a href="#Solution-4：Two-Pointers" class="headerlink" title="Solution-4：Two Pointers"></a>Solution-4：Two Pointers</h3><p>1.回想下Solution-2，对于任意i，找到leftMax[i]和rightMax[i]。然后就可以计算res[i]的值了。<br>2.同时，可以发现，当leftMax[i]小于rightMax[i]的时候，res[i]的值由宽度和leftMax[i]决定。<br>3.left指针指向1号元素，left向右移动。<br>right指针指向n - 2号元素，right向左移动。<br>leftMax表示“此时此刻，对于当前元素来说，它左边的最大值”，初始化为height[0]<br>rightMax表示“此时此刻，对于当前元素来说，它右边的最大值”，初始化为height[n - 1]<br>则考虑[left, right]区间内的每一个元素：<br>如果此时leftMax小于rightMax：说明：<br>a.对于当前元素cur来说（left位置的），这个位置能否存储水，只和height[left]和leftMax有关。<br>b.对于当前元素cur来说（left位置的），不管我右边的高度分别是多少，只要我右边存在一个位置使得rightMax &gt; leftMax，那么当前位置的存水量就只依赖于leftMax。<br>此时，ans累加该位置存储的水量，更新leftMax，left后移一位。</p>
+<p>如果此时leftMax大于等于rightMax，说明：<br>a.对于当前元素cur来说（right位置的），这个位置能否存储水，只和height[right]和rightMax有关。<br>b.对于当前元素cur来说（right位置的），不管我左边的高度分别是多少，只要我左边存在一个位置使得rightMax &lt;= leftMax，那么当前位置的存水量就只依赖于rightMax。<br>此时，ans累加该位置存储的水量，更新rightMax，right后移一位。</p>
+<p>left从左往右，right从右往左，每次循环找出一个位置的答案，然后left++或者right–，直到left &gt; right，此时所有位置的答案都交替计算出来了。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
+<p>4.Code(<a href="https://leetcode.com/submissions/detail/284130675/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284130675/</a>)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/03/Leetcode-238-Product%20of%20Array%20Except%20Self/" data-id="ck4slunp3000nc0t7cv46hpo7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/06/Leetcode-042-Trapping%20Rain%20Water/" data-id="ck4whum490006tct7fb4j2o50" class="article-share-link">Share</a>
       
       
     </footer>
@@ -112,7 +123,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/94/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/93/">93</a><a class="page-number" href="/page/94/">94</a><span class="page-number current">95</span><a class="page-number" href="/page/96/">96</a><a class="extend next" rel="next" href="/page/96/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/94/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/93/">93</a><a class="page-number" href="/page/94/">94</a><span class="page-number current">95</span><a class="page-number" href="/page/96/">96</a><a class="page-number" href="/page/97/">97</a><span class="space">&hellip;</span><a class="page-number" href="/page/103/">103</a><a class="extend next" rel="next" href="/page/96/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -131,7 +142,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li></ul>
     </div>
   </div>
 
@@ -144,23 +155,23 @@
       <ul>
         
           <li>
-            <a href="/2019/12/30/Linked%20List/Leetcode-143-Reorder%20List/">【链表专项】143.Reorder List</a>
+            <a href="/2020/01/02/DP/Leetcode-213-House%20Robber%20II/">【DP专项】213.House Robber II</a>
           </li>
         
           <li>
-            <a href="/2019/12/30/Linked%20List/Leetcode-142-Linked%20List%20Cycle%20II/">【链表专项】142.Linked List Cycle II</a>
+            <a href="/2020/01/02/DP/Leetcode-063-Unique%20Paths%20II/">【DP专项】063.Unique Paths II</a>
           </li>
         
           <li>
-            <a href="/2019/12/30/Linked%20List/Leetcode-160-Intersection%20of%20Two%20Linked%20Lists/">【链表专项】160.Intersection of Two Linked Lists</a>
+            <a href="/2020/01/02/DP/Leetcode-062-Unique%20Paths/">【DP专项】062.Unique Paths</a>
           </li>
         
           <li>
-            <a href="/2019/12/30/Linked%20List/Leetcode-024-Swap%20Nodes%20in%20Pairs/">【链表专项】024.Swap Nodes in Pairs</a>
+            <a href="/2020/01/02/DP/Leetcode-064-Minimum%20Path%20Sum/">【DP专项】064.Minimum Path Sum</a>
           </li>
         
           <li>
-            <a href="/2019/12/30/Linked%20List/Leetcode-002-Add%20Two%20Numbers/">【链表专项】002.Add Two Numbers</a>
+            <a href="/2020/01/02/DP/Leetcode-198-House%20Robber/">【DP专项】198.House Robber</a>
           </li>
         
       </ul>
@@ -175,7 +186,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2019 wspage3<br>
+      &copy; 2020 wspage3<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

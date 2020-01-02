@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Leetcode-278-First Bad Version" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Leetcode-426-Partition Equal Subset Sum" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/13/Leetcode-278-First%20Bad%20Version/" class="article-date">
-  <time datetime="2019-12-13T05:19:52.802Z" itemprop="datePublished">2019-12-13</time>
+    <a href="/2019/12/16/Leetcode-426-Partition%20Equal%20Subset%20Sum/" class="article-date">
+  <time datetime="2019-12-16T05:49:07.443Z" itemprop="datePublished">2019-12-16</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/13/Leetcode-278-First%20Bad%20Version/">278.First Bad Version</a>
+      <a class="article-title" href="/2019/12/16/Leetcode-426-Partition%20Equal%20Subset%20Sum/">416.Partition Equal Subset Sum</a>
     </h1>
   
 
@@ -83,20 +83,28 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/first-bad-version/" target="_blank" rel="noopener">278.First Bad Version</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【背景】<br>你是一个产品经理，你发现当前的产品版本中质量不过关。<br>由于每个版本都是基于上一个版本，修修改改进行发布的。所以当某个版本引入一个bug后，后面所有的版本都由bug。<br>你希望找出来是哪个版本引入了bug。<br>有一个API-isBadVersion可以根据版本号来确定当前版本是否由bug。如果有问题，则返回true。否则，返回false。<br>【输入】<br>给定一个整数n，代表当前版本号。版本号从1开始编号，且连续。<br>所以说n代表当前有n个版本。<br>【输出】<br>输出第一个出现bug的那个版本号。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Given n = 5, and version = 4 is the first bad version.</p>
-<p>call isBadVersion(3) -&gt; false<br>call isBadVersion(5) -&gt; true<br>call isBadVersion(4) -&gt; true</p>
-<p>Then 4 is the first bad version. </p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Binary-Search"><a href="#Solution-1：Binary-Search" class="headerlink" title="Solution-1：Binary Search"></a>Solution-1：Binary Search</h3><p>1.二分搜索。<br>我们要找到第一个有问题的版本，类似【找到target最小的索引】<br>考虑范围[left, right)，取mid：<br>如果当前mid没问题，说明答案一定在[mid + 1, right)范围内。<br>如果当前mid有问题，说明答案一定在[left, mid]范围内。<br>此时我们在[left, mid)上继续搜索。<br>如果[left, mid)上所有版本都没问题，那么答案就是mid。<br>否则答案就在[left, mid)中。</p>
-<p>2.考虑最后一次循环，left = right - 1<br>此时mid = left，然后判断mid的合法性。<br>如果此时mid有问题，right = mid = left。循环结束。left(right)就是答案。<br>如果此时mid没问题，left = mid + 1 = right。循环结束。此时还剩left(right)这个位置没有判断合法性。那么它一定是答案。</p>
-<p>时间复杂度：O(log n)<br>空间复杂度：O(1)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/285606627/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285606627/</a>)</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/partition-equal-subset-sum/" target="_blank" rel="noopener">416.Partition Equal Subset Sum</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个长度为n的整数数组。n大于0。<br>其中所有的元素取值都是正整数。<br>【输出】<br>判断这个数组中是否能分成两个数组，它们的和相等。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [1, 5, 11, 5]<br>Output: true<br>Explanation: The array can be partitioned as [1, 5, 5] and [11].</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.n: 大于0<br>2.nums[i]: 大于0</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：0-1-Knapsack"><a href="#Solution-1：0-1-Knapsack" class="headerlink" title="Solution-1：0/1 Knapsack"></a>Solution-1：0/1 Knapsack</h3><p>1.实质上：本题目就是求nums数组的一个子数组，使得其和为nums数组的和的一半。</p>
+<p>2.求出nums数组的和sum。若sum是奇数，则直接return false。</p>
+<p>3.对于任意一个nums[i]，我们可以选择它，也可能不选择它。<br>要是选择的话最多只能使用一次。然后看能不能凑到target（sum / 2）。</p>
+<p>4.0/1 knapsack问题<br>i: [0, n - 1]<br>j: [0, target]<br>dp数组用bool类型即可。若为true，则说明可以凑成target。<br>dp[i][j]代表：从[0, i]区间任意选择一些元素（每个元素只能选一次），使得和为j。<br>则答案就是：dp[0][target] || dp[1][target] … || dp[n - 2][target] || dp[n - 1][target]</p>
+<p>5.边界值：<br>不管i为多少，若j为0，则dp[i][0] = true；<br>若i为0，当j == nums[0]的时候，dp[0][j] = true；<br>状态转移方程：dp[i][j] = (dp[i - 1][j]) &amp;&amp; (dp[i - 1][j - nums[i]])<br>左边代表：不取nums[i]<br>右边代表：选择nums[i]。当nums[i] &gt; j的时候，右边为false。</p>
+<p>时间复杂度：O(n * c) //c代表nums数组累加和的一半<br>空间复杂度：O(n * c)</p>
+<p>6.Code(<a href="https://leetcode.com/submissions/detail/286289354/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286289354/</a>)</p>
+<p>7.进一步，压缩空间复杂度。可以发现dp[i][j]只和dp[i - 1][…]有关。所以把二维数组压缩为一维。<br>dp[j] = dp[j] || dp[j - nums[i]];<br>从二维的方程可以看出，当前位置的值依赖于两个值：这个位置上方的，这个位置左上方的。<br>如果压缩为一维的时候，继续让j从小到大遍历的话，这样当需要‘左上方’的时候，这个值一定是被覆盖过的。<br>所以需要让j从大到小遍历。</p>
+<p>时间复杂度：O(n * c) //c代表nums数组累加和的一半<br>空间复杂度：O(c)</p>
+<p>8.Code(<a href="https://leetcode.com/submissions/detail/286325812/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286325812/</a>)</p>
+<h3 id="Solution-2：DFS"><a href="#Solution-2：DFS" class="headerlink" title="Solution-2：DFS"></a>Solution-2：DFS</h3><p>1.将数组由大到小排序。<br>2.return dfs(nums, sum / 2, 0);<br>3.在递归中：<br>首先判断index是否在[0, n - 1]范围内，若超过该范围，return false。<br>然后判断nums[index] == target，如果满足，则return true。<br>接着判断nums[index] &gt; target，如果满足，则return false。<br>最后递归调用左子树和右子树即可，返回它们的返回值的or运算结果。<br>左子树：dfs(nums, target - nums[index], index + 1);<br>右子树：dfs(nums, target, index + 1);</p>
+<p>4.如果先调用右子树的话，会TLE。</p>
+<p>5.Code(<a href="https://leetcode.com/submissions/detail/286330983/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286330983/</a>)<br>结果发现这个提交beat 100%。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/13/Leetcode-278-First%20Bad%20Version/" data-id="ck4slunp3000rc0t73xlabwoa" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/16/Leetcode-426-Partition%20Equal%20Subset%20Sum/" data-id="ck4whum4q000utct73pyo1rl6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -110,7 +118,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/71/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/70/">70</a><a class="page-number" href="/page/71/">71</a><span class="page-number current">72</span><a class="page-number" href="/page/73/">73</a><a class="page-number" href="/page/74/">74</a><span class="space">&hellip;</span><a class="page-number" href="/page/96/">96</a><a class="extend next" rel="next" href="/page/73/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/71/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/70/">70</a><a class="page-number" href="/page/71/">71</a><span class="page-number current">72</span><a class="page-number" href="/page/73/">73</a><a class="page-number" href="/page/74/">74</a><span class="space">&hellip;</span><a class="page-number" href="/page/103/">103</a><a class="extend next" rel="next" href="/page/73/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -129,7 +137,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li></ul>
     </div>
   </div>
 
@@ -142,23 +150,23 @@
       <ul>
         
           <li>
-            <a href="/2019/12/30/Linked%20List/Leetcode-143-Reorder%20List/">【链表专项】143.Reorder List</a>
+            <a href="/2020/01/02/DP/Leetcode-213-House%20Robber%20II/">【DP专项】213.House Robber II</a>
           </li>
         
           <li>
-            <a href="/2019/12/30/Linked%20List/Leetcode-142-Linked%20List%20Cycle%20II/">【链表专项】142.Linked List Cycle II</a>
+            <a href="/2020/01/02/DP/Leetcode-063-Unique%20Paths%20II/">【DP专项】063.Unique Paths II</a>
           </li>
         
           <li>
-            <a href="/2019/12/30/Linked%20List/Leetcode-160-Intersection%20of%20Two%20Linked%20Lists/">【链表专项】160.Intersection of Two Linked Lists</a>
+            <a href="/2020/01/02/DP/Leetcode-062-Unique%20Paths/">【DP专项】062.Unique Paths</a>
           </li>
         
           <li>
-            <a href="/2019/12/30/Linked%20List/Leetcode-024-Swap%20Nodes%20in%20Pairs/">【链表专项】024.Swap Nodes in Pairs</a>
+            <a href="/2020/01/02/DP/Leetcode-064-Minimum%20Path%20Sum/">【DP专项】064.Minimum Path Sum</a>
           </li>
         
           <li>
-            <a href="/2019/12/30/Linked%20List/Leetcode-002-Add%20Two%20Numbers/">【链表专项】002.Add Two Numbers</a>
+            <a href="/2020/01/02/DP/Leetcode-198-House%20Robber/">【DP专项】198.House Robber</a>
           </li>
         
       </ul>
@@ -173,7 +181,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2019 wspage3<br>
+      &copy; 2020 wspage3<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

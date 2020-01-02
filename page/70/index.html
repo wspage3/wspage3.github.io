@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Leetcode-268-Missing Number" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Leetcode-054-Spiral Matrix" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/15/Leetcode-268-Missing%20Number/" class="article-date">
-  <time datetime="2019-12-15T10:27:54.308Z" itemprop="datePublished">2019-12-15</time>
+    <a href="/2019/12/17/Leetcode-054-Spiral%20Matrix/" class="article-date">
+  <time datetime="2019-12-17T00:20:41.517Z" itemprop="datePublished">2019-12-17</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/15/Leetcode-268-Missing%20Number/">268.Missing Number</a>
+      <a class="article-title" href="/2019/12/17/Leetcode-054-Spiral%20Matrix/">54.Spiral Matrix</a>
     </h1>
   
 
@@ -83,24 +83,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/missing-number/" target="_blank" rel="noopener">268.Missing Number</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个长度为n的整数数组。<br>其中所有的元素取值都是区间[0, n]的，且没有重复的元素。<br>显然，[0, n]一共有(n + 1)个元素，而nums中只有n个，找出这个缺失的元素。<br>【输出】<br>找出这个缺失的数字。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [9,6,4,2,3,5,7,0,1]<br>Output: 8</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.空间复杂度要求为O(1)。<br>2.时间复杂度要求O(n)。</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Accumulate"><a href="#Solution-1：Accumulate" class="headerlink" title="Solution-1：Accumulate"></a>Solution-1：Accumulate</h3><p>1.[0, n]中所有数字的和为[1, n] = n * (n + 1) / 2</p>
-<p>2.我们遍历nums中的数字，累加一个和。<br>然后用上面的公式计算出来的和减去nums中累加的和，答案就是缺失的元素。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/285827066/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285827066/</a>)<br>Code(<a href="https://leetcode.com/submissions/detail/285849852/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285849852/</a>)</p>
-<p>3.缺点：accumulate可以会导致整数溢出，存在局限。</p>
-<h3 id="Solution-2：XOR"><a href="#Solution-2：XOR" class="headerlink" title="Solution-2：XOR"></a>Solution-2：XOR</h3><p>1.任意一个数 异或 它自己 == 0<br>  任意一个数 异或 0     == 它自己<br>  异或满足交换律，结合率</p>
-<p>2.nums中有n个数字，且都在范围[0, n]内，且都不重复。<br>我们把nums中所有的数字都异或起来。记为a。<br>然后把[0, n]所有的数字都异或起来。记为b。<br>此时所有参与异或的数字一共有 n + (n + 1)个。<br>假设missing number为x。则上述n + (n + 1)个数字只有一个x，其它数字都是出现了两次。<br>则 a ^ b == x。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/285850682/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285850682/</a>)</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/spiral-matrix/" target="_blank" rel="noopener">54.Spiral Matrix</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个m * n的矩阵matrix。<br>【输出】<br>输出一个一维数组，长度为m * n，代表matrix顺时针螺旋的顺序。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input:<br>[<br>  [1, 2, 3, 4],<br>  [5, 6, 7, 8],<br>  [9,10,11,12]<br>]<br>Output: [1,2,3,4,8,12,11,10,9,5,6,7]</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.m或者n为0的时候，直接return {};</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Layer-by-Layer-One-by-One"><a href="#Solution-1：Layer-by-Layer-One-by-One" class="headerlink" title="Solution-1：Layer by Layer, One by One"></a>Solution-1：Layer by Layer, One by One</h3><p>1.根据<a href="https://leetcode.com/problems/rotate-image/" target="_blank" rel="noopener">48.Rotate Image</a>的启示，<br>我们可以从外往内一层一层地读取。然后每一层一个一个地将元素依次放入ans数组。<br>不同的是：[48.Rotate Image]是正方形，当前题目是长方形。</p>
+<p>2.由于每一层都是相当于一个长方形的四条边。<br>设左上角的点a为(r1, c1)，设右下角的点b为(r2, c2)。<br>初始值a为(0, 0)，b为(m - 1, n - 1)<br>显然，每层中最少也得有一个元素，即：a和b是同一个点。<br>此时 r1 == r2, c1 == c2;所以循环结束的条件为r1 &lt;= r2, c1 &lt;= c2</p>
+<p>3.遍历完每一层后，需要考虑下一层，即：<br>r1++;<br>c1++;<br>r2–;<br>c2–;</p>
+<p>4.对于每一层，把四条边（r1 &lt; r2, c1 &lt; c2）上的路径走一次即可：<br>top：i = r1; j = [c1, c2]<br>right：i = [r1 + 1, r2]; j = c2<br>bottom：i = r2; j = [c2 - 1, c1]<br>left：i = [r2 - 1, r1 + 1]; j = c1</p>
+<p>5.特殊情况考虑：<br>边长为2的正方形：top = 2，right = 1，bottom = 1，left = 0<br>长n，高1的长方形：top = n，right = 0，【bottom = n - 1，left = 0】存在重复计数<br>长1，高n的长方形：top = 1，right = n - 1，【bottom = 0，left = n - 2】存在重复计数<br>边长为1的正方形：top = 1，right = 0，bottom = 0，left = 0<br>所以只有当r1 &lt; r2, c1 &lt; c2的时候，才会遍历bottom和left两条边。</p>
+<p>时间复杂度：O(m * n)<br>空间复杂度：O(1)</p>
+<p>6.Code(<a href="https://leetcode.com/submissions/detail/286387070/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286387070/</a>)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/15/Leetcode-268-Missing%20Number/" data-id="ck4slunp3000qc0t73qu9ebj1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/17/Leetcode-054-Spiral%20Matrix/" data-id="ck4whum4b0008tct7714vfg0a" class="article-share-link">Share</a>
       
       
     </footer>
@@ -114,7 +112,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/69/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/68/">68</a><a class="page-number" href="/page/69/">69</a><span class="page-number current">70</span><a class="page-number" href="/page/71/">71</a><a class="page-number" href="/page/72/">72</a><span class="space">&hellip;</span><a class="page-number" href="/page/96/">96</a><a class="extend next" rel="next" href="/page/71/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/69/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/68/">68</a><a class="page-number" href="/page/69/">69</a><span class="page-number current">70</span><a class="page-number" href="/page/71/">71</a><a class="page-number" href="/page/72/">72</a><span class="space">&hellip;</span><a class="page-number" href="/page/103/">103</a><a class="extend next" rel="next" href="/page/71/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -133,7 +131,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li></ul>
     </div>
   </div>
 
@@ -146,23 +144,23 @@
       <ul>
         
           <li>
-            <a href="/2019/12/30/Linked%20List/Leetcode-143-Reorder%20List/">【链表专项】143.Reorder List</a>
+            <a href="/2020/01/02/DP/Leetcode-213-House%20Robber%20II/">【DP专项】213.House Robber II</a>
           </li>
         
           <li>
-            <a href="/2019/12/30/Linked%20List/Leetcode-142-Linked%20List%20Cycle%20II/">【链表专项】142.Linked List Cycle II</a>
+            <a href="/2020/01/02/DP/Leetcode-063-Unique%20Paths%20II/">【DP专项】063.Unique Paths II</a>
           </li>
         
           <li>
-            <a href="/2019/12/30/Linked%20List/Leetcode-160-Intersection%20of%20Two%20Linked%20Lists/">【链表专项】160.Intersection of Two Linked Lists</a>
+            <a href="/2020/01/02/DP/Leetcode-062-Unique%20Paths/">【DP专项】062.Unique Paths</a>
           </li>
         
           <li>
-            <a href="/2019/12/30/Linked%20List/Leetcode-024-Swap%20Nodes%20in%20Pairs/">【链表专项】024.Swap Nodes in Pairs</a>
+            <a href="/2020/01/02/DP/Leetcode-064-Minimum%20Path%20Sum/">【DP专项】064.Minimum Path Sum</a>
           </li>
         
           <li>
-            <a href="/2019/12/30/Linked%20List/Leetcode-002-Add%20Two%20Numbers/">【链表专项】002.Add Two Numbers</a>
+            <a href="/2020/01/02/DP/Leetcode-198-House%20Robber/">【DP专项】198.House Robber</a>
           </li>
         
       </ul>
@@ -177,7 +175,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2019 wspage3<br>
+      &copy; 2020 wspage3<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
