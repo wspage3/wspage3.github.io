@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Leetcode-020-Valid Parentheses" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Leetcode-034-Find First and Last Position of Element in Sorted Array" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/12/Leetcode-020-Valid%20Parentheses/" class="article-date">
-  <time datetime="2019-12-12T08:10:34.517Z" itemprop="datePublished">2019-12-12</time>
+    <a href="/2019/12/12/Leetcode-034-Find%20First%20and%20Last%20Position%20of%20Element%20in%20Sorted%20Array/" class="article-date">
+  <time datetime="2019-12-12T13:28:34.562Z" itemprop="datePublished">2019-12-12</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/12/Leetcode-020-Valid%20Parentheses/">20.Valid Parentheses</a>
+      <a class="article-title" href="/2019/12/12/Leetcode-034-Find%20First%20and%20Last%20Position%20of%20Element%20in%20Sorted%20Array/">34.Find First and Last Position of Element in Sorted Array</a>
     </h1>
   
 
@@ -83,23 +83,24 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/valid-parentheses/" target="_blank" rel="noopener">20.Valid Parentheses</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的字符串s；<br>判断该字符串是否一个合法的括号表达式；<br>括号有三种：[] {} ()<br>open的bracket最终必须有一个同类型close的bracket与之匹配；<br>且上述匹配的顺序必须是正确的。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: “()[]{}”<br>Output: true</p>
-<p>Input: “([)]”<br>Output: false</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n: 当n为0的时候，也认为是合法的；</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Stack"><a href="#Solution-1：Stack" class="headerlink" title="Solution-1：Stack"></a>Solution-1：Stack</h3><p>1.若n是奇数，那么一定非法。<br>若n是0，则直接return true。</p>
-<p>2.考虑n为大于0的偶数：<br>模拟括号匹配的过程：i在范围[0, n - 1]内遍历：<br>先将s[0]压入栈；<br>考察s[1]，若s[1]和s[0]是同类型的，且一个s[1]是close，s[0]是open的，那么说明这两个是一对。<br>则此时将s[0]从栈中抛出，i跳到位置2，考虑第二个元素。<br>若s[1]的出现无法和s[0]匹配掉，则将s[1]在压入栈，考虑下一个元素。<br>……<br>直到所有的n个元素都遍历过了，此时检查栈，如果栈是空的，说明所有的括号都可以匹配。<br>如果此时栈非空，则说明存在元素无法匹配。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/285447709/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285447709/</a>)</p>
-<h3 id="Solution-2：Stack"><a href="#Solution-2：Stack" class="headerlink" title="Solution-2：Stack"></a>Solution-2：Stack</h3><p>1.另一种方法：<br>从[0, n - 1]考虑每一个s[i]<br>若s[i]是open的bracket，则将其“另一半”压入栈。<br>否则的话，判断此时栈是否为空，是的话，直接return false。<br>栈不空的话，判断当前元素是否和栈顶元素相同，不同的话，也直接return false。<br>相同的话，将栈顶元素抛出，转移到考虑s[i + 1]</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/285450396/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285450396/</a>)</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/" target="_blank" rel="noopener">34.Find First and Last Position of Element in Sorted Array</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的数组，该数组是升序排列的，中间可能有重复的元素；<br>给定一个整数target；<br>查找target是否在数组中，在的话，返回其开始出现的索引，以及最后一次出现的索引。<br>不存在的话，返回(-1, -1)即可；</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: nums = [5,7,7,8,8,10], target = 8<br>Output: [3,4]</p>
+<p>Input: nums = [5,7,7,8,8,10], target = 6<br>Output: [-1,-1]</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n: 当n为0的时候，直接返回(-1, -1)；</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Binary-Search-Linear-Search"><a href="#Solution-1：Binary-Search-Linear-Search" class="headerlink" title="Solution-1：Binary Search + Linear Search"></a>Solution-1：Binary Search + Linear Search</h3><p>1.二分查找，每次去mid，然后判断nums[mid]的值是否是target，如果是的话：<br>依次向前找，直到当前的数不等于target为止。<br>依次向后找，直到当前的数不等于target位置。<br>找到，并return 即可。<br>如果target大于nums[mid]，则在[mid + 1, right]中搜。<br>如果target小于nums[mid]，则在[left, mid - 1]中搜。</p>
+<p>2.特殊情况考虑：当left，right相差1的时候，满足while循环条件，并进入。<br>此时mid = left，考虑了nums[mid]后:<br>若nums[mid]就是我们要找的target，则寻找它开始结束的位置。<br>若target大于nums[mid]，此时left = right，while循环退出。此时需要考虑left(等于right)这个位置的值。<br>如果是target，则返回{left, left}即可。<br>如果不是，则target不在数组中。<br>若target小于nums[mid]，则target不在数组中。</p>
+<p>时间复杂度：O(log n)，最坏O(n)<br>空间复杂度：O(1)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/285482172/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285482172/</a>)</p>
+<h3 id="Solution-2：Binary-Search-Binary-Search"><a href="#Solution-2：Binary-Search-Binary-Search" class="headerlink" title="Solution-2：Binary Search + Binary Search"></a>Solution-2：Binary Search + Binary Search</h3><p>1.由于我们在Leetcode-704-Binary Search中学会了找target的最小索引和最大索引。<br>正好本题目中就是找这两个值。</p>
+<p>2.先找到target的最小索引；再找到target的最大索引。<br>再返回答案。</p>
+<p>时间复杂度：O(log n)<br>空间复杂度：O(1)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/285598701/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285598701/</a>)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/12/Leetcode-020-Valid%20Parentheses/" data-id="ck4wp32ud0002g4t7gk9bczll" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/12/Leetcode-034-Find%20First%20and%20Last%20Position%20of%20Element%20in%20Sorted%20Array/" data-id="ck4ws3wiu0002rwt7551r9qk3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -113,7 +114,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/82/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/81/">81</a><a class="page-number" href="/page/82/">82</a><span class="page-number current">83</span><a class="page-number" href="/page/84/">84</a><a class="page-number" href="/page/85/">85</a><span class="space">&hellip;</span><a class="page-number" href="/page/104/">104</a><a class="extend next" rel="next" href="/page/84/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/82/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/81/">81</a><a class="page-number" href="/page/82/">82</a><span class="page-number current">83</span><a class="page-number" href="/page/84/">84</a><a class="page-number" href="/page/85/">85</a><span class="space">&hellip;</span><a class="page-number" href="/page/105/">105</a><a class="extend next" rel="next" href="/page/84/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -145,6 +146,10 @@
       <ul>
         
           <li>
+            <a href="/2020/01/02/DP/Leetcode-377-Combination%20Sum%20IV/">【DP专项】377.Combination Sum IV</a>
+          </li>
+        
+          <li>
             <a href="/2020/01/02/DP/Leetcode-120-Triangle/">【DP专项】120.Triangle</a>
           </li>
         
@@ -158,10 +163,6 @@
         
           <li>
             <a href="/2020/01/02/DP/Leetcode-062-Unique%20Paths/">【DP专项】062.Unique Paths</a>
-          </li>
-        
-          <li>
-            <a href="/2020/01/02/DP/Leetcode-064-Minimum%20Path%20Sum/">【DP专项】064.Minimum Path Sum</a>
           </li>
         
       </ul>

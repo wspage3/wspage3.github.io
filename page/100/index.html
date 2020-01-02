@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Leetcode-713-Subarray Product Less Than K" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Leetcode-300-Longest Increasing Subsequence" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/04/Leetcode-713-Subarray%20Product%20Less%20Than%20K/" class="article-date">
-  <time datetime="2019-12-04T02:14:22.621Z" itemprop="datePublished">2019-12-04</time>
+    <a href="/2019/12/04/Leetcode-300-Longest%20Increasing%20Subsequence/" class="article-date">
+  <time datetime="2019-12-04T07:18:13.134Z" itemprop="datePublished">2019-12-04</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/04/Leetcode-713-Subarray%20Product%20Less%20Than%20K/">Leetcode713-Subarray Product Less Than K</a>
+      <a class="article-title" href="/2019/12/04/Leetcode-300-Longest%20Increasing%20Subsequence/">Leetcode300-Longest Increasing Subsequence</a>
     </h1>
   
 
@@ -83,26 +83,27 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/subarray-product-less-than-k/" target="_blank" rel="noopener">Leetcode713-Subarray Product Less Than K</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的正整数数组nums；给定一个整数k；<br>求出满足条件的连续子数组的个数cnt：这个子数组的product小于给定的k</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: nums = [10, 5, 2, 6], k = 100<br>Output: 8<br>Explanation:<br>[10], [5], [2], [6], [10, 5], [5, 2], [2, 6], [5, 2, 6]</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>0 &lt; nums.length &lt;= 50000.<br>0 &lt; nums[i] &lt; 1000.<br>0 &lt;= k &lt; 10^6.<br>需要对k是否为0判断：若k为0，根据题目正整数数组的描述，直接返回0即可</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><p>【连续子数组的乘积】相关的题目。</p>
-<h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>1.i从[0, n - 1]遍历。<br>每次固定i，然后j从[i, n - 1]遍历：找出以i开头所有的连续子数组。其中累乘product，若小于k，则计数器加一。<br>结果发现Runtime Error：累乘的数据太大了，以至于用long long也会溢出。<br>2.一个显而易见有问题的地方在于：<br>给定的k的范围为[0, 1e6]，而我们固定i，试图找出以i开头的所有连续子数组的时候，为什么还会导致累乘的积溢出long long呢？<br>显然是因为：当发现累乘的积大于k的时候，没有跳出循环，直接考虑i + 1。（由于nums数组中的元素都是正数）<br>修改后发现结果是：TLE超时。</p>
-<p>时间复杂度：O(n ^ 2)<br>空间复杂度：O(1)</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/283569919/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283569919/</a>)</p>
-<h3 id="Solution-2：Sliding-Window"><a href="#Solution-2：Sliding-Window" class="headerlink" title="Solution-2：Sliding Window"></a>Solution-2：Sliding Window</h3><p>考虑数组[a, b, c, d, e, f, g, h, i]</p>
-<p>1.首先我们考虑以a开头的子树组：a,ab,abc,abcd,abcde……<br>若a本身大于等于k，则以a开头的所有子数组都不符合条件，跳过到b。<br>若a本身不大于k，则可以继续考察ab,abc,abcd,abcde……，某个时刻发现abcdefg不符合条件了：<br>但我们知道：abcdef是ok的，说明：abcdef内的任意连续子数组都是满足的。<br>Solution1的做法是break后考察以b开头的。这样的话，就会有重复计算了，不能充分利用上述已知信息。</p>
-<p>2.退一步，假设当前位置在”f”，我们已经知道了abcde是合法的，同时abcdef也是合法的。<br>考虑：把当前的”f”添加到abcde中，新增了一个元素，对应新增了多少个满足条件的子数组呢？<br>结果是：f, ef, def, cdef, bcdef, abcdef共6个，也就是index(f) - index(a) + 1。<br>同理我们知道序列abcde对应的答案为：1 + 2 + 3 + 4 + 5 = 15<br>那么abcdef对应的答案就是：15 + 6 = 21</p>
-<p>3.进一步，当前位置在”g”，当发现abcdefg不合法的时候，说明此时答案无法在21的基础上直接加上7。<br>这时，我们找到以g为结尾的满足条件的一个最大子数组，假设是序列cdefg。即：abcdefg,bcdefg均不合法；而cdefg合法。<br>此时就可以将g对应的cnt添加到已有的21中了：g, fg, efg, defg, cdefg。<br>而且这些包含g的子数组不可能和之前的21个子数组有相同的。<br>同时我们跳过的a和b，他们所有满足的情况都已经被考虑过了。也不会造成遗漏。<br>然后我们再在这个cdefg的基础上，考察下一个位置”h”……直到所有位置都被考察过了，最后的答案就是本题目的答案。</p>
-<p>4.根据以上思路，进行实现：<br>用一个start指针指向当前window的开始，初始化为0。<br>每次考察数组nums[i]，i的范围[0, n - 1]，依次将nums[i]添加到window中，并进行判断。<br>如果此时合法，则考察[i + 1]。并累加：i - start + 1。<br>如果此时非法，则将window向后滑动，找到start的位置，使得区间[start, i](start &lt;= i&gt;)合法。并累加：i - start + 1。<br>如果此时发现start &gt; i，则说明start == i + 1，且i位置不存在满足条件的子数组，累加0即可。然后考察i + 1</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/283582840/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283582840/</a>)</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/longest-increasing-subsequence/" target="_blank" rel="noopener">Leetcode300-Longest Increasing Subsequence</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组nums；数组无序；<br>求出一个最大序列的长度。该序列内所有元素是递增的。序列不同于子数组，不要求连续。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [10,9,2,5,3,7,101,18]<br>Output: 4<br>Explanation: The longest increasing subsequence is [2,3,7,101], therefore the length is 4. </p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>若n为0/1，直接返回0/1即可。</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><p>【LIS】相关的题目。<br>序列不要求连续，所以相较于【最长递增子数组】来说，范围更大。</p>
+<h3 id="Solution-1：Dynamic-Programming"><a href="#Solution-1：Dynamic-Programming" class="headerlink" title="Solution-1：Dynamic Programming"></a>Solution-1：Dynamic Programming</h3><p>1.考虑以下数组[a, b, c, d, e]<br>设res[i]表示以nums[i]结尾的递增子序列的最大长度。那题目要求的答案便是：res数组的最大值了。<br>显然，res[0] = 1；res[1]有两种情况：<br>若nums[1] &lt;= nums[0]，则说明以nums[1]结尾的递增子序列只有一种：就是nums[1]本身。<br>若nums[1] &gt; nums[0]，则说明以nums[1]可以和nums[0]连接起来，形成一个更长的子序列。<br>……<br>考虑nums[i]：<br>若nums[i]都不大于nums[0, i - 1]的任一数字，那res[i] = 1;<br>若能在[0, i - 1]区间找到k个比nums[i]小的值（k &gt;= 1），则找出这k次“拼接”后的最大值。</p>
+<p>2.对于每一个res[i]，<br>“拼接情况”：需要遍历[0, i - 1]的元素，进行判断和统计最大值maxLinkI。<br>“无法拼接情况”：1<br>res[i] = max(1, maxLinkI);</p>
+<p>时间复杂度：O(n ^ 2)<br>空间复杂度：O(n)</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/283644219/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283644219/</a>)</p>
+<h3 id="Solution-2：Dynamic-Programming-Search"><a href="#Solution-2：Dynamic-Programming-Search" class="headerlink" title="Solution-2：Dynamic Programming + Search"></a>Solution-2：Dynamic Programming + Search</h3><p>1.现象1：若同时有2个子序列(1, 5)和(1, 10)，然后取一个随机数x，能构成长度为3的递增子序列吗？<br>答案肯定是可以的，例如：<br>x &lt; 1 :都ok<br>x &gt; 10 :都ok<br>x == 2/3/4 :都不行<br>x == 6/7/8/9 :(1, 5)来说ok，(1, 10)来说不行<br>看起来对于(1, 5)和(1, 10)来说，能扩展成长度为3的递增子序列的“成功率”是不相等的，且(1, 5)的“扩展性”更好。</p>
+<p>2.令tail[i]表示：长度为i的满足条件的若干个序列中，序列末尾元素的最小值。<br>tail[1]初始为nums[0]；此时满足条件的子序列的最大长度就是1；<br>对于nums[i]，此时满足条件的子序列的最大长度是maxLen。<br>如果nums[i] &gt; tail[maxLen]的话，说明可以在当前maxLen的基础上，添加nums[i]形成一个maxLen + 1的子序列。<br>如果nums[i] &lt; tail[1]的话，说明长度为1的子序列的最小值就是nums[i]，此时更新tail[1]。<br>如果 tail[1] == nums[i] || nums[i] == tail[maxLen]的话，不做任何操作<br>如果 tail[1] &lt; nums[i] &lt; tail[maxLen]的话，说明可以更新某个tail[j]的值，来使得长度为j的子序列的“扩展性”更好。<br>所以每次我们在[1, maxLen]上从后往前查找，如果发现nums[i]大于了tail[j]，就使得：tail[j + 1] = nums[i]</p>
+<p>时间复杂度：O(n ^ 2)<br>空间复杂度：O(n)</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/283675471/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283675471/</a>)</p>
+<h3 id="Solution-2：Dynamic-Programming-Binary-Search"><a href="#Solution-2：Dynamic-Programming-Binary-Search" class="headerlink" title="Solution-2：Dynamic Programming + Binary Search"></a>Solution-2：Dynamic Programming + Binary Search</h3><p>1.不难发现，tail数组是递增的，因此，我们可以用二分搜索进一步降低时间复杂度。</p>
+<p>时间复杂度：O(n ^ logn)<br>空间复杂度：O(n)</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/283685139/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283685139/</a>)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/04/Leetcode-713-Subarray%20Product%20Less%20Than%20K/" data-id="ck4wp32v30011g4t7d8f80w93" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/04/Leetcode-300-Longest%20Increasing%20Subsequence/" data-id="ck4ws3wjb000rrwt7dbnvapk2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -116,7 +117,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/99/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/98/">98</a><a class="page-number" href="/page/99/">99</a><span class="page-number current">100</span><a class="page-number" href="/page/101/">101</a><a class="page-number" href="/page/102/">102</a><span class="space">&hellip;</span><a class="page-number" href="/page/104/">104</a><a class="extend next" rel="next" href="/page/101/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/99/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/98/">98</a><a class="page-number" href="/page/99/">99</a><span class="page-number current">100</span><a class="page-number" href="/page/101/">101</a><a class="page-number" href="/page/102/">102</a><span class="space">&hellip;</span><a class="page-number" href="/page/105/">105</a><a class="extend next" rel="next" href="/page/101/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -148,6 +149,10 @@
       <ul>
         
           <li>
+            <a href="/2020/01/02/DP/Leetcode-377-Combination%20Sum%20IV/">【DP专项】377.Combination Sum IV</a>
+          </li>
+        
+          <li>
             <a href="/2020/01/02/DP/Leetcode-120-Triangle/">【DP专项】120.Triangle</a>
           </li>
         
@@ -161,10 +166,6 @@
         
           <li>
             <a href="/2020/01/02/DP/Leetcode-062-Unique%20Paths/">【DP专项】062.Unique Paths</a>
-          </li>
-        
-          <li>
-            <a href="/2020/01/02/DP/Leetcode-064-Minimum%20Path%20Sum/">【DP专项】064.Minimum Path Sum</a>
           </li>
         
       </ul>
