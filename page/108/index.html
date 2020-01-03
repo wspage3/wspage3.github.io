@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
 <meta property="og:title" content="追逐青春的梦想，怀着自信的心，永不放弃！">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;page&#x2F;84&#x2F;index.html">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;page&#x2F;108&#x2F;index.html">
 <meta property="og:site_name" content="追逐青春的梦想，怀着自信的心，永不放弃！">
 <meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Leetcode-278-First Bad Version" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/13/Leetcode-278-First%20Bad%20Version/" class="article-date">
-  <time datetime="2019-12-13T05:19:52.802Z" itemprop="datePublished">2019-12-13</time>
+    <a href="/2019/12/02/hello-world/" class="article-date">
+  <time datetime="2019-12-02T01:39:02.156Z" itemprop="datePublished">2019-12-02</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/13/Leetcode-278-First%20Bad%20Version/">278.First Bad Version</a>
+      <a class="article-title" href="/2019/12/02/hello-world/">Hello Blog</a>
     </h1>
   
 
@@ -83,20 +83,15 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/first-bad-version/" target="_blank" rel="noopener">278.First Bad Version</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【背景】<br>你是一个产品经理，你发现当前的产品版本中质量不过关。<br>由于每个版本都是基于上一个版本，修修改改进行发布的。所以当某个版本引入一个bug后，后面所有的版本都由bug。<br>你希望找出来是哪个版本引入了bug。<br>有一个API-isBadVersion可以根据版本号来确定当前版本是否由bug。如果有问题，则返回true。否则，返回false。<br>【输入】<br>给定一个整数n，代表当前版本号。版本号从1开始编号，且连续。<br>所以说n代表当前有n个版本。<br>【输出】<br>输出第一个出现bug的那个版本号。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Given n = 5, and version = 4 is the first bad version.</p>
-<p>call isBadVersion(3) -&gt; false<br>call isBadVersion(5) -&gt; true<br>call isBadVersion(4) -&gt; true</p>
-<p>Then 4 is the first bad version. </p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Binary-Search"><a href="#Solution-1：Binary-Search" class="headerlink" title="Solution-1：Binary Search"></a>Solution-1：Binary Search</h3><p>1.二分搜索。<br>我们要找到第一个有问题的版本，类似【找到target最小的索引】<br>考虑范围[left, right)，取mid：<br>如果当前mid没问题，说明答案一定在[mid + 1, right)范围内。<br>如果当前mid有问题，说明答案一定在[left, mid]范围内。<br>此时我们在[left, mid)上继续搜索。<br>如果[left, mid)上所有版本都没问题，那么答案就是mid。<br>否则答案就在[left, mid)中。</p>
-<p>2.考虑最后一次循环，left = right - 1<br>此时mid = left，然后判断mid的合法性。<br>如果此时mid有问题，right = mid = left。循环结束。left(right)就是答案。<br>如果此时mid没问题，left = mid + 1 = right。循环结束。此时还剩left(right)这个位置没有判断合法性。那么它一定是答案。</p>
-<p>时间复杂度：O(log n)<br>空间复杂度：O(1)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/285606627/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285606627/</a>)</p>
+        <p>Hi, My name is wspage3 and this is my first article.<br>Opinions expressed here are mine alone.</p>
+<h2 id="一、定理目录"><a href="#一、定理目录" class="headerlink" title="一、定理目录"></a>一、定理目录</h2><h3 id="1-勾股定理"><a href="#1-勾股定理" class="headerlink" title="1.勾股定理"></a>1.勾股定理</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">a^2 + b^2 = c^2</span></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://wspage3.github.io" target="_blank" rel="noopener">wspage3</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/13/Leetcode-278-First%20Bad%20Version/" data-id="ck4xyd789000o2st7evvufx8f" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/02/hello-world/" data-id="ck4xyd78k00172st79qul5l1l" class="article-share-link">Share</a>
       
       
     </footer>
@@ -110,7 +105,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/83/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/82/">82</a><a class="page-number" href="/page/83/">83</a><span class="page-number current">84</span><a class="page-number" href="/page/85/">85</a><a class="page-number" href="/page/86/">86</a><span class="space">&hellip;</span><a class="page-number" href="/page/108/">108</a><a class="extend next" rel="next" href="/page/85/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/107/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/106/">106</a><a class="page-number" href="/page/107/">107</a><span class="page-number current">108</span>
   </nav>
 
 </section>
