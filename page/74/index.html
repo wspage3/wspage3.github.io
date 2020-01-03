@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Leetcode-242-Valid Anagram" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Leetcode-054-Spiral Matrix" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/16/Leetcode-242-Valid%20Anagram/" class="article-date">
-  <time datetime="2019-12-16T13:07:31.626Z" itemprop="datePublished">2019-12-16</time>
+    <a href="/2019/12/17/Leetcode-054-Spiral%20Matrix/" class="article-date">
+  <time datetime="2019-12-17T00:20:41.517Z" itemprop="datePublished">2019-12-17</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/16/Leetcode-242-Valid%20Anagram/">242.Valid Anagram</a>
+      <a class="article-title" href="/2019/12/17/Leetcode-054-Spiral%20Matrix/">54.Spiral Matrix</a>
     </h1>
   
 
@@ -83,28 +83,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/valid-anagram/" target="_blank" rel="noopener">242.Valid Anagram</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定两个字符串s和t。<br>【输出】<br>判断这两个字符串是否为：“字母异位词”<br>所谓“字母异位词”，就是两个单词，组成它们的字母是完全一样的，而不关心其排列顺序。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: s = “anagram”, t = “nagaram”<br>Output: true</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.lenS不等于lenT的时候，直接return false。<br>2.s和t中仅包含小写字母。<br>3.如果输入包含unicode字符的话，该程序的扩展性如何。</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Sort"><a href="#Solution-1：Sort" class="headerlink" title="Solution-1：Sort"></a>Solution-1：Sort</h3><p>1.将两个字符串都排序，然后直接比较字符串是否相等即可。<br>2.在C++中：<br>sort(s.begin(), s.end());<br>return s == t;</p>
-<p>时间复杂度：O(n * log n) //n代表字符串的长度<br>空间复杂度：O(1)</p>
-<p>6.Code(<a href="https://leetcode.com/submissions/detail/286349008/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286349008/</a>)</p>
-<h3 id="Solution-2：Hash-Table"><a href="#Solution-2：Hash-Table" class="headerlink" title="Solution-2：Hash Table"></a>Solution-2：Hash Table</h3><p>1.用两个哈希表mapS和mapT，来记录s和t中所有字母出现的次数。<br>2.然后遍历26个小写字母：<br>对于任意一个小写字母：<br>首先，判断其是否在mapS和mapT中同时出现或者同时不出现。<br>然后，判断其出现的频率是否相等。<br>如果上述两点有不满足的，直接返回false即可。<br>3.在C++中，判断其是否出现在unordered_map中可以使用count()，出现返回1，否则返回0。<br>判断其出现的次数的话，直接比较其key对应的value即可。</p>
-<p>时间复杂度：O(n + 26)<br>空间复杂度：O(26)</p>
-<p>4.Code(<a href="https://leetcode.com/submissions/detail/286336480/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286336480/</a>)</p>
-<h3 id="Solution-3：Hash-Table-with-Optimization"><a href="#Solution-3：Hash-Table-with-Optimization" class="headerlink" title="Solution-3：Hash Table with Optimization"></a>Solution-3：Hash Table with Optimization</h3><p>1.我们用一个哈希表即可。<br>2.首先判断lenS, lenT是否相等，不相等的话直接return false。<br>3.遍历n次，每次：<br>s[i]对应的value加一；<br>t[i]对应的value减一；<br>如果遍历n次后，且两个字符串由相同的字母组成的话，那么所有出现的字符的次数都是0了。<br>4.遍历整个哈希表，若其个数非0，则return false。</p>
-<p>时间复杂度：O(n + 26)<br>空间复杂度：O(26)</p>
-<p>4.Code(<a href="https://leetcode.com/submissions/detail/286347847/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286347847/</a>)</p>
-<h3 id="Solution-4：Use-Vector-instead-of-Hash-Table"><a href="#Solution-4：Use-Vector-instead-of-Hash-Table" class="headerlink" title="Solution-4：Use Vector instead of Hash Table"></a>Solution-4：Use Vector instead of Hash Table</h3><p>1.我们用一个固定长度为26的数组即可实现Solution-3的思路。<br>2.在数组中访问赋值的时间复杂度是O(1)。<br>而理论上哈希表的访问的时间复杂度也是O(1)。<br>参考：<br>Hash tables do some complex math in that one operation to get to the value that you want.<br>Simulating a hash table with an array is quicker because that<br>one operation for a lookup is only an offset from the beginning of the array(since you already have the index)<br>vs more difficult mathy stuff with the hash table.</p>
-<p>时间复杂度：O(n + 26)<br>空间复杂度：O(26)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/286348853/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286348853/</a>)</p>
-<p>4.进阶：如果输入字符串包含 unicode 字符怎么办？你能否调整你的解法来应对这种情况？<br>解答：使用哈希表而不是固定大小的计数器。想象一下，分配一个大的数组来适应整个 Unicode 字符范围，这个范围可能超过 100万。<br>哈希表是一种更通用的解决方案，可以适应任何字符范围。</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/spiral-matrix/" target="_blank" rel="noopener">54.Spiral Matrix</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个m * n的矩阵matrix。<br>【输出】<br>输出一个一维数组，长度为m * n，代表matrix顺时针螺旋的顺序。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input:<br>[<br>  [1, 2, 3, 4],<br>  [5, 6, 7, 8],<br>  [9,10,11,12]<br>]<br>Output: [1,2,3,4,8,12,11,10,9,5,6,7]</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.m或者n为0的时候，直接return {};</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Layer-by-Layer-One-by-One"><a href="#Solution-1：Layer-by-Layer-One-by-One" class="headerlink" title="Solution-1：Layer by Layer, One by One"></a>Solution-1：Layer by Layer, One by One</h3><p>1.根据<a href="https://leetcode.com/problems/rotate-image/" target="_blank" rel="noopener">48.Rotate Image</a>的启示，<br>我们可以从外往内一层一层地读取。然后每一层一个一个地将元素依次放入ans数组。<br>不同的是：[48.Rotate Image]是正方形，当前题目是长方形。</p>
+<p>2.由于每一层都是相当于一个长方形的四条边。<br>设左上角的点a为(r1, c1)，设右下角的点b为(r2, c2)。<br>初始值a为(0, 0)，b为(m - 1, n - 1)<br>显然，每层中最少也得有一个元素，即：a和b是同一个点。<br>此时 r1 == r2, c1 == c2;所以循环结束的条件为r1 &lt;= r2, c1 &lt;= c2</p>
+<p>3.遍历完每一层后，需要考虑下一层，即：<br>r1++;<br>c1++;<br>r2–;<br>c2–;</p>
+<p>4.对于每一层，把四条边（r1 &lt; r2, c1 &lt; c2）上的路径走一次即可：<br>top：i = r1; j = [c1, c2]<br>right：i = [r1 + 1, r2]; j = c2<br>bottom：i = r2; j = [c2 - 1, c1]<br>left：i = [r2 - 1, r1 + 1]; j = c1</p>
+<p>5.特殊情况考虑：<br>边长为2的正方形：top = 2，right = 1，bottom = 1，left = 0<br>长n，高1的长方形：top = n，right = 0，【bottom = n - 1，left = 0】存在重复计数<br>长1，高n的长方形：top = 1，right = n - 1，【bottom = 0，left = n - 2】存在重复计数<br>边长为1的正方形：top = 1，right = 0，bottom = 0，left = 0<br>所以只有当r1 &lt; r2, c1 &lt; c2的时候，才会遍历bottom和left两条边。</p>
+<p>时间复杂度：O(m * n)<br>空间复杂度：O(1)</p>
+<p>6.Code(<a href="https://leetcode.com/submissions/detail/286387070/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286387070/</a>)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/16/Leetcode-242-Valid%20Anagram/" data-id="ck4xgatiy000last7avx918zk" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/17/Leetcode-054-Spiral%20Matrix/" data-id="ck4xsqlgi0009vot73p8z6icq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -118,7 +112,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/73/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/72/">72</a><a class="page-number" href="/page/73/">73</a><span class="page-number current">74</span><a class="page-number" href="/page/75/">75</a><a class="page-number" href="/page/76/">76</a><span class="space">&hellip;</span><a class="page-number" href="/page/106/">106</a><a class="extend next" rel="next" href="/page/75/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/73/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/72/">72</a><a class="page-number" href="/page/73/">73</a><span class="page-number current">74</span><a class="page-number" href="/page/75/">75</a><a class="page-number" href="/page/76/">76</a><span class="space">&hellip;</span><a class="page-number" href="/page/107/">107</a><a class="extend next" rel="next" href="/page/75/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -150,6 +144,10 @@
       <ul>
         
           <li>
+            <a href="/2020/01/03/DP/Leetcode-518-Coin%20Change%202/">【DP专项】518.Coin Change 2</a>
+          </li>
+        
+          <li>
             <a href="/2020/01/03/DP/Leetcode-322-Coin%20Change/">【DP专项】322.Coin Change</a>
           </li>
         
@@ -163,10 +161,6 @@
         
           <li>
             <a href="/2020/01/02/DP/Leetcode-213-House%20Robber%20II/">【DP专项】213.House Robber II</a>
-          </li>
-        
-          <li>
-            <a href="/2020/01/02/DP/Leetcode-063-Unique%20Paths%20II/">【DP专项】063.Unique Paths II</a>
           </li>
         
       </ul>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>【DP专项】518.Coin Change 2 | 追逐青春的梦想，怀着自信的心，永不放弃！</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一、题意题目链接: 518.Coin Change 2 1.Description【输入】给定一个长度为n的整数数组，代表着有这些面值的硬币。给定一个整数target。【输出】求出有多少种不同的组合方式，使得组合起来的sum等于target。每个硬币可以使用无限次。注意：硬币的顺序不重要。就像去超市买东西一样，不会说把硬币一个一个拿出来，而是一把拿出来。 2.ExampleInput: amoun">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【DP专项】518.Coin Change 2">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;03&#x2F;DP&#x2F;Leetcode-518-Coin%20Change%202&#x2F;index.html">
+<meta property="og:site_name" content="追逐青春的梦想，怀着自信的心，永不放弃！">
+<meta property="og:description" content="一、题意题目链接: 518.Coin Change 2 1.Description【输入】给定一个长度为n的整数数组，代表着有这些面值的硬币。给定一个整数target。【输出】求出有多少种不同的组合方式，使得组合起来的sum等于target。每个硬币可以使用无限次。注意：硬币的顺序不重要。就像去超市买东西一样，不会说把硬币一个一个拿出来，而是一把拿出来。 2.ExampleInput: amoun">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-01-03T06:42:21.693Z">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="追逐青春的梦想，怀着自信的心，永不放弃！" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">追逐青春的梦想，怀着自信的心，永不放弃！</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-DP/Leetcode-518-Coin Change 2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/01/03/DP/Leetcode-518-Coin%20Change%202/" class="article-date">
+  <time datetime="2020-01-03T05:49:08.381Z" itemprop="datePublished">2020-01-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      【DP专项】518.Coin Change 2
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/coin-change-2/" target="_blank" rel="noopener">518.Coin Change 2</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个长度为n的整数数组，代表着有这些面值的硬币。<br>给定一个整数target。<br>【输出】<br>求出有多少种不同的组合方式，使得组合起来的sum等于target。<br>每个硬币可以使用无限次。<br>注意：硬币的顺序不重要。就像去超市买东西一样，不会说把硬币一个一个拿出来，而是一把拿出来。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: amount = 5, coins = [1, 2, 5]<br>Output: 4<br>Explanation: there are four ways to make up the amount:<br>5=5<br>5=2+2+1<br>5=2+1+1+1<br>5=1+1+1+1+1</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
+<li>0 &lt;= amount &lt;= 5000</li>
+<li>1 &lt;= coins[i] &lt;= 5000</li>
+<li>n &lt; 500</li>
+<li>the answer is guaranteed to fit into signed 32-bit integer</li>
+</ol>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ol>
+<li>当amount为0时，不管n是否为0，答案为1。即：有且仅有一种组合方式使得amount为0，那就是什么都不选。</li>
+<li>当amount不为0，n为0时，答案为0。即：不存在一种组合方式，使得sum等于amount。</li>
+<li>考虑amount大于0，n大于0的场景。</li>
+</ol>
+<h3 id="Solution-1：Dynamic-Programming-Iterative"><a href="#Solution-1：Dynamic-Programming-Iterative" class="headerlink" title="Solution-1：Dynamic Programming(Iterative)"></a>Solution-1：Dynamic Programming(Iterative)</h3><ol start="0">
+<li><p>参考(<a href="https://www.youtube.com/watch?v=DJ4a7cmjZY0" target="_blank" rel="noopener">https://www.youtube.com/watch?v=DJ4a7cmjZY0</a>)</p>
+</li>
+<li><p>回忆【377.Combination Sum IV】中，也是给定一组数，和一个target，求多少种不同的组合方式，使得sum为target。<br>但是不同元素的顺序是重要的。即122和221是两种不同的组合方式，需要都计数。</p>
+</li>
+<li><p>回忆【322.Coin Change】，求得最小使用了几个硬币，使得sum为target。</p>
+</li>
+<li><p>状态定义：dp[i][j]代表：仅仅使用了coins数组的前i种硬币，使得和为j的方案数。</p>
+</li>
+<li><p>转移方程：dp[i][j] = dp[i - 1][j] + dp[i][j - coins[i - 1]]。<br>解释：从前到后考虑每一类型的硬币，求前i种硬币使得sum为j的组合方式：<br>先求前(i - 1)种硬币使得sum为j的组合方式；即：dp[i - 1][j]。即：完全不用当前硬币组成j有多少种组合。<br>再求前i种硬币使得sum为(j - coins[i - 1])的组合方式，即：dp[i][j - coins[i - 1]]。即：使用至少一个当前硬币组成组成j有多少组合。</p>
+</li>
+<li><p>边界条件：<br>dp[i][0] = 1；0 &lt;= i &lt;= n<br>dp[0][j] = 0；1 &lt;= j &lt;= target</p>
+</li>
+<li><p>求解顺序：<br>【Backward】<br>i从1开始，到n结束。<br>j从1开始，到target结束。<br>依次考虑每一种类型的硬币，求解出来的子问题保存起来。为后面求解更大一点的问题服务。</p>
+</li>
+<li><p>空间复杂度压缩。</p>
+</li>
+<li><p>Code(<a href="https://leetcode.com/submissions/detail/290726614/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/290726614/</a>)<br>时间复杂度：O(n * amount)<br>空间复杂度：O(n * amount)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">change</span><span class="params">(<span class="keyword">int</span> amount, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; coins)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (amount == <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;<span class="comment">//只有一种组合方式，那就是什么都不选。</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = coins.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (n == <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;<span class="comment">//amount非零的情况下，如果n为0。则找不到一种组合方式使得sum为amount。</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; dp(n + <span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(amount + <span class="number">1</span>, <span class="number">0</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            dp[i][<span class="number">0</span>] = <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= amount; j++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">int</span> pre = j - coins[i - <span class="number">1</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">                dp[i][j] = dp[i - <span class="number">1</span>][j] + (pre &gt;= <span class="number">0</span> ? dp[i][pre] : <span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> dp[n][amount];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+</li>
+<li><p>Code(<a href="https://leetcode.com/submissions/detail/290745421/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/290745421/</a>)<br>时间复杂度：O(n * amount)<br>空间复杂度：O(amount)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">change</span><span class="params">(<span class="keyword">int</span> amount, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; coins)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (amount == <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;<span class="comment">//只有一种组合方式，那就是什么都不选。</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = coins.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (n == <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;<span class="comment">//amount非零的情况下，如果n为0。则找不到一种组合方式使得sum为amount。</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dp(amount + <span class="number">1</span>, <span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        dp[<span class="number">0</span>] = <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= amount; j++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">int</span> pre = j - coins[i - <span class="number">1</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">                dp[j] += (pre &gt;= <span class="number">0</span> ? dp[pre] : <span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> dp[amount];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/01/03/DP/Leetcode-518-Coin%20Change%202/" data-id="ck4xsqlhr001lvot7es5y0m1g" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/01/03/DP/Leetcode-322-Coin%20Change/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">【DP专项】322.Coin Change</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/01/03/DP/Leetcode-518-Coin%20Change%202/">【DP专项】518.Coin Change 2</a>
+          </li>
+        
+          <li>
+            <a href="/2020/01/03/DP/Leetcode-322-Coin%20Change/">【DP专项】322.Coin Change</a>
+          </li>
+        
+          <li>
+            <a href="/2020/01/02/DP/Leetcode-377-Combination%20Sum%20IV/">【DP专项】377.Combination Sum IV</a>
+          </li>
+        
+          <li>
+            <a href="/2020/01/02/DP/Leetcode-120-Triangle/">【DP专项】120.Triangle</a>
+          </li>
+        
+          <li>
+            <a href="/2020/01/02/DP/Leetcode-213-House%20Robber%20II/">【DP专项】213.House Robber II</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 wspage3<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
