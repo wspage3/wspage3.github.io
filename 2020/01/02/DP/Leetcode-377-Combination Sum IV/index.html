@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="追逐青春的梦想，怀着自信的心，永不放弃！">
 <meta property="og:description" content="一、题意题目链接: 377.Combination Sum IV 1.Description【输入】给定一个长度为n的整数数组。数组元素都是正数。给定一个正整数target。【输出】求出有多少种不同的组合方式，使得组合的sum等于target。每个数字可以使用任意次。 2.Examplenums &#x3D; [1, 2, 3]target &#x3D; 4 The possible combination ways">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-01-02T13:40:33.823Z">
+<meta property="og:updated_time" content="2020-01-02T13:44:32.015Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="追逐青春的梦想，怀着自信的心，永不放弃！" type="application/atom+xml">
@@ -106,10 +106,10 @@
 </li>
 <li><p>边界条件：dp[0] = 1。</p>
 </li>
-<li><p>求解方向：<br>【Top-Down】<br>i从1开始，到target结束。<br>对于每个i，遍历nums所有的元素。如果(i - x)大于等于0，则dp[i]累加dp[i - x]。</p>
+<li><p>求解方向：<br>【Backward DP】<br>i从1开始，到target结束。<br>对于每个i，遍历nums所有的元素。如果(i - x)大于等于0，则dp[i]累加dp[i - x]。</p>
 </li>
 </ol>
-<p>【Bottom-Up】<br>已知dp[0] = 1。<br>i从0开始，到target - 1结束。因为最多只可能target - 1转移到target。<br>对于每个i，遍历nums所有的元素。如果(i + x)小于等于target，则dp[i + x]累加dp[i]。</p>
+<p>【Forward DP】<br>已知dp[0] = 1。<br>i从0开始，到target - 1结束。因为最多只可能target - 1转移到target。<br>对于每个i，遍历nums所有的元素。如果(i + x)小于等于target，则dp[i + x]累加dp[i]。</p>
 <ol start="5">
 <li><p>空间优化：本题目无法进行空间降维。因为计算最后一项dp[target]的时候，可能使用到很多项之前的dp[i]。</p>
 </li>
@@ -144,7 +144,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/01/02/DP/Leetcode-377-Combination%20Sum%20IV/" data-id="ck4ws3wk4001irwt743fxchrq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/01/02/DP/Leetcode-377-Combination%20Sum%20IV/" data-id="ck4xgatjt001hast7f27rc5ba" class="article-share-link">Share</a>
       
       
     </footer>
@@ -152,6 +152,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2020/01/03/DP/Leetcode-322-Coin%20Change/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          【DP专项】322.Coin Change
+        
+      </div>
+    </a>
   
   
     <a href="/2020/01/02/DP/Leetcode-120-Triangle/" id="article-nav-older" class="article-nav-link-wrap">
@@ -193,6 +202,10 @@
       <ul>
         
           <li>
+            <a href="/2020/01/03/DP/Leetcode-322-Coin%20Change/">【DP专项】322.Coin Change</a>
+          </li>
+        
+          <li>
             <a href="/2020/01/02/DP/Leetcode-377-Combination%20Sum%20IV/">【DP专项】377.Combination Sum IV</a>
           </li>
         
@@ -206,10 +219,6 @@
         
           <li>
             <a href="/2020/01/02/DP/Leetcode-063-Unique%20Paths%20II/">【DP专项】063.Unique Paths II</a>
-          </li>
-        
-          <li>
-            <a href="/2020/01/02/DP/Leetcode-062-Unique%20Paths/">【DP专项】062.Unique Paths</a>
           </li>
         
       </ul>
