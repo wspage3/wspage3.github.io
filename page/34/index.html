@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Tree/Leetcode-173-Binary Search Tree Iterator" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Tree/Leetcode-116-Populating Next Right Pointers in Each Node" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/26/Tree/Leetcode-173-Binary%20Search%20Tree%20Iterator/" class="article-date">
-  <time datetime="2019-12-26T14:15:19.919Z" itemprop="datePublished">2019-12-26</time>
+    <a href="/2019/12/27/Tree/Leetcode-116-Populating%20Next%20Right%20Pointers%20in%20Each%20Node/" class="article-date">
+  <time datetime="2019-12-27T07:29:51.125Z" itemprop="datePublished">2019-12-27</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/26/Tree/Leetcode-173-Binary%20Search%20Tree%20Iterator/">【BST专项】173.Binary Search Tree Iterator</a>
+      <a class="article-title" href="/2019/12/27/Tree/Leetcode-116-Populating%20Next%20Right%20Pointers%20in%20Each%20Node/">【二叉树专项】116.Populating Next Right Pointers in Each Node</a>
     </h1>
   
 
@@ -83,30 +83,33 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/binary-search-tree-iterator/" target="_blank" rel="noopener">173.Binary Search Tree Iterator</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一棵BST。<br>【输出】<br>要求实现两个BST相关迭代器：<br>1.int next()：返回这棵BST中下一个最小的数字<br>2.bool hasNext()：判断这棵BST中是否有一个最小的数字</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [7,3,15,NULL,NULL,9,20]</p>
-<p>BSTIterator iterator = new BSTIterator(root);<br>iterator.next();    // 返回 3<br>iterator.next();    // 返回 7<br>iterator.hasNext(); // 返回 true<br>iterator.next();    // 返回 9<br>iterator.hasNext(); // 返回 true<br>iterator.next();    // 返回 15<br>iterator.hasNext(); // 返回 true<br>iterator.next();    // 返回 20<br>iterator.hasNext(); // 返回 false</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/populating-next-right-pointers-in-each-node/" target="_blank" rel="noopener">116.Populating Next Right Pointers in Each Node</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一棵完美二叉树(Perfect Binary Tree)。<br>完美二叉树：树中所有的叶子节点在同一层，每个非叶子节点都有两个儿子。<br>树的定义如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> val;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    Node *left;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    Node *right;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    Node *next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+<p>除了常规的：value，左儿子，右儿子外，还有一个成员是：next指针，指向其右侧的节点。<br>所有节点的next指针初始化为NULL。<br>【输出】<br>求出所有节点的next指针，并保存在当前的树中。<br>若某个节点右侧没有节点了，则值保持为NULL就行。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: root = [1,2,3,4,5,6,7]<br>Output: [1,#,2,3,#,4,5,6,7,#]<br>Explanation: Given the above perfect binary tree (Figure A), your function should populate each next pointer to point to its next right node, just like in Figure B. The serialized output is in level order as connected by the next pointers, with ‘#’ signifying the end of each level.</p>
 <h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
-<li>当遍历到BST的最后一个节点时，hasNext()返回false。</li>
-<li>题目保证next调用合法，所以不考虑该情况。</li>
+<li>树为NULL时，无需操作。</li>
+<li>树为单节点时，无需操作。</li>
+<li>要求O(1)的空间复杂度。允许使用递归，假定由递归产生的space开销不计入空间复杂度中。</li>
 </ol>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="要求"><a href="#要求" class="headerlink" title="要求"></a>要求</h3><ol>
-<li>next() 和 hasNext() 操作的时间复杂度是 O(1)，并使用 O(h) 内存，其中 h 是树的高度。</li>
-<li>可以假设 next() 调用总是有效的，也就是说，当调用 next() 时，BST 中至少存在一个下一个最小的数。</li>
-</ol>
-<h3 id="Solution-1："><a href="#Solution-1：" class="headerlink" title="Solution-1："></a>Solution-1：</h3><p>1.根据题意，next()和hasNext()要求o(1)的time和o(h)的space</p>
-<p>2.第一想法是：把BST的节点都inorder读取出来，放在数组中，这样很好实现上述两个函数，但是o(n)的space不满足。</p>
-<p>3.思路：要想依次获取BST中最小的节点，首先从root开始，一路往左下走，当某个节点N没有左儿子了，该节点就是最小的</p>
-<p>4.现在要接着找第二小的节点：假设F是N的父亲，F一定大于N；<br>由于N没有左儿子，考虑N的右儿子，如果没有的话，则F就是第二小的节点；<br>    如果有的话，假设为M，以M为根的所有节点一定都大于N，且小于F，则以M开始，继续一直往左下走。。。。。。<br>一直往左下走的动作，可以利用stack，当调用next()的时候，栈顶的就是最小的元素，把它pop出来，同时以其右儿子为root，继续往左下深入，再入栈</p>
-<p>5.hasNext()，显然满足time和space复杂度要求；<br>next()，该函数最多被调用n次，n是BST的节点个数。pushAll(temp-&gt;right)同样最多调用n次，平均下来就是o(1)的时间复杂度了。<br>而任一时刻，stack的大小都不会超过log n，满足空间复杂度。</p>
-<p>时间复杂度：O(1)<br>空间复杂度：O(h)</p>
-<p>6.Code(<a href="https://leetcode.com/submissions/detail/278065392/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/278065392/</a>)</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BSTIterator</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">stack</span>&lt;TreeNode*&gt; s;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">pushAll</span><span class="params">(TreeNode* node)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span> (node != <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            s.push(node);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">            node = node-&gt;left;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    BSTIterator(TreeNode* root) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        pushAll(root);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">/** @return the next smallest number */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">next</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        TreeNode* temp = s.top();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        s.pop();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        pushAll(temp-&gt;right);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> temp-&gt;val;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">/** @return whether we have a next smallest number */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">hasNext</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> !s.empty();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Iterative-Solution"><a href="#Solution-1：Iterative-Solution" class="headerlink" title="Solution-1：Iterative Solution"></a>Solution-1：Iterative Solution</h3><p>1.temp指针垂直方向迭代：<br>从root（第1层）出发，到倒数第二层为止。<br>代表每一层的最左边节点。</p>
+<p>2.cur指针水平方向迭代：<br>对于每一层来说，cur从最左边开始，到最右边为止。<br>代表每一层的任意非空节点。</p>
+<p>3.遍历到每个节点时，将其：<br>左儿子的next指针设置为：cur-&gt;left-&gt;next = cur-&gt;right;<br>右儿子的next指针设置为：cur-&gt;right-&gt;next = cur-&gt;next == NULL ? NULL : cur-&gt;next-&gt;left;</p>
+<p>4.循环结束时，所有的节点的next指针都被设置过了。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
+<p>5.Code(<a href="https://leetcode.com/submissions/detail/278169311/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/278169311/</a>)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function">Node* <span class="title">connect</span><span class="params">(Node* root)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        Node* temp = root;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span> (temp != <span class="literal">NULL</span> &amp;&amp; temp-&gt;left != <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            <span class="comment">/* cur指向该层的所有节点，从左边到右边。因为该层的next成员在上一次循环中已经计算出来，所有从左往右遍历很简单：cur = cur-&gt;next; */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">            Node* cur = temp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">while</span> (cur != <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">                cur-&gt;left-&gt;next = cur-&gt;right;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">                cur-&gt;right-&gt;next = cur-&gt;next == <span class="literal">NULL</span> ? <span class="literal">NULL</span> : cur-&gt;next-&gt;left;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">                cur = cur-&gt;next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">            temp = temp-&gt;left;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> root;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+
+<h3 id="Solution-2：Recursive-Solution-Preorder"><a href="#Solution-2：Recursive-Solution-Preorder" class="headerlink" title="Solution-2：Recursive Solution(Preorder)"></a>Solution-2：Recursive Solution(Preorder)</h3><p>1.遍历顺序为preorder：先处理完自身，递归其左右儿子时，才能顺利往下进行。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/278170494/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/278170494/</a>)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function">Node* <span class="title">connect</span><span class="params">(Node* root)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">/* 写法2：递归 */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="literal">NULL</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">/* 如果当前节点还有下面一层的话： */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (root-&gt;left != <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">            root-&gt;left-&gt;next = root-&gt;right;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            root-&gt;right-&gt;next = root-&gt;next == <span class="literal">NULL</span> ? <span class="literal">NULL</span> : root-&gt;next-&gt;left;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            <span class="built_in">connect</span>(root-&gt;left);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">            <span class="built_in">connect</span>(root-&gt;right);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> root;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/26/Tree/Leetcode-173-Binary%20Search%20Tree%20Iterator/" data-id="ck4zrcqma002sn4t74dzdbwuh" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/27/Tree/Leetcode-116-Populating%20Next%20Right%20Pointers%20in%20Each%20Node/" data-id="ck51r15hg002r3wt7gfbd92nv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -120,7 +123,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/33/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/32/">32</a><a class="page-number" href="/page/33/">33</a><span class="page-number current">34</span><a class="page-number" href="/page/35/">35</a><a class="page-number" href="/page/36/">36</a><span class="space">&hellip;</span><a class="page-number" href="/page/109/">109</a><a class="extend next" rel="next" href="/page/35/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/33/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/32/">32</a><a class="page-number" href="/page/33/">33</a><span class="page-number current">34</span><a class="page-number" href="/page/35/">35</a><a class="page-number" href="/page/36/">36</a><span class="space">&hellip;</span><a class="page-number" href="/page/110/">110</a><a class="extend next" rel="next" href="/page/35/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -152,6 +155,10 @@
       <ul>
         
           <li>
+            <a href="/2020/01/04/DP/Leetcode-091-Decode%20Ways/">【DP专项】091.Decode Ways</a>
+          </li>
+        
+          <li>
             <a href="/2020/01/03/DP/Leetcode-338-Counting%20Bits/">【DP专项】338.Counting Bits</a>
           </li>
         
@@ -165,10 +172,6 @@
         
           <li>
             <a href="/2020/01/03/DP/Leetcode-322-Coin%20Change/">【DP专项】322.Coin Change</a>
-          </li>
-        
-          <li>
-            <a href="/2020/01/02/DP/Leetcode-377-Combination%20Sum%20IV/">【DP专项】377.Combination Sum IV</a>
           </li>
         
       </ul>
