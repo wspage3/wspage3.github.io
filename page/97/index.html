@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Leetcode-309-Best Time to Buy and Sell Stock with Cooldown" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Leetcode-033-Search in Rotated Sorted Array" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/10/Leetcode-309-Best%20Time%20to%20Buy%20and%20Sell%20Stock%20with%20Cooldown/" class="article-date">
-  <time datetime="2019-12-10T06:51:24.948Z" itemprop="datePublished">2019-12-10</time>
+    <a href="/2019/12/10/Leetcode-033-Search%20in%20Rotated%20Sorted%20Array/" class="article-date">
+  <time datetime="2019-12-10T07:17:33.627Z" itemprop="datePublished">2019-12-10</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/10/Leetcode-309-Best%20Time%20to%20Buy%20and%20Sell%20Stock%20with%20Cooldown/">Leetcode309-Best Time to Buy and Sell Stock with Cooldown</a>
+      <a class="article-title" href="/2019/12/10/Leetcode-033-Search%20in%20Rotated%20Sorted%20Array/">33. Search in Rotated Sorted Array</a>
     </h1>
   
 
@@ -83,21 +83,25 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/" target="_blank" rel="noopener">Leetcode309-Best Time to Buy and Sell Stock with Cooldown</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组prices；prices[i]代表第i天股票的价格。<br>最多交易次数不限，求出你最多能赚多少钱。<br>前提是：买入下一股的时候，必须将上一股卖掉。<br>而且建议冷却期为1天，即：今天卖掉，后天才能买入。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [1,2,3,0,2]<br>Output: 3<br>Explanation: transactions = [buy, sell, cooldown, buy, sell]</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n: 当n为0/1的时候，直接返回0；<br>赚不到钱则返回0；</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Dynamic-Programming"><a href="#Solution-1：Dynamic-Programming" class="headerlink" title="Solution-1：Dynamic Programming"></a>Solution-1：Dynamic Programming</h3><p>1.对于任意一天i，有三种选择：buy, sell, rest<br>2.状态转移方程：<br>buy[i] = max(buy[i - 1], sell[i - 2] - prices[i]);//左边代表：今天休息；右边代表：今天用前天的利润来进一批货。<br>sell[i] = max(sell[i - 1], buy[i - 1] + prices[i]);//左边代表：今天休息；右边代表：今天在昨天进货的基础上，卖掉货。<br>buy[i]:时间范围[0, i]内，最后一次操作是buy或者rest，所能获得的最高利润<br>sell[i]:时间范围[0, i]内，最后一次操作是sell或者rest，所能获得的最高利润</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/284970939/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284970939/</a>)</p>
-<h3 id="Solution-2：Dynamic-Programming-Optimization"><a href="#Solution-2：Dynamic-Programming-Optimization" class="headerlink" title="Solution-2：Dynamic Programming + Optimization"></a>Solution-2：Dynamic Programming + Optimization</h3><p>1.优化空间复杂度</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/search-in-rotated-sorted-array/" target="_blank" rel="noopener">33. Search in Rotated Sorted Array</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组nums；<br>该数组原本是升序的，结果在某个支点处旋转了一次，如：<br>i.e., [0,1,2,4,5,6,7] might become [4,5,6,7,0,1,2]<br>给定一个整数target；<br>判断nums中是否包含该target，如果是，返回其index；否则，返回-1。<br>假设数组中所有数字都不相同。<br>要求时间复杂度为：O(log n)</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: nums = [4,5,6,7,0,1,2], target = 0<br>Output: 4</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n: 当n为0的时候，直接返回-1；</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>1.常规思路：从前到后遍历一遍nums，如果找到target则return。</p>
 <p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/284973472/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284973472/</a>)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/284976005/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284976005/</a>)</p>
+<h3 id="Solution-2：Binary-Search"><a href="#Solution-2：Binary-Search" class="headerlink" title="Solution-2：Binary Search"></a>Solution-2：Binary Search</h3><p>1.题目要求time complexity为O(log n)，则第一时间想到了Binary Search</p>
+<p>2.nums由于旋转的原因，虽说整体无序。但有两部分都是升序排列的。</p>
+<p>3.例如原有序数组为：[2,3,5,7,8]，经过rotate后所有可能为：<br>[3,5,7,8,2]<br>[5,7,8,2,3]<br>[7,8,2,3,5]<br>[8,2,3,5,7]<br>可能结果有(n - 1)种。<br>仔细观察可以发现，不管rotate成哪一种，都可以找出左边、右边两部分，它们各自有序。<br>而且：【右边子数组的所有元素一定比左边子数组的第一个元素小；】</p>
+<p>4.举个栗子：<br>对于[3,5,7,8,2]来说，left置为0，right置为4<br>第一次：mid = 2, nums[mid] = 7,<br>此时若target在范围[3, INT_MAX]内，即target不可能在另外一侧，因为另外一侧所有的元素都比nums[0]要小。<br>    直接进行二分搜索即可，用来比较的值就是nums[mid]。<br>此时若target不在范围[3, INT_MAX]内，说明：target不可能在左侧。需要将其在右侧搜索。即left往右移动。</p>
+<p>5.判断target和nums[mid]一个简单明了的方法就是：看他们俩是否都同时比nums[0]大或者比nums[0]小。<br>如果都比nums[0]大的话，说明这两个数都在左侧。<br>如果都比nums[0]小的话，说明这两个数都在右侧。<br>如果一个在左侧，一个在右侧的话，说明当前的nums[mid]对于在另外一侧寻找到target没有参考意义。<br>此时判断target和nums[0]的关系：<br>若target大于nums[0]，说明target此时在左侧，想办法将right指针左移。就是: num = INT_MAX;相当于认为右侧所有数都是INT_MAX<br>若target小于nums[0]，说明target此时在右侧，想办法将left指针右移。就是: num = INT_MIN;相当于认为左侧所有数都是INT_MIN</p>
+<p>时间复杂度：O(log n)<br>空间复杂度：O(1)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/285003804/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285003804/</a>)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/10/Leetcode-309-Best%20Time%20to%20Buy%20and%20Sell%20Stock%20with%20Cooldown/" data-id="ck52bqpja000p40t744k7f8j0" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/10/Leetcode-033-Search%20in%20Rotated%20Sorted%20Array/" data-id="ck52itxol0005b4t772sd52un" class="article-share-link">Share</a>
       
       
     </footer>
@@ -111,7 +115,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/96/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/95/">95</a><a class="page-number" href="/page/96/">96</a><span class="page-number current">97</span><a class="page-number" href="/page/98/">98</a><a class="page-number" href="/page/99/">99</a><span class="space">&hellip;</span><a class="page-number" href="/page/111/">111</a><a class="extend next" rel="next" href="/page/98/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/96/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/95/">95</a><a class="page-number" href="/page/96/">96</a><span class="page-number current">97</span><a class="page-number" href="/page/98/">98</a><a class="page-number" href="/page/99/">99</a><span class="space">&hellip;</span><a class="page-number" href="/page/112/">112</a><a class="extend next" rel="next" href="/page/98/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -143,6 +147,10 @@
       <ul>
         
           <li>
+            <a href="/2020/01/06/DP/Leetcode-674-Longest%20Continuous%20Increasing%20Subsequence/">【DP专项】674.Longest Continuous Increasing Subsequence</a>
+          </li>
+        
+          <li>
             <a href="/2020/01/06/DP/Leetcode-673-Number%20of%20Longest%20Increasing%20Subsequence/">【DP专项】673.Number of Longest Increasing Subsequence</a>
           </li>
         
@@ -156,10 +164,6 @@
         
           <li>
             <a href="/2020/01/03/DP/Leetcode-221-Maximal%20Square/">【DP专项】221.Maximal Square</a>
-          </li>
-        
-          <li>
-            <a href="/2020/01/03/DP/Leetcode-518-Coin%20Change%202/">【DP专项】518.Coin Change 2</a>
           </li>
         
       </ul>
