@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Linked List/Leetcode-328-Odd Even Linked List" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Linked List/Leetcode-082-Remove Duplicates from Sorted List II" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/30/Linked%20List/Leetcode-328-Odd%20Even%20Linked%20List/" class="article-date">
-  <time datetime="2019-12-30T02:27:46.004Z" itemprop="datePublished">2019-12-30</time>
+    <a href="/2019/12/30/Linked%20List/Leetcode-082-Remove%20Duplicates%20from%20Sorted%20List%20II/" class="article-date">
+  <time datetime="2019-12-30T03:10:07.892Z" itemprop="datePublished">2019-12-30</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/30/Linked%20List/Leetcode-328-Odd%20Even%20Linked%20List/">【链表专项】328.Odd Even Linked List</a>
+      <a class="article-title" href="/2019/12/30/Linked%20List/Leetcode-082-Remove%20Duplicates%20from%20Sorted%20List%20II/">【链表专项】082.Remove Duplicates from Sorted List II</a>
     </h1>
   
 
@@ -83,27 +83,24 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/odd-even-linked-list/" target="_blank" rel="noopener">328.Odd Even Linked List</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个单链表。<br>【输出】<br>要求将该单链表中的所有奇数项节点放在所有偶数项节点前面。<br>同时所有奇数项或者所有偶数项的相对顺序要保持不变。<br>即：1，3，5，7，…，2，4，6，8，…，NULL<br>注：链表第一个节点序号为1。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: 2-&gt;1-&gt;3-&gt;5-&gt;6-&gt;4-&gt;7-&gt;NULL<br>Output: 2-&gt;3-&gt;6-&gt;7-&gt;1-&gt;5-&gt;4-&gt;NULL</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/" target="_blank" rel="noopener">082.Remove Duplicates from Sorted List II</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个单链表，头为head。该单链表为有序的（升序）。<br>【输出】<br>将上述单链表中value出现多次的元素都去除（一个也不留），仅出现一次的元素保留。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: 1-&gt;2-&gt;3-&gt;3-&gt;4-&gt;4-&gt;5<br>Output: 1-&gt;2-&gt;5</p>
 <h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
-<li>此处的odd、even指的是节点的序号，而非节点的value。</li>
-<li>若链表为NULL，无需处理。</li>
-<li>若链表中节点数目小于等于2，无需处理。</li>
-<li>要求in-place就地处理（O(1)的space），同时O(n)的time。</li>
+<li>链表为NULL时，无需处理。</li>
+<li>链表为单节点时，无需处理。</li>
 </ol>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Iterative-Solution"><a href="#Solution-1：Iterative-Solution" class="headerlink" title="Solution-1：Iterative Solution"></a>Solution-1：Iterative Solution</h3><p>1.当链表中节点数目小于等于2时，无需处理。</p>
-<p>2.定义如下：<br>headNext始终指向第二个元素。<br>headOdd指向奇数项(1.3.5…)元素，初始化指向第1个节点<br>headEven指向偶数项(2.4.6…)元素，初始化指向第2个节点</p>
-<p>3.过程如下：<br>a.当headEven为NULL或者headEven-&gt;next为NULL的时候，代表headEven不能再向后移动了，此时循环结束。<br>b.否则的话：headOdd和headEven指针依次向后移动，链接对应的节点。<br>c.最后当循环退出的时候，将奇数项链表的尾部接在偶数项链表的头部：headOdd-&gt;next = headNext;</p>
-<p>4.举个例子：<br>当n == 3的时候，链表为：1-&gt;2-&gt;3-&gt;NULL<br>循环结束后：<br>head：1-&gt;3-&gt;NULL，headOdd为3。<br>headNext：2-&gt;NULL，headEven为NULL。<br>再进行链接：headOdd-&gt;next = headNext;</p>
-<p>当n == 4的时候，链表为：1-&gt;2-&gt;3-&gt;4-&gt;NULL<br>循环结束后：<br>head：1-&gt;3-&gt;4-&gt;NULL，headOdd为3。<br>headNext：2-&gt;4-&gt;NULL，headEven为4。<br>再进行链接：headOdd-&gt;next = headNext;</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Iterative-Solution"><a href="#Solution-1：Iterative-Solution" class="headerlink" title="Solution-1：Iterative Solution"></a>Solution-1：Iterative Solution</h3><p>1.回忆【203.Remove Linked List Elements】中，我们遍历链表来寻找所有value为target的节点，并将其删除。<br>使用一个dummyHead接在链表的前面，初始化cur指向dummyHead。依次检查cur-&gt;next是否满足题意……直到cur为空。</p>
+<p>2.回忆【083.Remove Duplicates from Sorted List】中，我们遍历链表来寻找所有value重复的节点，保留第一个，将后面的删除。</p>
+<p>3.本题中，也使用一个dummyHead接在链表前面。因为链表中第一个元素同样可能是满足题意的，即需要删除的。<br>pre指针初始化指向dummy。<br>cur指针初始化执行head。</p>
+<p>4.外层循环：当cur非空的时候，考虑cur。<br>内层循环：考虑cur紧接着的后面若干个元素，其value是否与cur-&gt;value相等。相等的话，删除cur后继的并且值相等的元素。<br>同时置flag为true，表示当前cur也需要删除。</p>
 <p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<p>5.Code(<a href="https://leetcode.com/submissions/detail/289636447/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/289636447/</a>)</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function">ListNode* <span class="title">oddEvenList</span><span class="params">(ListNode* head)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (head == <span class="literal">NULL</span> || head-&gt;next == <span class="literal">NULL</span> || head-&gt;next-&gt;next == <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> head;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        ListNode* headNext = head-&gt;next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        ListNode* headOdd = head;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        ListNode* headEven = head-&gt;next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span> (headEven != <span class="literal">NULL</span> &amp;&amp; headEven-&gt;next != <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            <span class="comment">/*</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="comment">            headOdd-&gt;next = headEven-&gt;next;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="comment">            headOdd = headOdd-&gt;next;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="comment">            headEven-&gt;next = headOdd-&gt;next;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="comment">            headEven = headEven-&gt;next;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="comment">            */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">            <span class="comment">//根据=赋值运算符的右结合性，将上述4行写成下面的两行</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">            headOdd = headOdd-&gt;next = headEven-&gt;next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">            headEven = headEven-&gt;next = headOdd-&gt;next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        headOdd-&gt;next = headNext;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> head;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+<p>5.Code(<a href="https://leetcode.com/submissions/detail/280539699/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/280539699/</a>)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function">ListNode* <span class="title">deleteDuplicates</span><span class="params">(ListNode* head)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="function">ListNode <span class="title">dummy</span><span class="params">(<span class="number">0</span>)</span></span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        dummy.next = head;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        ListNode* pre = &amp;dummy;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        ListNode* cur = head;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">bool</span> flag = <span class="literal">false</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span> (cur != <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">while</span> (cur-&gt;next != <span class="literal">NULL</span> &amp;&amp; cur-&gt;next-&gt;val == cur-&gt;val) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">                ListNode* temp = cur-&gt;next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">                cur-&gt;next = temp-&gt;next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">delete</span> temp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">                flag = <span class="literal">true</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (flag) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">                ListNode * temp = cur;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">                pre-&gt;next = cur-&gt;next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">                cur = cur-&gt;next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">delete</span> temp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">                flag = <span class="literal">false</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">            &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">                pre = pre-&gt;next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">                cur = cur-&gt;next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> dummy.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/30/Linked%20List/Leetcode-328-Odd%20Even%20Linked%20List/" data-id="ck53io1u90027hct78t8o2tnr" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/30/Linked%20List/Leetcode-082-Remove%20Duplicates%20from%20Sorted%20List%20II/" data-id="ck53oz49l001yast7gthzakss" class="article-share-link">Share</a>
       
       
     </footer>
@@ -117,7 +114,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/24/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="page-number" href="/page/24/">24</a><span class="page-number current">25</span><a class="page-number" href="/page/26/">26</a><a class="page-number" href="/page/27/">27</a><span class="space">&hellip;</span><a class="page-number" href="/page/113/">113</a><a class="extend next" rel="next" href="/page/26/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/24/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="page-number" href="/page/24/">24</a><span class="page-number current">25</span><a class="page-number" href="/page/26/">26</a><a class="page-number" href="/page/27/">27</a><span class="space">&hellip;</span><a class="page-number" href="/page/114/">114</a><a class="extend next" rel="next" href="/page/26/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -149,6 +146,10 @@
       <ul>
         
           <li>
+            <a href="/2020/01/07/DP/Leetcode-139-Word%20Break/">【DP专项】139.Word Break</a>
+          </li>
+        
+          <li>
             <a href="/2020/01/07/DP/Leetcode-279-Perfect%20Squares/">【DP专项】279.Perfect Squares</a>
           </li>
         
@@ -162,10 +163,6 @@
         
           <li>
             <a href="/2020/01/04/DP/Leetcode-091-Decode%20Ways/">【DP专项】091.Decode Ways</a>
-          </li>
-        
-          <li>
-            <a href="/2020/01/03/DP/Leetcode-338-Counting%20Bits/">【DP专项】338.Counting Bits</a>
           </li>
         
       </ul>
