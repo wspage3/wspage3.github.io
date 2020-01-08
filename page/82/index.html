@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Leetcode-054-Spiral Matrix" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Leetcode-059-Spiral Matrix II" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/17/Leetcode-054-Spiral%20Matrix/" class="article-date">
-  <time datetime="2019-12-17T00:20:41.517Z" itemprop="datePublished">2019-12-17</time>
+    <a href="/2019/12/17/Leetcode-059-Spiral%20Matrix%20II/" class="article-date">
+  <time datetime="2019-12-17T01:53:44.984Z" itemprop="datePublished">2019-12-17</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/17/Leetcode-054-Spiral%20Matrix/">54.Spiral Matrix</a>
+      <a class="article-title" href="/2019/12/17/Leetcode-059-Spiral%20Matrix%20II/">59.Spiral Matrix II</a>
     </h1>
   
 
@@ -83,22 +83,23 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/spiral-matrix/" target="_blank" rel="noopener">54.Spiral Matrix</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个m * n的矩阵matrix。<br>【输出】<br>输出一个一维数组，长度为m * n，代表matrix顺时针螺旋的顺序。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input:<br>[<br>  [1, 2, 3, 4],<br>  [5, 6, 7, 8],<br>  [9,10,11,12]<br>]<br>Output: [1,2,3,4,8,12,11,10,9,5,6,7]</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.m或者n为0的时候，直接return {};</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Layer-by-Layer-One-by-One"><a href="#Solution-1：Layer-by-Layer-One-by-One" class="headerlink" title="Solution-1：Layer by Layer, One by One"></a>Solution-1：Layer by Layer, One by One</h3><p>1.根据<a href="https://leetcode.com/problems/rotate-image/" target="_blank" rel="noopener">48.Rotate Image</a>的启示，<br>我们可以从外往内一层一层地读取。然后每一层一个一个地将元素依次放入ans数组。<br>不同的是：[48.Rotate Image]是正方形，当前题目是长方形。</p>
-<p>2.由于每一层都是相当于一个长方形的四条边。<br>设左上角的点a为(r1, c1)，设右下角的点b为(r2, c2)。<br>初始值a为(0, 0)，b为(m - 1, n - 1)<br>显然，每层中最少也得有一个元素，即：a和b是同一个点。<br>此时 r1 == r2, c1 == c2;所以循环结束的条件为r1 &lt;= r2, c1 &lt;= c2</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/spiral-matrix-ii/" target="_blank" rel="noopener">59.Spiral Matrix II</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个正整数n。<br>【输出】<br>构造一个1 ~ n ^ 2的方阵，它的螺旋序列为1 ~ n。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: 3<br>Output:<br>[<br> [ 1, 2, 3 ],<br> [ 8, 9, 4 ],<br> [ 7, 6, 5 ]<br>]</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.n为正整数。</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Layer-by-Layer-One-by-One"><a href="#Solution-1：Layer-by-Layer-One-by-One" class="headerlink" title="Solution-1：Layer by Layer, One by One"></a>Solution-1：Layer by Layer, One by One</h3><p>1.根据<a href="https://leetcode.com/problems/spiral-matrix/" target="_blank" rel="noopener">54.Spiral Matrix</a>的启示，<br>用同样的方法，从外层到内层，每一层按照top -&gt; right -&gt; bottom -&gt; left的顺序，将当前数字写入到方阵中。</p>
+<p>2.由于此时是方阵，我们先考虑a点和b点不同的情况。<br>设左上角的点a为(r1, c1)，设右下角的点b为(r2, c2)。<br>初始值a为(0, 0)，b为(n - 1, n - 1)<br>显然，当a，b两点不同的时候，最小为2 * 2的正方形;<br>所以循环结束的条件为r1 &lt; r2, c1 &lt; c2</p>
 <p>3.遍历完每一层后，需要考虑下一层，即：<br>r1++;<br>c1++;<br>r2–;<br>c2–;</p>
-<p>4.对于每一层，把四条边（r1 &lt; r2, c1 &lt; c2）上的路径走一次即可：<br>top：i = r1; j = [c1, c2]<br>right：i = [r1 + 1, r2]; j = c2<br>bottom：i = r2; j = [c2 - 1, c1]<br>left：i = [r2 - 1, r1 + 1]; j = c1</p>
-<p>5.特殊情况考虑：<br>边长为2的正方形：top = 2，right = 1，bottom = 1，left = 0<br>长n，高1的长方形：top = n，right = 0，【bottom = n - 1，left = 0】存在重复计数<br>长1，高n的长方形：top = 1，right = n - 1，【bottom = 0，left = n - 2】存在重复计数<br>边长为1的正方形：top = 1，right = 0，bottom = 0，left = 0<br>所以只有当r1 &lt; r2, c1 &lt; c2的时候，才会遍历bottom和left两条边。</p>
-<p>时间复杂度：O(m * n)<br>空间复杂度：O(1)</p>
-<p>6.Code(<a href="https://leetcode.com/submissions/detail/286387070/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286387070/</a>)</p>
+<p>4.对于每一层，把四条边（r1 &lt; r2, c1 &lt; c2）上的路径走一次即可：<br>不考虑r1 == r2，c1 == c2的情况。<br>top：i = r1; j = [c1, c2]<br>right：i = [r1 + 1, r2]; j = c2<br>bottom：i = r2; j = [c2 - 1, c1]<br>left：i = [r2 - 1, r1 + 1]; j = c1</p>
+<p>5.两种情况考虑：<br>当循环最后一次是2 * 2的正方形时，所有元素都遍历完成。<br>当循环最后一次是3 * 3的正方形时，还剩一个1 * 1的需要遍历。</p>
+<p>6.temp代表当前数字，从0开始，每次写入的时候，先自增，后赋值。</p>
+<p>时间复杂度：O(n * n)<br>空间复杂度：O(1) // 不包含返回的结果二维方阵</p>
+<p>6.Code(<a href="https://leetcode.com/submissions/detail/286500431/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286500431/</a>)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/17/Leetcode-054-Spiral%20Matrix/" data-id="ck555bgw70009t4t75qk08ig3" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/17/Leetcode-059-Spiral%20Matrix%20II/" data-id="ck55byq3r0008jgt70cy5ec09" class="article-share-link">Share</a>
       
       
     </footer>
@@ -112,7 +113,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/81/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/80/">80</a><a class="page-number" href="/page/81/">81</a><span class="page-number current">82</span><a class="page-number" href="/page/83/">83</a><a class="page-number" href="/page/84/">84</a><span class="space">&hellip;</span><a class="page-number" href="/page/115/">115</a><a class="extend next" rel="next" href="/page/83/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/81/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/80/">80</a><a class="page-number" href="/page/81/">81</a><span class="page-number current">82</span><a class="page-number" href="/page/83/">83</a><a class="page-number" href="/page/84/">84</a><span class="space">&hellip;</span><a class="page-number" href="/page/116/">116</a><a class="extend next" rel="next" href="/page/83/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -144,6 +145,10 @@
       <ul>
         
           <li>
+            <a href="/2020/01/08/DP/Leetcode-005-Longest%20Palindromic%20Substring/">【DP专项】005.Longest Palindromic Substring</a>
+          </li>
+        
+          <li>
             <a href="/2020/01/08/DP/Leetcode-647-Palindromic%20Substrings/">【DP专项】647.Palindromic Substrings</a>
           </li>
         
@@ -157,10 +162,6 @@
         
           <li>
             <a href="/2020/01/06/DP/Leetcode-674-Longest%20Continuous%20Increasing%20Subsequence/">【DP专项】674.Longest Continuous Increasing Subsequence</a>
-          </li>
-        
-          <li>
-            <a href="/2020/01/06/DP/Leetcode-673-Number%20of%20Longest%20Increasing%20Subsequence/">【DP专项】673.Number of Longest Increasing Subsequence</a>
           </li>
         
       </ul>

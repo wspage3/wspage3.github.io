@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Leetcode-084-Largest Rectangle in Histogram" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Leetcode-042-Trapping Rain Water" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/05/Leetcode-084-Largest%20Rectangle%20in%20Histogram/" class="article-date">
-  <time datetime="2019-12-05T08:13:48.347Z" itemprop="datePublished">2019-12-05</time>
+    <a href="/2019/12/06/Leetcode-042-Trapping%20Rain%20Water/" class="article-date">
+  <time datetime="2019-12-06T02:46:59.128Z" itemprop="datePublished">2019-12-06</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/05/Leetcode-084-Largest%20Rectangle%20in%20Histogram/">Leetcode84-Largest Rectangle in Histogram</a>
+      <a class="article-title" href="/2019/12/06/Leetcode-042-Trapping%20Rain%20Water/">Leetcode42-Trapping Rain Water</a>
     </h1>
   
 
@@ -83,31 +83,33 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/largest-rectangle-in-histogram/" target="_blank" rel="noopener">Leetcode84-Largest Rectangle in Histogram</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的非负整数数组heights；heights[i]代表第个矩形的高度；矩形宽度都是1；<br>求出这个图中最大的矩形面积。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p> input = [2,1,5,6,2,3]<br>output = 10</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n：当n为0和1的时候，直接返回结果；<br>heights[i]：题目保证非负</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>1.给定两个不同的柱子i, j，则area[i, j] = max(heights[i], heights[j], (j - i + 1) * minHeightBetweenIAndJ);<br>其中minHeightBetweenIAndJ是[i, j]中最短的高度。此过程需要O(n)的时间。<br>2.所以可以考察任意两个不同的i, j。i：[0, n - 2] j：[i + 1, n - 1]</p>
-<p>时间复杂度：O(n ^ 3)<br>空间复杂度：O(1)：<br>结果发现：此方法TLE，说明需要进一步优化。</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/283879193/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283879193/</a>)</p>
-<h3 id="Solution-2：Brute-Force"><a href="#Solution-2：Brute-Force" class="headerlink" title="Solution-2：Brute Force"></a>Solution-2：Brute Force</h3><p>1.由于我们遍历i, j是有序情况下的。在计算出[i, j]之间的结果后，立马考虑[i, j + 1]。<br>此时发现还要遍历n次找到[i, j + 1]中的最低高度，而[i, j]中的最低高度在之前已经计算过了。<br>同时minHeight[i, j + 1] = min(minHeight[i, j], heights[j + 1]);<br>所以保留这个结果，以O(1)的time就可以得到minHeight[i, j + 1]</p>
-<p>时间复杂度：O(n ^ 2)<br>空间复杂度：O(1)：<br>结果发现：此方法TLE，说明需要进一步优化。</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/283882070/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283882070/</a>)</p>
-<h3 id="Solution-3：Brute-Force"><a href="#Solution-3：Brute-Force" class="headerlink" title="Solution-3：Brute Force"></a>Solution-3：Brute Force</h3><p>1.换一种不同于Solution1和Solution2的思路：<br>在上面的枚举方法中，我们是枚举矩形能出现的所有区间[i, j]，固定了区间[i, j]，然后在这个区间中寻找一个最短的长度。<br>换一种思路：考虑每个位置i，找出以当前heights[i]为高度的，最大矩形的面积res[i]。则答案就是res数组的最大值。</p>
-<p>2.对于当前heights[i]来说，需要找到在[0, i - 1]中从后往前第一个比heights[i]小的值leftI。<br>同理，需要找到[i + 1, n - 1]中从前往后第一个比heights[i]小的值rightI。<br>则res[i] = heights[i] * (rightI - leftI - 1)</p>
-<p>时间复杂度：O(n ^ 2)<br>空间复杂度：O(n)：<br>结果发现：此方法TLE，说明需要进一步优化。</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/283922360/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283922360/</a>)</p>
-<h3 id="Solution-4：Monotonous-Stack"><a href="#Solution-4：Monotonous-Stack" class="headerlink" title="Solution-4：Monotonous Stack"></a>Solution-4：Monotonous Stack</h3><p>1.回忆Leetcode739-Daily Temperatures：该问题，我们用Brute Force方法：对于nums[i]，要做的就是找到它后面第一个比它大的元素。<br>同时我们用单调栈的方法使得上述的O(n ^ 2)优化为O(n)。</p>
-<p>2.再回过头来看本题目，对于heights[i]，实质上也是寻找它左右两边第一个比它小的元素。<br>如果我们能在O(n)的时间内，找到所有heights[i]对应的leftI和rightI。那么上面Solution3的时间复杂度就能降低到O(n)。</p>
-<p>3.Leetcode739-Daily Temperatures的单调栈解法是：<br>维护一个单调栈，且栈从顶到底是递增的；<br>当一个元素比栈中某个元素大的时候，将栈中元素抛出k个，直到当前元素不大于栈顶元素。<br>这样的话，对于当前元素，我们可以找到它左边第一个比它小的元素。<br>对于栈中元素，当其出栈时，当前元素就是其右边第一个比它大的元素。（Leetcode739思路就是依据本条）</p>
-<p>4.类似的，维护一个单调栈，且栈从顶到底是递减的；<br>栈中元素指的是对应的数组下标。<br>当我们在位置cur的时候，heights[cur]比栈中某个元素小的时候，将栈中元素抛出k个，直到当前元素不大于栈顶元素。<br>对于抛出去的k个元素：<br>其rightI就是cur。<br>其leftI就是该元素在栈中的下面一个元素，（因为栈任意时刻都是自顶向下递减），如果栈为空了，说明刚刚被抛出去的这个元素在左边没有比它小的，记为-1。<br>然后不断更新，直至遍历完依次heights数组。<br>此时栈中可能还有元素：则它们都是因为自身右边没有比自身小的元素。将其rightI记录为n。<br>这是因为，在[a, b]区间内，不包含a，b本身，一共有(b - a - 1)个元素。当其左边没有，记录为-1；当其右边没有，记录为n；方便计算。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(n)：</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/283927850/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283927850/</a>)</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/trapping-rain-water/" target="_blank" rel="noopener">Leetcode42-Trapping Rain Water</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的非负整数数组height；height[i]代表第个石头的高度；石头宽度都是1；<br>求出这个图中所有石头可以存储的水的体积。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [0,1,0,2,1,0,1,3,2,1,2,1]<br>Output: 6</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n：当n为0/1/2的时候，直接返回0；<br>heights[i]：题目保证非负</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>要想可以存储水，则n的数目至少为2。<br>例如[2,1,3]此时，由于中间高度为1，两边都比它高，所以可以存储水，水量为min(2, 3) - 1 = 1。<br>所以，我们对[0, n - 1]的每个位置进行遍历，找出每个位置可以存储的水量resI，则答案就是所有resI的和。<br>对于位置i来说，需要找到[0, i - 1]最高的高度a；以及[i + 1, n - 1]最高的高度b；<br>且min(a, b)大于height[i]的时候，位置i才可以存储水。<br>所以问题转化为：求给定一个元素i，它左边最大的值，以及它右边最大的值。</p>
+<h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>1.i从[0, n - 1]遍历。<br>对于每个i，leftMax和rightMax记录其左右两侧最大的值，则res[i] = min(leftMax, rightMax) - height[i]<br>leftMax/rightMax 均初始化为height[i]。这样假设左边或者右边没有比自身大的话，答案就是0了。<br>然后ans累加每次计算出来的resI。</p>
+<p>时间复杂度：O(n ^ 2)<br>空间复杂度：O(1)：<br>结果发现：此方法仅打败了5%的时间复杂度。</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/284036549/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284036549/</a>)</p>
+<h3 id="Solution-2：Dynamic-programming"><a href="#Solution-2：Dynamic-programming" class="headerlink" title="Solution-2：Dynamic programming"></a>Solution-2：Dynamic programming</h3><p>1.上面的核心思路是“对于任意一个i，找到[0, i - 1]和[i + 1, n - 1]内的最大值，然后计算res[i]”<br>而对于任意一个i，我们找到左边、右边最大值的复杂度都是O(n)。而对于n个i，则是O(n ^ 2)。</p>
+<p>2.根据Leetcode84-Largest Rectangle in Histogram的Solution2的启示：<br>求所有区间[i, j]内的最小值，从O(n ^ 3)优化为O(n ^ 2)，其中区间个数为n ^ 2。也就是说，求每个区间内最值的时间复杂度可以优化为O(1)。</p>
+<p>3.leftMax[i]表示：[0, i - 1]内的最大值，那leftMax[i + 1] = max(height[i], leftMax[i]);<br>也就是说，求当前的最大值，可以通过上一次的结果递推得到。<br>那么对于所有的i（i在[0, n - 1]），只要从前到后遍历一次即可求得所有的leftMax[i];<br>同理，rightMax[i]一样。<br>可以看出，通过空间换时间的方法，将O(n ^ 2)优化为O(n)<br>这样，我们在O(n)的时间内就解决了本题目。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/284056325/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284056325/</a>)</p>
+<h3 id="Solution-3：Monotonous-Stack"><a href="#Solution-3：Monotonous-Stack" class="headerlink" title="Solution-3：Monotonous Stack"></a>Solution-3：Monotonous Stack</h3><p>1.上面的想法是：对于第i个位置，找出它左边最大的数字a，右边最大的数字b，然后答案就可以计算了。<br>换个思路，对于位置cur，我们不去找它左边或者右边最大的数字；<br>我们找第一个比它大的数字：左边下标记为i，右边下标记录为j。<br>如果找到的话，计算出来这个凹坑的面积，答案累加上这个值。res += min(height[i], height[j]) * (j - i - 1)<br>此时，由于这块面积已经被累加过了，则可以想象成这个凹坑已经被填上了。遍历了所有的凹坑后，答案就出来了。<br>自然地，根据739. Daily Temperatures的启示，我们使用单调栈很容易找到一个元素左边和右边第一个比自己大的值。</p>
+<p>2.具体算法：如果出现一个新元素，大于栈顶元素，则将栈中元素抛出k个，且每个计算结果，并累加。<br>如果当前元素小于栈顶元素，则将其压入栈内即可。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/284093452/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284093452/</a>)</p>
+<h3 id="Solution-4：Two-Pointers"><a href="#Solution-4：Two-Pointers" class="headerlink" title="Solution-4：Two Pointers"></a>Solution-4：Two Pointers</h3><p>1.回想下Solution-2，对于任意i，找到leftMax[i]和rightMax[i]。然后就可以计算res[i]的值了。<br>2.同时，可以发现，当leftMax[i]小于rightMax[i]的时候，res[i]的值由宽度和leftMax[i]决定。<br>3.left指针指向1号元素，left向右移动。<br>right指针指向n - 2号元素，right向左移动。<br>leftMax表示“此时此刻，对于当前元素来说，它左边的最大值”，初始化为height[0]<br>rightMax表示“此时此刻，对于当前元素来说，它右边的最大值”，初始化为height[n - 1]<br>则考虑[left, right]区间内的每一个元素：<br>如果此时leftMax小于rightMax：说明：<br>a.对于当前元素cur来说（left位置的），这个位置能否存储水，只和height[left]和leftMax有关。<br>b.对于当前元素cur来说（left位置的），不管我右边的高度分别是多少，只要我右边存在一个位置使得rightMax &gt; leftMax，那么当前位置的存水量就只依赖于leftMax。<br>此时，ans累加该位置存储的水量，更新leftMax，left后移一位。</p>
+<p>如果此时leftMax大于等于rightMax，说明：<br>a.对于当前元素cur来说（right位置的），这个位置能否存储水，只和height[right]和rightMax有关。<br>b.对于当前元素cur来说（right位置的），不管我左边的高度分别是多少，只要我左边存在一个位置使得rightMax &lt;= leftMax，那么当前位置的存水量就只依赖于rightMax。<br>此时，ans累加该位置存储的水量，更新rightMax，right后移一位。</p>
+<p>left从左往右，right从右往左，每次循环找出一个位置的答案，然后left++或者right–，直到left &gt; right，此时所有位置的答案都交替计算出来了。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
+<p>4.Code(<a href="https://leetcode.com/submissions/detail/284130675/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284130675/</a>)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/05/Leetcode-084-Largest%20Rectangle%20in%20Histogram/" data-id="ck555bgwb000et4t7fn4f05fa" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/06/Leetcode-042-Trapping%20Rain%20Water/" data-id="ck55byq3r0006jgt7aqnic6vg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -121,7 +123,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/107/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/106/">106</a><a class="page-number" href="/page/107/">107</a><span class="page-number current">108</span><a class="page-number" href="/page/109/">109</a><a class="page-number" href="/page/110/">110</a><span class="space">&hellip;</span><a class="page-number" href="/page/115/">115</a><a class="extend next" rel="next" href="/page/109/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/107/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/106/">106</a><a class="page-number" href="/page/107/">107</a><span class="page-number current">108</span><a class="page-number" href="/page/109/">109</a><a class="page-number" href="/page/110/">110</a><span class="space">&hellip;</span><a class="page-number" href="/page/116/">116</a><a class="extend next" rel="next" href="/page/109/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -153,6 +155,10 @@
       <ul>
         
           <li>
+            <a href="/2020/01/08/DP/Leetcode-005-Longest%20Palindromic%20Substring/">【DP专项】005.Longest Palindromic Substring</a>
+          </li>
+        
+          <li>
             <a href="/2020/01/08/DP/Leetcode-647-Palindromic%20Substrings/">【DP专项】647.Palindromic Substrings</a>
           </li>
         
@@ -166,10 +172,6 @@
         
           <li>
             <a href="/2020/01/06/DP/Leetcode-674-Longest%20Continuous%20Increasing%20Subsequence/">【DP专项】674.Longest Continuous Increasing Subsequence</a>
-          </li>
-        
-          <li>
-            <a href="/2020/01/06/DP/Leetcode-673-Number%20of%20Longest%20Increasing%20Subsequence/">【DP专项】673.Number of Longest Increasing Subsequence</a>
           </li>
         
       </ul>
