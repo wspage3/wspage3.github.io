@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Leetcode-042-Trapping Rain Water" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-DP/Leetcode-121-Best Time to Buy ans Sell Stock" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/06/Leetcode-042-Trapping%20Rain%20Water/" class="article-date">
-  <time datetime="2019-12-06T02:46:59.128Z" itemprop="datePublished">2019-12-06</time>
+    <a href="/2019/12/07/DP/Leetcode-121-Best%20Time%20to%20Buy%20ans%20Sell%20Stock/" class="article-date">
+  <time datetime="2019-12-07T01:09:15.739Z" itemprop="datePublished">2019-12-07</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/06/Leetcode-042-Trapping%20Rain%20Water/">Leetcode42-Trapping Rain Water</a>
+      <a class="article-title" href="/2019/12/07/DP/Leetcode-121-Best%20Time%20to%20Buy%20ans%20Sell%20Stock/">【DP专项】121.Best Time to Buy and Sell Stock</a>
     </h1>
   
 
@@ -83,33 +83,54 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/trapping-rain-water/" target="_blank" rel="noopener">Leetcode42-Trapping Rain Water</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的非负整数数组height；height[i]代表第个石头的高度；石头宽度都是1；<br>求出这个图中所有石头可以存储的水的体积。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [0,1,0,2,1,0,1,3,2,1,2,1]<br>Output: 6</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n：当n为0/1/2的时候，直接返回0；<br>heights[i]：题目保证非负</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>要想可以存储水，则n的数目至少为2。<br>例如[2,1,3]此时，由于中间高度为1，两边都比它高，所以可以存储水，水量为min(2, 3) - 1 = 1。<br>所以，我们对[0, n - 1]的每个位置进行遍历，找出每个位置可以存储的水量resI，则答案就是所有resI的和。<br>对于位置i来说，需要找到[0, i - 1]最高的高度a；以及[i + 1, n - 1]最高的高度b；<br>且min(a, b)大于height[i]的时候，位置i才可以存储水。<br>所以问题转化为：求给定一个元素i，它左边最大的值，以及它右边最大的值。</p>
-<h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>1.i从[0, n - 1]遍历。<br>对于每个i，leftMax和rightMax记录其左右两侧最大的值，则res[i] = min(leftMax, rightMax) - height[i]<br>leftMax/rightMax 均初始化为height[i]。这样假设左边或者右边没有比自身大的话，答案就是0了。<br>然后ans累加每次计算出来的resI。</p>
-<p>时间复杂度：O(n ^ 2)<br>空间复杂度：O(1)：<br>结果发现：此方法仅打败了5%的时间复杂度。</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/284036549/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284036549/</a>)</p>
-<h3 id="Solution-2：Dynamic-programming"><a href="#Solution-2：Dynamic-programming" class="headerlink" title="Solution-2：Dynamic programming"></a>Solution-2：Dynamic programming</h3><p>1.上面的核心思路是“对于任意一个i，找到[0, i - 1]和[i + 1, n - 1]内的最大值，然后计算res[i]”<br>而对于任意一个i，我们找到左边、右边最大值的复杂度都是O(n)。而对于n个i，则是O(n ^ 2)。</p>
-<p>2.根据Leetcode84-Largest Rectangle in Histogram的Solution2的启示：<br>求所有区间[i, j]内的最小值，从O(n ^ 3)优化为O(n ^ 2)，其中区间个数为n ^ 2。也就是说，求每个区间内最值的时间复杂度可以优化为O(1)。</p>
-<p>3.leftMax[i]表示：[0, i - 1]内的最大值，那leftMax[i + 1] = max(height[i], leftMax[i]);<br>也就是说，求当前的最大值，可以通过上一次的结果递推得到。<br>那么对于所有的i（i在[0, n - 1]），只要从前到后遍历一次即可求得所有的leftMax[i];<br>同理，rightMax[i]一样。<br>可以看出，通过空间换时间的方法，将O(n ^ 2)优化为O(n)<br>这样，我们在O(n)的时间内就解决了本题目。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/284056325/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284056325/</a>)</p>
-<h3 id="Solution-3：Monotonous-Stack"><a href="#Solution-3：Monotonous-Stack" class="headerlink" title="Solution-3：Monotonous Stack"></a>Solution-3：Monotonous Stack</h3><p>1.上面的想法是：对于第i个位置，找出它左边最大的数字a，右边最大的数字b，然后答案就可以计算了。<br>换个思路，对于位置cur，我们不去找它左边或者右边最大的数字；<br>我们找第一个比它大的数字：左边下标记为i，右边下标记录为j。<br>如果找到的话，计算出来这个凹坑的面积，答案累加上这个值。res += min(height[i], height[j]) * (j - i - 1)<br>此时，由于这块面积已经被累加过了，则可以想象成这个凹坑已经被填上了。遍历了所有的凹坑后，答案就出来了。<br>自然地，根据739. Daily Temperatures的启示，我们使用单调栈很容易找到一个元素左边和右边第一个比自己大的值。</p>
-<p>2.具体算法：如果出现一个新元素，大于栈顶元素，则将栈中元素抛出k个，且每个计算结果，并累加。<br>如果当前元素小于栈顶元素，则将其压入栈内即可。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/284093452/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284093452/</a>)</p>
-<h3 id="Solution-4：Two-Pointers"><a href="#Solution-4：Two-Pointers" class="headerlink" title="Solution-4：Two Pointers"></a>Solution-4：Two Pointers</h3><p>1.回想下Solution-2，对于任意i，找到leftMax[i]和rightMax[i]。然后就可以计算res[i]的值了。<br>2.同时，可以发现，当leftMax[i]小于rightMax[i]的时候，res[i]的值由宽度和leftMax[i]决定。<br>3.left指针指向1号元素，left向右移动。<br>right指针指向n - 2号元素，right向左移动。<br>leftMax表示“此时此刻，对于当前元素来说，它左边的最大值”，初始化为height[0]<br>rightMax表示“此时此刻，对于当前元素来说，它右边的最大值”，初始化为height[n - 1]<br>则考虑[left, right]区间内的每一个元素：<br>如果此时leftMax小于rightMax：说明：<br>a.对于当前元素cur来说（left位置的），这个位置能否存储水，只和height[left]和leftMax有关。<br>b.对于当前元素cur来说（left位置的），不管我右边的高度分别是多少，只要我右边存在一个位置使得rightMax &gt; leftMax，那么当前位置的存水量就只依赖于leftMax。<br>此时，ans累加该位置存储的水量，更新leftMax，left后移一位。</p>
-<p>如果此时leftMax大于等于rightMax，说明：<br>a.对于当前元素cur来说（right位置的），这个位置能否存储水，只和height[right]和rightMax有关。<br>b.对于当前元素cur来说（right位置的），不管我左边的高度分别是多少，只要我左边存在一个位置使得rightMax &lt;= leftMax，那么当前位置的存水量就只依赖于rightMax。<br>此时，ans累加该位置存储的水量，更新rightMax，right后移一位。</p>
-<p>left从左往右，right从右往左，每次循环找出一个位置的答案，然后left++或者right–，直到left &gt; right，此时所有位置的答案都交替计算出来了。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<p>4.Code(<a href="https://leetcode.com/submissions/detail/284130675/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284130675/</a>)</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/" target="_blank" rel="noopener">121.Best Time to Buy and Sell Stock</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个长度为n的整数数组prices；<br>prices[i]代表第i天股票的价格。<br>【输出】<br>如果你只能交易一次，即：买一次，卖一次。求出你最多能赚多少钱。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [7,1,5,3,6,4]<br>Output: 5<br>Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.<br>Not 7-1 = 6, as selling price needs to be larger than buying price.</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
+<li>n：当n为0/1的时候，直接返回0；</li>
+<li>赚不到钱则返回0；</li>
+</ol>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><ol>
+<li>由于要想赚钱，得低价买入，高价卖出；</li>
+<li>买入卖出不能在同一天，至少买入的第二天才能卖出；</li>
+<li>对于任意i，本质上就是求出[i + 1, n - 1]范围内最大的数字，然后减去prices[i]，就是第i天能获取到的利润。<br>对于[0, n - 1]上的所有i，找出一个最大值即可。</li>
+</ol>
+<h3 id="Solution-1：Dynamic-programming"><a href="#Solution-1：Dynamic-programming" class="headerlink" title="Solution-1：Dynamic programming"></a>Solution-1：Dynamic programming</h3><p>1.状态定义：rightMax[i]表示：[i + 1, n - 1]范围内最大的数字。</p>
+<p>2.转移方程：rightMax[i - 1] = max(prices[i], rightMax[i]);</p>
+<p>3.边界条件：rightMax[n - 1] = 0</p>
+<p>4.求解顺序：i从(n - 2)开始，到0结束。<br>同时，使用这个值减去prices[i]的值，来不断更新最大利润ans即可。</p>
+<p>5.Code(<a href="https://leetcode.com/submissions/detail/284225891/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284225891/</a>)<br>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; prices)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = prices.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (n &lt; <span class="number">2</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; rightMax(n);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        rightMax[n - <span class="number">1</span>] = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = n - <span class="number">2</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            rightMax[i] = <span class="built_in">max</span>(prices[i + <span class="number">1</span>], rightMax[i + <span class="number">1</span>]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">            ans = <span class="built_in">max</span>(ans, rightMax[i] - prices[i]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+
+<p>6.Code(<a href="https://leetcode.com/submissions/detail/284226029/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284226029/</a>)<br>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; prices)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = prices.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (n &lt; <span class="number">2</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> rightMax = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = n - <span class="number">2</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            rightMax = <span class="built_in">max</span>(prices[i + <span class="number">1</span>], rightMax);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            ans = <span class="built_in">max</span>(ans, rightMax - prices[i]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/06/Leetcode-042-Trapping%20Rain%20Water/" data-id="ck53oz47z0006ast7efkp026f" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/07/DP/Leetcode-121-Best%20Time%20to%20Buy%20ans%20Sell%20Stock/" data-id="ck555bgxc001et4t753kgfbnn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -123,7 +144,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/105/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/104/">104</a><a class="page-number" href="/page/105/">105</a><span class="page-number current">106</span><a class="page-number" href="/page/107/">107</a><a class="page-number" href="/page/108/">108</a><span class="space">&hellip;</span><a class="page-number" href="/page/114/">114</a><a class="extend next" rel="next" href="/page/107/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/105/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/104/">104</a><a class="page-number" href="/page/105/">105</a><span class="page-number current">106</span><a class="page-number" href="/page/107/">107</a><a class="page-number" href="/page/108/">108</a><span class="space">&hellip;</span><a class="page-number" href="/page/115/">115</a><a class="extend next" rel="next" href="/page/107/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -155,6 +176,10 @@
       <ul>
         
           <li>
+            <a href="/2020/01/08/DP/Leetcode-647-Palindromic%20Substrings/">【DP专项】647.Palindromic Substrings</a>
+          </li>
+        
+          <li>
             <a href="/2020/01/07/DP/Leetcode-139-Word%20Break/">【DP专项】139.Word Break</a>
           </li>
         
@@ -168,10 +193,6 @@
         
           <li>
             <a href="/2020/01/06/DP/Leetcode-673-Number%20of%20Longest%20Increasing%20Subsequence/">【DP专项】673.Number of Longest Increasing Subsequence</a>
-          </li>
-        
-          <li>
-            <a href="/2020/01/04/DP/Leetcode-091-Decode%20Ways/">【DP专项】091.Decode Ways</a>
           </li>
         
       </ul>

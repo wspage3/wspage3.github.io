@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-DP/Leetcode-377-Combination Sum IV" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-DP/Leetcode-322-Coin Change" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2020/01/02/DP/Leetcode-377-Combination%20Sum%20IV/" class="article-date">
-  <time datetime="2020-01-02T13:01:20.397Z" itemprop="datePublished">2020-01-02</time>
+    <a href="/2020/01/03/DP/Leetcode-322-Coin%20Change/" class="article-date">
+  <time datetime="2020-01-03T00:13:11.627Z" itemprop="datePublished">2020-01-03</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/01/02/DP/Leetcode-377-Combination%20Sum%20IV/">【DP专项】377.Combination Sum IV</a>
+      <a class="article-title" href="/2020/01/03/DP/Leetcode-322-Coin%20Change/">【DP专项】322.Coin Change</a>
     </h1>
   
 
@@ -83,67 +83,40 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/combination-sum-iv/" target="_blank" rel="noopener">377.Combination Sum IV</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个长度为n的整数数组。数组元素都是正数。<br>给定一个正整数target。<br>【输出】<br>求出有多少种不同的组合方式，使得组合的sum等于target。<br>每个数字可以使用任意次。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>nums = [1, 2, 3]<br>target = 4</p>
-<p>The possible combination ways are:<br>(1, 1, 1, 1)<br>(1, 1, 2)<br>(1, 2, 1)<br>(1, 3)<br>(2, 1, 1)<br>(2, 2)<br>(3, 1)</p>
-<p>Note that different sequences are counted as different combinations.<br>Therefore the output is 7.</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/coin-change/" target="_blank" rel="noopener">322.Coin Change</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个长度为n的整数数组。代表着你拥有这些面值的硬币。<br>给定一个正整数target。<br>【输出】<br>求出你最少需要多少个硬币，使得它们的钱的sum等于target。<br>如果拼不出来，则返回-1。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: coins = [1, 2, 5], amount = 11<br>Output: 3<br>Explanation: 11 = 5 + 5 + 1</p>
 <h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
-<li>数组元素保证正数</li>
-<li>target保证正数</li>
-<li>当n为0时，不能使得sum等于正数的target，所以答案为0</li>
-</ol>
-<h3 id="4-Follow-Up"><a href="#4-Follow-Up" class="headerlink" title="4.Follow Up"></a>4.Follow Up</h3><ol>
-<li>如果数组元素中有负数呢？</li>
+<li>每种硬币可以使用无限次。</li>
+<li>每种硬币的面值都大于0。那么当target小于0时，ans = -1。</li>
 </ol>
 <h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Dynamic-Programming-Iterative"><a href="#Solution-1：Dynamic-Programming-Iterative" class="headerlink" title="Solution-1：Dynamic Programming(Iterative)"></a>Solution-1：Dynamic Programming(Iterative)</h3><ol start="0">
-<li><p>思考：<br>Q: What is important so far???<br>A: The sum</p>
+<li><p>思考：<br>Q: What is important so far???<br>A: The sum、minimum coins</p>
 </li>
-<li><p>状态定义：dp[i]：代表有多少种不同的方式组成一个序列，使得序列和为i。</p>
+<li><p>状态定义：dp[i]：sum为i，所需要的硬币的最小个数。本题答案即dp[target]。</p>
 </li>
-<li><p>转移方程：dp[i] += dp[i - x]。其中(i - x)必须大于等于0；x是nums中出现的所有元素。<br>解释：要想使得sum为i，那么一定是由(i - x)转移过来。<br>举个例子：nums = [1, 2, 3]，target = 20。<br>当计算到dp[10]的时候：10 = 9 + 1 = 8 + 2 = 7 + 3。<br>所以：dp[10] = dp[9] + dp[8] + dp[7]</p>
+<li><p>转移方程：dp[i] = min(dp[i], 1 + dp[i - x])。其中(i - x)大于等于0；x是nums中任一元素。</p>
 </li>
-<li><p>边界条件：dp[0] = 1。</p>
+<li><p>边界条件：dp[0] = 0；在计算dp[i]前，将其初始化为INT_MAX；</p>
 </li>
-<li><p>求解方向：<br>【Backward DP】<br>i从1开始，到target结束。<br>对于每个i，遍历nums所有的元素。如果(i - x)大于等于0，则dp[i]累加dp[i - x]。</p>
+<li><p>求解方向：<br>【Backward DP】<br>i从1开始，到target结束。通过dp[i - x]来计算求得dp[i]。</p>
 </li>
 </ol>
-<p>【Forward DP】<br>已知dp[0] = 1。<br>i从0开始，到target - 1结束。因为最多只可能target - 1转移到target。<br>对于每个i，遍历nums所有的元素。如果(i + x)小于等于target，则dp[i + x]累加dp[i]。</p>
+<p>【Forward DP】<br>i从0开始，到target - 1结束。使用dp[i]来更新dp[i + x]。</p>
 <ol start="5">
-<li><p>空间优化：本题目无法进行空间降维。因为计算最后一项dp[target]的时候，可能使用到很多项之前的dp[i]。</p>
+<li><p>空间优化：不能降维。</p>
 </li>
-<li><p>注意：当用例为：[3,33,333]，10000时，可以看出dp[10000]其实为0，因为不管这么组合，都不可能使得sum为10000。<br>此时在从1计算到10000的时候，存在某些i，使得dp[i]非常大，使用long long也不足以表示其方案数。<br>此时，可以换成无符号的int来存放值。这样，当overflow的时候，unsigned int会自动处理溢出。而不会报Runtime Error。<br>For example, unsigned int x = 4294967295 is ok but after do x += 1 operation, x will be 0 without any runtime error.</p>
+<li><p>Code(<a href="https://leetcode.com/submissions/detail/290651014/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/290651014/</a>)<br>时间复杂度：O(n * target)<br>空间复杂度：O(target)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">coinChange</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; coins, <span class="keyword">int</span> amount)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dp(amount + <span class="number">1</span>, <span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= amount; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            dp[i] = INT_MAX;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> x : coins) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">if</span> (i - x &gt;= <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">                    <span class="keyword">if</span> (INT_MAX != dp[i - x]) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">                        dp[i] = <span class="built_in">min</span>(dp[i], <span class="number">1</span> + dp[i - x]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">                    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> dp[amount] == INT_MAX ? <span class="number">-1</span> : dp[amount];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
 </li>
-<li><p>Code(<a href="https://leetcode.com/submissions/detail/290501613/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/290501613/</a>)<br>时间复杂度：O(n * target)<br>空间复杂度：O(target)</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">combinationSum4</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> target)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">unsigned</span> <span class="keyword">int</span>&gt; dp(target + <span class="number">1</span>, <span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        dp[<span class="number">0</span>] = <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= target; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> x : nums) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">if</span> (i - x &gt;= <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">                    dp[i] += dp[i - x];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> dp[target];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
-</li>
-<li><p>Code(<a href="https://leetcode.com/submissions/detail/290506960/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/290506960/</a>)<br>时间复杂度：O(n * target)<br>空间复杂度：O(target)</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">combinationSum4</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> target)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">unsigned</span> <span class="keyword">int</span>&gt; dp(target + <span class="number">1</span>, <span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        dp[<span class="number">0</span>] = <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= target - <span class="number">1</span>; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> x : nums) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">if</span> (i + x &lt;= target) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">                    dp[i + x] += dp[i];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> dp[target];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</li>
+<li><p>Code(<a href="https://leetcode.com/submissions/detail/290653511/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/290653511/</a>)<br>时间复杂度：O(n * target)<br>空间复杂度：O(target)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">coinChange</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; coins, <span class="keyword">int</span> amount)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dp(amount + <span class="number">1</span>, INT_MAX);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        dp[<span class="number">0</span>] = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= amount - <span class="number">1</span>; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (dp[i] == INT_MAX) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">continue</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> x : coins) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">if</span> (x &gt; amount) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">                    <span class="keyword">continue</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">if</span> (i + x &lt;= amount) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">                    dp[i + x] = <span class="built_in">min</span>(dp[i + x], <span class="number">1</span> + dp[i]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> dp[amount] == INT_MAX ? <span class="number">-1</span> : dp[amount];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure></li>
 </ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/01/02/DP/Leetcode-377-Combination%20Sum%20IV/" data-id="ck53oz49e001last733ok8rio" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/01/03/DP/Leetcode-322-Coin%20Change/" data-id="ck555bgxf001lt4t774614i6l" class="article-share-link">Share</a>
       
       
     </footer>
@@ -157,7 +130,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/9/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/114/">114</a><a class="extend next" rel="next" href="/page/11/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/9/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/115/">115</a><a class="extend next" rel="next" href="/page/11/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -189,6 +162,10 @@
       <ul>
         
           <li>
+            <a href="/2020/01/08/DP/Leetcode-647-Palindromic%20Substrings/">【DP专项】647.Palindromic Substrings</a>
+          </li>
+        
+          <li>
             <a href="/2020/01/07/DP/Leetcode-139-Word%20Break/">【DP专项】139.Word Break</a>
           </li>
         
@@ -202,10 +179,6 @@
         
           <li>
             <a href="/2020/01/06/DP/Leetcode-673-Number%20of%20Longest%20Increasing%20Subsequence/">【DP专项】673.Number of Longest Increasing Subsequence</a>
-          </li>
-        
-          <li>
-            <a href="/2020/01/04/DP/Leetcode-091-Decode%20Ways/">【DP专项】091.Decode Ways</a>
           </li>
         
       </ul>

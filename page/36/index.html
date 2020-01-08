@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Tree/Leetcode-106-Construct Binary Tree from Inorder and Postorder Traversal" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Linked List/Leetcode-237-Delete Node in a Linked List" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/27/Tree/Leetcode-106-Construct%20Binary%20Tree%20from%20Inorder%20and%20Postorder%20Traversal/" class="article-date">
-  <time datetime="2019-12-27T10:34:40.408Z" itemprop="datePublished">2019-12-27</time>
+    <a href="/2019/12/29/Linked%20List/Leetcode-237-Delete%20Node%20in%20a%20Linked%20List/" class="article-date">
+  <time datetime="2019-12-29T03:46:33.088Z" itemprop="datePublished">2019-12-29</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/27/Tree/Leetcode-106-Construct%20Binary%20Tree%20from%20Inorder%20and%20Postorder%20Traversal/">【二叉树专项】106.Construct Binary Tree from Inorder and Postorder Traversal</a>
+      <a class="article-title" href="/2019/12/29/Linked%20List/Leetcode-237-Delete%20Node%20in%20a%20Linked%20List/">【链表专项】237.Delete Node in a Linked List</a>
     </h1>
   
 
@@ -83,24 +83,27 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/" target="_blank" rel="noopener">106.Construct Binary Tree from Inorder and Postorder Traversal</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定两个二维数组，分别代表一棵二叉树的：<br>后序遍历序列<br>中序遍历序列<br>【输出】<br>求出这棵二叉树。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input:<br>inorder = [9,3,15,20,7]<br>postorder = [9,15,7,20,3]</p>
-<p>Output: [3,9,20,NULL,NULL,15,7]</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/delete-node-in-a-linked-list/" target="_blank" rel="noopener">237.Delete Node in a Linked List</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个单链表中的节点node（非链表尾）。<br>【输出】<br>在原链表中删除该目标节点node。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: head = [4,5,1,9], node = 1<br>Output: [4,5,9]<br>Explanation: You are given the third node with value 1, the linked list should become 4 -&gt; 5 -&gt; 9 after calling your function.</p>
 <h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
-<li>目标数组为空时，树为NULL。</li>
-<li>目标数组长度为1时，树为单节点。</li>
+<li>目标节点node不是链表尾，且保证是链表中的合法节点。</li>
+<li>单链表至少有两个元素。</li>
+<li>所有节点的value不重复。</li>
+<li>函数返回值为void。</li>
 </ol>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Recursive-Solution-Postorder"><a href="#Solution-1：Recursive-Solution-Postorder" class="headerlink" title="Solution-1：Recursive Solution(Postorder)"></a>Solution-1：Recursive Solution(Postorder)</h3><p>1.根据以下特性：<br>postorder序列的最后一个数字一定是：root的值<br>inorder序列：root的值左边都是root的左子树，右边都是root的右子树。</p>
-<p>2.对于任意任意两个序列：build(postStart, postEnd, inStart, inEnd)<br>a.根节点root一定是postorder[postEnd]<br>b.在inorder中找到root的位置，记为pos。则左子树的节点数目：pos - inStart<br>c.递归构建左子树：build(postStart, postStart + (pos - inStart) - 1, inStart, pos - 1)<br>d.递归构建右子树：build(postStart + (pos - inStart), postEnd - 1, pos + 1, inEnd)<br>e.将c.d两步的返回值赋值为root的左子树和右子树，return给上一层。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/278100841/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/278100841/</a>)</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function">TreeNode* <span class="title">build</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; inorder, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; postorder, <span class="keyword">int</span> inStart, <span class="keyword">int</span> inEnd, <span class="keyword">int</span> postStart, <span class="keyword">int</span> postEnd)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (inStart &gt; inEnd) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="literal">NULL</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        TreeNode* root = <span class="keyword">new</span> TreeNode(postorder[postEnd]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> pos;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (pos = inStart; pos &lt;= inEnd; pos++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (root-&gt;val == inorder[pos]) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">break</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        root-&gt;left = build(inorder, postorder, inStart, pos - <span class="number">1</span>, postStart, postStart + pos - inStart - <span class="number">1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        root-&gt;right = build(inorder, postorder, pos + <span class="number">1</span>, inEnd, postStart + pos - inStart, postEnd - <span class="number">1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> root;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    <span class="function">TreeNode* <span class="title">buildTree</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; inorder, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; postorder)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> build(inorder, postorder, <span class="number">0</span>, inorder.<span class="built_in">size</span>() - <span class="number">1</span>, <span class="number">0</span>, postorder.<span class="built_in">size</span>() - <span class="number">1</span>);   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution-1"></a>Solution-1</h3><p>1.给定一个节点，在链表中删除掉该节点，但是并没有给定链表的head。</p>
+<p>2.思路1：如果给定了head的话，就可以直接把node的前一个节点接到node的后一个节点，这样node就不在链表中了。</p>
+<p>3.思路2：本题目并没有给定head指针。<br>所以：把node后面一个节点的值拷贝到node里面，然后删除掉node-&gt;next，达成同样的删除效果。</p>
+<p>4.结构体变量直接赋值；不使用的节点记得释放内存；</p>
+<p>时间复杂度：O(1)<br>空间复杂度：O(1)</p>
+<p>5.Code(<a href="https://leetcode.com/submissions/detail/280512957/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/280512957/</a>)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">deleteNode</span><span class="params">(ListNode* node)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        ListNode* temp = node-&gt;next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        *node = *temp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">delete</span> temp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/27/Tree/Leetcode-106-Construct%20Binary%20Tree%20from%20Inorder%20and%20Postorder%20Traversal/" data-id="ck53oz49v002jast7h0lo8cw4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/29/Linked%20List/Leetcode-237-Delete%20Node%20in%20a%20Linked%20List/" data-id="ck555bgxq0028t4t7gz7q5yr9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -114,7 +117,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/35/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/34/">34</a><a class="page-number" href="/page/35/">35</a><span class="page-number current">36</span><a class="page-number" href="/page/37/">37</a><a class="page-number" href="/page/38/">38</a><span class="space">&hellip;</span><a class="page-number" href="/page/114/">114</a><a class="extend next" rel="next" href="/page/37/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/35/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/34/">34</a><a class="page-number" href="/page/35/">35</a><span class="page-number current">36</span><a class="page-number" href="/page/37/">37</a><a class="page-number" href="/page/38/">38</a><span class="space">&hellip;</span><a class="page-number" href="/page/115/">115</a><a class="extend next" rel="next" href="/page/37/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -146,6 +149,10 @@
       <ul>
         
           <li>
+            <a href="/2020/01/08/DP/Leetcode-647-Palindromic%20Substrings/">【DP专项】647.Palindromic Substrings</a>
+          </li>
+        
+          <li>
             <a href="/2020/01/07/DP/Leetcode-139-Word%20Break/">【DP专项】139.Word Break</a>
           </li>
         
@@ -159,10 +166,6 @@
         
           <li>
             <a href="/2020/01/06/DP/Leetcode-673-Number%20of%20Longest%20Increasing%20Subsequence/">【DP专项】673.Number of Longest Increasing Subsequence</a>
-          </li>
-        
-          <li>
-            <a href="/2020/01/04/DP/Leetcode-091-Decode%20Ways/">【DP专项】091.Decode Ways</a>
           </li>
         
       </ul>
