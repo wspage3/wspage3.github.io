@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-DP/Leetcode-494-Target Sum" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Leetcode-448-Find All Numbers Disappeared in an Array" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/20/DP/Leetcode-494-Target%20Sum/" class="article-date">
-  <time datetime="2019-12-20T14:36:38.243Z" itemprop="datePublished">2019-12-20</time>
+    <a href="/2019/12/21/Leetcode-448-Find%20All%20Numbers%20Disappeared%20in%20an%20Array/" class="article-date">
+  <time datetime="2019-12-21T07:09:07.502Z" itemprop="datePublished">2019-12-21</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/20/DP/Leetcode-494-Target%20Sum/">【DP专项】494.Target Sum</a>
+      <a class="article-title" href="/2019/12/21/Leetcode-448-Find%20All%20Numbers%20Disappeared%20in%20an%20Array/">448.Find All Numbers Disappeared in an Array</a>
     </h1>
   
 
@@ -83,63 +83,24 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/target-sum/" target="_blank" rel="noopener">494.Target Sum</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定长度为n的整数数组。数组元素都是非负数。<br>给定一个整数S。<br>【输出】<br>同时你拥有若干个加号，若干个减号。一共有n个。<br>把这n个符号放在nums[i]的前面，使其组成一个加减法表达式。<br>求出存在多少个不同的表达式，使得表达式的值为target。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: nums is [1, 1, 1, 1, 1], S is 3.<br>Output: 5<br>Explanation:<br>-1+1+1+1+1 = 3<br>+1-1+1+1+1 = 3<br>+1+1-1+1+1 = 3<br>+1+1+1-1+1 = 3<br>+1+1+1+1-1 = 3<br>There are 5 ways to assign symbols to make the sum of nums be target 3.</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/" target="_blank" rel="noopener">448.Find All Numbers Disappeared in an Array</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定长度为n的数组。其中所有元素的取值范围都在[1, n]中间。<br>其中有些元素出现了2次，有些元素没有出现。<br>【输出】<br>找出所有没有出现的元素，将其用数组的形式返回。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input:<br>[4,3,2,7,8,2,3,1]<br>Output:<br>[5,6]</p>
 <h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
-<li>0 &lt; n &lt;= 20</li>
-<li>nums数组累加和 &lt;= 1000</li>
-<li>返回结果在32位整数表示范围内</li>
+<li>要求O(n)的time complexity</li>
+<li>要求O(1)的space complexity</li>
+<li>判断n是否为0，若为0返回空数组即可。</li>
 </ol>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><ol>
-<li><p>由于需要在n个位置放置，每个位置只能放置’+’或者’-‘。<br>所以一共有(2 ^ n)种不同的放置方案。<br>枚举所有的情况，并计算其表达式的值，统计等于target的次数。</p>
-</li>
-<li><p>使用递归来简化这个过程：<br>从i = 0出发，当前累加sum为0。<br>若当前i小于等于n - 1，说明所有元素还未全部考虑完成。<br>若当前i等于n，说明所有元素都考虑完成了，统计此时累加的sum，如果和S相等，则统计一次。</p>
-</li>
-</ol>
-<p>对于位置i，在sum的基础上可以继续累加(+nums[i])，也可以累加(-nums[i])。即：<br>dfs(i + 1, target + nums[i]);<br>dfs(i + 1, target - nums[i]);</p>
-<ol start="3">
-<li>Code(<a href="https://leetcode.com/submissions/detail/287342127/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/287342127/</a>)<br>时间复杂度：O(2 ^ N)<br>空间复杂度：O(N) //递归栈的开销<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> i, <span class="keyword">int</span>&amp; cnt, <span class="keyword">int</span> target, <span class="keyword">int</span> S)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (i &lt;= nums.<span class="built_in">size</span>() - <span class="number">1</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">            dfs(nums, i + <span class="number">1</span>, cnt, target - nums[i], S);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            dfs(nums, i + <span class="number">1</span>, cnt, target + nums[i], S);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (target == S) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">                cnt++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findTargetSumWays</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> S)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> cnt = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        dfs(nums, <span class="number">0</span>, cnt, <span class="number">0</span>, S);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> cnt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h3 id="Solution-2：Dynamic-Programming"><a href="#Solution-2：Dynamic-Programming" class="headerlink" title="Solution-2：Dynamic Programming"></a>Solution-2：Dynamic Programming</h3><ol>
-<li><p>状态定义：dp[i][j]表示：前i个元素([0, i])所组成的表达式的和为j的方案数。<br>i取值范围: [0, n - 1]<br>j取值范围: [-1000, 1000]</p>
-</li>
-<li><p>转移方程：dp[i][j] = dp[i - 1][j - nums[i]] + dp[i - 1][j + nums[i]]</p>
-</li>
-<li><p>注意点1：由于表达式的和存在负数的情况。且和的范围最大为：[-1000, 1000]；<br>所以此时暂且开长度为2001的dp数组。<br>index对应情况如下：<br>旧index：[-1000, -999, -998, …, -2, -1, 0, 1, 2, …, 999, 1000]<br>新index：[0, 1, 2, …, 998, 999, 1000, 1001, 1002, …, 1999, 2000]</p>
-</li>
-<li><p>边界条件：<br>当i为0的时候，可以选择-nums[0]，或者nums[0]<br>旧index：dp[0][-nums[0]] = 1, dp[0][nums[0]] = 1<br>新index：dp[0][-nums[0] + 1000] = 1, dp[0][nums[0] + 1000] = 1<br>注意：此时若temp为0的话，分为两种情况：-0，+0。<br>所以应该写成：dp[0][-nums[0] + 1000]++, dp[0][nums[0] + 1000]++</p>
-</li>
-<li><p>计算顺序：<br>【Backward DP】<br>i从1开始，遍历到n - 1为止。<br>j从0开始，遍历到2000为止。<br>当前可以选择”+nums[i]”，也可以选择”-nums[i]”<br>答案为：dp[n - 1][S + 1000]</p>
-</li>
-<li><p>注意点2：<br>j - nums[i]可能小于0<br>j + nums[i]可能大于2000<br>超过合法范围，均无意义。即为0。</p>
-</li>
-<li><p>优化1：不必固定认为和的最大值为1000，每次计算一下，然后再申请数组即可。</p>
-</li>
-<li><p>优化2：空间压缩。二维空间压缩为一维空间。</p>
-</li>
-<li><p>Code(<a href="https://leetcode.com/submissions/detail/287484139/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/287484139/</a>)<br>时间复杂度：O(N * sum)<br>空间复杂度：O(sum) //sum为所有nums[i]的和</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findTargetSumWays</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> S)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">const</span> <span class="keyword">int</span> maxSum = accumulate(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>(), <span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (S &gt; maxSum || S &lt; -maxSum) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">const</span> <span class="keyword">int</span> maxn = maxSum * <span class="number">2</span> + <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; prev(maxn, <span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> temp = nums[<span class="number">0</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        prev[-temp + maxSum]++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        prev[temp + maxSum]++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">//dp[i][j] = dp[i - 1][j - nums[i]] + dp[i - 1][j + nums[i]]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n - <span class="number">1</span>; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">            <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; cur(maxn, <span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= maxn - <span class="number">1</span>; j++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">if</span> (j - nums[i] &gt;= <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">                    cur[j] += prev[j - nums[i]];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">if</span> (j + nums[i] &lt;= maxn - <span class="number">1</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">                    cur[j] += prev[j + nums[i]];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">            cur.swap(prev);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">        </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> prev[maxSum + S];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-
-
-</li>
-</ol>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：标记法"><a href="#Solution-1：标记法" class="headerlink" title="Solution-1：标记法"></a>Solution-1：标记法</h3><p>1.由于元素取值范围都在[1, n]中间，<br>所以任意nums[i] - 1都可以作为nums的index。</p>
+<p>2.举个例子：<br>index: [0, 1, 2, 3, 4, 5, 6, 7]<br>nums:  [4, 3, 2, 7, 8, 2, 3, 1]<br>遍历一次，将nums[nums[i] - 1]由正数变为负数；若已经是负数，则不处理：<br>nums:  [-4, -3, -2, -7, 8, 2, -3, -1]<br>此时发现index为4和5的数字仍然是正数。说明数组中不存在5和6这两个数字。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(1) //不包含返回的数组ans</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/287116928/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/287116928/</a>)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; findDisappearedNumbers(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n - <span class="number">1</span>; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">int</span> index = <span class="built_in">abs</span>(nums[i]) - <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (nums[index] &gt; <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">                nums[index] = -nums[index];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n - <span class="number">1</span>; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (nums[i] &gt; <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">                ans.push_back(i + <span class="number">1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/20/DP/Leetcode-494-Target%20Sum/" data-id="ck5gp9pxn001opwt7a5sp8fyp" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/21/Leetcode-448-Find%20All%20Numbers%20Disappeared%20in%20an%20Array/" data-id="ck5gr94yk000vo0t79w6j5r0j" class="article-share-link">Share</a>
       
       
     </footer>
@@ -153,7 +114,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/73/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/72/">72</a><a class="page-number" href="/page/73/">73</a><span class="page-number current">74</span><a class="page-number" href="/page/75/">75</a><a class="page-number" href="/page/76/">76</a><span class="space">&hellip;</span><a class="page-number" href="/page/117/">117</a><a class="extend next" rel="next" href="/page/75/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/73/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/72/">72</a><a class="page-number" href="/page/73/">73</a><span class="page-number current">74</span><a class="page-number" href="/page/75/">75</a><a class="page-number" href="/page/76/">76</a><span class="space">&hellip;</span><a class="page-number" href="/page/118/">118</a><a class="extend next" rel="next" href="/page/75/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -185,6 +146,10 @@
       <ul>
         
           <li>
+            <a href="/2020/01/16/DP/Leetcode-1143-Longest%20Common%20Subsequence/">【DP专项】1143.Longest Common Subsequence</a>
+          </li>
+        
+          <li>
             <a href="/2020/01/16/DP/Leetcode-516-Longest%20Palindromic%20Subsequence/">【DP专项】516.Longest Palindromic Subsequence</a>
           </li>
         
@@ -198,10 +163,6 @@
         
           <li>
             <a href="/2020/01/07/DP/Leetcode-139-Word%20Break/">【DP专项】139.Word Break</a>
-          </li>
-        
-          <li>
-            <a href="/2020/01/07/DP/Leetcode-279-Perfect%20Squares/">【DP专项】279.Perfect Squares</a>
           </li>
         
       </ul>

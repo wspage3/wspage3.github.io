@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>【DP专项】1143.Longest Common Subsequence | 追逐青春的梦想，怀着自信的心，永不放弃！</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一、题意题目链接: 1143.Longest Common Subsequence 1.Description【输入】给定两个字符串text1，text2，长度分别为n1，n2；【输出】找出text1和text2的LCS(Longest Common Subsequence)的长度；LCS：最长公共子序列如果没有LCS，则返回0； 2.ExampleInput: text1 &#x3D; “abcde”,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【DP专项】1143.Longest Common Subsequence">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;16&#x2F;DP&#x2F;Leetcode-1143-Longest%20Common%20Subsequence&#x2F;index.html">
+<meta property="og:site_name" content="追逐青春的梦想，怀着自信的心，永不放弃！">
+<meta property="og:description" content="一、题意题目链接: 1143.Longest Common Subsequence 1.Description【输入】给定两个字符串text1，text2，长度分别为n1，n2；【输出】找出text1和text2的LCS(Longest Common Subsequence)的长度；LCS：最长公共子序列如果没有LCS，则返回0； 2.ExampleInput: text1 &#x3D; “abcde”,">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-01-16T13:11:16.109Z">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="追逐青春的梦想，怀着自信的心，永不放弃！" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">追逐青春的梦想，怀着自信的心，永不放弃！</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-DP/Leetcode-1143-Longest Common Subsequence" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/01/16/DP/Leetcode-1143-Longest%20Common%20Subsequence/" class="article-date">
+  <time datetime="2020-01-16T12:18:37.184Z" itemprop="datePublished">2020-01-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      【DP专项】1143.Longest Common Subsequence
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/longest-common-subsequence/" target="_blank" rel="noopener">1143.Longest Common Subsequence</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定两个字符串text1，text2，长度分别为n1，n2；<br>【输出】<br>找出text1和text2的LCS(Longest Common Subsequence)的长度；<br>LCS：最长公共子序列<br>如果没有LCS，则返回0；</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: text1 = “abcde”, text2 = “ace”<br>Output: 3<br>Explanation: The longest common subsequence is “ace” and its length is 3.</p>
+<p>Input: text1 = “abc”, text2 = “def”<br>Output: 0<br>Explanation: There is no such common subsequence, so the result is 0.</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
+<li>若n1 == 0 || n2 == 0，则答案为0；</li>
+</ol>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ol>
+<li>若采用暴力法，则时间复杂度为指数形式的。</li>
+</ol>
+<h3 id="Solution-1：Dynamic-Programming"><a href="#Solution-1：Dynamic-Programming" class="headerlink" title="Solution-1：Dynamic Programming"></a>Solution-1：Dynamic Programming</h3><ol>
+<li><p>状态定义：dp[i][j]代表：text1的子串[0, i - 1]，和text2的子串[0, j - 1]，它们两者的LCS的长度。</p>
+</li>
+<li><p>边界条件：为方便转移方程的统一性：即当i或者j为0的时候，需要考虑i - 1以及j - 1为负数的情况。<br>将dp数组开到：(n1 + 1) * (n2 + 1)大小。当i为0，或者j为0时，元素初始化为0。</p>
+</li>
+<li><p>转移方程：<br>a. 若text1[i - 1] == text2[j - 1]，则dp[i][j] = 1 + dp[i - 1][j - 1];<br>b. 若text1[i - 1] != text2[j - 1]，则dp[i][j] = max(dp[i][j - 1], dp[i - 1][j]);</p>
+</li>
+<li><p>计算顺序：<br>【Backward-DP】<br>i从1开始，到n1结束；因为计算第i行的时候，需要使用到第i - 1行的元素；<br>j从1开始，到n2结束；因为计算第i行，第j列的时候，需要使用到第i行，第j - 1列的元素；</p>
+</li>
+<li><p>Code(<a href="https://leetcode.com/submissions/detail/294723307/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/294723307/</a>)<br>时间复杂度：O(n1 * n2)<br>空间复杂度：O(n1 * n2)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">longestCommonSubsequence</span><span class="params">(<span class="built_in">string</span> text1, <span class="built_in">string</span> text2)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n1 = text1.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n2 = text2.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (n1 == <span class="number">0</span> || n2 == <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; dp(n1 + <span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(n2 + <span class="number">1</span>, <span class="number">0</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n1; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n2; j++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">if</span> (text1[i - <span class="number">1</span>] == text2[j - <span class="number">1</span>]) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">                    dp[i][j] = <span class="number">1</span> + dp[i - <span class="number">1</span>][j - <span class="number">1</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">                &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">                    dp[i][j] = <span class="built_in">max</span>(dp[i - <span class="number">1</span>][j], dp[i][j - <span class="number">1</span>]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> dp[n1][n2];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+</li>
+<li><p>空间优化：pre变量保存左上角的元素。</p>
+</li>
+<li><p>Code(<a href="https://leetcode.com/submissions/detail/294725696/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/294725696/</a>)<br>时间复杂度：O(n1 * n2)<br>空间复杂度：O(min(n1, n2))</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">longestCommonSubsequence</span><span class="params">(<span class="built_in">string</span> text1, <span class="built_in">string</span> text2)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n1 = text1.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n2 = text2.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (n1 == <span class="number">0</span> || n2 == <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (n1 &lt; n2) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> longestCommonSubsequence(text2, text1);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> pre;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dp(n2 + <span class="number">1</span>, <span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n1; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n2; j++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">if</span> (j == <span class="number">1</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">                    pre = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">int</span> temp = dp[j];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">if</span> (text1[i - <span class="number">1</span>] == text2[j - <span class="number">1</span>]) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">                    dp[j] = <span class="number">1</span> + pre;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">                &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">                    dp[j] = <span class="built_in">max</span>(dp[j], dp[j - <span class="number">1</span>]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">                pre = temp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> dp[n2];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/01/16/DP/Leetcode-1143-Longest%20Common%20Subsequence/" data-id="ck5gr94z8001co0t70ogo4kzs" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/01/16/DP/Leetcode-516-Longest%20Palindromic%20Subsequence/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">【DP专项】516.Longest Palindromic Subsequence</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/01/16/DP/Leetcode-1143-Longest%20Common%20Subsequence/">【DP专项】1143.Longest Common Subsequence</a>
+          </li>
+        
+          <li>
+            <a href="/2020/01/16/DP/Leetcode-516-Longest%20Palindromic%20Subsequence/">【DP专项】516.Longest Palindromic Subsequence</a>
+          </li>
+        
+          <li>
+            <a href="/2020/01/08/DP/Leetcode-005-Longest%20Palindromic%20Substring/">【DP专项】005.Longest Palindromic Substring</a>
+          </li>
+        
+          <li>
+            <a href="/2020/01/08/DP/Leetcode-647-Palindromic%20Substrings/">【DP专项】647.Palindromic Substrings</a>
+          </li>
+        
+          <li>
+            <a href="/2020/01/07/DP/Leetcode-139-Word%20Break/">【DP专项】139.Word Break</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 wspage3<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
