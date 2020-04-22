@@ -412,7 +412,7 @@ td {
 pre {
   background: #2d2d2d;
   color: #ccc;
-  line-height: 0.8;
+  line-height: 1.3;
   margin: 0 auto 20px;
 }
 pre,
@@ -1201,7 +1201,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #010538;
+  background: #507158;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
