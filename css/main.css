@@ -400,11 +400,13 @@ td {
   transition-delay: 0s;
   transition-duration: 0.2s;
   transition-timing-function: ease-in-out;
-  background: #fff;
-  border: 0;
+  background-color: #eee;
+  background-image: linear-gradient(#fcfcfc, #eee);
+  border: 1px solid #d5d5d5;
+  border-radius: 3px;
   font-size: 0.8125em;
-  right: 0;
-  top: 0;
+  right: 4px;
+  top: 8px;
 }
 .highlight,
 pre {
@@ -1199,7 +1201,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ff34ff;
+  background: #ebb801;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
