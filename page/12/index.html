@@ -161,6 +161,82 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/25/Tree/Leetcode-114-Flatten%20Binary%20Tree%20to%20Linked%20List/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/pig.png">
+      <meta itemprop="name" content="wspage3">
+      <meta itemprop="description" content="永不放弃！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wspage3的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/25/Tree/Leetcode-114-Flatten%20Binary%20Tree%20to%20Linked%20List/" class="post-title-link" itemprop="url">【二叉树专项】114.Flatten Binary Tree to Linked List</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-12-25 10:54:02 / 修改时间：21:02:54" itemprop="dateCreated datePublished" datetime="2019-12-25T10:54:02+08:00">2019-12-25</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/flatten-binary-tree-to-linked-list/" target="_blank" rel="noopener">114.Flatten Binary Tree to Linked List</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一棵二叉树。<br>【输出】<br>使其扁平化，退化成一个单链表。<br>要求【in-place】操作：此处的in-place，应该指的是在当前的节点上改变指向。而非严格O(1)的空间复杂度。<br>单链表的顺序为：preorder遍历树的顺序。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [1,2,5,3,4,NULL,6]<br>Output: [1,2,3,4,5,6]</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
+<li>树为NULL时，无需任何操作，return即可。</li>
+</ol>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>目的：使得树退化为单链表，同时单链表从前到后的顺序为：前序遍历该树的顺序。即：根 -&gt; 左 -&gt; 右<br>方法：使用相反的顺序遍历树（右 -&gt; 左 -&gt; 根）：每遍历一个节点，将其链接到已退化好的单链表中，更新单链表的头。</p>
+<h3 id="Solution-1：Recursive-Solution-DFS-Postorder-Traversal"><a href="#Solution-1：Recursive-Solution-DFS-Postorder-Traversal" class="headerlink" title="Solution-1：Recursive Solution(DFS-Postorder Traversal)"></a>Solution-1：Recursive Solution(DFS-Postorder Traversal)</h3><p>1.回忆【145.Binary Tree Postorder Traversal】的迭代版本：<br>我们要想得到：左 -&gt; 右 -&gt; 根这样的后序遍历序列。<br>采用的遍历顺序实际上是：根 -&gt; 右 -&gt; 左。最后将遍历得到的序列进行反转。</p>
+<p>2.在本题中，采用类似的思路：<br>对于任一节点：<br>首先访问其右儿子，然后左儿子，最后访问自己。可以得到：右 -&gt; 左 -&gt; 根这样的后序遍历序列。<br>访问每个节点：将其右儿子赋值为单链表的头。将其左儿子赋值为空。将单链表的头设置为当前节点。</p>
+<p>3.这样的访问顺序，使得最后一个访问的节点为root。<br>访问完root，root指针就指向一个单链表了。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
+<p>4.Code(<a href="https://leetcode.com/submissions/detail/278369749/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/278369749/</a>)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">flatten</span><span class="params">(TreeNode* root)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">/* 思路：head指针指向当前已经flatten好的链表的头部，初始化为NULL */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">/* 遍历顺序为（后序遍历）：右儿子，左儿子，根。每遍历一个节点，就把该节点加入到链表中，head指向该链表的头 */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">/* 这样的遍历顺序使得：得到的链表的结果为：根，左儿子，右儿子。 */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">/* 写法1：递归写法；head使用引用传递，下次flatten函数需要使用到本次更新好的head值，以保证下个节点能和本个节点顺利地连接起来。 */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        TreeNode* head = <span class="literal">NULL</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        flatten(root, head);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">flatten</span><span class="params">(TreeNode* node, TreeNode*&amp; head)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (node == <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        flatten(node-&gt;right, head);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        flatten(node-&gt;left, head);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        node-&gt;right = head;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        node-&gt;left = <span class="literal">NULL</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        head = node;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+
+<h3 id="Solution-2：Iterative-Solution"><a href="#Solution-2：Iterative-Solution" class="headerlink" title="Solution-2：Iterative Solution"></a>Solution-2：Iterative Solution</h3><p>1.对于每一个节点cur，其左子树cur-&gt;left，其右子树cur-&gt;right。<br>考虑cur-&gt;left不为空的情况：<br>想办法将这两个儿子合并，成为一棵树。<br>这样的话，对于cur来说，就满足了链表节点的性质：只有一个后继节点。</p>
+<p>2.由于答案顺序为：根 -&gt; 左 -&gt; 右<br>所以将右子树(cur-&gt;right)拼接到左子树(cur-&gt;left)的“最后一个”节点即可。<br>对于cur-&gt;left来说，“最后一个”节点即：cur-&gt;left的第一个为空的右儿子。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/278375122/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/278375122/</a>)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">flatten</span><span class="params">(TreeNode* root)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        TreeNode* cur = root;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span> (cur != <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (cur-&gt;left != <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">                TreeNode* temp = cur-&gt;left;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">while</span> (temp-&gt;right != <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">                    temp = temp-&gt;right;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">                temp-&gt;right = cur-&gt;right;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">                cur-&gt;right = cur-&gt;left;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">                cur-&gt;left = <span class="literal">NULL</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">            cur = cur-&gt;right;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/25/Tree/Leetcode-110-Balanced%20Binary%20Tree/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -467,96 +543,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/24/Tree/Leetcode-437-Path%20Sum%20III/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/pig.png">
-      <meta itemprop="name" content="wspage3">
-      <meta itemprop="description" content="永不放弃！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wspage3的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/24/Tree/Leetcode-437-Path%20Sum%20III/" class="post-title-link" itemprop="url">【二叉树专项】437.Path Sum III</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-24 16:59:17" itemprop="dateCreated datePublished" datetime="2019-12-24T16:59:17+08:00">2019-12-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-12-25 10:47:26" itemprop="dateModified" datetime="2019-12-25T10:47:26+08:00">2019-12-25</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/path-sum-iii/" target="_blank" rel="noopener">437.Path Sum III</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一棵二叉树。<br>给定一个整数target。<br>【输出】<br>判断是否存在一条路径，使得路径上所有节点的sum为target。<br>且路径只能是向下的，即从父亲到儿子。<br>如果存在，返回可能的路径数。<br>如果不存在，返回0。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input:<br>8<br>[10,5,-3,3,2,null,11,3,-2,null,1]<br>Output:<br>Return 3</p>
-<ol>
-<li>5 -&gt; 3</li>
-<li>5 -&gt; 2 -&gt; 1</li>
-<li>-3 -&gt; 11</li>
-</ol>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
-<li>节点数：n &lt;= 1000</li>
-<li>节点值value：[-1000000, 1000000]</li>
-<li>树为NULL时，返回空二维数组。</li>
-<li>树仅包含一个node时，查看node-&gt;val 是否等于target。</li>
-</ol>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Recursive-solution-Dual-DFS"><a href="#Solution-1：Recursive-solution-Dual-DFS" class="headerlink" title="Solution-1：Recursive solution(Dual DFS)"></a>Solution-1：Recursive solution(Dual DFS)</h3><p>1.遍历顺序为dfs的顺序</p>
-<p>2.求一颗非空树root的答案，也就是树中任意路径和为target的方案数，可以分解为以下三种情况：<br>a.路径起点是root节点<br>b.路径起点不是root节点，也就是说root节点和该问题的答案没任何关系，它的存在不影响问题的解。<br>  此时将问题转化为：在root-&gt;left这个子树中找答案。在root-&gt;right这个子树中找答案。则问题答案就是这两个子答案的和。</p>
-<p>时间复杂度：O(n ^ 2) //最坏单链表的情况    最好平衡树的情况O(n * log n)<br>空间复杂度：O(n)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/278655172/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/278655172/</a>)</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">pathSum</span><span class="params">(TreeNode* root, <span class="keyword">int</span> sum)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> pathSumOnlyBeginFromRoot(root, sum) + pathSum(root-&gt;left, sum) + pathSum(root-&gt;right, sum);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">pathSumOnlyBeginFromRoot</span><span class="params">(TreeNode* root, <span class="keyword">int</span> sum)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">/* 该函数的意义为：给定（子）树，给定（子）和，求出以root为起点，任意节点为终点的路径的条数。 */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> (root-&gt;val == sum ? <span class="number">1</span> : <span class="number">0</span>) </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">            + pathSumOnlyBeginFromRoot(root-&gt;left, sum - root-&gt;val) </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">            + pathSumOnlyBeginFromRoot(root-&gt;right, sum - root-&gt;val);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
-
-<h3 id="Solution-2：PrefixSum-Cache"><a href="#Solution-2：PrefixSum-Cache" class="headerlink" title="Solution-2：PrefixSum + Cache"></a>Solution-2：PrefixSum + Cache</h3><p>1.遍历顺序依旧是dfs。</p>
-<p>2.采用prefixSum的方法，避免进行过多的重复计算。<br>遍历到某个节点时，将从root到该节点这条路径的和累加，缓存起来，在后续过程，可以利用这些有用信息。</p>
-<p>3.具体过程如下：<br>a.访问到每一个节点的时候，cur += node-&gt;val；<br>b.判断(cur - sum)有没有在字典中出现，有的话，答案累加其出现的频率（次数）<br>【原理1】：当遍历到当前节点node时，假设cur为x，也就是sum(root, node) = x。若字典中存在(x - sum)，说明在某个节点node1，sum(root, node1) = (x - sum)。<br>    那么也就可以推断出来：sum(node1-&gt;next, node) = sum。也就是答案要求解的路径。<br>【原理2】：字典中存在的记录，一定是从root到node路径上所有节点的前缀和。也就是说保证了某个节点到当前节点node的【可通性】。因此，我们在遍历完每个节点后，要将其在字典中的“影响”消除。<br>c.将当前cur缓存到字典中，其出现频率加一。<br>至此，当前节点node“自身”考虑完成。</p>
-<p>4.接下来递归考虑node的左儿子和右儿子。<br>当他们都考虑完成的时候，节点node才真正考虑完成。此时将cur在字典中出现的频率减一。<br>同时返回给父亲节点（回溯）</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/278714068/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/278714068/</a>)</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">pathSum</span><span class="params">(TreeNode* root, <span class="keyword">int</span> sum)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; m;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        m[<span class="number">0</span>]++;<span class="comment">//prefixSum从0开始</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        dfs(root, <span class="number">0</span>, sum, res, m);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> res;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(TreeNode* root, <span class="keyword">int</span> cur, <span class="keyword">int</span> sum, <span class="keyword">int</span>&amp; res, <span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&amp; m)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        cur += root-&gt;val;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (m.<span class="built_in">find</span>(cur - sum) != m.<span class="built_in">end</span>()) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">            res += m[cur - sum];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        m[cur]++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        dfs(root-&gt;left, cur, sum, res, m);<span class="comment">//递归到当前节点的左子树</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        dfs(root-&gt;right, cur, sum, res, m);<span class="comment">//递归到当前节点的右子树</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">        m[cur]--;<span class="comment">//回溯到当前节点</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -628,7 +614,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">121</span>
+          <span class="site-state-item-count">122</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -641,7 +627,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
