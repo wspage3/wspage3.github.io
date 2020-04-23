@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="一、题意0、题目链接343.Integer Break 1、Description【输入】给定一个正整数n；【输出】将这个正整数n，拆分成若干个正整数：使其sum为n，同时使其product最大。求出这个最大乘积；【要求】至少拆分成两个元素。 2、ExampleInput: 10Output: 36Explanation: 10 &#x3D; 3 + 3 + 4, 3 × 3 × 4 &#x3D; 36. 3、Cor">
+  <meta name="description" content="一、题意0、题目链接343.Integer Break 1、Description【输入】给定一个正整数n；【输出】将这个正整数n，拆分成若干个正整数：使其sum为n，同时使其product最大。求出这个最大乘积；【要求】至少拆分成两个元素。 2、ExampleInput: 10Output: 36Explanation: 10 &#x3D; 3 + 3 + 4, 3 × 3 × 4 &#x3D; 36.">
 <meta name="keywords" content="Dynamic Programming,Greedy">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Leetcode-343.Integer Break">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;17&#x2F;DP&#x2F;Leetcode-343-Integer%20Break&#x2F;index.html">
 <meta property="og:site_name" content="wspage3的博客">
-<meta property="og:description" content="一、题意0、题目链接343.Integer Break 1、Description【输入】给定一个正整数n；【输出】将这个正整数n，拆分成若干个正整数：使其sum为n，同时使其product最大。求出这个最大乘积；【要求】至少拆分成两个元素。 2、ExampleInput: 10Output: 36Explanation: 10 &#x3D; 3 + 3 + 4, 3 × 3 × 4 &#x3D; 36. 3、Cor">
+<meta property="og:description" content="一、题意0、题目链接343.Integer Break 1、Description【输入】给定一个正整数n；【输出】将这个正整数n，拆分成若干个正整数：使其sum为n，同时使其product最大。求出这个最大乘积；【要求】至少拆分成两个元素。 2、ExampleInput: 10Output: 36Explanation: 10 &#x3D; 3 + 3 + 4, 3 × 3 × 4 &#x3D; 36.">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-04-22T13:54:52.841Z">
+<meta property="og:updated_time" content="2020-04-23T03:29:49.154Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://yoursite.com/2020/01/17/DP/Leetcode-343-Integer%20Break/">
@@ -194,7 +194,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-22 21:54:52" itemprop="dateModified" datetime="2020-04-22T21:54:52+08:00">2020-04-22</time>
+                <time title="修改时间：2020-04-23 11:29:49" itemprop="dateModified" datetime="2020-04-23T11:29:49+08:00">2020-04-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -224,6 +224,8 @@
         <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><h3 id="0、题目链接"><a href="#0、题目链接" class="headerlink" title="0、题目链接"></a>0、题目链接</h3><p><a href="https://leetcode.com/problems/integer-break/" target="_blank" rel="noopener">343.Integer Break</a></p>
 <h3 id="1、Description"><a href="#1、Description" class="headerlink" title="1、Description"></a>1、Description</h3><p>【输入】<br>给定一个正整数n；<br>【输出】<br>将这个正整数n，拆分成若干个正整数：使其sum为n，同时使其product最大。求出这个最大乘积；<br>【要求】<br>至少拆分成两个元素。</p>
 <h3 id="2、Example"><a href="#2、Example" class="headerlink" title="2、Example"></a>2、Example</h3><p>Input: 10<br>Output: 36<br>Explanation: 10 = 3 + 3 + 4, 3 × 3 × 4 = 36.</p>
+<a id="more"></a>
+
 <h3 id="3、Corner-Case"><a href="#3、Corner-Case" class="headerlink" title="3、Corner Case"></a>3、Corner Case</h3><ol>
 <li>2 &lt;= n &lt;= 58</li>
 <li>若n为2，答案为1；(1 * 1)</li>
@@ -306,7 +308,10 @@
     <a href="/2020/01/17/DP/Leetcode-392-Is%20Subsequence/" rel="prev" title="【DP】【Two Pointers】392.Is Subsequence">
       <i class="fa fa-chevron-left"></i> 【DP】【Two Pointers】392.Is Subsequence
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/23/Two%20Pointers/Leetcode-1351-Count%20Negative%20Numbers%20in%20a%20Sorted%20Matrix/" rel="next" title="Leetcode-1351.Count Negative Numbers in a Sorted Matrix">
+      Leetcode-1351.Count Negative Numbers in a Sorted Matrix <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -381,7 +386,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">119</span>
+          <span class="site-state-item-count">120</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -394,7 +399,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
