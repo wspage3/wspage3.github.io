@@ -20,18 +20,18 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="一、题意0、题目链接703.Kth Largest Element in a Stream 1、Description【输入】无；【输出】设计一个class KthLargest；目的：找出一组数据流中，第k大的数字；第k大：此处的第k大指的是将数据流中的数字从大到小排序后，第k个数字；举个例子：[10, 10, 9, 8, 8]  第3大的数字为9，而不是8；【要求】构造函数：整数k、整数数组n">
-<meta name="keywords" content="Heap,Priority Queue,Design">
+  <meta name="description" content="一、题意0、题目链接373.Find K Pairs with Smallest Sums 1、Description【输入】给定两个整数数组nums1、nums2，大小分别为n1、n2；并且都是升序排列好的；给定一个整数k；【输出】以二维数组的形式，输出k个数字对(x, y)。其中x是nums1的元素，y是nums2的元素；要求使得：这k个数字对，对应的val(x + y)最小；【要求】无； 2">
+<meta name="keywords" content="Heap,Priority Queue,Linked List">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Leetcode-703.Kth Largest Element in a Stream">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;04&#x2F;26&#x2F;Heap&#x2F;Leetcode-703-Kth%20Largest%20Element%20in%20a%20Stream&#x2F;index.html">
+<meta property="og:title" content="Leetcode-373.Find K Pairs with Smallest Sums">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;04&#x2F;27&#x2F;Heap&#x2F;Leetcode-373-Find%20K%20Pairs%20with%20Smallest%20Sums&#x2F;index.html">
 <meta property="og:site_name" content="wspage3的博客">
-<meta property="og:description" content="一、题意0、题目链接703.Kth Largest Element in a Stream 1、Description【输入】无；【输出】设计一个class KthLargest；目的：找出一组数据流中，第k大的数字；第k大：此处的第k大指的是将数据流中的数字从大到小排序后，第k个数字；举个例子：[10, 10, 9, 8, 8]  第3大的数字为9，而不是8；【要求】构造函数：整数k、整数数组n">
+<meta property="og:description" content="一、题意0、题目链接373.Find K Pairs with Smallest Sums 1、Description【输入】给定两个整数数组nums1、nums2，大小分别为n1、n2；并且都是升序排列好的；给定一个整数k；【输出】以二维数组的形式，输出k个数字对(x, y)。其中x是nums1的元素，y是nums2的元素；要求使得：这k个数字对，对应的val(x + y)最小；【要求】无； 2">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-04-26T04:25:24.668Z">
+<meta property="og:updated_time" content="2020-04-27T11:43:23.472Z">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/2020/04/26/Heap/Leetcode-703-Kth%20Largest%20Element%20in%20a%20Stream/">
+<link rel="canonical" href="http://yoursite.com/2020/04/27/Heap/Leetcode-373-Find%20K%20Pairs%20with%20Smallest%20Sums/">
 
 
 <script id="page-configurations">
@@ -44,7 +44,7 @@
   };
 </script>
 
-  <title>Leetcode-703.Kth Largest Element in a Stream | wspage3的博客</title>
+  <title>Leetcode-373.Find K Pairs with Smallest Sums | wspage3的博客</title>
   
 
 
@@ -164,7 +164,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/26/Heap/Leetcode-703-Kth%20Largest%20Element%20in%20a%20Stream/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/27/Heap/Leetcode-373-Find%20K%20Pairs%20with%20Smallest%20Sums/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/pig.png">
@@ -177,7 +177,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Leetcode-703.Kth Largest Element in a Stream
+          Leetcode-373.Find K Pairs with Smallest Sums
         </h1>
 
         <div class="post-meta">
@@ -188,7 +188,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-04-26 11:41:53 / 修改时间：12:25:24" itemprop="dateCreated datePublished" datetime="2020-04-26T11:41:53+08:00">2020-04-26</time>
+              <time title="创建时间：2020-04-27 17:51:27 / 修改时间：19:43:23" itemprop="dateCreated datePublished" datetime="2020-04-27T17:51:27+08:00">2020-04-27</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -215,29 +215,31 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><h3 id="0、题目链接"><a href="#0、题目链接" class="headerlink" title="0、题目链接"></a>0、题目链接</h3><p><a href="https://leetcode.com/problems/kth-largest-element-in-a-stream/" target="_blank" rel="noopener">703.Kth Largest Element in a Stream</a></p>
-<h3 id="1、Description"><a href="#1、Description" class="headerlink" title="1、Description"></a>1、Description</h3><p>【输入】<br>无；<br>【输出】<br>设计一个class KthLargest；<br>目的：找出一组数据流中，第k大的数字；<br>第k大：此处的第k大指的是将数据流中的数字从大到小排序后，第k个数字；<br>举个例子：[10, 10, 9, 8, 8]  第3大的数字为9，而不是8；<br>【要求】<br>构造函数：整数k、整数数组nums；初始化k以及数据流；<br>add函数：整数x；将整数x添加到数据流中，并且返回此时数据流中的第k大的数字；</p>
-<h3 id="2、Example"><a href="#2、Example" class="headerlink" title="2、Example"></a>2、Example</h3><p>int k = 3;<br>int[] arr = [4,5,8,2];<br>KthLargest kthLargest = new KthLargest(3, arr);<br>kthLargest.add(3);   // returns 4<br>kthLargest.add(5);   // returns 5<br>kthLargest.add(10);  // returns 5<br>kthLargest.add(9);   // returns 8<br>kthLargest.add(4);   // returns 8</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><h3 id="0、题目链接"><a href="#0、题目链接" class="headerlink" title="0、题目链接"></a>0、题目链接</h3><p><a href="https://leetcode.com/problems/find-k-pairs-with-smallest-sums/" target="_blank" rel="noopener">373.Find K Pairs with Smallest Sums</a></p>
+<h3 id="1、Description"><a href="#1、Description" class="headerlink" title="1、Description"></a>1、Description</h3><p>【输入】<br>给定两个整数数组nums1、nums2，大小分别为n1、n2；并且都是升序排列好的；<br>给定一个整数k；<br>【输出】<br>以二维数组的形式，输出k个数字对(x, y)。其中x是nums1的元素，y是nums2的元素；<br>要求使得：这k个数字对，对应的val(x + y)最小；<br>【要求】<br>无；</p>
+<h3 id="2、Example"><a href="#2、Example" class="headerlink" title="2、Example"></a>2、Example</h3><p>Input: nums1 = [1,7,11], nums2 = [2,4,6], k = 3<br>Output: [[1,2],[1,4],[1,6]] </p>
 <a id="more"></a>
 
 <h3 id="3、Corner-Case"><a href="#3、Corner-Case" class="headerlink" title="3、Corner Case"></a>3、Corner Case</h3><ol>
-<li>k &gt;= 1</li>
-<li>n &gt;= k - 1</li>
-<li>当n == k - 1时：构造函数初始化后，第k大的元素还不能确定，需要后续的add()</li>
-<li>当n &gt; k - 1时：构造初始化后，第k大的元素就知道了</li>
+<li>若n1 == 0 || n2 == 0，则不管k是多少，返回空数组；</li>
+<li>若n1、n2都不为0，但k &lt;= 0，返回空数组；</li>
+<li>考虑n1、n2、k都为正数的情况；</li>
 </ol>
 <h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="0、思考"><a href="#0、思考" class="headerlink" title="0、思考"></a>0、思考</h3><ol>
-<li>对于Kth的问题，同样考虑是否可以使用Heap来解决；</li>
+<li>一共有n1 * n2个数字对，挑选其中k个；</li>
+<li>根据题目描述，若k &gt; n1 * n2，则返回n1 * n2个即可；即：k = min(k, n1 * n2)；</li>
 </ol>
 <h3 id="1、Solution-1：Min-Heap"><a href="#1、Solution-1：Min-Heap" class="headerlink" title="1、Solution-1：Min Heap"></a>1、Solution-1：Min Heap</h3><ol>
-<li><p>维护一个大小为k的小顶堆；</p>
+<li><p>处理边界情况：若n1或n2为0；若k小于等于0；都直接返回空数组。</p>
 </li>
-<li><p>初始化：将nums中的n个数字放入大小为k的小顶堆中。若堆大小超过了k，则把堆顶元素去除。</p>
+<li><p>处理k过大的情况：k = min(k, n1 * n2)；</p>
 </li>
-<li><p>add：将x放入小顶堆。若堆大小超过了k，则把堆顶元素去除。此时n一定大于等于k，第k大的数字就是堆顶的数字；</p>
+<li><p>观察：对于nums1的任意一个数字x，要使得(x + y)最小：那么一定是先从nums2[0]开始选择y，到nums2[n2 - 1]为止。因为nums2是升序的。<br>把这种先后选择的次序，抽象为一个链表。选择完成一个结点后，考虑其后继结点。<br>那么本问题转化为：023.Merge k Sorted Lists。</p>
 </li>
-<li><p>Code(<a href="https://leetcode.com/submissions/detail/330226399/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/330226399/</a>)<br>AC<br>初始化时间复杂度：O(n * log k)<br>add时间复杂度：O(log k)<br>空间复杂度：O(k)</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">KthLargest</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> _k;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    priority_queue&lt;<span class="keyword">int</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;, greater&lt;<span class="keyword">int</span>&gt;&gt; minHeap;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    KthLargest(<span class="keyword">int</span> k, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        _k = k;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> x : nums) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">            minHeap.push(x);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (minHeap.<span class="built_in">size</span>() &gt; _k) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">                minHeap.pop();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        minHeap.push(val);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (minHeap.<span class="built_in">size</span>() &gt; _k) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">            minHeap.pop();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> minHeap.top();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * Your KthLargest object will be instantiated and called as such:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * KthLargest* obj = new KthLargest(k, nums);</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * int param_1 = obj-&gt;add(val);</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> */</span></span></pre></td></tr></table></figure>
+<li><p>举个例子：nums1 = [1,7,11], nums2 = [2,4,6]<br>1：(1, 2) -&gt; (1, 4) -&gt; (1, 6)<br>7：(7, 2) -&gt; (7, 4) -&gt; (7, 6)<br>11：(11, 2) -&gt; (11, 4) -&gt; (11, 6)<br>可以看出，有n1个单链表，每个链表的长度为n2。将其merge，选择val最小的k个结点即可。</p>
+</li>
+<li><p>Code(<a href="https://leetcode.com/submissions/detail/330885880/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/330885880/</a>)<br>AC<br>时间复杂度：O(M * log L)  // M = min(k, n1 * n2); L = min(k, n1);<br>空间复杂度：O(L)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; kSmallestPairs(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums1, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums2, <span class="keyword">int</span> k) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n1 = nums1.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n2 = nums2.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (n1 == <span class="number">0</span> || n2 == <span class="number">0</span> || k &lt;= <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// i代表nums1的index</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// j代表nums2的index</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// &#123;value, &#123;i, j&#125;&#125;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// pair&lt;int, pair&lt;int, int&gt;&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        priority_queue&lt;pair&lt;<span class="keyword">int</span>, pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt;, <span class="built_in">vector</span>&lt;pair&lt;<span class="keyword">int</span>, pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt;&gt;, greater&lt;pair&lt;<span class="keyword">int</span>, pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt;&gt;&gt; minHeap;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 保持minHeap的大小为L：min(k, n1)。</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= <span class="built_in">min</span>(k - <span class="number">1</span>, n1 - <span class="number">1</span>); i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">            minHeap.push(&#123;nums1[i] + nums2[<span class="number">0</span>], &#123;i, <span class="number">0</span>&#125;&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 需要遍历的次数为M：min(k, n1 * n2)。</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 所以总体的时间复杂度为：O(M * log L)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num = <span class="number">1</span>; num &lt;= <span class="built_in">min</span>(k, n1 * n2); num++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">int</span> curI = minHeap.top().second.first;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">int</span> curJ = minHeap.top().second.second;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">            minHeap.pop();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">            ans.push_back(&#123;nums1[curI], nums2[curJ]&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (curJ == n2 - <span class="number">1</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">continue</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">            minHeap.push(&#123;nums1[curI] + nums2[curJ + <span class="number">1</span>], &#123;curI, curJ + <span class="number">1</span>&#125;&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
 
 </li>
 </ol>
@@ -252,7 +254,7 @@
           <div class="post-tags">
               <a href="/tags/Heap/" rel="tag"># Heap</a>
               <a href="/tags/Priority-Queue/" rel="tag"># Priority Queue</a>
-              <a href="/tags/Design/" rel="tag"># Design</a>
+              <a href="/tags/Linked-List/" rel="tag"># Linked List</a>
           </div>
 
         
@@ -261,13 +263,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/04/26/Heap/Leetcode-451-Sort%20Characters%20By%20Frequency/" rel="prev" title="Leetcode-451.Sort Characters By Frequency">
-      <i class="fa fa-chevron-left"></i> Leetcode-451.Sort Characters By Frequency
+    <a href="/2020/04/27/Binary%20Search/Leetcode-704-Binary%20Search/" rel="prev" title="Leetcode-704.Binary Search">
+      <i class="fa fa-chevron-left"></i> Leetcode-704.Binary Search
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/04/26/Reservoir%20Sampling/Leetcode-382-Linked%20List%20Random%20Node/" rel="next" title="Leetcode-382.Linked List Random Node">
-      Leetcode-382.Linked List Random Node <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
