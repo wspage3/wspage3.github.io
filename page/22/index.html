@@ -161,6 +161,81 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/16/Leetcode-242-Valid%20Anagram/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/pig.png">
+      <meta itemprop="name" content="wspage3">
+      <meta itemprop="description" content="永不放弃！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wspage3的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/16/Leetcode-242-Valid%20Anagram/" class="post-title-link" itemprop="url">242.Valid Anagram</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-12-16 21:07:31 / 修改时间：21:28:12" itemprop="dateCreated datePublished" datetime="2019-12-16T21:07:31+08:00">2019-12-16</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/valid-anagram/" target="_blank" rel="noopener">242.Valid Anagram</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定两个字符串s和t。<br>【输出】<br>判断这两个字符串是否为：“字母异位词”<br>所谓“字母异位词”，就是两个单词，组成它们的字母是完全一样的，而不关心其排列顺序。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: s = “anagram”, t = “nagaram”<br>Output: true</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.lenS不等于lenT的时候，直接return false。<br>2.s和t中仅包含小写字母。<br>3.如果输入包含unicode字符的话，该程序的扩展性如何。</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Sort"><a href="#Solution-1：Sort" class="headerlink" title="Solution-1：Sort"></a>Solution-1：Sort</h3><p>1.将两个字符串都排序，然后直接比较字符串是否相等即可。<br>2.在C++中：<br>sort(s.begin(), s.end());<br>return s == t;</p>
+<p>时间复杂度：O(n * log n) //n代表字符串的长度<br>空间复杂度：O(1)</p>
+<p>6.Code(<a href="https://leetcode.com/submissions/detail/286349008/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286349008/</a>)</p>
+<h3 id="Solution-2：Hash-Table"><a href="#Solution-2：Hash-Table" class="headerlink" title="Solution-2：Hash Table"></a>Solution-2：Hash Table</h3><p>1.用两个哈希表mapS和mapT，来记录s和t中所有字母出现的次数。<br>2.然后遍历26个小写字母：<br>对于任意一个小写字母：<br>首先，判断其是否在mapS和mapT中同时出现或者同时不出现。<br>然后，判断其出现的频率是否相等。<br>如果上述两点有不满足的，直接返回false即可。<br>3.在C++中，判断其是否出现在unordered_map中可以使用count()，出现返回1，否则返回0。<br>判断其出现的次数的话，直接比较其key对应的value即可。</p>
+<p>时间复杂度：O(n + 26)<br>空间复杂度：O(26)</p>
+<p>4.Code(<a href="https://leetcode.com/submissions/detail/286336480/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286336480/</a>)</p>
+<h3 id="Solution-3：Hash-Table-with-Optimization"><a href="#Solution-3：Hash-Table-with-Optimization" class="headerlink" title="Solution-3：Hash Table with Optimization"></a>Solution-3：Hash Table with Optimization</h3><p>1.我们用一个哈希表即可。<br>2.首先判断lenS, lenT是否相等，不相等的话直接return false。<br>3.遍历n次，每次：<br>s[i]对应的value加一；<br>t[i]对应的value减一；<br>如果遍历n次后，且两个字符串由相同的字母组成的话，那么所有出现的字符的次数都是0了。<br>4.遍历整个哈希表，若其个数非0，则return false。</p>
+<p>时间复杂度：O(n + 26)<br>空间复杂度：O(26)</p>
+<p>4.Code(<a href="https://leetcode.com/submissions/detail/286347847/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286347847/</a>)</p>
+<h3 id="Solution-4：Use-Vector-instead-of-Hash-Table"><a href="#Solution-4：Use-Vector-instead-of-Hash-Table" class="headerlink" title="Solution-4：Use Vector instead of Hash Table"></a>Solution-4：Use Vector instead of Hash Table</h3><p>1.我们用一个固定长度为26的数组即可实现Solution-3的思路。<br>2.在数组中访问赋值的时间复杂度是O(1)。<br>而理论上哈希表的访问的时间复杂度也是O(1)。<br>参考：<br>Hash tables do some complex math in that one operation to get to the value that you want.<br>Simulating a hash table with an array is quicker because that<br>one operation for a lookup is only an offset from the beginning of the array(since you already have the index)<br>vs more difficult mathy stuff with the hash table.</p>
+<p>时间复杂度：O(n + 26)<br>空间复杂度：O(26)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/286348853/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286348853/</a>)</p>
+<p>4.进阶：如果输入字符串包含 unicode 字符怎么办？你能否调整你的解法来应对这种情况？<br>解答：使用哈希表而不是固定大小的计数器。想象一下，分配一个大的数组来适应整个 Unicode 字符范围，这个范围可能超过 100万。<br>哈希表是一种更通用的解决方案，可以适应任何字符范围。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/16/DP/Leetcode-416-Partition%20Equal%20Subset%20Sum/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -479,86 +554,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/15/Leetcode-155-Min%20Stack/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/pig.png">
-      <meta itemprop="name" content="wspage3">
-      <meta itemprop="description" content="永不放弃！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wspage3的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/15/Leetcode-155-Min%20Stack/" class="post-title-link" itemprop="url">155.Min Stack</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2019-12-15 18:45:28 / 修改时间：19:45:00" itemprop="dateCreated datePublished" datetime="2019-12-15T18:45:28+08:00">2019-12-15</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/min-stack/" target="_blank" rel="noopener">155.Min Stack</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>设计一个数据结构”最小栈”，具有以下特点：<br>1.push(x) – Push element x onto stack.<br>2.pop() – Removes the element on top of the stack.<br>3.top() – Get the top element.<br>4.getMin() – Retrieve the minimum element in the stack.<br>其中核心功能是第四点，因为如果仅考虑前三点的话，就是常规的栈stack。<br>getMin()要求时间复杂度为O(1)。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>MinStack minStack = new MinStack();<br>minStack.push(-2);<br>minStack.push(0);<br>minStack.push(-3);<br>minStack.getMin();   –&gt; Returns -3.<br>minStack.pop();<br>minStack.top();      –&gt; Returns 0.<br>minStack.getMin();   –&gt; Returns -2.</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.getMin()要求时间复杂度为O(1)。</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><p>思路：看到题目，第一想法是：维护一个stack s和一个最小值m即可。<br>当有更小的值入栈后，更新m即可。<br>但这样有一个问题：如果我当前pop的就是最小值m，那怎么办。<br>因为没有保存第二小的值，所以在pop掉m后，m的值就无法追溯了。</p>
-<h3 id="Solution-1：Two-Stacks"><a href="#Solution-1：Two-Stacks" class="headerlink" title="Solution-1：Two Stacks"></a>Solution-1：Two Stacks</h3><p>1.用两个stack，一个s保存数据，一个m保存最小值。<br>当有更小的值入栈后，将这个值同时加入到栈m中。<br>则当前最小的值就是m的栈顶元素。<br>当pop最小元素的时候，将其从s和m中同时pop掉。</p>
-<p>空间复杂度：O(n)</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/285879960/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285879960/</a>)</p>
-<h3 id="Solution-2：One-Stack"><a href="#Solution-2：One-Stack" class="headerlink" title="Solution-2：One Stack"></a>Solution-2：One Stack</h3><p>1.Solution-1中，我们当遇到更小的值时，都将其保存到m栈中。<br>这样栈顶的就是当前s栈中最小的值，若其被pop出去，同时带走m栈顶的元素。<br>此时m栈顶的元素又是s栈中的最小值了。</p>
-<p>2.现在我们用int minValue来代表当前栈中最小的值。<br>s仍然代表着数据栈。<br>当出现了更小的值时：<br>a.保存当前minValue：将其先push到s中。<br>b.更新minValue<br>c.再将当前minValue push到s中。</p>
-<p>3.则任意时刻，minValue都是代表着当前栈中最小的元素值。</p>
-<p>4.当pop的值是minValue的时候，也就是s.top() == minValue，<br>我们从s中pop一个元素，这个元素就是minValue。<br>同时将此时s.top()赋值给minValue。因为这个元素是“前一个最小值”。<br>同时将其从s中pop出去。</p>
-<p>空间复杂度：O(n)</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/285881659/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285881659/</a>)</p>
-<h3 id="Solution-3：One-Stack"><a href="#Solution-3：One-Stack" class="headerlink" title="Solution-3：One Stack"></a>Solution-3：One Stack</h3><p>1.现在我们将当前元素cur和minValue的差值存入栈s中。</p>
-<p>2.push(x)：<br>当栈中没有元素的时候，将0存入s中，minValue说就是x；<br>当栈中已有元素的时候，将x - minValue存入s中，若该值为负，说明当前x是更小的值。将minValue更新为x。</p>
-<p>3.getMin()<br>任意时刻，minValue的值就是当前栈s中最小元素的值。</p>
-<p>4.top()<br>由于s中存入的已经不是之前的数据了，而是存放的差值。<br>当s栈顶元素小于0的时候，说明：这个元素是当前栈中最小的值minValue。return minValue即可。<br>当s栈顶元素不小于0的时候，说明，这个元素是一个差值，其值 = s.top() + minValue。</p>
-<p>5.pop()<br>当s栈顶元素小于0的时候，说明：这个元素是当前栈中最小的值minValue。<br>  需要更新minValue = minValue - s.top()；然后再从s中把其pop。<br>当s栈顶元素不小于0的时候，说明，这个元素是一个差值，直接pop即可。</p>
-<p>6.缺点1：由于差值可能会导致整数溢出，所以用minValue用long long。<br>缺点2：由于放入栈中的值是一个差值，而非原本的数据本身，即有修改数据的嫌疑。需要确定这种情况再用这个方法。</p>
-<p>空间复杂度：O(1)</p>
-<p>7.Code(<a href="https://leetcode.com/submissions/detail/285885660/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285885660/</a>)</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -630,7 +625,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">134</span>
+          <span class="site-state-item-count">135</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
