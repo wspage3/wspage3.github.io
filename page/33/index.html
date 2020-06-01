@@ -161,6 +161,81 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/05/Leetcode-739-Daily%20Temperatures/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/pig.png">
+      <meta itemprop="name" content="wspage3">
+      <meta itemprop="description" content="永不放弃！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wspage3的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/05/Leetcode-739-Daily%20Temperatures/" class="post-title-link" itemprop="url">Leetcode739-Daily Temperatures</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-12-05 10:58:12 / 修改时间：14:58:38" itemprop="dateCreated datePublished" datetime="2019-12-05T10:58:12+08:00">2019-12-05</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/daily-temperatures/" target="_blank" rel="noopener">Leetcode739-Daily Temperatures</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组T；T[i]代表第i天的气温；<br>求出一个长度为n的整数数组res；res[i]代表第i天需要等待的天数，直到后面某一天气温比当天高/</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p> input = [73, 74, 75, 71, 69, 72, 76, 73]<br>output = [1, 1, 4, 2, 1, 1, 0, 0]</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n：[1, 30000]<br>T[i]：[30, 100]</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><p>对于当前位置的元素T[i]，找出它后面一个比他大的元素，使得他们俩的距离最小。</p>
+<h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>1.i从[0, n - 1]进行遍历<br>对于T[i]来说，j考虑[i + 1, n - 1]内所有的数，如果发现第一个比T[i]大的数字，则：res[i] = (j - i)</p>
+<p>时间复杂度：O(n ^ 2)<br>空间复杂度：O(1)：不包含函数返回的数组res<br>结果发现：此方法TLE，说明需要进一步优化。</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/283812278/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283812278/</a>)</p>
+<h3 id="Solution-2：Monotonous-Stack"><a href="#Solution-2：Monotonous-Stack" class="headerlink" title="Solution-2：Monotonous Stack"></a>Solution-2：Monotonous Stack</h3><p>1.认识单调栈<br><a href="https://www.cnblogs.com/grandyang/p/8887985.html" target="_blank" rel="noopener">https://www.cnblogs.com/grandyang/p/8887985.html</a><br>单调栈的一大优势就是线性的时间复杂度，所有的元素只会进栈一次，而且一旦出栈后就不会再进来了。<br>单调递增栈可以找到左边第一个比当前数字小的元素。（本题做法）<br>单调递减栈可以找到右边第一个比当前数字大的元素。</p>
+<p>2.[73, 74, 71, 60, 50, 55]<br>先将73压入栈</p>
+<p>对于74，此时栈非空，则考察栈顶元素73。<br>此时74 &gt; 73，说明：对于73来说，找到了第一个比自己大的元素。<br>此时73的答案已经找到，将其从栈中拿出。<br>将74压入栈。</p>
+<p>对于71，此时栈非空，则考察栈顶元素74。<br>此时71 &lt; 74，说明：对于71来说，还是没有找到第一个比自己大的元素。<br>将71入栈。</p>
+<p>对于60，50也是如此。此时栈由顶到下为：50，60，71，74</p>
+<p>对于55来说，此时栈顶是50<br>此时55 &gt; 50，说明：对于50来说，找到了答案。<br>将其出栈。继续考察新的栈顶元素60，不满足了。<br>将55入栈。<br>此时栈由顶到下为： 55，60，71，74。而此时已经遍历完所有的数字了，说明这些元素找不到比自己大的元素了。</p>
+<p>3.可以发现，栈中数据在任何时刻都是有序的，且：最上面的数字最小，最下面的数字最大。<br>考虑遍历到位置nums[i]的时候，此时栈中元素自顶向下为:[a, b, c, d]。<br>若nums[i]不大于a，说明：nums[i]的出现，不会使得栈中任意元素找到答案。此时将nums[i]压入栈即可。<br>若nums[i]大于d，说明：nums[i]的出现，使得栈中任意元素都找到了答案。此时从栈顶依次拿出一个元素，直到栈空了。然后nums[i]入栈。<br>若nums[i]介于这两者中间的话，则“尽自己最大的能力，使得栈中的元素找到答案，然后将其出栈”<br>经过这样遍历的顺序：使得栈中任意时刻的数都是有序的，也使得了每个元素找到的答案都是距离自己最小的那个，也就是题目中要求的这样。</p>
+<p>时间复杂度：O(n) 因为所有元素只会进入栈一次，并且出栈后再也不会进栈了。<br>空间复杂度：O(n)</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/283824761/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283824761/</a>)</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/04/DP/Leetcode-300-Longest%20Increasing%20Subsequence/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -551,79 +626,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/03/Leetcode-238-Product%20of%20Array%20Except%20Self/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/pig.png">
-      <meta itemprop="name" content="wspage3">
-      <meta itemprop="description" content="永不放弃！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wspage3的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/03/Leetcode-238-Product%20of%20Array%20Except%20Self/" class="post-title-link" itemprop="url">Leetcode-238 Product of Array Except Self</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2019-12-03 17:29:50 / 修改时间：18:12:07" itemprop="dateCreated datePublished" datetime="2019-12-03T17:29:50+08:00">2019-12-03</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/product-of-array-except-self/" target="_blank" rel="noopener">Leetcode-238 Product of Array Except Self</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组nums，n &gt; 1。<br>求数组output，其中output[i]表示所有除了i之外，所有其它数字的乘积。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input:  [1,2,3,4]<br>Output: [24,12,8,6]</p>
-<h3 id="3-Note"><a href="#3-Note" class="headerlink" title="3.Note"></a>3.Note</h3><p>a.过程中不使用除法。<br>b.时间复杂度要求：O(n)。<br>c.空间复杂度要求：O(1)，函数返回的数组不算入空间复杂度。</p>
-<h3 id="4-Corner-Case"><a href="#4-Corner-Case" class="headerlink" title="4.Corner Case"></a>4.Corner Case</h3><p>题目保证了n &gt; 1</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><p>直观的想法就是遍历n次，每次累乘(n - 1)个数字。<br>时间复杂度：O(n ^ 2)<br>空间复杂度：O(1)</p>
-<h3 id="Solution-2：递推"><a href="#Solution-2：递推" class="headerlink" title="Solution-2：递推"></a>Solution-2：递推</h3><p>1.假设我们要求output[i]，i的范围为：[0, n - 1]，也就是nums数组中除了nums[i]之外所有的数字的乘积。也就是求[0, i - 1]以及[i + 1, n - 1]两个范围内所有数的乘积。</p>
-<p>2.新增数组s，设数组s[i]表示范围[0, i - 1]内所有数字的乘积。i的范围为：[1, n - 1]<br>新增数组t，设t[i]为[i + 1, n - 1]所有数字的乘积。i的范围为：[0, n - 2]<br>数组s只需要从前到后遍历一次nums即可求出。<br>数组t从后到前遍历一次nums也能求出。<br>在s和t都求出的情况下，output也只需要O(n)的时间即可求出：output[i] = s[i] * t[i];<br>时间复杂度：O(3 * n)<br>空间复杂度：O(2 * n)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/283206956/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283206956/</a>)</p>
-<h3 id="Solution-3：进一步优化"><a href="#Solution-3：进一步优化" class="headerlink" title="Solution-3：进一步优化"></a>Solution-3：进一步优化</h3><p>1.可以省略数组s，和数组t：<br>数组s的值就保留在output数组中。<br>数组t用一个int变量表示。<br>时间复杂度：O(2 * n)<br>空间复杂度：O(1)</p>
-<p>2.Code(<a href="https://leetcode.com/submissions/detail/283208630/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283208630/</a>)</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/32/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/32/">32</a><span class="page-number current">33</span>
+    <a class="extend prev" rel="prev" href="/page/32/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/32/">32</a><span class="page-number current">33</span><a class="page-number" href="/page/34/">34</a><a class="extend next" rel="next" href="/page/34/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -691,7 +697,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">165</span>
+          <span class="site-state-item-count">166</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
