@@ -21,14 +21,14 @@
   </script>
 
   <meta name="description" content="一、题意0、题目链接377.Combination Sum IV 1、Description【输入】给定一个大小为n的整数数组nums；nums性质：元素都是正数；无重复元素；给定一个整数target；target性质：正数；【输出】求出有几种方案，使得从nums中拿出一些数字，其和为target。【要求】无； 2、Examplenums &#x3D; [1, 2, 3]target &#x3D; 4 The pos">
-<meta name="keywords" content="Dynamic Programming">
+<meta name="keywords" content="Dynamic Programming,Permutation">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Leetcode-377.Combination Sum IV">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;06&#x2F;04&#x2F;DP&#x2F;Leetcode-377-Combination%20Sum%20IV&#x2F;index.html">
 <meta property="og:site_name" content="wspage3的博客">
 <meta property="og:description" content="一、题意0、题目链接377.Combination Sum IV 1、Description【输入】给定一个大小为n的整数数组nums；nums性质：元素都是正数；无重复元素；给定一个整数target；target性质：正数；【输出】求出有几种方案，使得从nums中拿出一些数字，其和为target。【要求】无； 2、Examplenums &#x3D; [1, 2, 3]target &#x3D; 4 The pos">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-06-04T08:24:39.162Z">
+<meta property="og:updated_time" content="2020-06-04T13:53:40.408Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://yoursite.com/2020/06/04/DP/Leetcode-377-Combination%20Sum%20IV/">
@@ -188,7 +188,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-06-04 13:03:54 / 修改时间：16:24:39" itemprop="dateCreated datePublished" datetime="2020-06-04T13:03:54+08:00">2020-06-04</time>
+              <time title="创建时间：2020-06-04 13:03:54 / 修改时间：21:53:40" itemprop="dateCreated datePublished" datetime="2020-06-04T13:03:54+08:00">2020-06-04</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -223,6 +223,9 @@
 <a id="more"></a>
 
 <h3 id="3、Corner-Case"><a href="#3、Corner-Case" class="headerlink" title="3、Corner Case"></a>3、Corner Case</h3><ol>
+<li>target为正数；</li>
+<li>nums[i]为正数；</li>
+<li>nums中无重复数；</li>
 <li>n == 0时：而target是正数，return 0；</li>
 <li>考虑n &gt;= 1的情况；</li>
 </ol>
@@ -271,6 +274,7 @@
       <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/Dynamic-Programming/" rel="tag"># Dynamic Programming</a>
+              <a href="/tags/Permutation/" rel="tag"># Permutation</a>
           </div>
 
         
@@ -360,7 +364,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">172</span>
+          <span class="site-state-item-count">173</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -373,7 +377,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
