@@ -161,6 +161,113 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/07/DP/Leetcode-121-Best%20Time%20to%20Buy%20ans%20Sell%20Stock/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/pig.png">
+      <meta itemprop="name" content="wspage3">
+      <meta itemprop="description" content="永不放弃！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wspage3的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/07/DP/Leetcode-121-Best%20Time%20to%20Buy%20ans%20Sell%20Stock/" class="post-title-link" itemprop="url">【DP专项】121.Best Time to Buy and Sell Stock</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-07 09:09:15" itemprop="dateCreated datePublished" datetime="2019-12-07T09:09:15+08:00">2019-12-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-02 16:34:22" itemprop="dateModified" datetime="2020-01-02T16:34:22+08:00">2020-01-02</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/" target="_blank" rel="noopener">121.Best Time to Buy and Sell Stock</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个长度为n的整数数组prices；<br>prices[i]代表第i天股票的价格。<br>【输出】<br>如果你只能交易一次，即：买一次，卖一次。求出你最多能赚多少钱。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [7,1,5,3,6,4]<br>Output: 5<br>Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.<br>Not 7-1 = 6, as selling price needs to be larger than buying price.</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
+<li>n：当n为0/1的时候，直接返回0；</li>
+<li>赚不到钱则返回0；</li>
+</ol>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><ol>
+<li>由于要想赚钱，得低价买入，高价卖出；</li>
+<li>买入卖出不能在同一天，至少买入的第二天才能卖出；</li>
+<li>对于任意i，本质上就是求出[i + 1, n - 1]范围内最大的数字，然后减去prices[i]，就是第i天能获取到的利润。<br>对于[0, n - 1]上的所有i，找出一个最大值即可。</li>
+</ol>
+<h3 id="Solution-1：Dynamic-programming"><a href="#Solution-1：Dynamic-programming" class="headerlink" title="Solution-1：Dynamic programming"></a>Solution-1：Dynamic programming</h3><p>1.状态定义：rightMax[i]表示：[i + 1, n - 1]范围内最大的数字。</p>
+<p>2.转移方程：rightMax[i - 1] = max(prices[i], rightMax[i]);</p>
+<p>3.边界条件：rightMax[n - 1] = 0</p>
+<p>4.求解顺序：i从(n - 2)开始，到0结束。<br>同时，使用这个值减去prices[i]的值，来不断更新最大利润ans即可。</p>
+<p>5.Code(<a href="https://leetcode.com/submissions/detail/284225891/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284225891/</a>)<br>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; prices)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = prices.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (n &lt; <span class="number">2</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; rightMax(n);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        rightMax[n - <span class="number">1</span>] = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = n - <span class="number">2</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            rightMax[i] = <span class="built_in">max</span>(prices[i + <span class="number">1</span>], rightMax[i + <span class="number">1</span>]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">            ans = <span class="built_in">max</span>(ans, rightMax[i] - prices[i]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+
+<p>6.Code(<a href="https://leetcode.com/submissions/detail/284226029/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284226029/</a>)<br>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; prices)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = prices.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (n &lt; <span class="number">2</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> rightMax = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = n - <span class="number">2</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            rightMax = <span class="built_in">max</span>(prices[i + <span class="number">1</span>], rightMax);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            ans = <span class="built_in">max</span>(ans, rightMax - prices[i]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/06/Leetcode-042-Trapping%20Rain%20Water/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -500,105 +607,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/04/DP/Leetcode-152-Maximum%20Product%20Subarray/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/pig.png">
-      <meta itemprop="name" content="wspage3">
-      <meta itemprop="description" content="永不放弃！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wspage3的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/04/DP/Leetcode-152-Maximum%20Product%20Subarray/" class="post-title-link" itemprop="url">【DP专项】152.Maximum Product Subarray</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-04 08:59:01" itemprop="dateCreated datePublished" datetime="2019-12-04T08:59:01+08:00">2019-12-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-06 13:56:01" itemprop="dateModified" datetime="2020-01-06T13:56:01+08:00">2020-01-06</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/maximum-product-subarray/" target="_blank" rel="noopener">152.Maximum Product Subarray</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组nums。<br>求出nums的连续子数组，这个子数组是nums所有子数组中乘积最大的那个。返回这个sum。<br>子数组长度至少为1。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [2,3,-2,4]<br>Output: 6<br>Explanation: [2,3] has the largest product 6.</p>
-<p>Input: [-2,0,-1]<br>Output: 0<br>Explanation: The result cannot be 2, because [-2,-1] is not a subarray.</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
-<li>n = 0时，答案为0；</li>
-</ol>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>显然，本题目和【053.Maximum Subarray】的唯一区别就是：一个求和最大值，一个求乘积最大值。<br>此处，主要需要考虑乘法运算和加法元素的差异。</p>
-<h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><ol>
-<li><p>不感知加法乘法的差异。</p>
-</li>
-<li><p>Code(<a href="https://leetcode.com/submissions/detail/283351227/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283351227/</a>)<br>时间复杂度：O(n ^ 2)<br>空间复杂度：O(1)</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxProduct</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (n == <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> res = INT_MIN;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n - <span class="number">1</span>; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">int</span> temp = <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &lt;= n - <span class="number">1</span>; j++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">                temp = temp * nums[j];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">                res = <span class="built_in">max</span>(res, temp);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> res;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h3 id="Solution-2：Divide-and-Conquer"><a href="#Solution-2：Divide-and-Conquer" class="headerlink" title="Solution-2：Divide and Conquer"></a>Solution-2：Divide and Conquer</h3><ol>
-<li><p>考虑区间[low, high]，mid为中点：<br>递归求得[low, mid]和[mid + 1, high]的值。<br>找出[i, mid]使得以mid结尾的最大值。<br>找出[mid + 1, j]使得以mid + 1开头的最大值。<br>假设区间为：[-3, 2, -5]<br>f(-3, 2) = 2<br>f(-5) = -5<br>f(i, j) = 2 * -5 = -10<br>这样求得的值是2，跟实际答案30不符合。</p>
-</li>
-<li><p>可以发现，问题出现在“负负得正”这种场景下。<br>我们在寻找[i, mid]和[mid + 1, j]的时候，单纯的找到了以其开头或者结尾的最大的值。但这两个最大的值的乘积并不一定是最大的。<br>所以根据这个特点，可以分别维护两个值。<br>对于i来说，lMax，lMin分别记录以mid结尾的最大乘积和最小乘积。<br>对于j来说，rMax，rMin分别记录以mid + 1开头的最大乘积和最小乘积。<br>当combine的时候，找出max(lMax * rMax, lMin * rMin)，这样才是[i, j]范围内的最大乘积。</p>
-</li>
-<li><p>Code(<a href="https://leetcode.com/submissions/detail/283358210/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283358210/</a>)<br>时间复杂度：O(n * logN)<br>空间复杂度：O(logN)，递归开销</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">f</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (low == high) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> nums[low];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> mid = low + (high - low) / <span class="number">2</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> lMax = f(nums, low, mid);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> rMax = f(nums, mid + <span class="number">1</span>, high);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> leftMaxProductNeg = nums[mid];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> leftMaxProductPos = nums[mid];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> rightMaxProductNeg = nums[mid + <span class="number">1</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> rightMaxProductPos = nums[mid + <span class="number">1</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> temp = nums[mid];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = mid - <span class="number">1</span>; i &gt;= low; i--) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">            temp = temp * nums[i];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">            leftMaxProductPos = <span class="built_in">max</span>(leftMaxProductPos, temp);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">            leftMaxProductNeg = <span class="built_in">min</span>(leftMaxProductNeg, temp);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        temp = nums[mid + <span class="number">1</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = mid + <span class="number">2</span>; i &lt;= high; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">            temp = temp * nums[i];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">            rightMaxProductPos = <span class="built_in">max</span>(rightMaxProductPos, temp);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">            rightMaxProductNeg = <span class="built_in">min</span>(rightMaxProductNeg, temp);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> <span class="built_in">max</span>(<span class="built_in">max</span>(lMax, rMax), <span class="built_in">max</span>(leftMaxProductPos * rightMaxProductPos, leftMaxProductNeg * rightMaxProductNeg));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxProduct</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">//Solution 2:Divide and Conquer</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (n == <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> f(nums, <span class="number">0</span>, n - <span class="number">1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h3 id="Solution-3：Dynamic-Programming"><a href="#Solution-3：Dynamic-Programming" class="headerlink" title="Solution-3：Dynamic Programming"></a>Solution-3：Dynamic Programming</h3><ol>
-<li><p>同理，在递推位置i的时候：<br>sum：<br> start = max(nums[i], nums[i] + start)<br> res = max(res, start)<br>product：<br> if (nums[i] &lt; 0)  then swap(startMin, startMax);<br> startMin = min(nums[i], nums[i] * startMin);<br> startMax = max(nums[i], nums[i] * startMax);<br> res = max(res, startMax);<br>当在位置i的时候，此时：<br>startMin代表以i + 1开头的最小乘积<br>startMax代表以i + 1开头的最大乘积<br>如果当前nums[i]非负的话，要想得到以i开头的连续子树组的最大值，并更新它的话，需要结合maxStart。<br> maxStart = max(nums[i], nums[i] * maxStart)<br> 同理更新minStart：minStart = max(nums[i], nums[i] * minStart)<br>如果当前nums[i]负数的话，要想得到以i开头的连续子树组的最大值，并更新它的话，需要结合minStart。<br> maxStart = max(nums[i], nums[i] * minStart)<br> 同理更新minStart：minStart = max(nums[i], nums[i] * maxStart)<br>为了表达简便，我们可以在更新前判断，如果当前nums[i]是负数的话，将minStart和maxStart交换值即可。</p>
-</li>
-<li><p>Code(<a href="https://leetcode.com/submissions/detail/283369314/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/283369314/</a>)<br>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxProduct</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (n == <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> res = nums[n - <span class="number">1</span>];<span class="comment">//res[i]表示[i, n - 1]内最大连续子数组的乘积。则res[0]就是我们要找的答案。</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> startMin = nums[n - <span class="number">1</span>];<span class="comment">//start[i]表示[i, n - 1]内最大连续子数组的乘积的最小值，且该子数组以nums[i]为开头。</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> startMax = nums[n - <span class="number">1</span>];<span class="comment">//start[i]表示[i, n - 1]内最大连续子数组的乘积的最大值，且该子数组以nums[i]为开头。</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = n - <span class="number">2</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (nums[i] &lt; <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">                swap(startMin, startMax);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">            startMin = <span class="built_in">min</span>(nums[i], startMin * nums[i]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">            startMax = <span class="built_in">max</span>(nums[i], startMax * nums[i]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">            res = <span class="built_in">max</span>(res, startMax);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> res;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
-
-
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -670,7 +678,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">182</span>
+          <span class="site-state-item-count">183</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
