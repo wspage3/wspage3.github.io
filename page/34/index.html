@@ -161,6 +161,73 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/15/Leetcode-075-Sort%20Colors/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/pig.png">
+      <meta itemprop="name" content="wspage3">
+      <meta itemprop="description" content="永不放弃！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wspage3的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/15/Leetcode-075-Sort%20Colors/" class="post-title-link" itemprop="url">75.Sort Colors</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-12-15 19:38:22 / 修改时间：19:59:53" itemprop="dateCreated datePublished" datetime="2019-12-15T19:38:22+08:00">2019-12-15</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/sort-colors/" target="_blank" rel="noopener">75.Sort Colors</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个长度为n的整数数组。<br>其中所有的元素取值都是集合[0, 1, 2]的。<br>【输出】<br>将这个数组进行排序，且按照0 -&gt; 1 -&gt; 2这个顺序从前到后排列。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [2,0,2,1,1,0]<br>Output: [0,0,1,1,2,2]</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>1.n &lt;= 1, 直接return即可。<br>2.要求就地排序，即空间复杂度为O(1)。<br>3.一个直接的想法是：统计0，1，2的个数，然后再重写nums数组。<br>显然这样需要遍历两次nums数组。<br>4.找一个one-pass的方法。</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Three-Pointers"><a href="#Solution-1：Three-Pointers" class="headerlink" title="Solution-1：Three Pointers"></a>Solution-1：Three Pointers</h3><p>1.用三个指针p0，cur，p2。<br>初始化：<br>p0 = 0<br>cur = 0<br>p2 = n - 1<br>分别代表：<br>p0: 元素’0’可能出现的位置，p0之前的位置上都已经全部放上’0’了。<br>cur: 当前考察的位置。<br>p2: 元素’2’可能出现的位置，p2之后的位置上都已经全部放上’2’了。</p>
+<p>2.循环开始：cur从0开始。<br>循环结束：cur == p2是最后一次循环。</p>
+<p>3.过程：<br>如果当前cur位置上的元素是’2’的话，将其与p2位置上的元素交换。p2–；cur保持不动，继续判断交换过来的这个值。<br>如果当前cur位置上的元素是’0’的话，将其与p0位置上的元素交换。p0++；cur向后移动一位（因为当前和p0交换过来的这个值，一定是0或者1，不可能是2）.<br>    如果是0的话，不需要重新考虑。<br>    如果是1的话，也不需要重新考虑。<br>如果当前cur位置上的元素是’1’的话，cur++即可。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
+<p>2.Code(<a href="https://leetcode.com/submissions/detail/286030421/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/286030421/</a>)</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/15/Leetcode-268-Missing%20Number/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -476,78 +543,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/12/Leetcode-022-Generate%20Parentheses/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/pig.png">
-      <meta itemprop="name" content="wspage3">
-      <meta itemprop="description" content="永不放弃！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wspage3的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/12/Leetcode-022-Generate%20Parentheses/" class="post-title-link" itemprop="url">22.Generate Parentheses</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2019-12-12 14:02:01 / 修改时间：16:12:12" itemprop="dateCreated datePublished" datetime="2019-12-12T14:02:01+08:00">2019-12-12</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/generate-parentheses/" target="_blank" rel="noopener">22.Generate Parentheses</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个整数n，代表有n对括号。这是一对：( )<br>求出这n对括号所有可能的组合方式，要求组合后是一个有效的括号表达式。<br>即：匹配的一对括号，左边是(，右边是)</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>n = 3<br>[<br>  “((()))”,<br>  “(()())”,<br>  “(())()”,<br>  “()(())”,<br>  “()()()”<br>]</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n: 当n为0的时候，直接返回空；</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Backtracking-Recursive"><a href="#Solution-1：Backtracking-Recursive" class="headerlink" title="Solution-1：Backtracking(Recursive)"></a>Solution-1：Backtracking(Recursive)</h3><p>1.给定的n，代表有n个open bracket，n个close bracket。</p>
-<p>2.对于任意时刻，我们仅可选一个bracket，要么是open的，要么是close的。<br>只要leftCnt大于0，就可以选择open的。<br>而选择close的，需要rightCnt大于leftCnt，以保证结果先左后右的合法性。</p>
-<p>3.当leftCnt, rightCnt的值都为0时，此时构造出来的string s就是一个合法的答案。将其添加到答案中。<br>并且返回。（回溯）</p>
-<p>4.递归树的某一个子节点计算完成后返回了，其父节点进行考虑，若当前还有其他的儿子，则递归调用其他的儿子。<br>对于一个节点来说，其左儿子可以认为是“选择open bracket”，其右儿子可以认为是“选择close bracket”</p>
-<p>时间复杂度：O() //to do<br>空间复杂度：O()</p>
-<p>5.Code(<a href="https://leetcode.com/submissions/detail/285419056/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285419056/</a>)</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/33/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/33/">33</a><span class="page-number current">34</span><a class="page-number" href="/page/35/">35</a><span class="space">&hellip;</span><a class="page-number" href="/page/37/">37</a><a class="extend next" rel="next" href="/page/35/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/33/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/33/">33</a><span class="page-number current">34</span><a class="page-number" href="/page/35/">35</a><span class="space">&hellip;</span><a class="page-number" href="/page/38/">38</a><a class="extend next" rel="next" href="/page/35/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -615,14 +614,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">185</span>
+          <span class="site-state-item-count">186</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
