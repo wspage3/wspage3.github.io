@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="wspage3的博客">
 <meta property="og:description" content="一、题意0、题目链接1143.Longest Common Subsequence 1、Description【输入】给定两个字符串text1，text2，长度分别为n1，n2；【输出】找出text1和text2的LCS(Longest Common Subsequence)的长度；LCS：最长公共子序列如果没有LCS，则返回0；【要求】无； 2、ExampleInput: text1 &#x3D; “ab">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-06-16T07:12:38.492Z">
+<meta property="og:updated_time" content="2020-06-16T07:42:01.471Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://yoursite.com/2020/06/16/DP/Leetcode-1143-Longest%20Common%20Subsequence/">
@@ -188,7 +188,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-06-16 11:37:59 / 修改时间：15:12:38" itemprop="dateCreated datePublished" datetime="2020-06-16T11:37:59+08:00">2020-06-16</time>
+              <time title="创建时间：2020-06-16 11:37:59 / 修改时间：15:42:01" itemprop="dateCreated datePublished" datetime="2020-06-16T11:37:59+08:00">2020-06-16</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -256,6 +256,8 @@
 <li><p>举例：<br>text1 = acbd；<br>text2 = abedc；<br>通过观察，dp[2][3] = 2，对应的LCS = ab；<br>现在考虑计算dp[3][4]：<br>由于d != c，所以有以下三种可能：<br>d不在最终的LCS中，而c可能在：dp[2][4] = 2；<br>c不在最终的LCS中，而d可能在：dp[3][3] = 3；<br>d、c均不在最终的LCS中：dp[2][3]。由于dp[2][4]一定包含dp[2][3]，所以可以忽略掉这一部分；<br>综上所述，dp[3][4] = max(2, 3) = 3，对应的LCS = abd；</p>
 </li>
 <li><p>进一步观察：<br>对于dp[2][4]来说，对应的集合为：<br>[a, c, b, ac, ab]<br>对于dp[3][3]来说，对应的集合为：<br>[a, b, d, ab, ad, bd, abd]<br>可以看出，dp[2][4]、dp[3][3]对应的集合中有交集。但对于max操作来说，有重复无影响；<br>但一定要保证“不遗漏”：即将dp[3][4]完整地划分，不能有遗漏；</p>
+</li>
+<li><p>进阶：找出相应的LCS。<br>根据二维dp数组往回推，时间复杂度为O(n1 + n2)；<br>参考：<a href="https://blog.csdn.net/hrn1216/article/details/51534607" target="_blank" rel="noopener">https://blog.csdn.net/hrn1216/article/details/51534607</a></p>
 </li>
 </ol>
 
