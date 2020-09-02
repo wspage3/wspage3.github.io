@@ -20,14 +20,15 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="一、题意题目链接: 237.Delete Node in a Linked List 1.Description【输入】给定一个单链表中的节点node（非链表尾）。【输出】在原链表中删除该目标节点node。 2.ExampleInput: head &#x3D; [4,5,1,9], node &#x3D; 1Output: [4,5,9]Explanation: You are given the third no">
+  <meta name="description" content="一、题意0、题目链接237.Delete Node in a Linked List 1、Description【输入】给定一个单链表中的结点node（非尾结点）。【输出】在原链表中删除该结点node。【要求】题目未给定链表的头结点； 2、ExampleInput: head &#x3D; [4,5,1,9], node &#x3D; 1Output: [4,5,9]Explanation: You are give">
+<meta name="keywords" content="Linked List">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【链表专项】237.Delete Node in a Linked List">
+<meta property="og:title" content="Leetcode-237.Delete Node in a Linked List">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;29&#x2F;Linked%20List&#x2F;Leetcode-237-Delete%20Node%20in%20a%20Linked%20List&#x2F;index.html">
 <meta property="og:site_name" content="wspage3的博客">
-<meta property="og:description" content="一、题意题目链接: 237.Delete Node in a Linked List 1.Description【输入】给定一个单链表中的节点node（非链表尾）。【输出】在原链表中删除该目标节点node。 2.ExampleInput: head &#x3D; [4,5,1,9], node &#x3D; 1Output: [4,5,9]Explanation: You are given the third no">
+<meta property="og:description" content="一、题意0、题目链接237.Delete Node in a Linked List 1、Description【输入】给定一个单链表中的结点node（非尾结点）。【输出】在原链表中删除该结点node。【要求】题目未给定链表的头结点； 2、ExampleInput: head &#x3D; [4,5,1,9], node &#x3D; 1Output: [4,5,9]Explanation: You are give">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-12-29T06:21:50.410Z">
+<meta property="og:updated_time" content="2020-09-02T03:58:56.960Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://yoursite.com/2019/12/29/Linked%20List/Leetcode-237-Delete%20Node%20in%20a%20Linked%20List/">
@@ -43,7 +44,7 @@
   };
 </script>
 
-  <title>【链表专项】237.Delete Node in a Linked List | wspage3的博客</title>
+  <title>Leetcode-237.Delete Node in a Linked List | wspage3的博客</title>
   
 
 
@@ -176,7 +177,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          【链表专项】237.Delete Node in a Linked List
+          Leetcode-237.Delete Node in a Linked List
         </h1>
 
         <div class="post-meta">
@@ -185,9 +186,28 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2019-12-29 11:46:33 / 修改时间：14:21:50" itemprop="dateCreated datePublished" datetime="2019-12-29T11:46:33+08:00">2019-12-29</time>
+              <time title="创建时间：2019-12-29 11:46:33" itemprop="dateCreated datePublished" datetime="2019-12-29T11:46:33+08:00">2019-12-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-02 11:58:56" itemprop="dateModified" datetime="2020-09-02T11:58:56+08:00">2020-09-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Leetcode/" itemprop="url" rel="index"><span itemprop="name">Leetcode</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法</span></a>
+                </span>
             </span>
 
           
@@ -201,22 +221,34 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/delete-node-in-a-linked-list/" target="_blank" rel="noopener">237.Delete Node in a Linked List</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个单链表中的节点node（非链表尾）。<br>【输出】<br>在原链表中删除该目标节点node。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: head = [4,5,1,9], node = 1<br>Output: [4,5,9]<br>Explanation: You are given the third node with value 1, the linked list should become 4 -&gt; 5 -&gt; 9 after calling your function.</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
-<li>目标节点node不是链表尾，且保证是链表中的合法节点。</li>
-<li>单链表至少有两个元素。</li>
-<li>所有节点的value不重复。</li>
-<li>函数返回值为void。</li>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><h3 id="0、题目链接"><a href="#0、题目链接" class="headerlink" title="0、题目链接"></a>0、题目链接</h3><p><a href="https://leetcode.com/problems/delete-node-in-a-linked-list/" target="_blank" rel="noopener">237.Delete Node in a Linked List</a></p>
+<h3 id="1、Description"><a href="#1、Description" class="headerlink" title="1、Description"></a>1、Description</h3><p>【输入】<br>给定一个单链表中的结点node（非尾结点）。<br>【输出】<br>在原链表中删除该结点node。<br>【要求】<br>题目未给定链表的头结点；</p>
+<h3 id="2、Example"><a href="#2、Example" class="headerlink" title="2、Example"></a>2、Example</h3><p>Input: head = [4,5,1,9], node = 1<br>Output: [4,5,9]<br>Explanation: You are given the third node with value 1, the linked list should become 4 -&gt; 5 -&gt; 9 after calling your function.</p>
+<a id="more"></a>
+
+<h3 id="3、Corner-Case"><a href="#3、Corner-Case" class="headerlink" title="3、Corner Case"></a>3、Corner Case</h3><ol>
+<li>结点node不是尾结点，且保证是链表中的合法结点；</li>
+<li>本题中，链表至少有两个结点；</li>
+<li>所有结点的value不重复；</li>
+<li>函数返回类型为void；</li>
 </ol>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution-1"></a>Solution-1</h3><p>1.给定一个节点，在链表中删除掉该节点，但是并没有给定链表的head。</p>
-<p>2.思路1：如果给定了head的话，就可以直接把node的前一个节点接到node的后一个节点，这样node就不在链表中了。</p>
-<p>3.思路2：本题目并没有给定head指针。<br>所以：把node后面一个节点的值拷贝到node里面，然后删除掉node-&gt;next，达成同样的删除效果。</p>
-<p>4.结构体变量直接赋值；不使用的节点记得释放内存；</p>
-<p>时间复杂度：O(1)<br>空间复杂度：O(1)</p>
-<p>5.Code(<a href="https://leetcode.com/submissions/detail/280512957/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/280512957/</a>)</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="0、思考"><a href="#0、思考" class="headerlink" title="0、思考"></a>0、思考</h3><ol>
+<li><p>根据单链表的特性，若给定结点node，我们可以以O(1)的时间复杂度，删除node的后继结点；</p>
+</li>
+<li><p>而本题中，给定结点node，要求删除它本身；</p>
+</li>
+<li><p>且未给定链表的head结点，也就是说，我们不能从head遍历一次，找到node的前驱结点，通过修改其指向来删除node；</p>
+</li>
+<li><p>转换思路：要想使得node消失，可以对node变化，使node与node的后继节点一模一样，再删除node的后继结点；</p>
+</li>
+</ol>
+<h3 id="1、Solution-1"><a href="#1、Solution-1" class="headerlink" title="1、Solution-1"></a>1、Solution-1</h3><ol>
+<li><p>结构体变量直接赋值；删除的结点最好释放内存；</p>
+</li>
+<li><p>Code(<a href="https://leetcode.com/submissions/detail/280512957/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/280512957/</a>)<br>AC<br>时间复杂度：O(1)<br>空间复杂度：O(1)</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">deleteNode</span><span class="params">(ListNode* node)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        ListNode* temp = node-&gt;next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        *node = *temp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">delete</span> temp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+</li>
+</ol>
 
     </div>
 
@@ -225,6 +257,9 @@
     
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linked-List/" rel="tag"># Linked List</a>
+          </div>
 
         
 
@@ -297,7 +332,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、题意"><span class="nav-number">1.</span> <span class="nav-text">一、题意</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Description"><span class="nav-number">1.1.</span> <span class="nav-text">1.Description</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Example"><span class="nav-number">1.2.</span> <span class="nav-text">2.Example</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Corner-Case"><span class="nav-number">1.3.</span> <span class="nav-text">3.Corner Case</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、题解"><span class="nav-number">2.</span> <span class="nav-text">二、题解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution-1"><span class="nav-number">2.1.</span> <span class="nav-text">Solution-1</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、题意"><span class="nav-number">1.</span> <span class="nav-text">一、题意</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0、题目链接"><span class="nav-number">1.1.</span> <span class="nav-text">0、题目链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1、Description"><span class="nav-number">1.2.</span> <span class="nav-text">1、Description</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、Example"><span class="nav-number">1.3.</span> <span class="nav-text">2、Example</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、Corner-Case"><span class="nav-number">1.4.</span> <span class="nav-text">3、Corner Case</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、题解"><span class="nav-number">2.</span> <span class="nav-text">二、题解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0、思考"><span class="nav-number">2.1.</span> <span class="nav-text">0、思考</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1、Solution-1"><span class="nav-number">2.2.</span> <span class="nav-text">1、Solution-1</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
