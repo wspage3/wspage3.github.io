@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="wspage3的博客">
 <meta property="og:description" content="一、单链表（Singly Linked List）0、简介 单链表中的每个结点记录了：我的值(val)是什么、我的后继结点是谁；  根据以上特性，对于任一已知结点node来说，可以：以O(1)的时间复杂度，求出node的后继结点；以O(n)的时间复杂度，求出node的前驱结点；  在竞赛&#x2F;笔试中，考虑到程序的性能，常常使用静态链表，即用数组模拟链表；主要原因在于：若在C++中使用动态链表，则每个结">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-09-01T10:16:17.827Z">
+<meta property="og:updated_time" content="2020-09-02T03:12:33.627Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://yoursite.com/2020/09/01/Linked%20List/%E9%93%BE%E8%A1%A8/">
@@ -186,10 +186,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-09-01 09:41:06 / 修改时间：18:16:17" itemprop="dateCreated datePublished" datetime="2020-09-01T09:41:06+08:00">2020-09-01</time>
+              <time title="创建时间：2020-09-01 09:41:06" itemprop="dateCreated datePublished" datetime="2020-09-01T09:41:06+08:00">2020-09-01</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-02 11:12:33" itemprop="dateModified" datetime="2020-09-02T11:12:33+08:00">2020-09-02</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -252,8 +258,8 @@
 <tbody><tr>
 <td align="center"><a href="https://www.acwing.com/problem/content/828/" target="_blank" rel="noopener">AcWing-826-单链表</a></td>
 <td align="center">1. 在链表头插入一个结点；<br>2. 给定结点k，在其后面插入一个结点；<br>3. 给定结点k，删除其后面的结点；</td>
-<td align="center">数组模拟单链表</td>
-<td align="center">III</td>
+<td align="center">数组模拟单链表<br>head不占数组空间，记录头节点的索引，-1表示NULL；</td>
+<td align="center">II</td>
 </tr>
 </tbody></table>
 <h2 id="二、双链表（Doubly-Linked-List）"><a href="#二、双链表（Doubly-Linked-List）" class="headerlink" title="二、双链表（Doubly Linked List）"></a>二、双链表（Doubly Linked List）</h2><h3 id="0、简介-1"><a href="#0、简介-1" class="headerlink" title="0、简介"></a>0、简介</h3><ol>
@@ -293,8 +299,8 @@
 <tbody><tr>
 <td align="center"><a href="https://www.acwing.com/problem/content/829/" target="_blank" rel="noopener">AcWing-827-双链表</a></td>
 <td align="center">1. 删除第k个结点；——上述操作3 <br>2. 在链表头，插入一个结点；——上述操作1 <br>3. 在链表尾，插入一个结点；——可转化为上述操作2：在pr[tail]右边，插入一个结点<br>4. 给定结点k，在其后面插入一个结点；——上述操作2<br>5. 给定结点k，在其前面插入一个结点；——可转化为上述操作2：在pr[k]右边，插入一个结点<br></td>
-<td align="center">数组模拟双链表</td>
-<td align="center">III</td>
+<td align="center">数组模拟双链表<br>head、tail为两哨兵，占用数组空间，索引为0和1；</td>
+<td align="center">II</td>
 </tr>
 </tbody></table>
 
