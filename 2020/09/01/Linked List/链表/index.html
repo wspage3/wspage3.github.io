@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="wspage3的博客">
 <meta property="og:description" content="一、单链表（Singly Linked List）0、简介 单链表中的每个结点记录了：我的值(val)是什么、我的后继结点是谁；  根据以上特性，对于任一已知结点node来说，可以：以O(1)的时间复杂度，求出node的后继结点；以O(n)的时间复杂度，求出node的前驱结点；  在竞赛&#x2F;笔试中，考虑到程序的性能，常常使用静态链表，即用数组模拟链表；主要原因在于：若在C++中使用动态链表，则每个结">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-09-02T04:12:31.482Z">
+<meta property="og:updated_time" content="2020-09-02T07:56:42.278Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://yoursite.com/2020/09/01/Linked%20List/%E9%93%BE%E8%A1%A8/">
@@ -194,7 +194,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-02 12:12:31" itemprop="dateModified" datetime="2020-09-02T12:12:31+08:00">2020-09-02</time>
+                <time title="修改时间：2020-09-02 15:56:42" itemprop="dateModified" datetime="2020-09-02T15:56:42+08:00">2020-09-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -271,6 +271,12 @@
 <td align="center"><a href="https://wspage3.github.io/2019/12/29/Linked%20List/Leetcode-237-Delete%20Node%20in%20a%20Linked%20List/" target="_blank" rel="noopener">Leetcode-237-Delete Node in a Linked List</a></td>
 <td align="center">1. 给定单链表中的一个结点node，node非尾结点，且合法非空；<br>2. 删除node；<br></td>
 <td align="center">狸猫换太子：<br>将node换成node的后继结点（结构体直接用’=’赋值）；<br>删除后继结点（delete释放内存）；<br></td>
+<td align="center">II</td>
+</tr>
+<tr>
+<td align="center"><a href="https://wspage3.github.io/2019/12/29/Linked%20List/Leetcode-206-Reverse%20Linked%20List/" target="_blank" rel="noopener">Leetcode-206-Reverse Linked List</a></td>
+<td align="center">1. 给定一个单链表的头结点head；<br>2. 将其反转，返回反转后的头结点；<br></td>
+<td align="center">递归：<br>确定递归结束条件：NULL或单结点；<br>先递归子链表，记录答案newHead；<br>再将当前结点接到末尾；<br>最后返回newHead；<br>迭代：<br>head结点遍历；<br>cur结点是当前考察的结点；<br>pre结点是已经反转好的头结点；<br></td>
 <td align="center">II</td>
 </tr>
 </tbody></table>
