@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="wspage3的博客">
 <meta property="og:description" content="一、单链表（Singly Linked List）0、简介 单链表中的每个结点记录了：我的值(val)是什么、我的后继结点是谁；  根据以上特性，对于任一已知结点node来说，可以：以O(1)的时间复杂度，求出node的后继结点；以O(n)的时间复杂度，求出node的前驱结点；  在竞赛&#x2F;笔试中，考虑到程序的性能，常常使用静态链表，即用数组模拟链表；主要原因在于：若在C++中使用动态链表，则每个结">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-09-03T03:45:20.354Z">
+<meta property="og:updated_time" content="2020-09-03T07:37:26.451Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://yoursite.com/2020/09/01/Linked%20List/%E9%93%BE%E8%A1%A8/">
@@ -194,7 +194,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-03 11:45:20" itemprop="dateModified" datetime="2020-09-03T11:45:20+08:00">2020-09-03</time>
+                <time title="修改时间：2020-09-03 15:37:26" itemprop="dateModified" datetime="2020-09-03T15:37:26+08:00">2020-09-03</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -289,6 +289,12 @@
 <td align="center"><a href="https://wspage3.github.io/2020/04/29/Linked%20List/Leetcode-876-Middle%20of%20the%20Linked%20List/" target="_blank" rel="noopener">Leetcode-876-Middle of the Linked List</a></td>
 <td align="center">1. 给定一个单链表的头结点head，head非空；<br>2. 输出链表的中间结点；<br>3. 如果中间结点有两个，输出右边那个；<br></td>
 <td align="center">暴力(Two-round)：<br>先遍历一次，求出链表的长度n；<br>head往后移动n / 2次即可；<br>双指针(One-round)：<br>slow、fast同时从head出发；<br>当fast为NULL或者fast-&gt;next为NULL的时候，返回slow即可；<br>Follow-up：若中间结点有两个，输出左边那个：<br>(n - 1) / 2；<br>slow、fast同时从虚拟头结点出发；<br></td>
+<td align="center">II</td>
+</tr>
+<tr>
+<td align="center"><a href="https://wspage3.github.io/2019/12/30/Linked%20List/Leetcode-019-Remove%20Nth%20Node%20From%20End%20of%20List/" target="_blank" rel="noopener">Leetcode-019-Remove Nth Node From End of List</a></td>
+<td align="center">1. 给定一个单链表的头结点head；<br>2. 给定一个整数k，1 &lt;= k &lt;= n；<br>3. 删除单链表的倒数第k个结点，返回此时的头结点；<br></td>
+<td align="center">暴力(Two-round)：<br>先遍历一次，求出链表的长度n；<br>设置虚拟头结点dummy，tail指向dummy；<br>tail向后移动n - k次后，指向target的前驱结点；<br>删除target；<br>双指针(One-round)：<br>设置虚拟头结点dummy；<br>slow、fast同时从dummy出发；<br>fast先向后移动k + 1次；<br>slow、fast同时向后移动，直到fast为NULL；<br>此时slow指向target的前驱结点；<br>删除target；<br></td>
 <td align="center">II</td>
 </tr>
 </tbody></table>
