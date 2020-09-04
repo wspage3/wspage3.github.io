@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="wspage3的博客">
 <meta property="og:description" content="一、单链表（Singly Linked List）0、简介 单链表中的每个结点记录了：我的值(val)是什么、我的后继结点是谁；  根据以上特性，对于任一已知结点node来说，可以：以O(1)的时间复杂度，求出node的后继结点；以O(n)的时间复杂度，求出node的前驱结点；  在竞赛&#x2F;笔试中，考虑到程序的性能，常常使用静态链表，即用数组模拟链表；主要原因在于：若在C++中使用动态链表，则每个结">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-09-03T09:58:59.553Z">
+<meta property="og:updated_time" content="2020-09-04T04:25:25.594Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://yoursite.com/2020/09/01/Linked%20List/%E9%93%BE%E8%A1%A8/">
@@ -194,7 +194,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-03 17:58:59" itemprop="dateModified" datetime="2020-09-03T17:58:59+08:00">2020-09-03</time>
+                <time title="修改时间：2020-09-04 12:25:25" itemprop="dateModified" datetime="2020-09-04T12:25:25+08:00">2020-09-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -301,6 +301,18 @@
 <td align="center"><a href="https://wspage3.github.io/2020/09/03/Linked%20List/Leetcode-234-Palindrome%20Linked%20List/" target="_blank" rel="noopener">Leetcode-234-Palindrome Linked List</a></td>
 <td align="center">1. 给定一个单链表的头结点head；<br>2. 判断该单链表是否为一个回文串；<br>3. 若head为NULL、或者head为单结点时，认为是回文串；<br>4. O(n)的时间复杂度、O(1)的空间复杂度；<br></td>
 <td align="center">双指针 + 栈：<br>T(n)、S(n)；<br>双指针 + Reverse：<br>T(n)、S(1)；<br></td>
+<td align="center">II</td>
+</tr>
+<tr>
+<td align="center"><a href="https://wspage3.github.io/2020/09/04/Linked%20List/Leetcode-141-Linked%20List%20Cycle/" target="_blank" rel="noopener">Leetcode-141-Linked List Cycle</a></td>
+<td align="center">1. 给定一个单链表的头结点head；<br>2. 判断该单链表中是否存在环路；<br>3. 要求O(1)的空间复杂度；<br></td>
+<td align="center">双指针：<br>T(n)、S(1)；<br>slow、fast从head出发；<br>slow跳一步、fast跳两步；<br>若相遇，存在环路；<br></td>
+<td align="center">II</td>
+</tr>
+<tr>
+<td align="center"><a href="https://wspage3.github.io/2020/09/04/Linked%20List/Leetcode-142-Linked%20List%20Cycle%20II/" target="_blank" rel="noopener">Leetcode-142-Linked List Cycle II</a></td>
+<td align="center">1. 给定一个单链表的头结点head；<br>2. 找出入环点，若没有，返回NULL；<br>3. 要求O(1)的空间复杂度；<br></td>
+<td align="center">双指针：<br>T(n)、S(1)；<br>slow、fast从head出发；<br>slow跳一步、fast跳两步；<br>若相遇，存在环路；<br>slow从head出发、fast继续从相遇点出发；<br>再次相遇点就是入环点；<br></td>
 <td align="center">II</td>
 </tr>
 </tbody></table>
