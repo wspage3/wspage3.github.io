@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="wspage3的博客">
 <meta property="og:description" content="一、单链表（Singly Linked List）0、简介 单链表中的每个结点记录了：我的值(val)是什么、我的后继结点是谁；  根据以上特性，对于任一已知结点node来说，可以：以O(1)的时间复杂度，求出node的后继结点；以O(n)的时间复杂度，求出node的前驱结点；  在竞赛&#x2F;笔试中，考虑到程序的性能，常常使用静态链表，即用数组模拟链表；主要原因在于：若在C++中使用动态链表，则每个结">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-09-08T07:34:40.193Z">
+<meta property="og:updated_time" content="2020-09-08T08:09:59.437Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://yoursite.com/2020/09/01/Linked%20List/%E9%93%BE%E8%A1%A8/">
@@ -194,7 +194,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-08 15:34:40" itemprop="dateModified" datetime="2020-09-08T15:34:40+08:00">2020-09-08</time>
+                <time title="修改时间：2020-09-08 16:09:59" itemprop="dateModified" datetime="2020-09-08T16:09:59+08:00">2020-09-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -249,6 +249,7 @@
 <h3 id="3、相关题目"><a href="#3、相关题目" class="headerlink" title="3、相关题目"></a>3、相关题目</h3><table>
 <thead>
 <tr>
+<th align="center">编号</th>
 <th align="center">题目</th>
 <th align="center">题意</th>
 <th align="center">概要</th>
@@ -256,91 +257,113 @@
 </tr>
 </thead>
 <tbody><tr>
+<td align="center">01</td>
 <td align="center"><a href="https://www.acwing.com/problem/content/828/" target="_blank" rel="noopener">AcWing-826-单链表</a></td>
 <td align="center">1. 在链表头插入一个结点；<br>2. 给定结点k，在其后面插入一个结点；<br>3. 给定结点k，删除其后面的结点；</td>
 <td align="center">数组模拟单链表：<br>head不占数组空间，记录头节点的索引，-1表示NULL；</td>
 <td align="center">II</td>
 </tr>
 <tr>
+<td align="center">02</td>
 <td align="center"><a href="https://wspage3.github.io/2020/05/31/Linked%20List/Leetcode-002-Add%20Two%20Numbers/" target="_blank" rel="noopener">Leetcode-002-Add Two Numbers</a></td>
 <td align="center">1. 给定两个非空单链表l1、l2，分别代表一个非负整数；<br>2. 计算这两个整数的和，并以上述单链表的形式返回；<br></td>
 <td align="center">模拟加法运算：<br>个位对齐；若有进位，保存下来；<br>创建局部变量dummy方便返回实际的头结点；</td>
 <td align="center">II</td>
 </tr>
 <tr>
+<td align="center">03</td>
 <td align="center"><a href="https://wspage3.github.io/2019/12/29/Linked%20List/Leetcode-237-Delete%20Node%20in%20a%20Linked%20List/" target="_blank" rel="noopener">Leetcode-237-Delete Node in a Linked List</a></td>
 <td align="center">1. 给定单链表中的一个结点node，node非尾结点，且合法非空；<br>2. 删除node；<br></td>
 <td align="center">狸猫换太子：<br>将node换成node的后继结点（结构体直接用’=’赋值）；<br>删除后继结点（delete释放内存）；<br></td>
 <td align="center">II</td>
 </tr>
 <tr>
+<td align="center">04</td>
 <td align="center"><a href="https://wspage3.github.io/2019/12/29/Linked%20List/Leetcode-206-Reverse%20Linked%20List/" target="_blank" rel="noopener">Leetcode-206-Reverse Linked List</a></td>
 <td align="center">1. 给定一个单链表的头结点head；<br>2. 将其反转，返回反转后的头结点；<br></td>
 <td align="center">递归：<br>确定递归结束条件：NULL或单结点；<br>先递归子链表，记录答案newHead；<br>再将当前结点接到末尾；<br>最后返回newHead；<br>迭代：<br>head结点遍历；<br>cur结点是当前考察的结点；<br>pre结点是已经反转好的头结点；<br></td>
 <td align="center">II</td>
 </tr>
 <tr>
+<td align="center">05</td>
 <td align="center"><a href="https://wspage3.github.io/2019/12/29/Linked%20List/Leetcode-092-Reverse%20Linked%20List%20II/" target="_blank" rel="noopener">Leetcode-092-Reverse Linked List II</a></td>
 <td align="center">1. 给定一个单链表的头结点head；<br>2. 给定一个区间范围[m, n]；<br>3. 将子链表[m, n]反转，返回此时单链表的头结点；<br>4. 本题中的编号，从1开始；且m、n均合法；<br></td>
 <td align="center">分解：<br>设置虚拟头结点dummy，方便处理m为1的情况；<br>tail指向Node(m - 1)；<br>start指向Node(m)；<br>迭代法反转：反转后，pre、cur均指向Node(n)，head指向Node(n + 1)；<br>拼接：tail向后接cur(或pre)，start向后接head；<br></td>
 <td align="center">II</td>
 </tr>
 <tr>
+<td align="center">06</td>
 <td align="center"><a href="https://wspage3.github.io/2020/04/29/Linked%20List/Leetcode-876-Middle%20of%20the%20Linked%20List/" target="_blank" rel="noopener">Leetcode-876-Middle of the Linked List</a></td>
 <td align="center">1. 给定一个单链表的头结点head，head非空；<br>2. 输出链表的中间结点；<br>3. 如果中间结点有两个，输出右边那个；<br></td>
 <td align="center">暴力(Two-round)：<br>先遍历一次，求出链表的长度n；<br>head往后移动n / 2次即可；<br>双指针(One-round)：<br>slow、fast同时从head出发；<br>当fast为NULL或者fast-&gt;next为NULL的时候，返回slow即可；<br>Follow-up：若中间结点有两个，输出左边那个：<br>(n - 1) / 2；<br>slow、fast同时从虚拟头结点出发；<br></td>
 <td align="center">II</td>
 </tr>
 <tr>
+<td align="center">07</td>
 <td align="center"><a href="https://wspage3.github.io/2019/12/30/Linked%20List/Leetcode-019-Remove%20Nth%20Node%20From%20End%20of%20List/" target="_blank" rel="noopener">Leetcode-019-Remove Nth Node From End of List</a></td>
 <td align="center">1. 给定一个单链表的头结点head；<br>2. 给定一个整数k，1 &lt;= k &lt;= n；<br>3. 删除单链表的倒数第k个结点，返回此时的头结点；<br></td>
 <td align="center">暴力(Two-round)：<br>先遍历一次，求出链表的长度n；<br>设置虚拟头结点dummy，tail指向dummy；<br>tail向后移动n - k次后，指向target的前驱结点；<br>删除target；<br>双指针(One-round)：<br>设置虚拟头结点dummy；<br>slow、fast同时从dummy出发；<br>fast先向后移动k + 1次；<br>slow、fast同时向后移动，直到fast为NULL；<br>此时slow指向target的前驱结点；<br>删除target；<br></td>
 <td align="center">II</td>
 </tr>
 <tr>
+<td align="center">08</td>
+<td align="center"><a href="https://wspage3.github.io/2020/06/28/Linked%20List/%E3%80%8A%E5%89%91%E6%8C%87Offer%E3%80%8B-022-%E9%93%BE%E8%A1%A8%E4%B8%AD%E5%80%92%E6%95%B0%E7%AC%ACk%E4%B8%AA%E8%8A%82%E7%82%B9/" target="_blank" rel="noopener">《剑指Offer》-022-链表中倒数第k个节点</a></td>
+<td align="center">1. 给定一个单链表的头结点head；<br>2. 给定一个整数k；<br>3. 返回单链表的倒数第k个结点；<br></td>
+<td align="center">双指针(One-round)：<br>设置虚拟头结点dummy；<br>slow、fast同时从dummy出发；<br>fast先向后移动k次；<br>slow、fast同时向后移动，直到fast为NULL；<br>此时slow指向target；<br>返回target；<br>本题需要判断k是否在[1, n]内，否则可能会有运行时错误；<br></td>
+<td align="center">II</td>
+</tr>
+<tr>
+<td align="center">09</td>
 <td align="center"><a href="https://wspage3.github.io/2020/09/03/Linked%20List/Leetcode-234-Palindrome%20Linked%20List/" target="_blank" rel="noopener">Leetcode-234-Palindrome Linked List</a></td>
 <td align="center">1. 给定一个单链表的头结点head；<br>2. 判断该单链表是否为一个回文串；<br>3. 若head为NULL、或者head为单结点时，认为是回文串；<br>4. O(n)的时间复杂度、O(1)的空间复杂度；<br></td>
 <td align="center">双指针 + 栈：<br>T(n)、S(n)；<br>双指针 + Reverse：<br>T(n)、S(1)；<br></td>
 <td align="center">II</td>
 </tr>
 <tr>
+<td align="center">10</td>
 <td align="center"><a href="https://wspage3.github.io/2020/09/04/Linked%20List/Leetcode-141-Linked%20List%20Cycle/" target="_blank" rel="noopener">Leetcode-141-Linked List Cycle</a></td>
 <td align="center">1. 给定一个单链表的头结点head；<br>2. 判断该单链表中是否存在环路；<br>3. 要求O(1)的空间复杂度；<br></td>
 <td align="center">双指针：<br>T(n)、S(1)；<br>slow、fast从head出发；<br>slow跳一步、fast跳两步；<br>若相遇，存在环路；<br></td>
 <td align="center">II</td>
 </tr>
 <tr>
+<td align="center">11</td>
 <td align="center"><a href="https://wspage3.github.io/2020/09/04/Linked%20List/Leetcode-142-Linked%20List%20Cycle%20II/" target="_blank" rel="noopener">Leetcode-142-Linked List Cycle II</a></td>
 <td align="center">1. 给定一个单链表的头结点head；<br>2. 找出入环点，若没有，返回NULL；<br>3. 要求O(1)的空间复杂度；<br></td>
 <td align="center">双指针：<br>T(n)、S(1)；<br>slow、fast从head出发；<br>slow跳一步、fast跳两步；<br>若相遇，存在环路；<br>slow从head出发、fast继续从相遇点出发；<br>再次相遇点就是入环点；<br></td>
 <td align="center">II</td>
 </tr>
 <tr>
+<td align="center">12</td>
 <td align="center"><a href="https://wspage3.github.io/2020/09/07/Linked%20List/Leetcode-021-Merge%20Two%20Sorted%20Lists/" target="_blank" rel="noopener">Leetcode-021-Merge Two Sorted Lists</a></td>
 <td align="center">1. 给定两个单链表，头结点分别为l1、l2，两个单链表都是有序的（非降序）；<br>2. 将这两个单链表合并成一个单链表，同时保持有序的特点，返回头结点；<br></td>
 <td align="center">双指针：<br>T(n)、S(1)；<br></td>
 <td align="center">II</td>
 </tr>
 <tr>
+<td align="center">13</td>
 <td align="center"><a href="https://wspage3.github.io/2020/09/07/Linked%20List/Leetcode-023-Merge%20k%20Sorted%20Lists/" target="_blank" rel="noopener">Leetcode-023-Merge k Sorted Lists</a></td>
 <td align="center">1. 给定k个单链表（数组形式），单链表都是有序的（非降序）；<br>2. 将这k个单链表合并成一个单链表，同时保持有序的特点，返回头结点；<br></td>
 <td align="center">Min Heap：<br>T(N * log k)、S(k)；<br>Sort：<br>T(N * log N)、S(N)；<br>Merge one by one：<br>T(N * k)、S(1)；<br>Divide and Conquer：<br>T(N * log k)、S(1)；<br></td>
 <td align="center">II</td>
 </tr>
 <tr>
+<td align="center">14</td>
 <td align="center"><a href="https://wspage3.github.io/2020/09/08/Linked%20List/Leetcode-083-Remove%20Duplicates%20from%20Sorted%20List/" target="_blank" rel="noopener">Leetcode-083-Remove Duplicates from Sorted List</a></td>
 <td align="center">1. 给定一个单链表，头结点为head，单链表是有序的（非降序）；<br>2. 将单链表中的重复元素去除，使得继续保持有序的情况下：每个元素出现一次；<br></td>
 <td align="center">双指针：<br>T(n)、S(1)；<br>1. tail指向head；<br>2. cur从head-&gt;next出发，直到为NULL；<br>3. 依次考虑cur是否是某一批的第一个结点（cur-&gt;val == tail-&gt;val）：是的话，接在tail后面；否则的话，删除cur；<br></td>
 <td align="center">II</td>
 </tr>
 <tr>
+<td align="center">15</td>
 <td align="center"><a href="https://wspage3.github.io/2020/09/08/Linked%20List/Leetcode-082-Remove%20Duplicates%20from%20Sorted%20List%20II/" target="_blank" rel="noopener">Leetcode-082-Remove Duplicates from Sorted List II</a></td>
 <td align="center">1. 给定一个单链表，头结点为head，单链表是有序的（非降序）；<br>2. 将单链表中的重复元素去除，使得继续保持有序的情况下：原先出现一次的元素，继续出现一次；原先出现若干次的元素，将其全部删除；<br></td>
 <td align="center">双指针：<br>T(n)、S(1)；<br>1. slow指向某一批的第一个结点，fast指向下一批的第一个结点；<br>2. 判断slow、fast之间的距离是否大于1；<br>3. 使用虚拟结点dummy，tail初始化指向它，如果有符合题意的结点，将其接在tail后面；<br>4. fast后移的同时，free；最后考虑slow是否需要free；<br></td>
 <td align="center">II</td>
 </tr>
 <tr>
-<td align="center"><a href="">Leetcode-203-Remove Linked List Elements</a></td>
+<td align="center">16</td>
+<td align="center"><a href="https://wspage3.github.io/2020/09/08/Linked%20List/Leetcode-203-Remove%20Linked%20List%20Elements/" target="_blank" rel="noopener">Leetcode-203-Remove Linked List Elements</a></td>
 <td align="center">1. 给定一个单链表，头结点为head；<br>2. 给定一个整数val；<br>3. 将单链表中值为val的结点删除，返回新链表的头结点；<br></td>
 <td align="center">双指针：<br>T(n)、S(1)；<br>1. tail指向dummy；<br>2. cur从head出发，直到为NULL；<br>3. 依次考虑cur是否需要删除（cur-&gt;val == val）：不需要的话，接在tail后面；否则的话，删除cur；<br></td>
 <td align="center">II</td>
