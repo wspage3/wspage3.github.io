@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="wspage3的博客">
 <meta property="og:description" content="一、单链表（Singly Linked List）0、简介 单链表中的每个结点记录了：我的值(val)是什么、我的后继结点是谁；  根据以上特性，对于任一已知结点node来说，可以：以O(1)的时间复杂度，求出node的后继结点；以O(n)的时间复杂度，求出node的前驱结点；  在竞赛&#x2F;笔试中，考虑到程序的性能，常常使用静态链表，即用数组模拟链表；主要原因在于：若在C++中使用动态链表，则每个结">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-09-14T08:19:40.518Z">
+<meta property="og:updated_time" content="2020-09-15T05:29:27.483Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://yoursite.com/2020/09/01/Linked%20List/%E9%93%BE%E8%A1%A8/">
@@ -194,7 +194,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-14 16:19:40" itemprop="dateModified" datetime="2020-09-14T16:19:40+08:00">2020-09-14</time>
+                <time title="修改时间：2020-09-15 13:29:27" itemprop="dateModified" datetime="2020-09-15T13:29:27+08:00">2020-09-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -380,6 +380,13 @@
 <td align="center"><a href="https://wspage3.github.io/2020/09/08/Linked%20List/Leetcode-203-Remove%20Linked%20List%20Elements/" target="_blank" rel="noopener">Leetcode-203-Remove Linked List Elements</a></td>
 <td align="center">1. 给定一个单链表，头结点为head；<br>2. 给定一个整数val；<br>3. 将单链表中值为val的结点删除，返回新链表的头结点；<br></td>
 <td align="center">双指针：<br>T(n)、S(1)；<br>1. tail指向dummy；<br>2. cur从head出发，直到为NULL；<br>3. 依次考虑cur是否需要删除（cur-&gt;val == val）：不需要的话，接在tail后面；否则的话，删除cur；<br></td>
+<td align="center">II</td>
+</tr>
+<tr>
+<td align="center">19</td>
+<td align="center"><a href="">Leetcode-328-Odd Even Linked List</a></td>
+<td align="center">1. 给定一个单链表，头结点为head；L1→…→Ln-1→Ln；<br>2. 将单链表按照：L1→L3→L5→…→L2→L4→L6→…重新排列，返回新链表的头结点；<br>3. 要求O(n)的时间复杂度，O(1)的空间复杂度；<br></td>
+<td align="center">双指针：<br>T(n)、S(1)；<br>1. odd指向第一段链表的尾结点（初始化head）；<br>2. even指向第二段链表的尾结点（初始化head-&gt;next）；<br>3. 由于odd始终在even前面，需要对even进行判断；<br>4. n为奇数时，even为NULL，break；<br>n为偶数时，even指向原链表尾结点，break；<br>5. 最后将evenHead拼接到odd后面即可；<br></td>
 <td align="center">II</td>
 </tr>
 </tbody></table>
