@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="wspage3的博客">
 <meta property="og:description" content="一、单链表（Singly Linked List）0、简介 单链表中的每个结点记录了：我的值(val)是什么、我的后继结点是谁；  根据以上特性，对于任一已知结点node来说，可以：以O(1)的时间复杂度，求出node的后继结点；以O(n)的时间复杂度，求出node的前驱结点；  在竞赛&#x2F;笔试中，考虑到程序的性能，常常使用静态链表，即用数组模拟链表；主要原因在于：若在C++中使用动态链表，则每个结">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-09-16T09:08:58.750Z">
+<meta property="og:updated_time" content="2020-09-16T16:09:39.076Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://yoursite.com/2020/09/01/Linked%20List/%E9%93%BE%E8%A1%A8/">
@@ -194,7 +194,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-16 17:08:58" itemprop="dateModified" datetime="2020-09-16T17:08:58+08:00">2020-09-16</time>
+                <time title="修改时间：2020-09-17 00:09:39" itemprop="dateModified" datetime="2020-09-17T00:09:39+08:00">2020-09-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -408,6 +408,13 @@
 <td align="center"><a href="https://wspage3.github.io/2020/05/07/Linked%20List/Leetcode-725-Split%20Linked%20List%20in%20Parts/" target="_blank" rel="noopener">Leetcode-725-Split Linked List in Parts</a></td>
 <td align="center">1. 给定一个单链表，头结点为root；给定一个正整数k；<br>2. 将单链表分成k个片段，每个片段都是一个小链表；<br>3. 以一维数组的形式返回，数组每个元素是一个片段的头结点；<br>4. 每一片段的长度尽可能的相等：任意两个片段的长度差不得大于1；<br>前一片段的长度不得小于后一片段的长度；<br>需要保持有序：k个片段的顺序需要与其在list中出现的顺序一致；<br></td>
 <td align="center">模拟：<br>T(n)、S(1)；<br>1. 统计结点数n；<br>2. 每个片段的基础长度len = n / k；<br>3. 剩余n % k个结点，分配给前n % k个片段，每个片段一个结点；<br>4. cur指向每个片段的头结点，pre指向每个片段的尾结点；<br></td>
+<td align="center">II</td>
+</tr>
+<tr>
+<td align="center">23</td>
+<td align="center"><a href="https://wspage3.github.io/2020/09/16/Linked%20List/Leetcode-138-Copy%20List%20with%20Random%20Pointer/" target="_blank" rel="noopener">Leetcode-138-Copy List with Random Pointer</a></td>
+<td align="center">1. 给定一个“复杂”单链表，头结点为head；<br>复杂：有一个额外的指针random，指向链表中的某个结点，或者指向NULL；<br>2. 对其进行“深拷贝”，返回新链表的头结点；<br></td>
+<td align="center">哈希表：<br>T(n)、S(n)；<br>1. cur从head开始遍历，到NULL结束：申请n个新结点，并维护新旧结点的关联关系；<br>2. cur从head开始遍历，到NULL结束：处理m[cur]的next域以及random域；<br>3. 返回m[head]；<br>串联、拆分：<br>T(n)、S(1)；<br>1. cur从head开始遍历，到NULL结束：申请n个新结点，并将新旧结点串联起来（1, 1’, 2, 2’, …）；<br>2. cur从head开始遍历，到NULL结束：处理cur-&gt;next的random域；<br>3. 拆分成两条短链表：使用虚拟结点dummy，将新节点逐一接在tail后面；<br>4. 返回dummy.next；<br></td>
 <td align="center">II</td>
 </tr>
 </tbody></table>
