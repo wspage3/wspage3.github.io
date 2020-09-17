@@ -161,6 +161,118 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/16/DP/Leetcode-516-Longest%20Palindromic%20Subsequence/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/pig.png">
+      <meta itemprop="name" content="wspage3">
+      <meta itemprop="description" content="永不放弃！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wspage3的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/01/16/DP/Leetcode-516-Longest%20Palindromic%20Subsequence/" class="post-title-link" itemprop="url">【DP专项】516.Longest Palindromic Subsequence</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-01-16 16:19:13 / 修改时间：16:51:13" itemprop="dateCreated datePublished" datetime="2020-01-16T16:19:13+08:00">2020-01-16</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/longest-palindromic-subsequence/" target="_blank" rel="noopener">516.Longest Palindromic Subsequence</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个长度为n的字符串s。<br>【输出】<br>找出一个s的一个子序列，该子序列构成回文串，且长度最大。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: “bbbab”<br>Output: 4<br>One possible longest palindromic subsequence is “bbbb”.</p>
+<p>Input: “cbbd”<br>Output: 2<br>One possible longest palindromic subsequence is “bb”.</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
+<li>当n &lt;= 1时，答案为n；</li>
+<li>n &lt;= 1000；</li>
+</ol>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ol>
+<li><p>回忆【005.Longest Palindromic Substring】，我们找出任意一个s的最长回文子数组。<br>而本题要求的是s的最长回文子序列的长度。</p>
+</li>
+<li><p>回忆【300.Longest Increasing Subsequence】中，有如下分析：<br>【子序列】不要求连续，所以相较于【子数组】来说，数目更多。<br>对于一个长度为n的数组来说：<br>【子数组】（非空）的个数为：n * (n + 1) / 2；复杂度：O(n * n)<br>【子序列】（非空）的个数为：(2 ^ n) - 1；复杂度：O(2 ^ n)</p>
+</li>
+<li><p>如果采用暴力方法的话，时间复杂度为O(n * (2 ^ n))；</p>
+</li>
+</ol>
+<h3 id="Solution-1：Dynamic-Programming"><a href="#Solution-1：Dynamic-Programming" class="headerlink" title="Solution-1：Dynamic Programming"></a>Solution-1：Dynamic Programming</h3><ol start="0">
+<li><p>Q: What is important so far???   A: Cur char(end); Start char(start); Pre length; </p>
+</li>
+<li><p>状态定义：dp[i][j]代表：在范围[i, j]内，最长的回文子序列的长度。答案即：dp[0][n - 1]；</p>
+</li>
+<li><p>边界条件：<br>a. i == j时，dp[i][j] = 1；<br>b. i &gt; j时，dp[i][j]无意义；</p>
+</li>
+<li><p>转移方程：<br>a. 若s[i] == s[j]，则dp[i][j] = 2 + dp[i + 1][j - 1]；<br>考虑dp[i + 1][j - 1]的合法性：(i + 1 &gt; j - 1时，dp[i + 1][j - 1]为0)<br>b. 若s[i] != s[j]，则dp[i][j] = max(dp[i][j - 1], dp[i + 1][j])；<br>不需要考虑dp[i][j - 1]和dp[i + 1][j]的合法性，画图：二维数组即可看出。</p>
+</li>
+<li><p>计算顺序：<br>【Backward-DP】<br>从上面的状态转移方程中可以看出：<br>计算当前row的时候(i)，需要使用到下一row的内容(i + 1)。所以i从n - 1开始，到0结束；<br>计算当前col的时候(j)，需要使用到前一col的内容(j - 1)。所以j从i开始，到n - 1结束；</p>
+</li>
+<li><p>Code(<a href="https://leetcode.com/submissions/detail/294675718/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/294675718/</a>)<br>时间复杂度：O(n * n)<br>空间复杂度：O(n * n)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">longestPalindromeSubseq</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = s.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> n;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; dp(n, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(n));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = n - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &lt;= n - <span class="number">1</span>; j++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">if</span> (i == j) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">                    dp[i][j] = <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">                    <span class="keyword">continue</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">if</span> (s[i] == s[j]) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">                    dp[i][j] = <span class="number">2</span> + (i + <span class="number">1</span> &lt;= j - <span class="number">1</span> ? dp[i + <span class="number">1</span>][j - <span class="number">1</span>] : <span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">                &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">                    dp[i][j] = <span class="built_in">max</span>(dp[i][j - <span class="number">1</span>], dp[i + <span class="number">1</span>][j]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> dp[<span class="number">0</span>][n - <span class="number">1</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+</li>
+<li><p>空间优化：由于计算第(i)行的时候，只需要用到第(i + 1)行的数据，所以可以优化为O(n)的空间复杂度。<br>具体过程：<br>a. 在计算dp[i][j]的时候，需要用到它左下角的元素、左边的元素、下边的元素。<br>b. 考虑dp数组压缩为一维的情况：左边的元素(dp[j - 1])、下边的元素(dp[j])。<br>c. 由于在计算出来dp[j - 1]的时候，其之前的值已被覆盖。而被覆盖的该值，对于dp[j]来说，就是其左下角的元素。<br>d. 所以我们在计算dp[j]的时候，先将其已存的值保存到prev变量中。在计算dp[j + 1]的时候，直接使用prev变量即可，计算后再更新prev变量。</p>
+</li>
+<li><p>Code(<a href="https://leetcode.com/submissions/detail/294680816/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/294680816/</a>)<br>时间复杂度：O(n * n)<br>空间复杂度：O(n)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">longestPalindromeSubseq</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = s.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> n;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> prev;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dp(n);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = n - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &lt;= n - <span class="number">1</span>; j++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">int</span> temp = dp[j];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">if</span> (i == j) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">                    dp[j] = <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">                    <span class="keyword">continue</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">if</span> (s[i] == s[j]) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">                    dp[j] = <span class="number">2</span> + (i + <span class="number">1</span> &lt;= j - <span class="number">1</span> ? prev : <span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">                &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">                    dp[j] = <span class="built_in">max</span>(dp[j - <span class="number">1</span>], dp[j]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">                prev = temp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> dp[n - <span class="number">1</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/08/DP/Leetcode-005-Longest%20Palindromic%20Substring/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -613,105 +725,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/06/DP/Leetcode-674-Longest%20Continuous%20Increasing%20Subsequence/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/pig.png">
-      <meta itemprop="name" content="wspage3">
-      <meta itemprop="description" content="永不放弃！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wspage3的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/06/DP/Leetcode-674-Longest%20Continuous%20Increasing%20Subsequence/" class="post-title-link" itemprop="url">【DP专项】674.Longest Continuous Increasing Subsequence</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-01-06 21:53:01 / 修改时间：22:08:45" itemprop="dateCreated datePublished" datetime="2020-01-06T21:53:01+08:00">2020-01-06</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/longest-continuous-increasing-subsequence/" target="_blank" rel="noopener">674.Longest Continuous Increasing Subsequence</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个长度为n的整数数组nums；数组无序；<br>【输出】<br>求出最长递增子数组的长度。子数组要求连续。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [1,3,5,4,7]<br>Output: 3<br>Explanation: The longest continuous increasing subsequence is [1,3,5], its length is 3.<br>Even though [1,3,5,7] is also an increasing subsequence, it’s not a continuous one where 5 and 7 are separated by 4. </p>
-<p>Input: [2,2,2,2,2]<br>Output: 1<br>Explanation: The longest continuous increasing subsequence is [2], its length is 1. </p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
-<li>若n为0/1，直接返回0/1即可；</li>
-<li>要求严格递增；</li>
-</ol>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ol>
-<li><p>回忆【300.Longest Increasing Subsequence】，我们要求的是【最长递增子序列】的长度。<br>现在要求的是【最长递增子数组】的长度。</p>
-</li>
-<li><p>前面可知：【子数组】（非空）的个数为：n * (n + 1) / 2；复杂度：O(n * n)</p>
-</li>
-</ol>
-<h3 id="Solution-1：Brute-Force"><a href="#Solution-1：Brute-Force" class="headerlink" title="Solution-1：Brute Force"></a>Solution-1：Brute Force</h3><ol>
-<li><p>考虑以每个元素为开头的最长子数组。i：[0, n - 2]。<br>对于一个固定的i，考虑其后面最长能接多少个元素。j：[i + 1, n - 1]。<br>不管update最大值，最后返回即可。</p>
-</li>
-<li><p>Code(<a href="https://leetcode.com/submissions/detail/291730890/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/291730890/</a>)<br>时间复杂度：O(n * n)<br>空间复杂度：O(1)</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findLengthOfLCIS</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> n;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> ans = <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n - <span class="number">2</span>; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt;= n - <span class="number">1</span>; j++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">if</span> (nums[j] &lt;= nums[j - <span class="number">1</span>]) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">                    <span class="keyword">break</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">                &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">                    ans = <span class="built_in">max</span>(ans, j - i + <span class="number">1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h3 id="Solution-2：Dynamic-Programming"><a href="#Solution-2：Dynamic-Programming" class="headerlink" title="Solution-2：Dynamic Programming"></a>Solution-2：Dynamic Programming</h3><ol start="0">
-<li><p>Q: What is important so far???   A: Cur num; Pre num; Pre length;</p>
-</li>
-<li><p>状态定义：dp[i]表示：以nums[i]结尾的最大递增子数组的长度。</p>
-</li>
-<li><p>边界条件：dp[i] = 1;</p>
-</li>
-<li><p>转移方程：dp[i] = nums[i] &gt; nums[i - 1] ? 1 + dp[i - 1] : 1;</p>
-</li>
-<li><p>计算顺序：<br>【Backward-DP】<br>i从1开始，到(n - 1)结束；</p>
-</li>
-<li><p>空间优化：从一维线性降至常数复杂度。</p>
-</li>
-<li><p>Code(<a href="https://leetcode.com/submissions/detail/291732566/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/291732566/</a>)<br>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findLengthOfLCIS</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> n;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dp(n);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        dp[<span class="number">0</span>] = <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> ans = <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n - <span class="number">1</span>; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            dp[i] = nums[i] &gt; nums[i - <span class="number">1</span>] ? <span class="number">1</span> + dp[i - <span class="number">1</span>] : <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">            ans = <span class="built_in">max</span>(ans, dp[i]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
-</li>
-<li><p>Code(<a href="https://leetcode.com/submissions/detail/291732750/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/291732750/</a>)<br>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findLengthOfLCIS</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> n;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> cur = <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> ans = <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n - <span class="number">1</span>; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            cur = nums[i] &gt; nums[i - <span class="number">1</span>] ? <span class="number">1</span> + cur : <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            ans = <span class="built_in">max</span>(ans, cur);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -783,7 +796,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">193</span>
+          <span class="site-state-item-count">194</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

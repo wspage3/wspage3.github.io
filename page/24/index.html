@@ -161,6 +161,85 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/02/DP/Leetcode-064-Minimum%20Path%20Sum/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/pig.png">
+      <meta itemprop="name" content="wspage3">
+      <meta itemprop="description" content="永不放弃！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wspage3的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/01/02/DP/Leetcode-064-Minimum%20Path%20Sum/" class="post-title-link" itemprop="url">【DP专项】064.Minimum Path Sum</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-01-02 12:01:07 / 修改时间：16:51:54" itemprop="dateCreated datePublished" datetime="2020-01-02T12:01:07+08:00">2020-01-02</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/minimum-path-sum/" target="_blank" rel="noopener">064.Minimum Path Sum</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个m * n的矩阵，每个位置都有一个非负的整数。<br>【输出】<br>找一条路径，从top-left到bottom-right，使得路径上的和最小。<br>在任意位置，你只能向右边或者下边走一步。</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input:<br>[<br>  [1,3,1],<br>  [1,5,1],<br>  [4,2,1]<br>]<br>Output: 7<br>Explanation: Because the path 1→3→1→1→1 minimizes the sum.</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
+<li>m或者n为0时，答案为0。</li>
+<li>m或者n为1时，答案为一维数组的累加和。</li>
+</ol>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Dynamic-Programming"><a href="#Solution-1：Dynamic-Programming" class="headerlink" title="Solution-1：Dynamic Programming"></a>Solution-1：Dynamic Programming</h3><ol>
+<li><p>状态定义：dp[i][j]：到达位置(i,j)上，路径上所有元素的最小和。</p>
+</li>
+<li><p>转移方程：dp[i][j] = grid[i][j] + min(dp[i - 1][j], dp[i][j - 1])</p>
+</li>
+<li><p>边界条件：dp[0][0] = grid[0][0]; </p>
+</li>
+<li><p>求解顺序：从(0,0)开始计算，到(m - 1, n - 1)停止。</p>
+</li>
+<li><p>优化：避免开额外的dp数组，复用grid数组就行。</p>
+</li>
+</ol>
+<p>6.Code(<a href="https://leetcode.com/submissions/detail/290407395/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/290407395/</a>)<br>时间复杂度：O(m * n)<br>空间复杂度：O(1)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">minPathSum</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; grid)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; grid.<span class="built_in">size</span>(); i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; grid[<span class="number">0</span>].<span class="built_in">size</span>(); j++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">if</span> (i == <span class="number">0</span> &amp;&amp; j == <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">                    <span class="keyword">continue</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (i == <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">                    grid[i][j] = grid[i][j] + grid[i][j - <span class="number">1</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> ( j == <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">                    grid[i][j] = grid[i][j] + grid[i - <span class="number">1</span>][j];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">                &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">                    grid[i][j] = <span class="built_in">min</span>(grid[i - <span class="number">1</span>][j], grid[i][j - <span class="number">1</span>]) + grid[i][j];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> grid[grid.<span class="built_in">size</span>() - <span class="number">1</span>][grid[<span class="number">0</span>].<span class="built_in">size</span>() - <span class="number">1</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/02/DP/Leetcode-198-House%20Robber/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -544,80 +623,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/30/Tree/Leetcode-109-Convert%20Sorted%20List%20to%20Binary%20Search%20Tree/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/pig.png">
-      <meta itemprop="name" content="wspage3">
-      <meta itemprop="description" content="永不放弃！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wspage3的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/30/Tree/Leetcode-109-Convert%20Sorted%20List%20to%20Binary%20Search%20Tree/" class="post-title-link" itemprop="url">【BST专项】109.Convert Sorted List to Binary Search Tree</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2019-12-30 09:40:52 / 修改时间：10:15:05" itemprop="dateCreated datePublished" datetime="2019-12-30T09:40:52+08:00">2019-12-30</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/" target="_blank" rel="noopener">109.Convert Sorted List to Binary Search Tree</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一个单链表，元素是升序排列的。<br>【输出】<br>将这个链表转化为一个高度平衡的（height-balanced）二叉搜索树（BST）。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [-10,-3,0,5,9]<br>Output: [0,-3,9,-10,NULL,5,NULL]  答案不唯一。</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
-<li>链表为NULL时，树为NULL。</li>
-<li>链表为单节点时，树为单节点。</li>
-</ol>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Recursive-Solution"><a href="#Solution-1：Recursive-Solution" class="headerlink" title="Solution-1：Recursive Solution"></a>Solution-1：Recursive Solution</h3><p>1.给定一个单链表，要将其转化为高度平衡的BST。<br>a.取数组中间元素作为root；（快慢指针法）<br>b.递归将其右边所有元素构成一棵较小的高度平衡的BST。作为root的右子树。<br>c.递归将其左边所有元素构成一棵较小的高度平衡的BST。作为root的左子树。</p>
-<p>2.结束条件：若链表为单节点，则将其作为一个单节点；若链表为NULL，则树也为NULL；</p>
-<p>3.不管n是奇数还是偶数，对于任一节点，其左右子树的节点数不会大于1。保证了height-balanced。</p>
-<p>4.举个例子：<br>n = 2时，链表为：1-&gt;2-&gt;NULL<br>经过快慢指针法：<br>slow指向1，fast指向NULL。<br>root为2，右子树为[NULL]，左子树为[1]。</p>
-<p>n = 3时，链表为：1-&gt;2-&gt;3-&gt;NULL<br>slow指向1，fast指向3。<br>root为2，右子树为[3,NULL]，左子树为[1,NULL]。</p>
-<p>n = 4时，链表为：1-&gt;2-&gt;3-&gt;4-&gt;NULL<br>slow指向2，fast指向NULL。<br>root为3，右子树为[4,NULL]，左子树为[1,2,NULL]。</p>
-<p>n = 5时，链表为：1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL<br>slow指向2，fast指向5。<br>root为3，右子树为[4,5,NULL]，左子树为[1,2,NULL]。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
-<p>5.Code(<a href="https://leetcode.com/submissions/detail/277846719/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/277846719/</a>)</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function">TreeNode* <span class="title">sortedListToBST</span><span class="params">(ListNode* head)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">/* 思路：仍然是类似108的方法。只不过此处为链表，不支持随机访问。此处采用快慢指针的方法找到mid */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (head == <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="literal">NULL</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (head-&gt;next == <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> TreeNode(head-&gt;val);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        ListNode* slow = head;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        ListNode* fast = head-&gt;next-&gt;next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span> (fast != <span class="literal">NULL</span> &amp;&amp; fast-&gt;next != <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            slow = slow-&gt;next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">            fast = fast-&gt;next-&gt;next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        TreeNode* root = <span class="keyword">new</span> TreeNode(slow-&gt;next-&gt;val);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        root-&gt;right = sortedListToBST(slow-&gt;next-&gt;next);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        slow-&gt;next = <span class="literal">NULL</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        root-&gt;left = sortedListToBST(head);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> root;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -689,7 +694,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">193</span>
+          <span class="site-state-item-count">194</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
