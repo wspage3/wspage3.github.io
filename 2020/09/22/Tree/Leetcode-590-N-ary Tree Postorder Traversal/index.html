@@ -20,18 +20,18 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="一、题意0、题目链接589.N-ary Tree Preorder Traversal 1、Description【输入】给定一棵N叉树，根结点为root；【输出】对N叉树进行前序遍历：输出每个结点的val；以一维数组的形式返回；【要求】递归、迭代； 2、ExampleInput: root &#x3D; [1,3,2,4]Output: [1,3,2,4]">
+  <meta name="description" content="一、题意0、题目链接590.N-ary Tree Postorder Traversal 1、Description【输入】给定一棵N叉树，根结点为root；【输出】对N叉树进行后序遍历：输出每个结点的val；以一维数组的形式返回；【要求】递归、迭代； 2、ExampleInput: root &#x3D; [1,3,2,4]Output: [3,2,4,1]">
 <meta name="keywords" content="Tree,Stack">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Leetcode-589.N-ary Tree Preorder Traversal">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;09&#x2F;22&#x2F;Tree&#x2F;Leetcode-589-N-ary%20Tree%20Preorder%20Traversal&#x2F;index.html">
+<meta property="og:title" content="Leetcode-590.N-ary Tree Postorder Traversal">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;09&#x2F;22&#x2F;Tree&#x2F;Leetcode-590-N-ary%20Tree%20Postorder%20Traversal&#x2F;index.html">
 <meta property="og:site_name" content="wspage3的博客">
-<meta property="og:description" content="一、题意0、题目链接589.N-ary Tree Preorder Traversal 1、Description【输入】给定一棵N叉树，根结点为root；【输出】对N叉树进行前序遍历：输出每个结点的val；以一维数组的形式返回；【要求】递归、迭代； 2、ExampleInput: root &#x3D; [1,3,2,4]Output: [1,3,2,4]">
+<meta property="og:description" content="一、题意0、题目链接590.N-ary Tree Postorder Traversal 1、Description【输入】给定一棵N叉树，根结点为root；【输出】对N叉树进行后序遍历：输出每个结点的val；以一维数组的形式返回；【要求】递归、迭代； 2、ExampleInput: root &#x3D; [1,3,2,4]Output: [3,2,4,1]">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-09-22T04:21:33.802Z">
+<meta property="og:updated_time" content="2020-09-22T07:21:15.350Z">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/2020/09/22/Tree/Leetcode-589-N-ary%20Tree%20Preorder%20Traversal/">
+<link rel="canonical" href="http://yoursite.com/2020/09/22/Tree/Leetcode-590-N-ary%20Tree%20Postorder%20Traversal/">
 
 
 <script id="page-configurations">
@@ -44,7 +44,7 @@
   };
 </script>
 
-  <title>Leetcode-589.N-ary Tree Preorder Traversal | wspage3的博客</title>
+  <title>Leetcode-590.N-ary Tree Postorder Traversal | wspage3的博客</title>
   
 
 
@@ -164,7 +164,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/22/Tree/Leetcode-589-N-ary%20Tree%20Preorder%20Traversal/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/22/Tree/Leetcode-590-N-ary%20Tree%20Postorder%20Traversal/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/pig.png">
@@ -177,7 +177,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Leetcode-589.N-ary Tree Preorder Traversal
+          Leetcode-590.N-ary Tree Postorder Traversal
         </h1>
 
         <div class="post-meta">
@@ -188,7 +188,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-09-22 12:15:29 / 修改时间：12:21:33" itemprop="dateCreated datePublished" datetime="2020-09-22T12:15:29+08:00">2020-09-22</time>
+              <time title="创建时间：2020-09-22 15:09:05 / 修改时间：15:21:15" itemprop="dateCreated datePublished" datetime="2020-09-22T15:09:05+08:00">2020-09-22</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -215,33 +215,35 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><h3 id="0、题目链接"><a href="#0、题目链接" class="headerlink" title="0、题目链接"></a>0、题目链接</h3><p><a href="https://leetcode.com/problems/n-ary-tree-preorder-traversal/" target="_blank" rel="noopener">589.N-ary Tree Preorder Traversal</a></p>
-<h3 id="1、Description"><a href="#1、Description" class="headerlink" title="1、Description"></a>1、Description</h3><p>【输入】<br>给定一棵N叉树，根结点为root；<br>【输出】<br>对N叉树进行前序遍历：输出每个结点的val；以一维数组的形式返回；<br>【要求】<br>递归、迭代；</p>
-<h3 id="2、Example"><a href="#2、Example" class="headerlink" title="2、Example"></a>2、Example</h3><p>Input: root = [1,3,2,4]<br>Output: [1,3,2,4]</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><h3 id="0、题目链接"><a href="#0、题目链接" class="headerlink" title="0、题目链接"></a>0、题目链接</h3><p><a href="https://leetcode.com/problems/n-ary-tree-postorder-traversal/" target="_blank" rel="noopener">590.N-ary Tree Postorder Traversal</a></p>
+<h3 id="1、Description"><a href="#1、Description" class="headerlink" title="1、Description"></a>1、Description</h3><p>【输入】<br>给定一棵N叉树，根结点为root；<br>【输出】<br>对N叉树进行后序遍历：输出每个结点的val；以一维数组的形式返回；<br>【要求】<br>递归、迭代；</p>
+<h3 id="2、Example"><a href="#2、Example" class="headerlink" title="2、Example"></a>2、Example</h3><p>Input: root = [1,3,2,4]<br>Output: [3,2,4,1]</p>
 <a id="more"></a>
 
 <h3 id="3、Corner-Case"><a href="#3、Corner-Case" class="headerlink" title="3、Corner Case"></a>3、Corner Case</h3><ol>
 <li>若root == NULL，输出空数组；</li>
 </ol>
 <h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="1、Solution-1：Recursive"><a href="#1、Solution-1：Recursive" class="headerlink" title="1、Solution-1：Recursive"></a>1、Solution-1：Recursive</h3><ol>
-<li><p>前序遍历：root、左儿子、…、右儿子</p>
+<li><p>后序遍历：左儿子、…、右儿子、root</p>
 </li>
-<li><p>对于当前结点来说：<br>输出自身val；<br>递归调用左子树；<br>递归调用…；<br>递归调用右子树；</p>
+<li><p>对于当前结点来说：<br>递归调用左子树；<br>递归调用…；<br>递归调用右子树；<br>输出自身val；</p>
 </li>
-<li><p>Code(<a href="https://leetcode.com/submissions/detail/398842387/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/398842387/</a>)<br>AC<br>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">helper</span><span class="params">(Node* root, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; ans)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        ans.push_back(root-&gt;val);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (Node* child : root-&gt;children) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">            helper(child, ans);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; preorder(Node* root) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        helper(root, ans);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+<li><p>Code(<a href="https://leetcode.com/submissions/detail/399024631/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/399024631/</a>)<br>AC<br>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">helper</span><span class="params">(Node* root, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; ans)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span>;    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (Node* child : root-&gt;children) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">            helper(child, ans);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        ans.push_back(root-&gt;val);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; postorder(Node* root) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        helper(root, ans);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
 
 </li>
 </ol>
 <h3 id="2、Solution-2：Iterative"><a href="#2、Solution-2：Iterative" class="headerlink" title="2、Solution-2：Iterative"></a>2、Solution-2：Iterative</h3><ol>
-<li><p>使用栈来模拟；</p>
+<li><p>转换：<br>preorder：根、左、…、右<br>temp：根、右、…、左<br>postorder：左、…、右、根</p>
 </li>
 <li><p>初始化：将root压入栈；</p>
 </li>
-<li><p>每一次：<br>从栈顶取出一个结点cur；<br>输出其val；<br>将cur出栈；<br>将其右儿子（非空）入栈；<br>将其…（非空）入栈；<br>将其左儿子（非空）入栈；</p>
+<li><p>每一次：<br>从栈顶取出一个结点cur；<br>输出其val；<br>将cur出栈；<br>将其左儿子（非空）入栈；<br>将其…（非空）入栈；<br>将其右儿子（非空）入栈；</p>
 </li>
-<li><p>Code(<a href="https://leetcode.com/submissions/detail/398845763/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/398845763/</a>)<br>AC<br>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; preorder(Node* root) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">stack</span>&lt;Node*&gt; s;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        s.push(root);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span> (!s.empty()) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">            Node* cur = s.top();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            ans.push_back(cur-&gt;val);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">            s.pop();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">int</span> n = cur-&gt;children.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = n - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">if</span> (cur-&gt;children[i] != <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">                    s.push(cur-&gt;children[i]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">        </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure></li>
+<li><p>将ans逆序；</p>
+</li>
+<li><p>Code(<a href="https://leetcode.com/submissions/detail/399026271/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/399026271/</a>)<br>AC<br>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; postorder(Node* root) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">stack</span>&lt;Node*&gt; s;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        s.push(root);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span> (!s.empty()) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">            Node* cur = s.top();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            ans.push_back(cur-&gt;val);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">            s.pop();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">for</span> (Node* child : cur-&gt;children) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">                s.push(child);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        reverse(ans.<span class="built_in">begin</span>(), ans.<span class="built_in">end</span>());</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure></li>
 </ol>
 
     </div>
@@ -262,13 +264,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/09/21/Tree/Leetcode-144-Binary%20Tree%20Preorder%20Traversal/" rel="prev" title="Leetcode-144.Binary Tree Preorder Traversal">
-      <i class="fa fa-chevron-left"></i> Leetcode-144.Binary Tree Preorder Traversal
+    <a href="/2020/09/22/Tree/Leetcode-145-Binary%20Tree%20Postorder%20Traversal/" rel="prev" title="Leetcode-145.Binary Tree Postorder Traversal">
+      <i class="fa fa-chevron-left"></i> Leetcode-145.Binary Tree Postorder Traversal
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/09/22/Tree/Leetcode-145-Binary%20Tree%20Postorder%20Traversal/" rel="next" title="Leetcode-145.Binary Tree Postorder Traversal">
-      Leetcode-145.Binary Tree Postorder Traversal <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
