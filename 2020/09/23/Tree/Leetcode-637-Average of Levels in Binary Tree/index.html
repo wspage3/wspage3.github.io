@@ -20,18 +20,18 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="一、题意0、题目链接107.Binary Tree Level Order Traversal II 1、Description【输入】给定一棵二叉树，根结点为root；【输出】对二叉树进行层次遍历：输出每个结点的val；以二维数组的形式返回：每层对应一个一维数组；先输出最后一层，最后输出第一层；【要求】无； 2、ExampleInput: [3,9,20,null,null,15,7]Outpu">
+  <meta name="description" content="一、题意0、题目链接637.Average of Levels in Binary Tree 1、Description【输入】给定一棵二叉树，根结点为root；【输出】对二叉树进行层次遍历：输出每一层的平均值；以一维数组的形式返回；【要求】无； 2、ExampleInput: [3,9,20,null,null,15,7]Output: [3,14.5,11]">
 <meta name="keywords" content="Queue,Binary Tree">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Leetcode-107.Binary Tree Level Order Traversal II">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;09&#x2F;23&#x2F;Tree&#x2F;Leetcode-107-Binary%20Tree%20Level%20Order%20Traversal%20II&#x2F;index.html">
+<meta property="og:title" content="Leetcode-637.Average of Levels in Binary Tree">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;09&#x2F;23&#x2F;Tree&#x2F;Leetcode-637-Average%20of%20Levels%20in%20Binary%20Tree&#x2F;index.html">
 <meta property="og:site_name" content="wspage3的博客">
-<meta property="og:description" content="一、题意0、题目链接107.Binary Tree Level Order Traversal II 1、Description【输入】给定一棵二叉树，根结点为root；【输出】对二叉树进行层次遍历：输出每个结点的val；以二维数组的形式返回：每层对应一个一维数组；先输出最后一层，最后输出第一层；【要求】无； 2、ExampleInput: [3,9,20,null,null,15,7]Outpu">
+<meta property="og:description" content="一、题意0、题目链接637.Average of Levels in Binary Tree 1、Description【输入】给定一棵二叉树，根结点为root；【输出】对二叉树进行层次遍历：输出每一层的平均值；以一维数组的形式返回；【要求】无； 2、ExampleInput: [3,9,20,null,null,15,7]Output: [3,14.5,11]">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-09-23T09:03:59.032Z">
+<meta property="og:updated_time" content="2020-09-23T09:12:25.856Z">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/2020/09/23/Tree/Leetcode-107-Binary%20Tree%20Level%20Order%20Traversal%20II/">
+<link rel="canonical" href="http://yoursite.com/2020/09/23/Tree/Leetcode-637-Average%20of%20Levels%20in%20Binary%20Tree/">
 
 
 <script id="page-configurations">
@@ -44,7 +44,7 @@
   };
 </script>
 
-  <title>Leetcode-107.Binary Tree Level Order Traversal II | wspage3的博客</title>
+  <title>Leetcode-637.Average of Levels in Binary Tree | wspage3的博客</title>
   
 
 
@@ -164,7 +164,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/23/Tree/Leetcode-107-Binary%20Tree%20Level%20Order%20Traversal%20II/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/23/Tree/Leetcode-637-Average%20of%20Levels%20in%20Binary%20Tree/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/pig.png">
@@ -177,7 +177,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Leetcode-107.Binary Tree Level Order Traversal II
+          Leetcode-637.Average of Levels in Binary Tree
         </h1>
 
         <div class="post-meta">
@@ -188,7 +188,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-09-23 17:00:10 / 修改时间：17:03:59" itemprop="dateCreated datePublished" datetime="2020-09-23T17:00:10+08:00">2020-09-23</time>
+              <time title="创建时间：2020-09-23 17:07:42 / 修改时间：17:12:25" itemprop="dateCreated datePublished" datetime="2020-09-23T17:07:42+08:00">2020-09-23</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -215,9 +215,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><h3 id="0、题目链接"><a href="#0、题目链接" class="headerlink" title="0、题目链接"></a>0、题目链接</h3><p><a href="https://leetcode.com/problems/binary-tree-level-order-traversal-ii/" target="_blank" rel="noopener">107.Binary Tree Level Order Traversal II</a></p>
-<h3 id="1、Description"><a href="#1、Description" class="headerlink" title="1、Description"></a>1、Description</h3><p>【输入】<br>给定一棵二叉树，根结点为root；<br>【输出】<br>对二叉树进行层次遍历：输出每个结点的val；以二维数组的形式返回：每层对应一个一维数组；<br>先输出最后一层，最后输出第一层；<br>【要求】<br>无；</p>
-<h3 id="2、Example"><a href="#2、Example" class="headerlink" title="2、Example"></a>2、Example</h3><p>Input: [3,9,20,null,null,15,7]<br>Output:<br>[<br>  [15,7],<br>  [9,20],<br>  [3]<br>]</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><h3 id="0、题目链接"><a href="#0、题目链接" class="headerlink" title="0、题目链接"></a>0、题目链接</h3><p><a href="https://leetcode.com/problems/average-of-levels-in-binary-tree/" target="_blank" rel="noopener">637.Average of Levels in Binary Tree</a></p>
+<h3 id="1、Description"><a href="#1、Description" class="headerlink" title="1、Description"></a>1、Description</h3><p>【输入】<br>给定一棵二叉树，根结点为root；<br>【输出】<br>对二叉树进行层次遍历：输出每一层的平均值；以一维数组的形式返回；<br>【要求】<br>无；</p>
+<h3 id="2、Example"><a href="#2、Example" class="headerlink" title="2、Example"></a>2、Example</h3><p>Input: [3,9,20,null,null,15,7]<br>Output: [3,14.5,11]</p>
 <a id="more"></a>
 
 <h3 id="3、Corner-Case"><a href="#3、Corner-Case" class="headerlink" title="3、Corner Case"></a>3、Corner Case</h3><ol>
@@ -226,10 +226,10 @@
 <h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="1、Solution-1：BFS-Using-Queue"><a href="#1、Solution-1：BFS-Using-Queue" class="headerlink" title="1、Solution-1：BFS Using Queue"></a>1、Solution-1：BFS Using Queue</h3><ol>
 <li><p>执行正常的层次遍历；</p>
 </li>
-<li><p>最后，将ans逆序即可；</p>
+<li><p>对于每一层，不用将所有结点的val存储在一维数组level中，<br>而是：将所有结点的val累加到sum中，sum最后再除以n；</p>
 </li>
-<li><p>Code(<a href="https://leetcode.com/submissions/detail/399465065/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/399465065/</a>)<br>AC<br>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; levelOrderBottom(TreeNode* root) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">queue</span>&lt;TreeNode*&gt; q;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        q.push(root);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span> (!q.empty()) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">            <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; level;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">int</span> n = q.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">                TreeNode* node = q.front();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">                q.pop();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">                level.push_back(node-&gt;val);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">if</span> (node-&gt;left != <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">                    q.push(node-&gt;left);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">if</span> (node-&gt;right != <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">                    q.push(node-&gt;right);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">            ans.push_back(level);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">        </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">        reverse(ans.<span class="built_in">begin</span>(), ans.<span class="built_in">end</span>());</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure></li>
+<li><p>Code(<a href="https://leetcode.com/submissions/detail/399462091/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/399462091/</a>)<br>AC<br>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt; averageOfLevels(TreeNode* root) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt; ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">queue</span>&lt;TreeNode*&gt; q;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        q.push(root);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span> (!q.empty()) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">double</span> sum = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">int</span> n = q.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">                TreeNode* node = q.front();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">                q.pop();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">                sum += node-&gt;val;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">if</span> (node-&gt;left != <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">                    q.push(node-&gt;left);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">if</span> (node-&gt;right != <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">                    q.push(node-&gt;right);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">            ans.push_back(sum / n);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">        </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure></li>
 </ol>
 
     </div>
@@ -250,13 +250,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/09/23/Tree/Leetcode-102-Binary%20Tree%20Level%20Order%20Traversal/" rel="prev" title="Leetcode-102.Binary Tree Level Order Traversal">
-      <i class="fa fa-chevron-left"></i> Leetcode-102.Binary Tree Level Order Traversal
+    <a href="/2020/09/23/Tree/Leetcode-107-Binary%20Tree%20Level%20Order%20Traversal%20II/" rel="prev" title="Leetcode-107.Binary Tree Level Order Traversal II">
+      <i class="fa fa-chevron-left"></i> Leetcode-107.Binary Tree Level Order Traversal II
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/09/23/Tree/Leetcode-637-Average%20of%20Levels%20in%20Binary%20Tree/" rel="next" title="Leetcode-637.Average of Levels in Binary Tree">
-      Leetcode-637.Average of Levels in Binary Tree <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
