@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="wspage3的博客">
 <meta property="og:description" content="一、题意0、题目链接113.Path Sum II 1、Description【输入】给定一棵二叉树，根结点为root；给定一个整数sum；【输出】求出所有从根结点到叶结点的路径，路径上的所有结点的和恰好为给定的sum；一条路径用一个一维数组表示，最终输出一个二维数组；【要求】无； 2、ExampleInput:  [1,2,3], sum &#x3D; 3Output: [[1,2]]">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-11-03T08:22:50.193Z">
+<meta property="og:updated_time" content="2020-11-03T08:25:24.084Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://yoursite.com/2020/11/03/Tree/Leetcode-113-Path%20Sum%20II/">
@@ -188,7 +188,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-11-03 15:59:06 / 修改时间：16:22:50" itemprop="dateCreated datePublished" datetime="2020-11-03T15:59:06+08:00">2020-11-03</time>
+              <time title="创建时间：2020-11-03 15:59:06 / 修改时间：16:25:24" itemprop="dateCreated datePublished" datetime="2020-11-03T15:59:06+08:00">2020-11-03</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -238,11 +238,15 @@
 </li>
 <li><p>辅助栈：栈中每个元素是一个一维数组，代表一条路径；</p>
 </li>
+<li><p>缺点：辅助栈消耗大量空间；</p>
+</li>
 </ol>
 <h3 id="3、Solution-3：BFS-Iterative-using-queue"><a href="#3、Solution-3：BFS-Iterative-using-queue" class="headerlink" title="3、Solution-3：BFS(Iterative, using queue)"></a>3、Solution-3：BFS(Iterative, using queue)</h3><ol>
 <li><p>遍历顺序：BFS的顺序（level-order）访问二叉树中的所有结点；</p>
 </li>
 <li><p>辅助队列：队列中每个元素是一个一维数组，代表一条路径；</p>
+</li>
+<li><p>缺点：辅助队列消耗大量空间；</p>
 </li>
 </ol>
 
@@ -268,7 +272,10 @@
     <a href="/2020/11/02/Tree/Leetcode-112-Path%20Sum/" rel="prev" title="Leetcode-112.Path Sum">
       <i class="fa fa-chevron-left"></i> Leetcode-112.Path Sum
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/11/03/Tree/Leetcode-129-Sum%20Root%20to%20Leaf%20Numbers/" rel="next" title="Leetcode-129.Sum Root to Leaf Numbers">
+      Leetcode-129.Sum Root to Leaf Numbers <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
