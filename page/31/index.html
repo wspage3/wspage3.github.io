@@ -161,6 +161,93 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/29/Linked%20List/Leetcode-237-Delete%20Node%20in%20a%20Linked%20List/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/pig.png">
+      <meta itemprop="name" content="wspage3">
+      <meta itemprop="description" content="永不放弃！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wspage3的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/29/Linked%20List/Leetcode-237-Delete%20Node%20in%20a%20Linked%20List/" class="post-title-link" itemprop="url">Leetcode-237.Delete Node in a Linked List</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-29 11:46:33" itemprop="dateCreated datePublished" datetime="2019-12-29T11:46:33+08:00">2019-12-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-02 11:58:56" itemprop="dateModified" datetime="2020-09-02T11:58:56+08:00">2020-09-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Leetcode/" itemprop="url" rel="index"><span itemprop="name">Leetcode</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><h3 id="0、题目链接"><a href="#0、题目链接" class="headerlink" title="0、题目链接"></a>0、题目链接</h3><p><a href="https://leetcode.com/problems/delete-node-in-a-linked-list/" target="_blank" rel="noopener">237.Delete Node in a Linked List</a></p>
+<h3 id="1、Description"><a href="#1、Description" class="headerlink" title="1、Description"></a>1、Description</h3><p>【输入】<br>给定一个单链表中的结点node（非尾结点）。<br>【输出】<br>在原链表中删除该结点node。<br>【要求】<br>题目未给定链表的头结点；</p>
+<h3 id="2、Example"><a href="#2、Example" class="headerlink" title="2、Example"></a>2、Example</h3><p>Input: head = [4,5,1,9], node = 1<br>Output: [4,5,9]<br>Explanation: You are given the third node with value 1, the linked list should become 4 -&gt; 5 -&gt; 9 after calling your function.</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/12/29/Linked%20List/Leetcode-237-Delete%20Node%20in%20a%20Linked%20List/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/27/Tree/Leetcode-106-Construct%20Binary%20Tree%20from%20Inorder%20and%20Postorder%20Traversal/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -368,80 +455,6 @@
 <p>时间复杂度：O(1)<br>空间复杂度：O(h)</p>
 <p>6.Code(<a href="https://leetcode.com/submissions/detail/278065392/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/278065392/</a>)</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BSTIterator</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">stack</span>&lt;TreeNode*&gt; s;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">pushAll</span><span class="params">(TreeNode* node)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span> (node != <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            s.push(node);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">            node = node-&gt;left;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    BSTIterator(TreeNode* root) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        pushAll(root);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">/** @return the next smallest number */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">next</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        TreeNode* temp = s.top();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        s.pop();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        pushAll(temp-&gt;right);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> temp-&gt;val;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">/** @return whether we have a next smallest number */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">hasNext</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> !s.empty();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/26/Tree/Leetcode-257-Binary%20Tree%20Paths/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/pig.png">
-      <meta itemprop="name" content="wspage3">
-      <meta itemprop="description" content="永不放弃！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wspage3的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/26/Tree/Leetcode-257-Binary%20Tree%20Paths/" class="post-title-link" itemprop="url">【二叉树专项】257.Binary Tree Paths</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2019-12-26 16:36:53 / 修改时间：17:36:54" itemprop="dateCreated datePublished" datetime="2019-12-26T16:36:53+08:00">2019-12-26</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/" target="_blank" rel="noopener">257.Binary Tree Paths</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>【输入】<br>给定一棵二叉树。<br>【输出】<br>输出这棵二叉树中所有从root到leaf的路径。<br>每一条路径是一个字符串，最终返回一个一维字符串数组。<br>格式举例：”1-&gt;2-&gt;5”</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [1,2,3,NULL,5]<br>Output: [“1-&gt;2-&gt;5”, “1-&gt;3”]<br>Explanation: All root-to-leaf paths are: 1-&gt;2-&gt;5, 1-&gt;3</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><ol>
-<li>当树为NULL时，返回一个空数组。</li>
-</ol>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Recursive-Solution-Backtracking"><a href="#Solution-1：Recursive-Solution-Backtracking" class="headerlink" title="Solution-1：Recursive Solution(Backtracking)"></a>Solution-1：Recursive Solution(Backtracking)</h3><p>1.回忆【113.Path Sum II】，我们找出所有从root到leaf的路径，其和为target，保存在二维数组中。</p>
-<p>2.现在我们要找出所有从root到leaf的路径，保存在一维字符串数组中。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/275898943/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/275898943/</a>)</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; binaryTreePaths(TreeNode* root) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; res;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> res;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        binaryTreePaths(root, res, to_string(root-&gt;val));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> res;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">binaryTreePaths</span><span class="params">(TreeNode* node, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; res, <span class="built_in">string</span> s)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (node-&gt;left == <span class="literal">NULL</span> &amp;&amp; node-&gt;right == <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            res.push_back(s);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (node-&gt;left != <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">            binaryTreePaths(node-&gt;left, res, s + <span class="string">"-&gt;"</span> + to_string(node-&gt;left-&gt;val));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (node-&gt;right != <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">            binaryTreePaths(node-&gt;right, res, s + <span class="string">"-&gt;"</span> + to_string(node-&gt;right-&gt;val));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
-
-<h3 id="Solution-2：Iterative-Solution-using-Stack-DFS"><a href="#Solution-2：Iterative-Solution-using-Stack-DFS" class="headerlink" title="Solution-2：Iterative Solution using Stack(DFS)"></a>Solution-2：Iterative Solution using Stack(DFS)</h3><p>1.遍历顺序为迭代版本的DFS(preorder)</p>
-<p>2.使用一个辅助栈，用于存放每个节点对应的字符串。<br>当用栈模拟节点的遍历时，同时也用辅助栈模拟其value。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/275902870/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/275902870/</a>)</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; binaryTreePaths(TreeNode* root) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; res;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> res;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">stack</span>&lt;TreeNode* &gt; s;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">stack</span>&lt;<span class="built_in">string</span>&gt; pathStack;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        s.push(root);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        pathStack.push(to_string(root-&gt;val));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span> (!s.empty()) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">            TreeNode* node = s.top();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            s.pop();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">            <span class="built_in">string</span> str = pathStack.top();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">            pathStack.pop();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (node-&gt;left == <span class="literal">NULL</span> &amp;&amp; node-&gt;right == <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">                res.push_back(str);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">continue</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (node-&gt;right != <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">                s.push(node-&gt;right);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">                pathStack.push(str + <span class="string">"-&gt;"</span> + to_string(node-&gt;right-&gt;val));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (node-&gt;left != <span class="literal">NULL</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">                s.push(node-&gt;left);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">                pathStack.push(str + <span class="string">"-&gt;"</span> + to_string(node-&gt;left-&gt;val));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> res;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
       
     </div>
 
