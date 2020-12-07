@@ -20,18 +20,18 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="一、题意0、题目链接174.Dungeon Game 1、Description【输入】给定一个m * n的矩阵grid，代表一张地图；公主位于右下角；骑士将要从左上角出发；grid[i][j] &#x3D; 0，代表：位置(i, j)处是一块空地；grid[i][j] &amp;gt; 0，代表：位置(i, j)处加血量；grid[i][j] &amp;lt; 0，代表：位置(i, j)处扣血量；【输出】骑士要去找公主；">
+  <meta name="description" content="一、题意0、题目链接198.House Robber 1、Description【输入】给定一个长度为n的数组nums，代表着n户人家的财产；【输出】小王今晚打算去打劫这n户人家；已知：若相邻的两户人家同时被打劫，则会自动触发警报；求小王今晚最多能打劫多少财产，输出这个值；【要求】无； 2、ExampleInput: nums &#x3D; [2,7,9,3,1]Output: 12Explanation:">
 <meta name="keywords" content="Dynamic Programming">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Leetcode-174.Dungeon Game">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;12&#x2F;07&#x2F;DP&#x2F;Leetcode-174-Dungeon%20Game&#x2F;index.html">
+<meta property="og:title" content="Leetcode-198.House Robber">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;12&#x2F;07&#x2F;DP&#x2F;Leetcode-198-House%20Robber&#x2F;index.html">
 <meta property="og:site_name" content="wspage3的博客">
-<meta property="og:description" content="一、题意0、题目链接174.Dungeon Game 1、Description【输入】给定一个m * n的矩阵grid，代表一张地图；公主位于右下角；骑士将要从左上角出发；grid[i][j] &#x3D; 0，代表：位置(i, j)处是一块空地；grid[i][j] &amp;gt; 0，代表：位置(i, j)处加血量；grid[i][j] &amp;lt; 0，代表：位置(i, j)处扣血量；【输出】骑士要去找公主；">
+<meta property="og:description" content="一、题意0、题目链接198.House Robber 1、Description【输入】给定一个长度为n的数组nums，代表着n户人家的财产；【输出】小王今晚打算去打劫这n户人家；已知：若相邻的两户人家同时被打劫，则会自动触发警报；求小王今晚最多能打劫多少财产，输出这个值；【要求】无； 2、ExampleInput: nums &#x3D; [2,7,9,3,1]Output: 12Explanation:">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-12-07T07:50:48.273Z">
+<meta property="og:updated_time" content="2020-12-07T13:12:29.075Z">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/2020/12/07/DP/Leetcode-174-Dungeon%20Game/">
+<link rel="canonical" href="http://yoursite.com/2020/12/07/DP/Leetcode-198-House%20Robber/">
 
 
 <script id="page-configurations">
@@ -44,7 +44,7 @@
   };
 </script>
 
-  <title>Leetcode-174.Dungeon Game | wspage3的博客</title>
+  <title>Leetcode-198.House Robber | wspage3的博客</title>
   
 
 
@@ -164,7 +164,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/07/DP/Leetcode-174-Dungeon%20Game/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/07/DP/Leetcode-198-House%20Robber/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/pig.png">
@@ -177,7 +177,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Leetcode-174.Dungeon Game
+          Leetcode-198.House Robber
         </h1>
 
         <div class="post-meta">
@@ -188,7 +188,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-12-07 14:57:53 / 修改时间：15:50:48" itemprop="dateCreated datePublished" datetime="2020-12-07T14:57:53+08:00">2020-12-07</time>
+              <time title="创建时间：2020-12-07 20:59:18 / 修改时间：21:12:29" itemprop="dateCreated datePublished" datetime="2020-12-07T20:59:18+08:00">2020-12-07</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -215,46 +215,37 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><h3 id="0、题目链接"><a href="#0、题目链接" class="headerlink" title="0、题目链接"></a>0、题目链接</h3><p><a href="https://leetcode.com/problems/dungeon-game/" target="_blank" rel="noopener">174.Dungeon Game</a></p>
-<h3 id="1、Description"><a href="#1、Description" class="headerlink" title="1、Description"></a>1、Description</h3><p>【输入】<br>给定一个m * n的矩阵grid，代表一张地图；<br>公主位于右下角；<br>骑士将要从左上角出发；<br>grid[i][j] = 0，代表：位置(i, j)处是一块空地；<br>grid[i][j] &gt; 0，代表：位置(i, j)处加血量；<br>grid[i][j] &lt; 0，代表：位置(i, j)处扣血量；<br>【输出】<br>骑士要去找公主；每次只能向右或者向下走一步；<br>当骑士血量为0或者负数时，立马去世；<br>求骑士出发时，至少拥有多少血量，才能顺利找到公主；<br>【要求】<br>无；</p>
-<h3 id="2、Example"><a href="#2、Example" class="headerlink" title="2、Example"></a>2、Example</h3><p>Input: grid =<br>[<br>    [-2,-3,3],<br>    [-5,-10,1],<br>    [10,30,-5]<br>]<br>Output: 7</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><h3 id="0、题目链接"><a href="#0、题目链接" class="headerlink" title="0、题目链接"></a>0、题目链接</h3><p><a href="https://leetcode.com/problems/house-robber/" target="_blank" rel="noopener">198.House Robber</a></p>
+<h3 id="1、Description"><a href="#1、Description" class="headerlink" title="1、Description"></a>1、Description</h3><p>【输入】<br>给定一个长度为n的数组nums，代表着n户人家的财产；<br>【输出】<br>小王今晚打算去打劫这n户人家；<br>已知：若相邻的两户人家同时被打劫，则会自动触发警报；<br>求小王今晚最多能打劫多少财产，输出这个值；<br>【要求】<br>无；</p>
+<h3 id="2、Example"><a href="#2、Example" class="headerlink" title="2、Example"></a>2、Example</h3><p>Input: nums = [2,7,9,3,1]<br>Output: 12<br>Explanation: 2 + 9 + 1 = 12.</p>
 <a id="more"></a>
 
 <h3 id="3、Corner-Case"><a href="#3、Corner-Case" class="headerlink" title="3、Corner Case"></a>3、Corner Case</h3><ol>
-<li>骑士血量无上限；</li>
+<li>0 &lt;= n &lt;= 100</li>
+<li>n == 0时，输出0；</li>
+<li>n == 1时，输出nums[0]；</li>
+<li>0 &lt;= nums[i] &lt;= 400</li>
 </ol>
 <h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="0、思考"><a href="#0、思考" class="headerlink" title="0、思考"></a>0、思考</h3><ol>
-<li><p>路径方向<br>Leetcode-062-Unique Paths<br>Leetcode-063-Unique Paths II<br>上述两题中，我们求：从左上角到右下角一共有几种不同的路径；<br>不关心路径顺序：左上到右下、与右下到左上，答案都是相同的；</p>
+<li><p>错误想法：<br>计算x = nums[0], nums[2]…<br>计算y = nums[1], nums[3]…<br>然后将max(x, y)作为答案；</p>
 </li>
-<li><p>而本题中：左上到右下、与右下到左上，答案都是不同的；<br>例如：grid = [[-5, 10]]<br>左上出发，答案为：6<br>右下出发，答案为：1</p>
-</li>
-<li><p>计算顺序：从目的地，向前推算；</p>
+<li><p>对于nums = [2, 1, 1, 2]来说，上述方法得到错误的答案；</p>
 </li>
 </ol>
 <h3 id="1、Solution-1：Dynamic-Programming"><a href="#1、Solution-1：Dynamic-Programming" class="headerlink" title="1、Solution-1：Dynamic Programming"></a>1、Solution-1：Dynamic Programming</h3><ol>
-<li><p>dp[i][j]表示：从(i, j)出发，到达坐标(m - 1, n - 1)，最少初始化拥有多少血量；</p>
+<li><p>dp[i]表示：在抢劫了[0, i]这些人家后，最多抢劫到的财产；</p>
 </li>
-<li><p>答案：dp[0][0]；</p>
+<li><p>答案：dp[n - 1]；</p>
 </li>
-<li><p>递推式<br>根据当前位置，有以下三种情况：<br>令x = dp[i][j + 1]，y = dp[i + 1][j]；</p>
+<li><p>递推式<br>dp[i] = max(dp[i - 1], nums[i] + dp[i - 2]);</p>
 </li>
-</ol>
-<ul>
-<li><p>空地：dp[i][j] = min(x, y);<br>例如：x = 3，y = 5：则到达(i, j)时拥有3点血，即可顺利找到公主；</p>
+<li><p>Code(<a href="https://leetcode.com/submissions/detail/428179734/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/428179734/</a>)<br>AC<br>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">rob</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (n == <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (n == <span class="number">1</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> nums[<span class="number">0</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dp(n, <span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        dp[<span class="number">0</span>] = nums[<span class="number">0</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        dp[<span class="number">1</span>] = <span class="built_in">max</span>(nums[<span class="number">0</span>], nums[<span class="number">1</span>]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n - <span class="number">1</span>; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">            dp[i] = <span class="built_in">max</span>(dp[i - <span class="number">1</span>], nums[i] + dp[i - <span class="number">2</span>]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> dp[n - <span class="number">1</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
 </li>
-<li><p>加血：dp[i][j] = max(1, min(x, y) - grid[i][j]);<br>例如：x = 3，y = 5，grid[i][j] = 10：则到达(i, j)时拥有1点血，即可顺利找到公主；<br>例如：x = 3，y = 5，grid[i][j] = 1：则到达(i, j)时拥有2点血，即可顺利找到公主；</p>
+<li><p>空间优化<br>计算dp[i]只需要dp[i - 1]和dp[i - 2]；</p>
 </li>
-<li><p>掉血：dp[i][j] = -grid[i][j] + min(x, y);<br>例如：x = 3，y = 5，grid[i][j] = -10：则到达(i, j)时拥有13点血，即可顺利找到公主；</p>
-</li>
-</ul>
-<ol start="4">
-<li><p>初始化<br>空地：骑士必须是活着到达位置(m - 1, n - 1)。最小血量：dp[m - 1][n - 1] = 1;<br>加血：同上，保证骑士活着到达该位置即可。最小血量：dp[m - 1][n - 1] = 1;<br>扣血：最小血量：1 + (-grid[m - 1][n - 1]);<br>综上所述：<br>dp[m - 1][n - 1] = max(1, 1 - grid[m - 1][n - 1]);</p>
-</li>
-<li><p>Code(<a href="https://leetcode.com/submissions/detail/428107065/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/428107065/</a>)<br>AC<br>时间复杂度：O(m * n)<br>空间复杂度：O(m * n)</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">calculateMinimumHP</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; grid)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> m = grid.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = grid[<span class="number">0</span>].<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; dp(m + <span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(n + <span class="number">1</span>, INT_MAX));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        dp[m - <span class="number">1</span>][n - <span class="number">1</span>] = <span class="built_in">max</span>(<span class="number">1</span>, <span class="number">1</span> - grid[m - <span class="number">1</span>][n - <span class="number">1</span>]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = m - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = n - <span class="number">1</span>; j &gt;= <span class="number">0</span>; j--) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">if</span> (i == m - <span class="number">1</span> &amp;&amp; j == n - <span class="number">1</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">                    <span class="keyword">continue</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">if</span> (grid[i][j] == <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">                    dp[i][j] = <span class="built_in">min</span>(dp[i][j + <span class="number">1</span>], dp[i + <span class="number">1</span>][j]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (grid[i][j] &lt; <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">                    dp[i][j] = -grid[i][j] + <span class="built_in">min</span>(dp[i][j + <span class="number">1</span>], dp[i + <span class="number">1</span>][j]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">                &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">                    dp[i][j] = <span class="built_in">max</span>(<span class="number">1</span>, <span class="built_in">min</span>(dp[i][j + <span class="number">1</span>], dp[i + <span class="number">1</span>][j]) - grid[i][j]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> dp[<span class="number">0</span>][<span class="number">0</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
-</li>
-<li><p>空间优化<br>将O(m * n)的空间复杂度优化为O(n)；</p>
-</li>
+<li><p>Code(<a href="https://leetcode.com/submissions/detail/428180144/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/428180144/</a>)<br>AC<br>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">rob</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (n == <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (n == <span class="number">1</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> nums[<span class="number">0</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> prepre = nums[<span class="number">0</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> pre = <span class="built_in">max</span>(nums[<span class="number">0</span>], nums[<span class="number">1</span>]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n - <span class="number">1</span>; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">int</span> cur = <span class="built_in">max</span>(pre, nums[i] + prepre);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">            prepre = pre;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">            pre = cur;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> pre;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure></li>
 </ol>
 
     </div>
@@ -274,13 +265,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/12/07/DP/Leetcode-064-Minimum%20Path%20Sum/" rel="prev" title="Leetcode-064.Minimum Path Sum">
-      <i class="fa fa-chevron-left"></i> Leetcode-064.Minimum Path Sum
+    <a href="/2020/12/07/DP/Leetcode-174-Dungeon%20Game/" rel="prev" title="Leetcode-174.Dungeon Game">
+      <i class="fa fa-chevron-left"></i> Leetcode-174.Dungeon Game
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/12/07/DP/Leetcode-198-House%20Robber/" rel="next" title="Leetcode-198.House Robber">
-      Leetcode-198.House Robber <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
