@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="wspage3的博客">
 <meta property="og:description" content="一、题意0、题目链接174.Dungeon Game 1、Description【输入】给定一个m * n的矩阵grid，代表一张地图；公主位于右下角；骑士将要从左上角出发；grid[i][j] &#x3D; 0，代表：位置(i, j)处是一块空地；grid[i][j] &amp;gt; 0，代表：位置(i, j)处加血量；grid[i][j] &amp;lt; 0，代表：位置(i, j)处扣血量；【输出】骑士要去找公主；">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-12-07T07:31:30.206Z">
+<meta property="og:updated_time" content="2020-12-07T07:50:48.273Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://yoursite.com/2020/12/07/DP/Leetcode-174-Dungeon%20Game/">
@@ -188,7 +188,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-12-07 14:57:53 / 修改时间：15:31:30" itemprop="dateCreated datePublished" datetime="2020-12-07T14:57:53+08:00">2020-12-07</time>
+              <time title="创建时间：2020-12-07 14:57:53 / 修改时间：15:50:48" itemprop="dateCreated datePublished" datetime="2020-12-07T14:57:53+08:00">2020-12-07</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -224,7 +224,12 @@
 <li>骑士血量无上限；</li>
 </ol>
 <h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="0、思考"><a href="#0、思考" class="headerlink" title="0、思考"></a>0、思考</h3><ol>
-<li>计算方向</li>
+<li><p>路径方向<br>Leetcode-062-Unique Paths<br>Leetcode-063-Unique Paths II<br>上述两题中，我们求：从左上角到右下角一共有几种不同的路径；<br>不关心路径顺序：左上到右下、与右下到左上，答案都是相同的；</p>
+</li>
+<li><p>而本题中：左上到右下、与右下到左上，答案都是不同的；<br>例如：grid = [[-5, 10]]<br>左上出发，答案为：6<br>右下出发，答案为：1</p>
+</li>
+<li><p>计算顺序：从目的地，向前推算；</p>
+</li>
 </ol>
 <h3 id="1、Solution-1：Dynamic-Programming"><a href="#1、Solution-1：Dynamic-Programming" class="headerlink" title="1、Solution-1：Dynamic Programming"></a>1、Solution-1：Dynamic Programming</h3><ol>
 <li><p>dp[i][j]表示：从(i, j)出发，到达坐标(m - 1, n - 1)，最少初始化拥有多少血量；</p>
