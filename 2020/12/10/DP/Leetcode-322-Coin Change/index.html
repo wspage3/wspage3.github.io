@@ -20,18 +20,18 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="一、题意0、题目链接279.Perfect Squares 1、Description【输入】给定一个正整数n；【输出】求最少使用多少个完全平方数，使得其sum为n；完全平方数：1,4,9,16,25…【要求】无； 2、ExampleInput: n &#x3D; 12Output: 3Explanation: 12 &#x3D; 4 + 4 + 4.">
+  <meta name="description" content="一、题意0、题目链接322.Coin Change 1、Description【输入】给定一个整数target；给定一个长度为n的数组coins，代表你有这些面额的硬币；【输出】求最少使用多少个硬币，使得其sum为target；每种硬币有任意多个；【要求】无； 2、ExampleInput: coins &#x3D; [1,2,5], amount &#x3D; 11Output: 3Explanation: 11">
 <meta name="keywords" content="Dynamic Programming">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Leetcode-279.Perfect Squares">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;12&#x2F;10&#x2F;DP&#x2F;Leetcode-279-Perfect%20Squares&#x2F;index.html">
+<meta property="og:title" content="Leetcode-322.Coin Change">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;12&#x2F;10&#x2F;DP&#x2F;Leetcode-322-Coin%20Change&#x2F;index.html">
 <meta property="og:site_name" content="wspage3的博客">
-<meta property="og:description" content="一、题意0、题目链接279.Perfect Squares 1、Description【输入】给定一个正整数n；【输出】求最少使用多少个完全平方数，使得其sum为n；完全平方数：1,4,9,16,25…【要求】无； 2、ExampleInput: n &#x3D; 12Output: 3Explanation: 12 &#x3D; 4 + 4 + 4.">
+<meta property="og:description" content="一、题意0、题目链接322.Coin Change 1、Description【输入】给定一个整数target；给定一个长度为n的数组coins，代表你有这些面额的硬币；【输出】求最少使用多少个硬币，使得其sum为target；每种硬币有任意多个；【要求】无； 2、ExampleInput: coins &#x3D; [1,2,5], amount &#x3D; 11Output: 3Explanation: 11">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-12-10T07:09:24.488Z">
+<meta property="og:updated_time" content="2020-12-10T07:37:35.769Z">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/2020/12/10/DP/Leetcode-279-Perfect%20Squares/">
+<link rel="canonical" href="http://yoursite.com/2020/12/10/DP/Leetcode-322-Coin%20Change/">
 
 
 <script id="page-configurations">
@@ -44,7 +44,7 @@
   };
 </script>
 
-  <title>Leetcode-279.Perfect Squares | wspage3的博客</title>
+  <title>Leetcode-322.Coin Change | wspage3的博客</title>
   
 
 
@@ -164,7 +164,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/10/DP/Leetcode-279-Perfect%20Squares/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/10/DP/Leetcode-322-Coin%20Change/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/pig.png">
@@ -177,7 +177,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Leetcode-279.Perfect Squares
+          Leetcode-322.Coin Change
         </h1>
 
         <div class="post-meta">
@@ -188,7 +188,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-12-10 14:53:43 / 修改时间：15:09:24" itemprop="dateCreated datePublished" datetime="2020-12-10T14:53:43+08:00">2020-12-10</time>
+              <time title="创建时间：2020-12-10 15:30:05 / 修改时间：15:37:35" itemprop="dateCreated datePublished" datetime="2020-12-10T15:30:05+08:00">2020-12-10</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -215,26 +215,28 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><h3 id="0、题目链接"><a href="#0、题目链接" class="headerlink" title="0、题目链接"></a>0、题目链接</h3><p><a href="https://leetcode.com/problems/perfect-squares/" target="_blank" rel="noopener">279.Perfect Squares</a></p>
-<h3 id="1、Description"><a href="#1、Description" class="headerlink" title="1、Description"></a>1、Description</h3><p>【输入】<br>给定一个正整数n；<br>【输出】<br>求最少使用多少个完全平方数，使得其sum为n；<br>完全平方数：1,4,9,16,25…<br>【要求】<br>无；</p>
-<h3 id="2、Example"><a href="#2、Example" class="headerlink" title="2、Example"></a>2、Example</h3><p>Input: n = 12<br>Output: 3<br>Explanation: 12 = 4 + 4 + 4.</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><h3 id="0、题目链接"><a href="#0、题目链接" class="headerlink" title="0、题目链接"></a>0、题目链接</h3><p><a href="https://leetcode.com/problems/coin-change/" target="_blank" rel="noopener">322.Coin Change</a></p>
+<h3 id="1、Description"><a href="#1、Description" class="headerlink" title="1、Description"></a>1、Description</h3><p>【输入】<br>给定一个整数target；<br>给定一个长度为n的数组coins，代表你有这些面额的硬币；<br>【输出】<br>求最少使用多少个硬币，使得其sum为target；<br>每种硬币有任意多个；<br>【要求】<br>无；</p>
+<h3 id="2、Example"><a href="#2、Example" class="headerlink" title="2、Example"></a>2、Example</h3><p>Input: coins = [1,2,5], amount = 11<br>Output: 3<br>Explanation: 11 = 5 + 5 + 1</p>
 <a id="more"></a>
 
 <h3 id="3、Corner-Case"><a href="#3、Corner-Case" class="headerlink" title="3、Corner Case"></a>3、Corner Case</h3><ol>
-<li>n &gt;= 1</li>
-<li>若n为完全平方数，则输出1；</li>
+<li>1 &lt;= n &lt;= 12</li>
+<li>1 &lt;= coins[i] &lt;= INT_MAX</li>
+<li>0 &lt;= target &lt;= 10000</li>
+<li>当target为0时，输出0；</li>
 </ol>
 <h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="1、Solution-1：Dynamic-Programming"><a href="#1、Solution-1：Dynamic-Programming" class="headerlink" title="1、Solution-1：Dynamic Programming"></a>1、Solution-1：Dynamic Programming</h3><ol>
-<li><p>dp[i]表示：最少使用多少个完全平方数，使得其sum为i；</p>
+<li><p>dp[i]表示：最少使用多少个硬币，使得其sum为i；</p>
 </li>
-<li><p>答案：dp[n]；</p>
+<li><p>答案：dp[target]；</p>
 </li>
-<li><p>初始化<br>dp[0] = 0；（当i是完全平方数的时候，此时dp[i] = 1 + dp[0] = 1）</p>
+<li><p>初始化<br>dp[0] = 0；（当i在coins中出现的时候，此时dp[i] = 1 + dp[0] = 1）</p>
 </li>
-<li><p>递推式<br>dp[i] = min(dp[i], 1 + dp[i - j * j]);</p>
+<li><p>递推式<br>dp[i] = min(dp[i], 1 + dp[i - coin]);</p>
 </li>
-<li><p>Code(<a href="https://leetcode.com/submissions/detail/429139546/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/429139546/</a>)<br>AC<br>时间复杂度：O(n * sqrt(n))<br>空间复杂度：O(n)</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">numSquares</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dp(n + <span class="number">1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        dp[<span class="number">0</span>] = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">int</span> minCnt = INT_MAX;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j * j &lt;= i; j++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">                minCnt = <span class="built_in">min</span>(minCnt, <span class="number">1</span> + dp[i - j * j]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            dp[i] = minCnt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> dp[n];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure></li>
+<li><p>Code(<a href="https://leetcode.com/submissions/detail/429149611/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/429149611/</a>)<br>AC<br>时间复杂度：O(target * n)<br>空间复杂度：O(target)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">coinChange</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; coins, <span class="keyword">int</span> target)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (target == <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dp(target + <span class="number">1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        dp[<span class="number">0</span>] = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= target; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">int</span> minCnt = INT_MAX;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> coin : coins) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">if</span> (coin &gt; i || dp[i - coin] == INT_MAX) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">                    <span class="keyword">continue</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">                minCnt = <span class="built_in">min</span>(minCnt, <span class="number">1</span> + dp[i - coin]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">            dp[i] = minCnt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> dp[target] == INT_MAX ? <span class="number">-1</span> : dp[target];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure></li>
 </ol>
 
     </div>
@@ -254,13 +256,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/12/10/Array/Leetcode-628-Maximum%20Product%20of%20Three%20Numbers/" rel="prev" title="Leetcode-628. Maximum Product of Three Numbers">
-      <i class="fa fa-chevron-left"></i> Leetcode-628. Maximum Product of Three Numbers
+    <a href="/2020/12/10/DP/Leetcode-279-Perfect%20Squares/" rel="prev" title="Leetcode-279.Perfect Squares">
+      <i class="fa fa-chevron-left"></i> Leetcode-279.Perfect Squares
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/12/10/DP/Leetcode-322-Coin%20Change/" rel="next" title="Leetcode-322.Coin Change">
-      Leetcode-322.Coin Change <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
