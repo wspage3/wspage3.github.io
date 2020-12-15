@@ -161,6 +161,92 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/13/Leetcode-704-Binary%20Search/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/pig.png">
+      <meta itemprop="name" content="wspage3">
+      <meta itemprop="description" content="永不放弃！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wspage3的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/13/Leetcode-704-Binary%20Search/" class="post-title-link" itemprop="url">704.Binary Search</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-12-13 13:19:51 / 修改时间：15:40:12" itemprop="dateCreated datePublished" datetime="2019-12-13T13:19:51+08:00">2019-12-13</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/binary-search/" target="_blank" rel="noopener">704.Binary Search</a></p>
+<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的数组，该数组是升序排列的，中间没有有重复的元素；<br>给定一个整数target；<br>查找target是否在数组中，在的话，返回其索引。<br>不存在的话，返回-1即可；</p>
+<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: nums = [-1,0,3,5,9,12], target = 9<br>Output: 4<br>Explanation: 9 exists in nums and its index is 4</p>
+<p>Input: nums = [-1,0,3,5,9,12], target = 2<br>Output: -1<br>Explanation: 2 does not exist in nums so return -1</p>
+<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n: [1, 10000]<br>nums[i]: [-9999,9999]</p>
+<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：Binary-Search"><a href="#Solution-1：Binary-Search" class="headerlink" title="Solution-1：Binary Search"></a>Solution-1：Binary Search</h3><p>1.二分查找，每次取mid，然后判断nums[mid]的值是否是target，如果是的话，说明当前mid就是target的索引。<br>如果target大于nums[mid]，则在[mid + 1, right]中搜。<br>如果target小于nums[mid]，则在[left, mid - 1]中搜。</p>
+<p>2.在区间[0, n - 1]上搜索。开始left = 0, right = n - 1。<br>每次考虑nums[mid]，如果其不是答案，则继续在mid左边或者mid右边查找。</p>
+<p>3.循环判断：left &lt;= right，这样可以保证[0, n - 1]上的每个元素都能被考虑到。<br>最终循环结束的时候，一定有left = right + 1。<br>如果循环结束了还没有找到target，说明数组中没有target。</p>
+<p>时间复杂度：O(log n)<br>空间复杂度：O(1)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/285484850/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285484850/</a>)</p>
+<h3 id="Solution-2：Binary-Search-with-minimum-index"><a href="#Solution-2：Binary-Search-with-minimum-index" class="headerlink" title="Solution-2：Binary Search with minimum index"></a>Solution-2：Binary Search with minimum index</h3><p>1.核心思想还是二分查找。我们尝试找target最小的index（如果target有多个的话）</p>
+<p>2.假设某一时刻，在区间[left, right)上查找。<br>继续取mid，判断nums[mid]和target的大小关系。<br>此时区间[left, right)被分成：[left, mid), nums[mid], [mid + 1, right)三部分。<br>我们通过判断nums[mid]和target的大小关系来决定下次搜索在上面范围内：<br>如果target &gt; nums[mid]，说明target的最小索引一定在[mid + 1, right)这个范围上。<br>如果target &lt; nums[mid]，说明target的最小索引一定在[left, mid)这个范围上。<br>如果target == nums[mid]，说明target的最小索引要么就在mid位置；要么在mid位置之前；<br>这种情况下，我们继续在[left, mid)上寻找，如果这个范围内已经没有和target相等的数字了，那么答案就是mid。<br>如果这个范围内又找到了target，说明target的最小索引在这个范围内。</p>
+<p>举个例子：<br>[1, 2, 2, 3], target = 2<br>在范围[0, 4)上搜索，mid = 2, nums[mid] == target。此时将right = mid = 2。<br>在范围[0, 2)上搜索，mid = 1, nums[mid] == target。此时将right = mid = 1。<br>在范围[0, 1)上搜索，mid = 0, target &gt; nums[0]。此时left = mid + 1 = 1。<br>left == right == 1，此时循环结束。<br>可以看出，1就是target的最小索引。</p>
+<p>[1, 1, 2, 3], target = 2<br>在范围[0, 4)上搜索，mid = 2, nums[mid] == target。此时将right = mid = 2。<br>在范围[0, 2)上搜索，mid = 1, target &gt; nums[1]。此时left = mid + 1 = 2。<br>left == right == 2，此时循环结束。<br>可以看出，2就是target的最小索引。</p>
+<p>3.以上两个例子都是nums中包含target的情况，下面看nums中不包含target的情况。<br>[1, 3, 5, 7], target = 0<br>在范围[0, 4)上搜索，mid = 2, target &lt; nums[mid]。此时将right = mid = 2。<br>在范围[0, 2)上搜索，mid = 1, target &lt; nums[mid]。此时将right = mid = 1。<br>在范围[0, 1)上搜索，mid = 0, target &lt; nums[mid]。此时将right = mid = 0。<br>left == rihgt == 0，此时循环结束。<br>再次判断：【如果这个位置是target，则是target的最小索引；】<br>否则的话，说明target不在nums中。<br>而nums[0] = 1，而不是target，说明target不存在于nums中。</p>
+<p>[1, 3, 5, 7], target = 10<br>在范围[0, 4)上搜索，mid = 2, target &gt; nums[mid]。此时将left = mid + 1 = 3。<br>在范围[3, 4)上搜索，mid = 3, target &gt; nums[mid]。此时将left = mid + 1 = 4。<br>left == rihgt == 4，此时循环结束。<br>再次判断：【如果这个位置是target，则是target的最小索引；】<br>而此时的left(right)已经代表不了数组的index了，说明target不在nums中。<br>即：【若left(right) == n，则target不在nums中】</p>
+<p>[1, 3, 5, 7], target = 6<br>在范围[0, 4)上搜索，mid = 2, target &gt; nums[mid]。此时将left = mid + 1 = 3。<br>在范围[3, 4)上搜索，mid = 3, target &lt; nums[mid]。此时将rihgt = mid = 3。<br>left == right == 3，此时循环结束。<br>再次判断：【如果这个位置是target，则是target的最小索引；】<br>否则的话，说明target不在nums中。<br>而nums[3] = 7，而不是target，说明target不存在于nums中。</p>
+<p>时间复杂度：O(log n)<br>空间复杂度：O(1)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/285596680/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285596680/</a>)</p>
+<h3 id="Solution-2：Binary-Search-with-minimum-index-1"><a href="#Solution-2：Binary-Search-with-minimum-index-1" class="headerlink" title="Solution-2：Binary Search with minimum index"></a>Solution-2：Binary Search with minimum index</h3><p>1.核心思想还是二分查找。我们尝试找target最大的index（如果target有多个的话）</p>
+<p>2.假设某一时刻，在区间[left, right)上查找。<br>继续取mid，判断nums[mid]和target的大小关系。<br>此时区间[left, right)被分成：[left, mid), nums[mid], [mid + 1, right)三部分。<br>我们通过判断nums[mid]和target的大小关系来决定下次搜索在上面范围内：<br>如果target &gt; nums[mid]，说明target的最大索引一定在[mid + 1, right)这个范围上。<br>如果target &lt; nums[mid]，说明target的最大索引一定在[left, mid)这个范围上。<br>如果target == nums[mid]，说明target的最大索引要么就在mid位置；要么在mid位置之后；<br>这种情况下，我们继续在[mid + 1, right)上寻找:<br>如果这个范围内已经没有和target相等的数字了，那么答案就是mid。<br>如果这个范围内又找到了target，说明target的最大索引在这个范围内。</p>
+<p>举个例子：<br>[1, 2, 2, 3], target = 2<br>在范围[0, 4)上搜索，mid = 2, nums[mid] == target。此时将left = mid + 1 = 3。<br>在范围[3, 4)上搜索，mid = 3, nums[mid] &gt; target。此时将right = mid = 3。<br>left == right == 3，此时循环结束。<br>可以看出，【3 - 1】就是target的最大索引。</p>
+<p>[1, 1, 2, 3], target = 2<br>在范围[0, 4)上搜索，mid = 2, nums[mid] == target。此时将left = mid + 1 = 3。<br>在范围[3, 4)上搜索，mid = 3, nums[mid] &gt; target。此时right = mid = 3。<br>left == right == 3，此时循环结束。<br>可以看出，【3 - 1】就是target的最大索引。</p>
+<p>3.以上两个例子都是nums中包含target的情况，下面看nums中不包含target的情况。<br>[1, 3, 5, 7], target = 0<br>在范围[0, 4)上搜索，mid = 2, target &lt; nums[mid]。此时将right = mid = 2。<br>在范围[0, 2)上搜索，mid = 1, target &lt; nums[mid]。此时将right = mid = 1。<br>在范围[0, 1)上搜索，mid = 0, target &lt; nums[mid]。此时将right = mid = 0。<br>left == right == 0，此时循环结束。<br>再次判断：【如果这个位置的前一个位置是target，则是target的最大索引；】<br>否则的话，说明target不在nums中。<br>而left(right)的前一个是-1，已经不能表示index了。说明target不存在。<br>即：【若left(right) == 0，则target不在nums中】</p>
+<p>[1, 3, 5, 7], target = 10<br>在范围[0, 4)上搜索，mid = 2, target &gt; nums[mid]。此时将left = mid + 1 = 3。<br>在范围[3, 4)上搜索，mid = 3, target &gt; nums[mid]。此时将left = mid + 1 = 4。<br>left == right == 4，此时循环结束。<br>再次判断：【如果这个位置的前一个位置是target，则是target的最大索引；】<br>否则的话，说明target不在nums中。<br>而nums[3]的值为7，说明target不在nums中。</p>
+<p>[1, 3, 5, 7], target = 2<br>在范围[0, 4)上搜索，mid = 2, target &lt; nums[mid]。此时将right = mid = 2。<br>在范围[0, 2)上搜索，mid = 1, target &lt; nums[mid]。此时将right = mid = 1。<br>在范围[0, 1)上搜索，mid = 0, target &gt; nums[mid]。此时将left = mid + 1 = 1。<br>left == right == 1，此时循环结束。<br>再次判断：【如果这个位置的前一个位置是target，则是target的最大索引；】<br>否则的话，说明target不在nums中。<br>而nums[0]的值为1，说明target不在nums中。</p>
+<p>时间复杂度：O(log n)<br>空间复杂度：O(1)</p>
+<p>3.Code(<a href="https://leetcode.com/submissions/detail/285657074/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/285657074/</a>)</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/12/Leetcode-022-Generate%20Parentheses/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -440,96 +526,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/08/Leetcode-123-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20III/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/pig.png">
-      <meta itemprop="name" content="wspage3">
-      <meta itemprop="description" content="永不放弃！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wspage3的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/08/Leetcode-123-Best%20Time%20to%20Buy%20ans%20Sell%20Stock%20III/" class="post-title-link" itemprop="url">Leetcode123-Best Time to Buy and Sell Stock III</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-08 11:35:57" itemprop="dateCreated datePublished" datetime="2019-12-08T11:35:57+08:00">2019-12-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-12-09 12:06:56" itemprop="dateModified" datetime="2019-12-09T12:06:56+08:00">2019-12-09</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><p>题目链接: <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/" target="_blank" rel="noopener">Leetcode123-Best Time to Buy and Sell Stock III</a></p>
-<h3 id="1-Description"><a href="#1-Description" class="headerlink" title="1.Description"></a>1.Description</h3><p>给定一个长度为n的整数数组prices；prices[i]代表第i天股票的价格。<br>如果你最多能交易2次，即：买2次，卖2次。求出你最多能赚多少钱。<br>前提是：买入下一股的时候，必须将上一股卖掉。</p>
-<h3 id="2-Example"><a href="#2-Example" class="headerlink" title="2.Example"></a>2.Example</h3><p>Input: [3,3,5,0,0,3,1,4]<br>Output: 6<br>Explanation: Buy on day 4 (price = 0) and sell on day 6 (price = 3), profit = 3-0 = 3.<br>             Then buy on day 7 (price = 1) and sell on day 8 (price = 4), profit = 4-1 = 3.</p>
-<h3 id="3-Corner-Case"><a href="#3-Corner-Case" class="headerlink" title="3.Corner Case"></a>3.Corner Case</h3><p>n：当n为0/1的时候，直接返回0；<br>赚不到钱则返回0；</p>
-<h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="Solution-1：峰谷法"><a href="#Solution-1：峰谷法" class="headerlink" title="Solution-1：峰谷法"></a>Solution-1：峰谷法</h3><p>1.将每天的价格画成折线图，折线图中上升的线段就是可以获得利润的时候。<br>由于我们最多可以交易两次，也是就说找到两条折线，其高度差最大。<br>所以说用变量maxProfit1和maxProfit2来维护这两个值，数组从左往右遍历一次，找出所有的valley和peak；然后依次更新两个最大值。<br>最后结果返回这两个值的和即可。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<p>结果发现：pass了190/200的用例。<br>其中一个不过的用例是：[1,2,4,2,5,7,2,4,9,0]<br>按照我们上面的思路：找出所有的上升线段：1-&gt;2-&gt;4  2-&gt;5-&gt;7  2-&gt;4-&gt;9<br>挑两个最大的，计算出ans = 5 + 7 = 12<br>但实际上答案是13。分别是：1-&gt;7  2-&gt;9这两个区间。<br>通过观察，可以看出：1-&gt;2-&gt;4  2-&gt;5-&gt;7，这两个区间由于存在范围重叠，导致将其分开计算得到的两个最大值，比在一个计算得到的一个最大值要小。<br>这也是这种思路的问题所在。</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/284240316/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284240316/</a>)</p>
-<h3 id="Solution-2：Divide-and-Conquer"><a href="#Solution-2：Divide-and-Conquer" class="headerlink" title="Solution-2：Divide and Conquer"></a>Solution-2：Divide and Conquer</h3><p>1.根据leetcode121的启示，我们可以找O(n)的时间内，找到一个区间[0, n - 1]交易一次所能获取的最大利润。<br>本题限定，我们最多能交易2次，所以对于位置i，我们可以先找到[0, i - 1]内交易一次所能获得的最大利润。以及[i, n - 1]内交易一次所能获得的最大利润。<br>然后把两部分加起来即可。在[0, n - 1]的范围内，找到一个i，使得其两部分的和最大。相当于进行两次leetcode121。</p>
-<p>2.vector<int> l(n, 0);//l[i]代表：范围[0, i]内，交易一次，能获得的最大利润<br>  vector<int> r(n, 0);//r[i]代表：范围[i, n - 1]内，交易一次，能获得的最大利润<br>  则对于i在[0, n - 1]内，res[i] = l[i] + r[i]，找出最大的res[i]即可。</p>
-<p>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/284663137/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284663137/</a>)</p>
-<h3 id="Solution-3：Dynamic-Programming"><a href="#Solution-3：Dynamic-Programming" class="headerlink" title="Solution-3：Dynamic Programming"></a>Solution-3：Dynamic Programming</h3><p>1.状态转移：dp[k][i] = max(dp[k][i - 1], dp[k - 1][j] + prices[i] - prices[j])<br>其中dp[k][i]代表：最多交易k次，截止到第i天为止（包含第i天），所能获得的最多利润。则答案就是dp[k][n - 1]<br>分别遍历k和i即可。对于固定的k和i，找到一个j在[0, i]范围内，使得prices[j] - dp[k - 1][j]最小即可。<br>边界条件：<br>当k为0时，dp[k][i]都为0<br>当i为0时，dp[k][i]都为0</p>
-<p>时间复杂度：O(k * n ^ 2)<br>空间复杂度：O(K * n)</p>
-<p>结果TLE</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/284681458/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284681458/</a>)</p>
-<h3 id="Solution-4：Dynamic-Programming-Optimization"><a href="#Solution-4：Dynamic-Programming-Optimization" class="headerlink" title="Solution-4：Dynamic Programming + Optimization"></a>Solution-4：Dynamic Programming + Optimization</h3><p>1.Solution-3的思路是：我们对于一个给定的(k, i)，j在[0, i]中，寻找一个最小的j使得表达式（prices[j] - dp[k - 1][j]）的值最小。<br>找到之后，继续寻找(k, i + 1)..(k, i + 2)……的值，直到所有的k和i遍历完成。</p>
-<p>2.通过观察，我们发现表达式（prices[j] - dp[k - 1][j]）的值只和位置j有关（在k固定的情况下）。<br>所以对于同一个k来说，当计算出了范围[0, i]内表达式的最小值后，计算[0, i + 1]只需要O(1)的时间。<br>也就是说，对于给定的(k, i)，我们保留(k, i - 1)的计算结果，通过递推来算出当前的结果。<br>而不是对于每一个(k, i)，我们通过遍历j来找出当下结果。<br>启示：当计算到某个状态时，而非仅仅考虑当前计算出来正确结果即可。尝试想一下当前结果对下一次的计算是否有用，有用的话将当前结果保留下来即可。</p>
-<p>时间复杂度：O(k * n)<br>空间复杂度：O(K * n)</p>
-<p>3.Code(<a href="https://leetcode.com/submissions/detail/284684804/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284684804/</a>)</p>
-<h3 id="Solution-5：Dynamic-Programming-Further-Optimization"><a href="#Solution-5：Dynamic-Programming-Further-Optimization" class="headerlink" title="Solution-5：Dynamic Programming + Further Optimization"></a>Solution-5：Dynamic Programming + Further Optimization</h3><p>1.进一步，我们可以发现k是一个常数，所以尝试将两层循环倒换一下顺序，即：常数级别的k放在内层循环中。</p>
-<p>时间复杂度：O(k * n)<br>空间复杂度：O(K * n)</p>
-<p>Code(<a href="https://leetcode.com/submissions/detail/284698683/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284698683/</a>)</p>
-<p>2.再进一步，我们可以发现dp[i][k]的值只和dp[i - 1][k]的值有关，而和i - 2, i - 3……无关。所以我们可以将第一维用一个变量表示即可，即将二维压缩为一维。空间复杂度变为：O(k)</p>
-<p>时间复杂度：O(k * n)<br>空间复杂度：O(k)</p>
-<p>Code(<a href="https://leetcode.com/submissions/detail/284701294/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/284701294/</a>)</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -601,7 +597,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">223</span>
+          <span class="site-state-item-count">224</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
