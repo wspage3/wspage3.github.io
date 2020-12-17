@@ -20,18 +20,18 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="一、题意0、题目链接121.Best Time to Buy and Sell Stock 1、Description【输入】给定一个长度为n的数组nums；nums[i]代表：第i天的股价；【输出】小王最多能买卖一次股票；且必须先买入，再卖出；求出小王最多能赚多少钱；【要求】无； 2、ExampleInput: [7,1,5,3,6,4]Output: 5">
+  <meta name="description" content="一、题意0、题目链接《程序员代码面试指南》-最长公共子串 1、Description【输入】给定两个字符串s、t，长度分别为ns、nt；【输出】求s和t的最长公共子串；LCs（Longest Common sub-string）；若为空，输出-1；【要求】无； 2、ExampleInput:s: “1AB2345CD”t: “12345EF”Output: “2345”">
 <meta name="keywords" content="Dynamic Programming">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Leetcode-121.Best Time to Buy and Sell Stock">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;12&#x2F;09&#x2F;DP&#x2F;Leetcode-121-Best%20Time%20to%20Buy%20and%20Sell%20Stock&#x2F;index.html">
+<meta property="og:title" content="《程序员代码面试指南》-最长公共子串">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;12&#x2F;17&#x2F;DP&#x2F;%E3%80%8A%E7%A8%8B%E5%BA%8F%E5%91%98%E4%BB%A3%E7%A0%81%E9%9D%A2%E8%AF%95%E6%8C%87%E5%8D%97%E3%80%8B-%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E4%B8%B2&#x2F;index.html">
 <meta property="og:site_name" content="wspage3的博客">
-<meta property="og:description" content="一、题意0、题目链接121.Best Time to Buy and Sell Stock 1、Description【输入】给定一个长度为n的数组nums；nums[i]代表：第i天的股价；【输出】小王最多能买卖一次股票；且必须先买入，再卖出；求出小王最多能赚多少钱；【要求】无； 2、ExampleInput: [7,1,5,3,6,4]Output: 5">
+<meta property="og:description" content="一、题意0、题目链接《程序员代码面试指南》-最长公共子串 1、Description【输入】给定两个字符串s、t，长度分别为ns、nt；【输出】求s和t的最长公共子串；LCs（Longest Common sub-string）；若为空，输出-1；【要求】无； 2、ExampleInput:s: “1AB2345CD”t: “12345EF”Output: “2345”">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-12-08T16:12:44.305Z">
+<meta property="og:updated_time" content="2020-12-17T08:41:59.509Z">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/2020/12/09/DP/Leetcode-121-Best%20Time%20to%20Buy%20and%20Sell%20Stock/">
+<link rel="canonical" href="http://yoursite.com/2020/12/17/DP/%E3%80%8A%E7%A8%8B%E5%BA%8F%E5%91%98%E4%BB%A3%E7%A0%81%E9%9D%A2%E8%AF%95%E6%8C%87%E5%8D%97%E3%80%8B-%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E4%B8%B2/">
 
 
 <script id="page-configurations">
@@ -44,7 +44,7 @@
   };
 </script>
 
-  <title>Leetcode-121.Best Time to Buy and Sell Stock | wspage3的博客</title>
+  <title>《程序员代码面试指南》-最长公共子串 | wspage3的博客</title>
   
 
 
@@ -164,7 +164,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/09/DP/Leetcode-121-Best%20Time%20to%20Buy%20and%20Sell%20Stock/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/17/DP/%E3%80%8A%E7%A8%8B%E5%BA%8F%E5%91%98%E4%BB%A3%E7%A0%81%E9%9D%A2%E8%AF%95%E6%8C%87%E5%8D%97%E3%80%8B-%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E4%B8%B2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/pig.png">
@@ -177,7 +177,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Leetcode-121.Best Time to Buy and Sell Stock
+          《程序员代码面试指南》-最长公共子串
         </h1>
 
         <div class="post-meta">
@@ -188,7 +188,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-12-09 00:03:29 / 修改时间：00:12:44" itemprop="dateCreated datePublished" datetime="2020-12-09T00:03:29+08:00">2020-12-09</time>
+              <time title="创建时间：2020-12-17 16:13:38 / 修改时间：16:41:59" itemprop="dateCreated datePublished" datetime="2020-12-17T16:13:38+08:00">2020-12-17</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -215,40 +215,28 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><h3 id="0、题目链接"><a href="#0、题目链接" class="headerlink" title="0、题目链接"></a>0、题目链接</h3><p><a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/" target="_blank" rel="noopener">121.Best Time to Buy and Sell Stock</a></p>
-<h3 id="1、Description"><a href="#1、Description" class="headerlink" title="1、Description"></a>1、Description</h3><p>【输入】<br>给定一个长度为n的数组nums；<br>nums[i]代表：第i天的股价；<br>【输出】<br>小王最多能买卖一次股票；<br>且必须先买入，再卖出；<br>求出小王最多能赚多少钱；<br>【要求】<br>无；</p>
-<h3 id="2、Example"><a href="#2、Example" class="headerlink" title="2、Example"></a>2、Example</h3><p>Input: [7,1,5,3,6,4]<br>Output: 5</p>
+        <h2 id="一、题意"><a href="#一、题意" class="headerlink" title="一、题意"></a>一、题意</h2><h3 id="0、题目链接"><a href="#0、题目链接" class="headerlink" title="0、题目链接"></a>0、题目链接</h3><p><a href="https://www.nowcoder.com/practice/210741385d37490c97446aa50874e62d?tpId=101&&tqId=33101&rp=1&ru=/ta/programmer-code-interview-guide&qru=/ta/programmer-code-interview-guide/question-ranking" target="_blank" rel="noopener">《程序员代码面试指南》-最长公共子串</a></p>
+<h3 id="1、Description"><a href="#1、Description" class="headerlink" title="1、Description"></a>1、Description</h3><p>【输入】<br>给定两个字符串s、t，长度分别为ns、nt；<br>【输出】<br>求s和t的最长公共子串；<br>LCs（Longest Common sub-string）；<br>若为空，输出-1；<br>【要求】<br>无；</p>
+<h3 id="2、Example"><a href="#2、Example" class="headerlink" title="2、Example"></a>2、Example</h3><p>Input:<br>s: “1AB2345CD”<br>t: “12345EF”<br>Output: “2345”</p>
 <a id="more"></a>
 
 <h3 id="3、Corner-Case"><a href="#3、Corner-Case" class="headerlink" title="3、Corner Case"></a>3、Corner Case</h3><ol>
-<li>答案至少为0，即不赔不赚；</li>
-<li>n &lt;= 1时，输出0；</li>
+<li>若ns == 0 || nt == 0，直接输出-1；</li>
 </ol>
 <h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="0、思考"><a href="#0、思考" class="headerlink" title="0、思考"></a>0、思考</h3><ol>
-<li><p>实际上要找一个nums的子数组，数组的左端代表买入，右端代表卖出；</p>
-</li>
-<li><p>对于一个长度为n的数组nums，其非空子数组有n * (n + 1) / 2个；</p>
-</li>
-<li><p>暴力解法：O(n * n)；</p>
-</li>
+<li>经典问题LCs（最长公共子数组）：同Leetcode-718-Maximum Length of Repeated Subarray；</li>
 </ol>
 <h3 id="1、Solution-1：Dynamic-Programming"><a href="#1、Solution-1：Dynamic-Programming" class="headerlink" title="1、Solution-1：Dynamic Programming"></a>1、Solution-1：Dynamic Programming</h3><ol>
-<li><p>dp[i]表示：nums[i + 1, n - 1]中，最大的数是多少；</p>
-</li>
-<li><p>答案<br>max(dp[i]-nums[i])；</p>
-</li>
-<li><p>初始化<br>dp[n - 1] = 0；</p>
-</li>
-<li><p>递推式<br>dp[i] = max(nums[i + 1], dp[i + 1]);</p>
-</li>
-<li><p>Code(<a href="https://leetcode.com/submissions/detail/428577925/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/428577925/</a>)<br>AC<br>时间复杂度：O(n)<br>空间复杂度：O(n)</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dp(n);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 1. init</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        dp[n - <span class="number">1</span>] = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 2. solve</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = n - <span class="number">2</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">            dp[i] = <span class="built_in">max</span>(nums[i + <span class="number">1</span>], dp[i + <span class="number">1</span>]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">            ans = <span class="built_in">max</span>(ans, dp[i] - nums[i]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 3. return</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+<li><p>Code<br>AC<br>时间复杂度：O(ns * nt)<br>空间复杂度：O(ns * nt)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">string</span> s;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">string</span> t;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 注意 while 处理多个 case</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">while</span> (<span class="built_in">cin</span> &gt;&gt; s &gt;&gt; t) &#123; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> ns = s.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> nt = t.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (ns == <span class="number">0</span> || nt == <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="number">-1</span> &lt;&lt; <span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> maxLen = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> idx = <span class="number">-1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; dp(ns + <span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(nt + <span class="number">1</span>, <span class="number">0</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= ns; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= nt; j++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">if</span> (s[i - <span class="number">1</span>] == t[j - <span class="number">1</span>]) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">                    dp[i][j] = <span class="number">1</span> + dp[i - <span class="number">1</span>][j - <span class="number">1</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">                    <span class="keyword">if</span> (dp[i][j] &gt; maxLen) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">                        maxLen = dp[i][j];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">                        idx = i - <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">                    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">        </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (maxLen == <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="number">-1</span> &lt;&lt; <span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">        &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">            <span class="built_in">cout</span> &lt;&lt; s.substr(idx - maxLen + <span class="number">1</span>, maxLen) &lt;&lt; <span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
 </li>
 <li><p>空间优化</p>
 </li>
-<li><p>Code(<a href="https://leetcode.com/submissions/detail/428578569/" target="_blank" rel="noopener">https://leetcode.com/submissions/detail/428578569/</a>)<br>AC<br>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 1. init</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> next = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 2. solve</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = n - <span class="number">2</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">int</span> cur = <span class="built_in">max</span>(nums[i + <span class="number">1</span>], next);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">            ans = <span class="built_in">max</span>(ans, cur - nums[i]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">            next = cur;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 3. return</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure></li>
 </ol>
+<ul>
+<li>二维空间降为一维空间；</li>
+<li>选择min(ns, nt)作为一维空间长度；</li>
+</ul>
 
     </div>
 
@@ -267,13 +255,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/12/08/Hash%20Table/Leetcode-697-Degree%20of%20an%20Array/" rel="prev" title="Leetcode-697.Degree of an Array">
-      <i class="fa fa-chevron-left"></i> Leetcode-697.Degree of an Array
+    <a href="/2020/12/17/DP/Leetcode-718-Maximum%20Length%20of%20Repeated%20Subarray/" rel="prev" title="Leetcode-718.Maximum Length of Repeated Subarray">
+      <i class="fa fa-chevron-left"></i> Leetcode-718.Maximum Length of Repeated Subarray
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/12/09/Two%20Pointers/Leetcode-009-Palindrome%20Number/" rel="next" title="Leetcode-009.Palindrome Number">
-      Leetcode-009.Palindrome Number <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
