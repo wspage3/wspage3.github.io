@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="wspage3的博客">
 <meta property="og:description" content="一、题意0、题目链接070.Climbing Stairs 1、Description【输入】给定一个整数n；代表着一个有n个台阶的楼梯；【输出】小王每次能上1阶或者2阶；求小王一共有几种不同的上楼梯方案，输出这个方案数；【要求】无； 2、ExampleInput: n &#x3D; 3Output: 3Explanation: There are three ways to climb to the to">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-12-05T15:13:13.840Z">
+<meta property="og:updated_time" content="2020-12-21T03:28:34.204Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://yoursite.com/2020/12/05/DP/Leetcode-070-Climbing%20Stairs/">
@@ -186,10 +186,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-12-05 22:47:42 / 修改时间：23:13:13" itemprop="dateCreated datePublished" datetime="2020-12-05T22:47:42+08:00">2020-12-05</time>
+              <time title="创建时间：2020-12-05 22:47:42" itemprop="dateCreated datePublished" datetime="2020-12-05T22:47:42+08:00">2020-12-05</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-12-21 11:28:34" itemprop="dateModified" datetime="2020-12-21T11:28:34+08:00">2020-12-21</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -224,7 +230,7 @@
 <li>1 &lt;= n &lt;= 45；</li>
 </ol>
 <h2 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h2><h3 id="1、Solution-1：Dynamic-Programming"><a href="#1、Solution-1：Dynamic-Programming" class="headerlink" title="1、Solution-1：Dynamic Programming"></a>1、Solution-1：Dynamic Programming</h3><ol>
-<li><p>dp[i]表示：到达第i阶，一共有几种不同的方案数；</p>
+<li><p>dp[i]表示：上完前i阶，一共有几种不同的方案数；</p>
 </li>
 <li><p>答案：dp[n]；</p>
 </li>
